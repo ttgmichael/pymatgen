@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.matproj.rest module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.matproj.rest module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -270,7 +270,7 @@ creating phase diagrams of entire chemical systems.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>elements</strong> (<em>[str]</em>) &#8211; List of element symbols, e.g., [&#8220;Li&#8221;, &#8220;Fe&#8221;,
+<li><strong>elements</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of element symbols, e.g., [&#8220;Li&#8221;, &#8220;Fe&#8221;,
 &#8220;O&#8221;].</li>
 <li><strong>compatible_only</strong> (<em>bool</em>) &#8211; Whether to return only &#8220;compatible&#8221;
 entries. Compatible entries are entries that have been
@@ -407,8 +407,8 @@ equivalent to an old materials id)</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>reactants</strong> (<em>[str]</em>) &#8211; List of formulas</li>
-<li><strong>products</strong> (<em>[str]</em>) &#8211; List of formulas</li>
+<li><strong>reactants</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of formulas</li>
+<li><strong>products</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of formulas</li>
 </ul>
 </td>
 </tr>
@@ -657,7 +657,7 @@ the future.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>snl</strong> (<em>StructureNL/[StructureNL]</em>) &#8211; A single StructureNL, or a list</li>
+<li><strong>snl</strong> (<em>StructureNL/</em><em>[</em><a class="reference internal" href="pymatgen.matproj.snl.html#pymatgen.matproj.snl.StructureNL" title="pymatgen.matproj.snl.StructureNL"><em>StructureNL</em></a><em>]</em><em></em>) &#8211; A single StructureNL, or a list</li>
 <li><strong>StructureNL objects</strong> (<em>of</em>) &#8211; </li>
 </ul>
 </td>
@@ -694,12 +694,12 @@ the future.</p>
 <li><strong>authors</strong> (<em>list</em>) &#8211; List of {&#8220;name&#8221;:&#8217;&#8216;, &#8220;email&#8221;:&#8217;&#8216;} dicts,
 <em>list</em> of Strings as &#8216;John Doe &lt;<a class="reference external" href="mailto:johndoe&#37;&#52;&#48;gmail&#46;com">johndoe<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;&#8217;,
 or a single String with commas separating authors</li>
-<li><strong>projects</strong> (<em>[str]</em>) &#8211; List of Strings [&#8216;Project A&#8217;, &#8216;Project B&#8217;].
+<li><strong>projects</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of Strings [&#8216;Project A&#8217;, &#8216;Project B&#8217;].
 This applies to all structures.</li>
 <li><strong>references</strong> (<em>str</em>) &#8211; A String in BibTeX format. Again, this applies to
 all structures.</li>
-<li><strong>remarks</strong> (<em>[str]</em>) &#8211; List of Strings [&#8216;Remark A&#8217;, &#8216;Remark B&#8217;]</li>
-<li><strong>data</strong> (<em>[dict]</em>) &#8211; A list of free form dict. Namespaced at the root
+<li><strong>remarks</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of Strings [&#8216;Remark A&#8217;, &#8216;Remark B&#8217;]</li>
+<li><strong>data</strong> (<em></em><em>[</em><em>dict</em><em>]</em><em></em>) &#8211; A list of free form dict. Namespaced at the root
 level with an underscore, e.g. {&#8220;_materialsproject&#8221;:&lt;custom
 data&gt;}. The length of data should be the same as the list of
 structures if not None.</li>
@@ -740,11 +740,11 @@ the future.</p>
 <em>list</em> of Strings as &#8216;John Doe &lt;<a class="reference external" href="mailto:johndoe&#37;&#52;&#48;gmail&#46;com">johndoe<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;&#8217;,
 or a single String with commas separating authors. The same
 list of authors should apply to all runs.</li>
-<li><strong>projects</strong> (<em>[str]</em>) &#8211; List of Strings [&#8216;Project A&#8217;, &#8216;Project B&#8217;].
+<li><strong>projects</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of Strings [&#8216;Project A&#8217;, &#8216;Project B&#8217;].
 This applies to all structures.</li>
 <li><strong>references</strong> (<em>str</em>) &#8211; A String in BibTeX format. Again, this applies to
 all structures.</li>
-<li><strong>remarks</strong> (<em>[str]</em>) &#8211; List of Strings [&#8216;Remark A&#8217;, &#8216;Remark B&#8217;]</li>
+<li><strong>remarks</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of Strings [&#8216;Remark A&#8217;, &#8216;Remark B&#8217;]</li>
 <li><strong>master_data</strong> (<em>dict</em>) &#8211; A free form dict. Namespaced at the root
 level with an underscore, e.g. {&#8220;_materialsproject&#8221;:&lt;custom
 data&gt;}. This data is added to all structures detected in the
@@ -784,7 +784,7 @@ assimilate. Defaults to None, which means serial.</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.matproj.rest.txt"
+      <li><a href="_sources/pymatgen.matproj.rest.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -811,13 +811,13 @@ assimilate. Defaults to None, which means serial.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

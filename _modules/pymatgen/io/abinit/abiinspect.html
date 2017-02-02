@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.abiinspect &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.abinit.abiinspect &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -178,10 +177,10 @@
         <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_iterations</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">all_lens</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="nb">slice</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="nb">slice</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">__iter__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
@@ -202,24 +201,24 @@
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="ScfCycle.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.ScfCycle.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+<div class="viewcode-block" id="ScfCycle.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.ScfCycle.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read the first occurrence of ScfCycle from file.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="ScfCycle.from_stream"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.ScfCycle.from_stream">[docs]</a>    <span class="k">def</span> <span class="nf">from_stream</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<div class="viewcode-block" id="ScfCycle.from_stream"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.ScfCycle.from_stream">[docs]</a>    <span class="k">def</span> <span class="nf">from_stream</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Read the first occurrence of ScfCycle from stream.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None if no `ScfCycle` entry is found.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="n">_magic_parser</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">magic</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">MAGIC</span><span class="p">)</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">_magic_parser</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">magic</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">MAGIC</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
             <span class="n">fields</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;iter&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
@@ -250,8 +249,8 @@
 
         <span class="c1"># Hard-coded y-range for selected variables.</span>
         <span class="n">has_yrange</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;deltaE(h)&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span>
-            <span class="s2">&quot;deltaE(Ha)&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span>
+            <span class="s2">&quot;deltaE(h)&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">1e-3</span><span class="p">,</span> <span class="o">+</span><span class="mf">1e-3</span><span class="p">),</span>
+            <span class="s2">&quot;deltaE(Ha)&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">1e-3</span><span class="p">,</span> <span class="o">+</span><span class="mf">1e-3</span><span class="p">),</span>
             <span class="p">}</span>
 
         <span class="n">iter_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_iterations</span><span class="p">)))</span>
@@ -268,7 +267,7 @@
 
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">use_logscale</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">yy</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">22</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">use_logscale</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">yy</span> <span class="o">&gt;</span> <span class="mf">1e-22</span><span class="p">):</span>
                 <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">has_yrange</span><span class="p">:</span>
@@ -324,10 +323,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cycles</span> <span class="o">=</span> <span class="n">cycles</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycles</span><span class="o">.</span><span class="n">__iter__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycles</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycles</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycles</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycles</span><span class="p">[</span><span class="nb">slice</span><span class="p">]</span>
@@ -346,13 +345,13 @@
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Relaxation.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.Relaxation.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+<div class="viewcode-block" id="Relaxation.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.Relaxation.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize the object from the Abinit main output file.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Relaxation.from_stream"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.Relaxation.from_stream">[docs]</a>    <span class="k">def</span> <span class="nf">from_stream</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<div class="viewcode-block" id="Relaxation.from_stream"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.Relaxation.from_stream">[docs]</a>    <span class="k">def</span> <span class="nf">from_stream</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract data from stream. Returns None if some error occurred.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -362,7 +361,7 @@
             <span class="k">if</span> <span class="n">scf_cycle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">break</span>
             <span class="n">cycles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scf_cycle</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">cycles</span><span class="p">)</span> <span class="k">if</span> <span class="n">cycles</span> <span class="k">else</span> <span class="kc">None</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">cycles</span><span class="p">)</span> <span class="k">if</span> <span class="n">cycles</span> <span class="k">else</span> <span class="kc">None</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -650,7 +649,7 @@
 <span class="sd">    Handy object that stores that YAML document, its main tag and the</span>
 <span class="sd">    position inside the file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;text&quot;</span><span class="p">,</span>
         <span class="s2">&quot;lineno&quot;</span><span class="p">,</span>
         <span class="s2">&quot;tag&quot;</span><span class="p">,</span>
@@ -730,14 +729,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

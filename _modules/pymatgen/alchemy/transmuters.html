@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.alchemy.transmuters &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.alchemy.transmuters &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -297,7 +296,7 @@
 <span class="sd">            tstructs_or_transmuter: A list of transformed structures or a</span>
 <span class="sd">                transmuter.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tstructs_or_transmuter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tstructs_or_transmuter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">transformed_structures</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tstructs_or_transmuter</span>
                                                <span class="o">.</span><span class="n">transformed_structures</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -363,7 +362,7 @@
             <span class="n">tstruct</span> <span class="o">=</span> <span class="n">TransformedStructure</span><span class="o">.</span><span class="n">from_cif_string</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="p">[],</span>
                                                            <span class="n">primitive</span><span class="p">)</span>
             <span class="n">transformed_structures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tstruct</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CifTransmuter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">transformed_structures</span><span class="p">,</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CifTransmuter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">transformed_structures</span><span class="p">,</span>
                                     <span class="n">transformations</span><span class="p">,</span> <span class="n">extend_collection</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
@@ -405,7 +404,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poscar_string</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">extend_collection</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">tstruct</span> <span class="o">=</span> <span class="n">TransformedStructure</span><span class="o">.</span><span class="n">from_poscar_string</span><span class="p">(</span><span class="n">poscar_string</span><span class="p">,</span> <span class="p">[])</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PoscarTransmuter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">([</span><span class="n">tstruct</span><span class="p">],</span> <span class="n">transformations</span><span class="p">,</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PoscarTransmuter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">([</span><span class="n">tstruct</span><span class="p">],</span> <span class="n">transformations</span><span class="p">,</span>
                                     <span class="n">extend_collection</span><span class="o">=</span><span class="n">extend_collection</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
@@ -522,14 +521,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

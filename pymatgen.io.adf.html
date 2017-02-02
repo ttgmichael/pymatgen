@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.adf module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.adf module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -132,7 +132,7 @@ is a primitive object.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>option</strong> (<em>Sized or str or int or float</em>) &#8211; A new option to add. This must have the same format with exsiting
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>option</strong> (<em>Sized</em><em> or </em><em>str</em><em> or </em><em>int</em><em> or </em><em>float</em>) &#8211; A new option to add. This must have the same format with exsiting
 options.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> &#8211; If the format of the given <code class="docutils literal"><span class="pre">option</span></code> is different.</td>
@@ -165,7 +165,7 @@ options.</td>
 
 <dl class="attribute">
 <dt id="pymatgen.io.adf.AdfKey.block_keys">
-<code class="descname">block_keys</code><em class="property"> = {'ATOMS', 'SYMMETRY', 'ANALYTICALFREQ', 'SCF', 'UNRESTRICTED', 'SAVE', 'CHARGE', 'INTEGRATION', 'XC', 'OCCUPATIONS', 'BASIS', 'TOTALENERGY', 'UNITS', 'A1FIT', 'TITLE', 'GEOMETRY', 'ZLMFIT', 'EXACTDENSITY', 'RELATIVISTIC'}</em><a class="headerlink" href="#pymatgen.io.adf.AdfKey.block_keys" title="Permalink to this definition">¶</a></dt>
+<code class="descname">block_keys</code><em class="property"> = {'CHARGE', 'GEOMETRY', 'ANALYTICALFREQ', 'OCCUPATIONS', 'SAVE', 'ATOMS', 'RELATIVISTIC', 'SCF', 'TOTALENERGY', 'XC', 'BASIS', 'SYMMETRY', 'ZLMFIT', 'UNITS', 'INTEGRATION', 'EXACTDENSITY', 'A1FIT', 'TITLE', 'UNRESTRICTED'}</em><a class="headerlink" href="#pymatgen.io.adf.AdfKey.block_keys" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -235,7 +235,7 @@ a ValueError would be raised.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subkey</strong> (<em>str or AdfKey</em>) &#8211; A key name or an AdfKey object.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subkey</strong> (<em>str</em><em> or </em><a class="reference internal" href="#pymatgen.io.adf.AdfKey" title="pymatgen.io.adf.AdfKey"><em>AdfKey</em></a>) &#8211; A key name or an AdfKey object.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>has</strong> &#8211; True if this key contains the given key. Otherwise False.</td>
 </tr>
@@ -266,7 +266,7 @@ converted to upper cases.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>option</strong> (<em>str or int</em>) &#8211; The name (str) or index (int) of the option to remove.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>option</strong> (<em>str</em><em> or </em><em>int</em>) &#8211; The name (str) or index (int) of the option to remove.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> &#8211; If the option has a wrong type.</td>
 </tr>
@@ -282,7 +282,7 @@ converted to upper cases.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subkey</strong> (<em>str or AdfKey</em>) &#8211; The subkey to remove.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subkey</strong> (<em>str</em><em> or </em><a class="reference internal" href="#pymatgen.io.adf.AdfKey" title="pymatgen.io.adf.AdfKey"><em>AdfKey</em></a>) &#8211; The subkey to remove.</td>
 </tr>
 </tbody>
 </table>
@@ -470,7 +470,7 @@ not support calculating force/gradient.</p>
 
 <dl class="attribute">
 <dt id="pymatgen.io.adf.AdfTask.operations">
-<code class="descname">operations</code><em class="property"> = {'numerical_frequencies': 'Compute molecular frequencies using numerical method.', 'freq': 'Same as frequencies.', 'optimize': 'Minimize the energy by varying the molecular structure.', 'frequencies': 'Compute second derivatives and print out an analysis of molecular vibrations.', 'energy': 'Evaluate the single point energy.'}</em><a class="headerlink" href="#pymatgen.io.adf.AdfTask.operations" title="Permalink to this definition">¶</a></dt>
+<code class="descname">operations</code><em class="property"> = {'energy': 'Evaluate the single point energy.', 'optimize': 'Minimize the energy by varying the molecular structure.', 'frequencies': 'Compute second derivatives and print out an analysis of molecular vibrations.', 'freq': 'Same as frequencies.', 'numerical_frequencies': 'Compute molecular frequencies using numerical method.'}</em><a class="headerlink" href="#pymatgen.io.adf.AdfTask.operations" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -508,12 +508,12 @@ float. Otherwise False will be returned.</td>
 <p>&#8216;) for reducing memory overhead.</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>s</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str</span><dd>A multi-line string.</dd>
+<dt>s <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>A multi-line string.</dd>
 </dl>
 <dl class="docutils">
-<dt>line</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">str</span><dd>A string.</dd>
+<dt>line <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>A string.</dd>
 </dl>
 </div></blockquote>
 </dd></dl>
@@ -529,7 +529,7 @@ float. Otherwise False will be returned.</td>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.io.adf.txt"
+      <li><a href="_sources/pymatgen.io.adf.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -556,13 +556,13 @@ float. Otherwise False will be returned.</td>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

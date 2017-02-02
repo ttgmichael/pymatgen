@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.diffusion_analyzer module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.analysis.diffusion_analyzer module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -156,7 +156,7 @@ perform diffusion analysis.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filepaths</strong> (<em>[str]</em>) &#8211; List of paths to vasprun.xml files of runs. (
+<li><strong>filepaths</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; List of paths to vasprun.xml files of runs. (
 must be ordered in sequence of MD simulation). For example,
 you may have done sequential VASP runs and they are in run1,
 run2, run3, etc. You should then pass in
@@ -225,7 +225,7 @@ perform diffusion analysis.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>structures</strong> (<em>[Structure]</em>) &#8211; list of Structure objects (must be
+<li><strong>structures</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a><em>]</em><em></em>) &#8211; list of Structure objects (must be
 ordered in sequence of run). E.g., you may have performed
 sequential VASP runs to obtain sufficient statistics.</li>
 <li><strong>specie</strong> (<em>Element/Specie</em>) &#8211; Specie to calculate diffusivity for as a
@@ -287,7 +287,7 @@ perform diffusion analysis.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vaspruns</strong> (<em>[Vasprun]</em>) &#8211; List of Vaspruns (must be ordered  in
+<li><strong>vaspruns</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Vasprun" title="pymatgen.io.vasp.outputs.Vasprun"><em>Vasprun</em></a><em>]</em><em></em>) &#8211; List of Vaspruns (must be ordered  in
 sequence of MD simulation). E.g., you may have performed
 sequential VASP runs to obtain sufficient statistics.</li>
 <li><strong>specie</strong> (<em>Element/Specie</em>) &#8211; Specie to calculate diffusivity for as a
@@ -349,7 +349,7 @@ huge. You don&#8217;t often need all the structures all at once.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop, step</strong> (<em>start,</em>) &#8211; applies a start/stop/step to the iterator.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop</strong><strong>, </strong><strong>step</strong> (<a class="reference internal" href="pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.start" title="pymatgen.io.abinit.launcher.PyFlowScheduler.start"><em>start</em></a><em>,</em><em></em>) &#8211; applies a start/stop/step to the iterator.
 Faster than applying it after generation, as it reduces the
 number of structures created.</td>
 </tr>
@@ -449,8 +449,8 @@ displacement by specie).</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>temps</strong> (<em>[float]</em>) &#8211; A sequence of temperatures. units: K</li>
-<li><strong>diffusivities</strong> (<em>[float]</em>) &#8211; A sequence of diffusivities (e.g.,
+<li><strong>temps</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of temperatures. units: K</li>
+<li><strong>diffusivities</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of diffusivities (e.g.,
 from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
 </ul>
 </td>
@@ -468,10 +468,10 @@ from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>temps</strong> (<em>[float]</em>) &#8211; A sequence of temperatures.</li>
-<li><strong>diffusivities</strong> (<em>[float]</em>) &#8211; A sequence of diffusivities (e.g.,
+<li><strong>temps</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of temperatures.</li>
+<li><strong>diffusivities</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of diffusivities (e.g.,
 from DiffusionAnalyzer.diffusivity).</li>
-<li><strong>diffusivity_errors</strong> (<em>[float]</em>) &#8211; A sequence of errors for the
+<li><strong>diffusivity_errors</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of errors for the
 diffusivities. If None, no error bar is plotted.</li>
 <li><strong>**kwargs</strong> &#8211; Any keyword args supported by matplotlib.pyplot.plot.</li>
 </ul>
@@ -520,11 +520,11 @@ Conductivity (in mS/cm) = Conversion Factor * Diffusivity (in cm^2/s)</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>temps</strong> (<em>[float]</em>) &#8211; A sequence of temperatures. units: K</li>
-<li><strong>diffusivities</strong> (<em>[float]</em>) &#8211; A sequence of diffusivities (e.g.,
+<li><strong>temps</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of temperatures. units: K</li>
+<li><strong>diffusivities</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of diffusivities (e.g.,
 from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
 <li><strong>new_temp</strong> (<em>float</em>) &#8211; desired temperature. units: K</li>
-<li><strong>structure</strong> (<a class="reference internal" href="pymatgen.analysis.defects.point_defects.html#pymatgen.analysis.defects.point_defects.ValenceIonicRadiusEvaluator.structure" title="pymatgen.analysis.defects.point_defects.ValenceIonicRadiusEvaluator.structure"><em>structure</em></a>) &#8211; Structure used for the diffusivity calculation</li>
+<li><strong>structure</strong> (<a class="reference internal" href="pymatgen.analysis.defects.point_defects.html#pymatgen.analysis.defects.point_defects.Defect.structure" title="pymatgen.analysis.defects.point_defects.Defect.structure"><em>structure</em></a>) &#8211; Structure used for the diffusivity calculation</li>
 <li><strong>species</strong> (<em>string/Specie</em>) &#8211; conducting species</li>
 </ul>
 </td>
@@ -545,8 +545,8 @@ from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>temps</strong> (<em>[float]</em>) &#8211; A sequence of temperatures. units: K</li>
-<li><strong>diffusivities</strong> (<em>[float]</em>) &#8211; A sequence of diffusivities (e.g.,
+<li><strong>temps</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of temperatures. units: K</li>
+<li><strong>diffusivities</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; A sequence of diffusivities (e.g.,
 from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
 <li><strong>new_temp</strong> (<em>float</em>) &#8211; desired temperature. units: K</li>
 </ul>
@@ -570,7 +570,7 @@ from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.analysis.diffusion_analyzer.txt"
+      <li><a href="_sources/pymatgen.analysis.diffusion_analyzer.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -597,13 +597,13 @@ from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

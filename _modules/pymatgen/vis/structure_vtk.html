@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.vis.structure_vtk &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.vis.structure_vtk &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -101,7 +100,7 @@
 <span class="kn">from</span> <span class="nn">pymatgen.core.sites</span> <span class="k">import</span> <span class="n">PeriodicSite</span>
 
 
-<span class="n">module_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+<span class="n">module_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 <span class="n">EL_COLORS</span> <span class="o">=</span> <span class="n">loadfn</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">module_dir</span><span class="p">,</span> <span class="s2">&quot;ElementColorSchemes.yaml&quot;</span><span class="p">))</span>
 
 
@@ -971,7 +970,7 @@
                  <span class="n">show_bonds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_polyhedron</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">poly_radii_tol_factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">excluded_bonding_elements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">animated_movie_options</span><span class="o">=</span><span class="n">DEFAULT_ANIMATED_MOVIE_OPTIONS</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">MultiStructuresVis</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">element_color_mapping</span><span class="o">=</span><span class="n">element_color_mapping</span><span class="p">,</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MultiStructuresVis</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">element_color_mapping</span><span class="o">=</span><span class="n">element_color_mapping</span><span class="p">,</span>
                                                  <span class="n">show_unit_cell</span><span class="o">=</span><span class="n">show_unit_cell</span><span class="p">,</span>
                                                  <span class="n">show_bonds</span><span class="o">=</span><span class="n">show_bonds</span><span class="p">,</span> <span class="n">show_polyhedron</span><span class="o">=</span><span class="n">show_polyhedron</span><span class="p">,</span>
                                                  <span class="n">poly_radii_tol_factor</span><span class="o">=</span><span class="n">poly_radii_tol_factor</span><span class="p">,</span>
@@ -1139,7 +1138,7 @@
 
 <div class="viewcode-block" id="MultiStructuresInteractorStyle"><a class="viewcode-back" href="../../../pymatgen.vis.structure_vtk.html#pymatgen.vis.structure_vtk.MultiStructuresInteractorStyle">[docs]</a><span class="k">class</span> <span class="nc">MultiStructuresInteractorStyle</span><span class="p">(</span><span class="n">StructureInteractorStyle</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
-        <span class="n">StructureInteractorStyle</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+        <span class="n">StructureInteractorStyle</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MultiStructuresInteractorStyle.keyPressEvent"><a class="viewcode-back" href="../../../pymatgen.vis.structure_vtk.html#pymatgen.vis.structure_vtk.MultiStructuresInteractorStyle.keyPressEvent">[docs]</a>    <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="n">parent</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">GetCurrentRenderer</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
@@ -1227,14 +1226,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.lattice &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.core.lattice &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -136,7 +135,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_diags</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lll_matrix_mappings</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lll_inverse</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_orthogonal</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">90</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_angles</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_orthogonal</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">90</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-5</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_angles</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt_spec</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -167,7 +166,7 @@
 
 <div class="viewcode-block" id="Lattice.copy"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Deep copy of self.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -352,7 +351,7 @@
         <span class="k">return</span> <span class="n">Lattice</span><span class="p">([</span><span class="n">vector_a</span><span class="p">,</span> <span class="n">vector_b</span><span class="p">,</span> <span class="n">vector_c</span><span class="p">])</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Lattice.from_dict"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Lattice.from_dict"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a Lattice from a dictionary containing the a, b, c, alpha, beta,</span>
 <span class="sd">        and gamma parameters if fmt is None.</span>
@@ -368,12 +367,12 @@
         <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;abivars&quot;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">pymatgen.io.abinit.abiobjects</span> <span class="k">import</span> <span class="n">lattice_from_abivars</span>
             <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">lattice_from_abivars</span><span class="p">(</span><span class="n">cls</span><span class="o">=</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">lattice_from_abivars</span><span class="p">(</span><span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s2">&quot;matrix&quot;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_parameters</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">],</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_parameters</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">],</span>
                                        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">])</span></div>
 
     <span class="nd">@property</span>
@@ -512,7 +511,7 @@
         <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">7</span>
@@ -530,8 +529,8 @@
 <span class="sd">                matrix representation. Set to 1 for more details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-             <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+             <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
              <span class="s2">&quot;matrix&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matrix</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
         <span class="k">if</span> <span class="n">verbosity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
@@ -546,7 +545,7 @@
 
         <span class="k">return</span> <span class="n">d</span></div>
 
-<div class="viewcode-block" id="Lattice.find_all_mappings"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.find_all_mappings">[docs]</a>    <span class="k">def</span> <span class="nf">find_all_mappings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_lattice</span><span class="p">,</span> <span class="n">ltol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<div class="viewcode-block" id="Lattice.find_all_mappings"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.find_all_mappings">[docs]</a>    <span class="k">def</span> <span class="nf">find_all_mappings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_lattice</span><span class="p">,</span> <span class="n">ltol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                           <span class="n">skip_rotation_matrix</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds all mappings between current lattice and another lattice.</span>
@@ -606,7 +605,7 @@
                                                  <span class="n">betab</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]))</span>
             <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">inds</span><span class="p">):</span>
                 <span class="n">scale_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">f_a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f_b</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">f_c</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">scale_m</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">scale_m</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span>
                     <span class="k">continue</span>
 
                 <span class="n">aligned_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">c_a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">c_b</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">c_c</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
@@ -619,7 +618,7 @@
 
                 <span class="k">yield</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">aligned_m</span><span class="p">),</span> <span class="n">rotation_m</span><span class="p">,</span> <span class="n">scale_m</span></div>
 
-<div class="viewcode-block" id="Lattice.find_mapping"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.find_mapping">[docs]</a>    <span class="k">def</span> <span class="nf">find_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_lattice</span><span class="p">,</span> <span class="n">ltol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<div class="viewcode-block" id="Lattice.find_mapping"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.find_mapping">[docs]</a>    <span class="k">def</span> <span class="nf">find_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_lattice</span><span class="p">,</span> <span class="n">ltol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                      <span class="n">skip_rotation_matrix</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds a mapping between current lattice and another lattice. There</span>
@@ -756,7 +755,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">lll_frac_coords</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lll_mapping</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Lattice.get_niggli_reduced_lattice"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.get_niggli_reduced_lattice">[docs]</a>    <span class="k">def</span> <span class="nf">get_niggli_reduced_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="Lattice.get_niggli_reduced_lattice"><a class="viewcode-back" href="../../../pymatgen.core.lattice.html#pymatgen.core.lattice.Lattice.get_niggli_reduced_lattice">[docs]</a>    <span class="k">def</span> <span class="nf">get_niggli_reduced_lattice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the Niggli reduced lattice using the numerically stable algo</span>
 <span class="sd">        proposed by R. W. Grosse-Kunstleve, N. K. Sauter, &amp; P. D. Adams,</span>
@@ -1229,14 +1228,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

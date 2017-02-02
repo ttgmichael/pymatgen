@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.works &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.abinit.works &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -94,7 +93,7 @@
 <span class="kn">from</span> <span class="nn">.abitimer</span> <span class="k">import</span> <span class="n">AbinitTimerParser</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Matteo Giantomassi&quot;</span>
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2013, The Materials Project&quot;</span>
@@ -118,9 +117,9 @@
     <span class="n">JSON_SCHEMA</span> <span class="o">=</span> <span class="n">NodeResults</span><span class="o">.</span><span class="n">JSON_SCHEMA</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_node</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">work</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_node</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">work</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize an instance from a :class:`Work` instance.&quot;&quot;&quot;</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">WorkResults</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">from_node</span><span class="p">(</span><span class="n">work</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">WorkResults</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">from_node</span><span class="p">(</span><span class="n">work</span><span class="p">)</span>
 
         <span class="c1"># Will put all files found in outdir in GridFs</span>
         <span class="c1"># Warning: assuming binary files.</span>
@@ -406,7 +405,7 @@
 <span class="sd">            flow.walknset_vars(ecut=10, kptopt=4)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">def</span> <span class="nf">change_task</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">task_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">task</span><span class="o">.</span><span class="n">__class__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">task_class</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">task_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">task</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">task_class</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span>
             <span class="k">return</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_work</span><span class="p">:</span>
@@ -420,7 +419,7 @@
                 <span class="n">task</span><span class="o">.</span><span class="n">set_vars</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to set variables for object class </span><span class="si">%s</span><span class="s2">&quot;</span>  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to set variables for object class </span><span class="si">%s</span><span class="s2">&quot;</span>  <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Work"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.works.html#pymatgen.io.abinit.works.Work">[docs]</a><span class="k">class</span> <span class="nc">Work</span><span class="p">(</span><span class="n">BaseWork</span><span class="p">,</span> <span class="n">NodeContainer</span><span class="p">):</span>
@@ -433,7 +432,7 @@
 <span class="sd">            workdir: Path to the working directory.</span>
 <span class="sd">            manager: :class:`TaskManager` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Work</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Work</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -501,7 +500,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">__iter__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">[</span><span class="nb">slice</span><span class="p">]</span>
@@ -826,7 +825,7 @@
 <span class="sd">            workdir: Working directory.</span>
 <span class="sd">            manager: :class:`TaskManager` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">BandStructureWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BandStructureWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
         <span class="c1"># Register the GS-SCF run.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scf_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_scf_task</span><span class="p">(</span><span class="n">scf_input</span><span class="p">)</span>
@@ -921,7 +920,7 @@
 <span class="sd">            workdir: Working directory.</span>
 <span class="sd">            manager: :class:`TaskManager` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">RelaxWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RelaxWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ion_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_relax_task</span><span class="p">(</span><span class="n">ion_input</span><span class="p">)</span>
 
@@ -1015,7 +1014,7 @@
 <span class="sd">            workdir: Working directory of the calculation.</span>
 <span class="sd">            manager: :class:`TaskManager` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">G0W0Work</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">G0W0Work</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">):</span>
             <span class="n">spread_scr</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1072,7 +1071,7 @@
         <span class="c1"># Cast to node instances.</span>
         <span class="n">wfk_node</span><span class="p">,</span> <span class="n">scr_node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">as_node</span><span class="p">(</span><span class="n">wfk_node</span><span class="p">),</span> <span class="n">Node</span><span class="o">.</span><span class="n">as_node</span><span class="p">(</span><span class="n">scr_node</span><span class="p">)</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">SigmaConvWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SigmaConvWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
         <span class="c1"># Register the SIGMA runs.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -1097,7 +1096,7 @@
 <span class="sd">            workdir: Working directory of the calculation.</span>
 <span class="sd">            manager: :class:`TaskManager`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">BseMdfWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BseMdfWork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
         <span class="c1"># Register the GS-SCF run.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scf_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_scf_task</span><span class="p">(</span><span class="n">scf_input</span><span class="p">)</span>
@@ -1340,7 +1339,7 @@
             <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">ddb_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">out_ddb</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Call mrgddb</span>
-            <span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;DDB file merged by </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">())</span>
+            <span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;DDB file merged by </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">())</span>
             <span class="n">mrgddb</span> <span class="o">=</span> <span class="n">wrappers</span><span class="o">.</span><span class="n">Mrgddb</span><span class="p">(</span><span class="n">manager</span><span class="o">=</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">manager</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">mrgddb</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">ddb_files</span><span class="p">,</span> <span class="n">out_ddb</span><span class="o">=</span><span class="n">out_ddb</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">desc</span><span class="p">)</span>
 
@@ -1355,7 +1354,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="PhononWork.from_scf_task"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.works.html#pymatgen.io.abinit.works.PhononWork.from_scf_task">[docs]</a>    <span class="k">def</span> <span class="nf">from_scf_task</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">scf_task</span><span class="p">,</span> <span class="n">qpoints</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PhononWork.from_scf_task"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.works.html#pymatgen.io.abinit.works.PhononWork.from_scf_task">[docs]</a>    <span class="k">def</span> <span class="nf">from_scf_task</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">scf_task</span><span class="p">,</span> <span class="n">qpoints</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a `PhononWork` from a :class:`ScfTask` object.</span>
 <span class="sd">        The input file for phonons is automatically generated from the input of the ScfTask.</span>
@@ -1373,7 +1372,7 @@
 
         <span class="n">qpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">qpoints</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
-        <span class="n">new</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span><span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">qpt</span> <span class="ow">in</span> <span class="n">qpoints</span><span class="p">:</span>
             <span class="n">multi</span> <span class="o">=</span> <span class="n">scf_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">make_ph_inputs_qpoint</span><span class="p">(</span><span class="n">qpt</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">ph_inp</span> <span class="ow">in</span> <span class="n">multi</span><span class="p">:</span>
@@ -1382,7 +1381,7 @@
         <span class="k">return</span> <span class="n">new</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="PhononWork.from_scf_input"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.works.html#pymatgen.io.abinit.works.PhononWork.from_scf_input">[docs]</a>    <span class="k">def</span> <span class="nf">from_scf_input</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">scf_input</span><span class="p">,</span> <span class="n">qpoints</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PhononWork.from_scf_input"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.works.html#pymatgen.io.abinit.works.PhononWork.from_scf_input">[docs]</a>    <span class="k">def</span> <span class="nf">from_scf_input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">scf_input</span><span class="p">,</span> <span class="n">qpoints</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Similar to `from_scf_task`, the difference is that this method requires</span>
 <span class="sd">        an input for SCF calculation instead of a ScfTask. All the tasks (Scf + Phonon)</span>
@@ -1390,7 +1389,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">qpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">qpoints</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
-        <span class="n">new</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span><span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
         <span class="n">scf_task</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">register_scf_task</span><span class="p">(</span><span class="n">scf_input</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">qpt</span> <span class="ow">in</span> <span class="n">qpoints</span><span class="p">:</span>
             <span class="n">multi</span> <span class="o">=</span> <span class="n">scf_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">make_ph_inputs_qpoint</span><span class="p">(</span><span class="n">qpt</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">)</span>
@@ -1458,12 +1457,12 @@
 <span class="sd">    partial DDB files produced by the work.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_scf_task</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">scf_task</span><span class="p">,</span> <span class="n">ddk_tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_scf_task</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">scf_task</span><span class="p">,</span> <span class="n">ddk_tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build a BecWork from a ground-state task.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scf_task</span><span class="p">,</span> <span class="n">ScfTask</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;task </span><span class="si">%s</span><span class="s2"> does not inherit from GsTask&quot;</span> <span class="o">%</span> <span class="n">scf_task</span><span class="p">)</span>
 
-        <span class="n">new</span> <span class="o">=</span> <span class="n">cls</span><span class="p">()</span> <span class="c1">#manager=scf_task.manager)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span> <span class="c1">#manager=scf_task.manager)</span>
 
         <span class="c1"># DDK calculations</span>
         <span class="n">multi_ddk</span> <span class="o">=</span> <span class="n">scf_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">make_ddk_inputs</span><span class="p">(</span><span class="n">tolerance</span><span class="o">=</span><span class="n">ddk_tolerance</span><span class="p">)</span>
@@ -1527,14 +1526,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

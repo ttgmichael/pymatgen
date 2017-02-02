@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.transformations.advanced_transformations &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.transformations.advanced_transformations &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -90,7 +89,7 @@
     <span class="n">SpinComparator</span>
 <span class="kn">from</span> <span class="nn">pymatgen.analysis.energy_models</span> <span class="k">import</span> <span class="n">SymmetryModel</span>
 <span class="kn">from</span> <span class="nn">pymatgen.analysis.bond_valence</span> <span class="k">import</span> <span class="n">BVAnalyzer</span>
-
+<span class="kn">from</span> <span class="nn">pymatgen.core.surface</span> <span class="k">import</span> <span class="n">SlabGenerator</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module implements more advanced transformations.</span>
@@ -104,7 +103,7 @@
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;Jul 24, 2012&quot;</span>
 
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="ChargeBalanceTransformation"><a class="viewcode-back" href="../../../pymatgen.transformations.advanced_transformations.html#pymatgen.transformations.advanced_transformations.ChargeBalanceTransformation">[docs]</a><span class="k">class</span> <span class="nc">ChargeBalanceTransformation</span><span class="p">(</span><span class="n">AbstractTransformation</span><span class="p">):</span>
@@ -138,7 +137,7 @@
                <span class="s2">&quot;Species to remove = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charge_balance_sp</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -192,7 +191,7 @@
                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transformations</span><span class="p">]))</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -284,7 +283,7 @@
                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sp_to_replace</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -428,7 +427,7 @@
         <span class="k">return</span> <span class="s2">&quot;EnumerateStructureTransformation&quot;</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -449,7 +448,7 @@
 <span class="sd">        **kwargs: Args for SubstitutionProbability class lambda_table, alpha</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_substitutor</span> <span class="o">=</span> <span class="n">SubstitutionPredictor</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
@@ -480,7 +479,7 @@
         <span class="k">return</span> <span class="s2">&quot;SubstitutionPredictorTransformation&quot;</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -522,7 +521,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="MagOrderingTransformation.determine_min_cell"><a class="viewcode-back" href="../../../pymatgen.transformations.advanced_transformations.html#pymatgen.transformations.advanced_transformations.MagOrderingTransformation.determine_min_cell">[docs]</a>    <span class="k">def</span> <span class="nf">determine_min_cell</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">mag_species_spin</span><span class="p">,</span> <span class="n">order_parameter</span><span class="p">):</span>
+<div class="viewcode-block" id="MagOrderingTransformation.determine_min_cell"><a class="viewcode-back" href="../../../pymatgen.transformations.advanced_transformations.html#pymatgen.transformations.advanced_transformations.MagOrderingTransformation.determine_min_cell">[docs]</a>    <span class="k">def</span> <span class="nf">determine_min_cell</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">mag_species_spin</span><span class="p">,</span> <span class="n">order_parameter</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Determine the smallest supercell that is able to enumerate</span>
 <span class="sd">        the provided structure with the given order parameter</span>
@@ -613,7 +612,7 @@
         <span class="k">return</span> <span class="s2">&quot;MagOrderingTransformation&quot;</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -842,6 +841,55 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_one_to_many</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="SlabTransformation"><a class="viewcode-back" href="../../../pymatgen.transformations.advanced_transformations.html#pymatgen.transformations.advanced_transformations.SlabTransformation">[docs]</a><span class="k">class</span> <span class="nc">SlabTransformation</span><span class="p">(</span><span class="n">AbstractTransformation</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A transformation that creates a slab from a structure.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">miller_index</span><span class="p">,</span> <span class="n">min_slab_size</span><span class="p">,</span> <span class="n">min_vacuum_size</span><span class="p">,</span>
+                 <span class="n">lll_reduce</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">center_slab</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">primitive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">max_normal_search</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            miller_index (3-tuple or list): miller index of slab</span>
+<span class="sd">            min_slab_size (float): minimum slab size in angstroms</span>
+<span class="sd">            min_vacuum_size (float): minimum size of vacuum</span>
+<span class="sd">            lll_reduce (bool): whether to apply LLL reduction</span>
+<span class="sd">            center_slab (bool): whether to center the slab</span>
+<span class="sd">            primitive (bool): whether to reduce slabs to most primitive cell</span>
+<span class="sd">            max_normal_search (int): maximum index to include in linear</span>
+<span class="sd">                combinations of indices to find c lattice vector orthogonal</span>
+<span class="sd">                to slab surface</span>
+<span class="sd">            shift (float): shift to get termination</span>
+<span class="sd">            tol (float): tolerance for primitive cell finding</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">miller_index</span> <span class="o">=</span> <span class="n">miller_index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_slab_size</span> <span class="o">=</span> <span class="n">min_slab_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_vacuum_size</span> <span class="o">=</span> <span class="n">min_vacuum_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lll_reduce</span> <span class="o">=</span> <span class="n">lll_reduce</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_slab</span> <span class="o">=</span> <span class="n">center_slab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">primitive</span> <span class="o">=</span> <span class="n">primitive</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_normal_search</span> <span class="o">=</span> <span class="n">max_normal_search</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">shift</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<div class="viewcode-block" id="SlabTransformation.apply_transformation"><a class="viewcode-back" href="../../../pymatgen.transformations.advanced_transformations.html#pymatgen.transformations.advanced_transformations.SlabTransformation.apply_transformation">[docs]</a>    <span class="k">def</span> <span class="nf">apply_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">):</span>
+        <span class="n">sg</span> <span class="o">=</span> <span class="n">SlabGenerator</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">miller_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_slab_size</span><span class="p">,</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">min_vacuum_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lll_reduce</span><span class="p">,</span> 
+                           <span class="bp">self</span><span class="o">.</span><span class="n">center_slab</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">primitive</span><span class="p">,</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">max_normal_search</span><span class="p">)</span>
+        <span class="n">slab</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">get_slab</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">slab</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_one_to_many</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
 </pre></div>
 
           </div>
@@ -872,14 +920,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

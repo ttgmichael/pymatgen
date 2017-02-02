@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -112,7 +111,7 @@
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Production&quot;</span>
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;Nov 30, 2012&quot;</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_parse_parameters</span><span class="p">(</span><span class="n">val_type</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
@@ -406,7 +405,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">ionic_step_skip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">ionic_step_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dos</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">parse_eigen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parse_projected_eigen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">parse_potcar_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">occu_tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span>
+                 <span class="n">parse_potcar_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">occu_tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
                  <span class="n">exception_on_bad_xml</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ionic_step_skip</span> <span class="o">=</span> <span class="n">ionic_step_skip</span>
@@ -669,7 +668,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hubbards</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hubbards</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hubbards</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mf">1e-8</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_spin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1214,7 +1213,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">parse_projected_eigen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">parse_potcar_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">occu_tol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+                 <span class="n">parse_potcar_file</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">occu_tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">occu_tol</span> <span class="o">=</span> <span class="n">occu_tol</span>
 
@@ -1573,8 +1572,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="n">zopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">table_pattern_text</span> <span class="o">=</span> <span class="n">header_pattern</span> <span class="o">+</span> <span class="s2">r&quot;\s*^(?P&lt;table_body&gt;(?:\s+&quot;</span> <span class="o">+</span> \
-                             <span class="n">row_pattern</span> <span class="o">+</span> <span class="s2">r&quot;)+)\s+&quot;</span> <span class="o">+</span> <span class="n">footer_pattern</span>
+        <span class="n">table_pattern_text</span> <span class="o">=</span> <span class="n">header_pattern</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\s*^(?P&lt;table_body&gt;(?:\s+&quot;</span> <span class="o">+</span> \
+                             <span class="n">row_pattern</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;)+)\s+&quot;</span> <span class="o">+</span> <span class="n">footer_pattern</span>
         <span class="n">table_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">table_pattern_text</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
         <span class="n">rp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">row_pattern</span><span class="p">)</span>
         <span class="n">tables</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1604,10 +1603,10 @@
 <span class="sd">        LOPTICS). Frequencies (in eV) are in self.frequencies, and dielectric</span>
 <span class="sd">        tensor function is given as self.dielectric_tensor_function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">header_pattern</span> <span class="o">=</span> <span class="s2">r&quot;\s+frequency dependent\s+IMAGINARY &quot;</span> \
-                         <span class="s2">r&quot;DIELECTRIC FUNCTION \(independent particle, &quot;</span> \
-                         <span class="s2">r&quot;no local field effects\)\s*&quot;</span>
-        <span class="n">row_pattern</span> <span class="o">=</span> <span class="s2">r&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">r&quot;([\.\-\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+frequency dependent\s+IMAGINARY &quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;DIELECTRIC FUNCTION \(independent particle, &quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;no local field effects\)\s*&quot;</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;([\.\-\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>
 
         <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">reverse_readfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">):</span>
@@ -1628,7 +1627,7 @@
                 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">yz</span><span class="p">,</span> <span class="n">xz</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">toks</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
                 <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">xx</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">yz</span><span class="p">],</span> <span class="p">[</span><span class="n">xy</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">yz</span><span class="p">],</span> <span class="p">[</span><span class="n">xz</span><span class="p">,</span> <span class="n">yz</span><span class="p">,</span> <span class="n">zz</span><span class="p">]]</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">component</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">r&quot;\s*\-+\s*&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*\-+\s*&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1647,17 +1646,17 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            List of chemical shifts in the order of atoms from the OUTCAR. Maryland notation is adopted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">header_pattern</span> <span class="o">=</span> <span class="s2">r&quot;\s+CSA tensor \(J\. Mason, Solid State Nucl\. Magn\. Reson\. 2, &quot;</span> \
-                         <span class="s2">r&quot;285 \(1993\)\)\s+&quot;</span> \
-                         <span class="s2">r&quot;\s+-{50,}\s+&quot;</span> \
-                         <span class="s2">r&quot;\s+EXCLUDING G=0 CONTRIBUTION\s+INCLUDING G=0 CONTRIBUTION\s+&quot;</span> \
-                         <span class="s2">r&quot;\s+-{20,}\s+-{20,}\s+&quot;</span> \
-                         <span class="s2">r&quot;\s+ATOM\s+ISO_SHIFT\s+SPAN\s+SKEW\s+ISO_SHIFT\s+SPAN\s+SKEW\s+&quot;</span> \
+        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+CSA tensor \(J\. Mason, Solid State Nucl\. Magn\. Reson\. 2, &quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;285 \(1993\)\)\s+&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;\s+-{50,}\s+&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;\s+EXCLUDING G=0 CONTRIBUTION\s+INCLUDING G=0 CONTRIBUTION\s+&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;\s+-{20,}\s+-{20,}\s+&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;\s+ATOM\s+ISO_SHIFT\s+SPAN\s+SKEW\s+ISO_SHIFT\s+SPAN\s+SKEW\s+&quot;</span> \
                          <span class="s2">&quot;-{50,}\s*$&quot;</span>
-        <span class="n">first_part_pattern</span> <span class="o">=</span> <span class="s2">r&quot;\s+\(absolute, valence only\)\s+$&quot;</span>
-        <span class="n">swallon_valence_body_pattern</span> <span class="o">=</span> <span class="s2">r&quot;.+?\(absolute, valence and core\)\s+$&quot;</span>
-        <span class="n">row_pattern</span> <span class="o">=</span> <span class="s2">r&quot;\d+(?:\s+[-]?\d+\.\d+)</span><span class="si">{3}</span><span class="s2">\s+&quot;</span> <span class="o">+</span> <span class="s1">r&#39;\s+&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="p">[</span><span class="s2">r&quot;([-]?\d+\.\d+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">first_part_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+\(absolute, valence only\)\s+$&quot;</span>
+        <span class="n">swallon_valence_body_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;.+?\(absolute, valence and core\)\s+$&quot;</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+(?:\s+[-]?\d+\.\d+)</span><span class="si">{3}</span><span class="s2">\s+&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;([-]?\d+\.\d+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
         <span class="n">footer_pattern</span> <span class="o">=</span> <span class="s2">&quot;-{50,}\s*$&quot;</span>
         <span class="n">h1</span> <span class="o">=</span> <span class="n">header_pattern</span> <span class="o">+</span> <span class="n">first_part_pattern</span>
         <span class="n">cs_valence_only</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span>
@@ -1685,15 +1684,15 @@
 <span class="sd">            Electric Field Gradient tensors as a list of dict in the order of atoms from OUTCAR.</span>
 <span class="sd">            Each dict key/value pair corresponds to a component of the tensors.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">header_pattern</span> <span class="o">=</span> <span class="s2">r&quot;^\s+NMR quadrupolar parameters\s+$\n&quot;</span> \
-                         <span class="s2">r&quot;^\s+Cq : quadrupolar parameter\s+Cq=e[*]Q[*]V_zz/h$\n&quot;</span> \
-                         <span class="s2">r&quot;^\s+eta: asymmetry parameters\s+\(V_yy - V_xx\)/ V_zz$\n&quot;</span> \
-                         <span class="s2">r&quot;^\s+Q  : nuclear electric quadrupole moment in mb \(millibarn\)$\n&quot;</span> \
-                         <span class="s2">r&quot;^-{50,}$\n&quot;</span> \
-                         <span class="s2">r&quot;^\s+ion\s+Cq\(MHz\)\s+eta\s+Q \(mb\)\s+$\n&quot;</span> \
-                         <span class="s2">r&quot;^-{50,}\s*$\n&quot;</span>
-        <span class="n">row_pattern</span> <span class="o">=</span> <span class="s2">r&quot;\d+\s+(?P&lt;cq&gt;[-]?\d+\.\d+)\s+(?P&lt;eta&gt;[-]?\d+\.\d+)\s+&quot;</span> \
-                      <span class="s2">r&quot;(?P&lt;nuclear_quadrupole_moment&gt;[-]?\d+\.\d+)&quot;</span>
+        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;^\s+NMR quadrupolar parameters\s+$\n&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;^\s+Cq : quadrupolar parameter\s+Cq=e[*]Q[*]V_zz/h$\n&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;^\s+eta: asymmetry parameters\s+\(V_yy - V_xx\)/ V_zz$\n&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;^\s+Q  : nuclear electric quadrupole moment in mb \(millibarn\)$\n&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;^-{50,}$\n&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;^\s+ion\s+Cq\(MHz\)\s+eta\s+Q \(mb\)\s+$\n&quot;</span> \
+                         <span class="sa">r</span><span class="s2">&quot;^-{50,}\s*$\n&quot;</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+\s+(?P&lt;cq&gt;[-]?\d+\.\d+)\s+(?P&lt;eta&gt;[-]?\d+\.\d+)\s+&quot;</span> \
+                      <span class="sa">r</span><span class="s2">&quot;(?P&lt;nuclear_quadrupole_moment&gt;[-]?\d+\.\d+)&quot;</span>
         <span class="n">footer_pattern</span> <span class="o">=</span> <span class="s2">&quot;-{50,}\s*$&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span> <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
                                 <span class="n">last_one_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute_name</span><span class="o">=</span><span class="s2">&quot;efg&quot;</span><span class="p">)</span></div>
@@ -2175,8 +2174,8 @@
         <span class="k">return</span> <span class="n">cl</span></div>
 
 <div class="viewcode-block" id="Outcar.as_dict"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-             <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="s2">&quot;efermi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+             <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;efermi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span>
              <span class="s2">&quot;run_stats&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_stats</span><span class="p">,</span> <span class="s2">&quot;magnetization&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnetization</span><span class="p">,</span>
              <span class="s2">&quot;charge&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge</span><span class="p">,</span> <span class="s2">&quot;total_magnetization&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_mag</span><span class="p">,</span>
              <span class="s2">&quot;nelect&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nelect</span><span class="p">,</span> <span class="s2">&quot;is_stopped&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">}</span>
@@ -2498,7 +2497,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poscar</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Locpot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">poscar</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Locpot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">poscar</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">poscar</span><span class="o">.</span><span class="n">comment</span>
 
     <span class="nd">@staticmethod</span>
@@ -2517,7 +2516,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poscar</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Chgcar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">poscar</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Chgcar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">poscar</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">poscar</span> <span class="o">=</span> <span class="n">poscar</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">poscar</span><span class="o">.</span><span class="n">comment</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_distance_matrix</span> <span class="o">=</span> <span class="p">{}</span>
@@ -3331,14 +3330,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

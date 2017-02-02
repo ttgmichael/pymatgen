@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.phasediagram.maker module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.phasediagram.maker module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -69,10 +69,10 @@ elements.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>entries</strong> (<em>[PDEntry]</em>) &#8211; Sequence of input entries. For example,
+<li><strong>entries</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.phasediagram.entries.html#pymatgen.phasediagram.entries.PDEntry" title="pymatgen.phasediagram.entries.PDEntry"><em>PDEntry</em></a><em>]</em><em></em>) &#8211; Sequence of input entries. For example,
 if you want a Li2O-P2O5 phase diagram, you might have all
 Li-P-O entries as an input.</li>
-<li><strong>terminal_compositions</strong> (<em>[Composition]</em>) &#8211; Terminal compositions of
+<li><strong>terminal_compositions</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.composition.html#pymatgen.core.composition.Composition" title="pymatgen.core.composition.Composition"><em>Composition</em></a><em>]</em><em></em>) &#8211; Terminal compositions of
 phase space. In the Li2O-P2O5 example, these will be the
 Li2O and P2O5 compositions.</li>
 <li><strong>normalize_terminal_compositions</strong> (<em>bool</em>) &#8211; Whether to normalize the
@@ -153,11 +153,11 @@ doi:10.1016/j.elecom.2010.01.010</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>entries</strong> (<em>[PDEntry]</em>) &#8211; A list of PDEntry-like objects having an
+<li><strong>entries</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.phasediagram.entries.html#pymatgen.phasediagram.entries.PDEntry" title="pymatgen.phasediagram.entries.PDEntry"><em>PDEntry</em></a><em>]</em><em></em>) &#8211; A list of PDEntry-like objects having an
 energy, energy_per_atom and composition.</li>
 <li><strong>{Element</strong> (<em>chempots</em>) &#8211; float}: Specify the chemical potentials
 of the open elements.</li>
-<li><strong>elements</strong> (<em>[Element]</em>) &#8211; Optional list of elements in the phase
+<li><strong>elements</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element" title="pymatgen.core.periodic_table.Element"><em>Element</em></a><em>]</em><em></em>) &#8211; Optional list of elements in the phase
 diagram. If set to None, the elements are determined from
 the the entries themselves.</li>
 </ul>
@@ -204,9 +204,9 @@ entries that are filtered out before Phase Diagram construction.</div></blockquo
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>entries</strong> (<em>[PDEntry]</em>) &#8211; A list of PDEntry-like objects having an
+<li><strong>entries</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.phasediagram.entries.html#pymatgen.phasediagram.entries.PDEntry" title="pymatgen.phasediagram.entries.PDEntry"><em>PDEntry</em></a><em>]</em><em></em>) &#8211; A list of PDEntry-like objects having an
 energy, energy_per_atom and composition.</li>
-<li><strong>elements</strong> (<em>[Element]</em>) &#8211; Optional list of elements in the phase
+<li><strong>elements</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element" title="pymatgen.core.periodic_table.Element"><em>Element</em></a><em>]</em><em></em>) &#8211; Optional list of elements in the phase
 diagram. If set to None, the elements are determined from
 the the entries themselves.</li>
 </ul>
@@ -325,7 +325,7 @@ errors.</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.phasediagram.maker.txt"
+      <li><a href="_sources/pymatgen.phasediagram.maker.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -352,13 +352,13 @@ errors.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

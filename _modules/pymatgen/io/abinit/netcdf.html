@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.netcdf &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.abinit.netcdf &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -74,7 +73,7 @@
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="k">import</span> <span class="n">Structure</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Matteo Giantomassi&quot;</span>
@@ -99,10 +98,10 @@
     <span class="n">netCDF4</span> <span class="o">=</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">_asreader</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_asreader</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
     <span class="n">closeit</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
-        <span class="n">file</span><span class="p">,</span> <span class="n">closeit</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="n">file</span><span class="p">,</span> <span class="n">closeit</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="n">file</span><span class="p">,</span> <span class="n">closeit</span>
 
 
@@ -311,12 +310,12 @@
         <span class="sd">&quot;&quot;&quot;Returns the type index from the chemical symbol. Note python convention.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_symbols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ETSF_Reader.read_structure"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.ETSF_Reader.read_structure">[docs]</a>    <span class="k">def</span> <span class="nf">read_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">Structure</span><span class="p">):</span>
+<div class="viewcode-block" id="ETSF_Reader.read_structure"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.ETSF_Reader.read_structure">[docs]</a>    <span class="k">def</span> <span class="nf">read_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Structure</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the crystalline structure.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ngroups</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;In file </span><span class="si">%s</span><span class="s2">: ngroups != 1&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">structure_from_ncdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">cls</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">structure_from_ncdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ETSF_Reader.read_abinit_xcfunc"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.ETSF_Reader.read_abinit_xcfunc">[docs]</a>    <span class="k">def</span> <span class="nf">read_abinit_xcfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -326,7 +325,7 @@
         <span class="k">return</span> <span class="n">XcFunc</span><span class="o">.</span><span class="n">from_abinit_ixc</span><span class="p">(</span><span class="n">ixc</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="structure_from_ncdata"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.structure_from_ncdata">[docs]</a><span class="k">def</span> <span class="nf">structure_from_ncdata</span><span class="p">(</span><span class="n">ncdata</span><span class="p">,</span> <span class="n">site_properties</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">Structure</span><span class="p">):</span>
+<div class="viewcode-block" id="structure_from_ncdata"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.structure_from_ncdata">[docs]</a><span class="k">def</span> <span class="nf">structure_from_ncdata</span><span class="p">(</span><span class="n">ncdata</span><span class="p">,</span> <span class="n">site_properties</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Structure</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reads and returns a pymatgen structure from a NetCDF file</span>
 <span class="sd">    containing crystallographic data in the ETSF-IO format.</span>
@@ -360,13 +359,13 @@
         <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">site_properties</span><span class="p">:</span>
             <span class="n">d</span><span class="p">[</span><span class="nb">property</span><span class="p">]</span> <span class="o">=</span> <span class="n">ncdata</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
 
-    <span class="n">structure</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">red_coords</span><span class="p">,</span> <span class="n">site_properties</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">red_coords</span><span class="p">,</span> <span class="n">site_properties</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
 
     <span class="c1"># Quick and dirty hack.</span>
     <span class="c1"># I need an abipy structure since I need to_abivars and other methods.</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">abipy.core.structure</span> <span class="k">import</span> <span class="n">Structure</span> <span class="k">as</span> <span class="n">AbipyStructure</span>
-        <span class="n">structure</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">AbipyStructure</span>
+        <span class="n">structure</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">AbipyStructure</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">pass</span>
 
@@ -404,14 +403,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

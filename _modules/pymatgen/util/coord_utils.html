@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.util.coord_utils &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.util.coord_utils &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -85,10 +84,10 @@
 
 
 <span class="c1"># array size threshold for looping instead of broadcasting</span>
-<span class="n">LOOP_THRESHOLD</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e6</span>
+<span class="n">LOOP_THRESHOLD</span> <span class="o">=</span> <span class="mf">1e6</span>
 
 
-<div class="viewcode-block" id="find_in_coord_list"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.find_in_coord_list">[docs]</a><span class="k">def</span> <span class="nf">find_in_coord_list</span><span class="p">(</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="find_in_coord_list"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.find_in_coord_list">[docs]</a><span class="k">def</span> <span class="nf">find_in_coord_list</span><span class="p">(</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the indices of matches of a particular coord in a coord_list.</span>
 
@@ -107,7 +106,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">atol</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="in_coord_list"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.in_coord_list">[docs]</a><span class="k">def</span> <span class="nf">in_coord_list</span><span class="p">(</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="in_coord_list"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.in_coord_list">[docs]</a><span class="k">def</span> <span class="nf">in_coord_list</span><span class="p">(</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tests if a particular coord is within a coord_list.</span>
 
@@ -123,7 +122,7 @@
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">find_in_coord_list</span><span class="p">(</span><span class="n">coord_list</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="is_coord_subset"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.is_coord_subset">[docs]</a><span class="k">def</span> <span class="nf">is_coord_subset</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="is_coord_subset"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.is_coord_subset">[docs]</a><span class="k">def</span> <span class="nf">is_coord_subset</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tests if all coords in subset are contained in superset.</span>
 <span class="sd">    Doesn&#39;t use periodic boundary conditions</span>
@@ -141,7 +140,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">any_close</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="coord_list_mapping"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.coord_list_mapping">[docs]</a><span class="k">def</span> <span class="nf">coord_list_mapping</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="coord_list_mapping"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.coord_list_mapping">[docs]</a><span class="k">def</span> <span class="nf">coord_list_mapping</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gives the index mapping from a subset to a superset.</span>
 <span class="sd">    Subset and superset cannot contain duplicate rows</span>
@@ -166,7 +165,7 @@
     <span class="k">return</span> <span class="n">inds</span></div>
 
 
-<div class="viewcode-block" id="coord_list_mapping_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.coord_list_mapping_pbc">[docs]</a><span class="k">def</span> <span class="nf">coord_list_mapping_pbc</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="coord_list_mapping_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.coord_list_mapping_pbc">[docs]</a><span class="k">def</span> <span class="nf">coord_list_mapping_pbc</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gives the index mapping from a subset to a superset.</span>
 <span class="sd">    Superset cannot contain duplicate matching rows</span>
@@ -270,7 +269,7 @@
     <span class="k">return</span> <span class="n">cuc</span><span class="o">.</span><span class="n">pbc_shortest_vectors</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">fcoords1</span><span class="p">,</span> <span class="n">fcoords2</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">return_d2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="find_in_coord_list_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.find_in_coord_list_pbc">[docs]</a><span class="k">def</span> <span class="nf">find_in_coord_list_pbc</span><span class="p">(</span><span class="n">fcoord_list</span><span class="p">,</span> <span class="n">fcoord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="find_in_coord_list_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.find_in_coord_list_pbc">[docs]</a><span class="k">def</span> <span class="nf">find_in_coord_list_pbc</span><span class="p">(</span><span class="n">fcoord_list</span><span class="p">,</span> <span class="n">fcoord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the indices of all points in a fractional coord list that are</span>
 <span class="sd">    equal to a fractional coord (with a tolerance), taking into account</span>
@@ -292,7 +291,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fdist</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">atol</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="in_coord_list_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.in_coord_list_pbc">[docs]</a><span class="k">def</span> <span class="nf">in_coord_list_pbc</span><span class="p">(</span><span class="n">fcoord_list</span><span class="p">,</span> <span class="n">fcoord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="in_coord_list_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.in_coord_list_pbc">[docs]</a><span class="k">def</span> <span class="nf">in_coord_list_pbc</span><span class="p">(</span><span class="n">fcoord_list</span><span class="p">,</span> <span class="n">fcoord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tests if a particular fractional coord is within a fractional coord_list.</span>
 
@@ -307,7 +306,7 @@
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">find_in_coord_list_pbc</span><span class="p">(</span><span class="n">fcoord_list</span><span class="p">,</span> <span class="n">fcoord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="is_coord_subset_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.is_coord_subset_pbc">[docs]</a><span class="k">def</span> <span class="nf">is_coord_subset_pbc</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="is_coord_subset_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.is_coord_subset_pbc">[docs]</a><span class="k">def</span> <span class="nf">is_coord_subset_pbc</span><span class="p">(</span><span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tests if all fractional coords in subset are contained in superset.</span>
 
@@ -363,8 +362,8 @@
 
     <span class="n">frac_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">all_points</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">supercell_matrix</span><span class="p">))</span>
 
-    <span class="n">tvects</span> <span class="o">=</span> <span class="n">frac_points</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">frac_points</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-                         <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">frac_points</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">tvects</span> <span class="o">=</span> <span class="n">frac_points</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">frac_points</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                         <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">frac_points</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tvects</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">supercell_matrix</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">tvects</span></div>
 
@@ -458,7 +457,7 @@
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Simplex is not full-dimensional&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Simplex.in_simplex"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.Simplex.in_simplex">[docs]</a>    <span class="k">def</span> <span class="nf">in_simplex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="Simplex.in_simplex"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.Simplex.in_simplex">[docs]</a>    <span class="k">def</span> <span class="nf">in_simplex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if a point is in the simplex using the standard barycentric</span>
 <span class="sd">        coordinate system algorithm.</span>
@@ -494,7 +493,7 @@
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -532,14 +531,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

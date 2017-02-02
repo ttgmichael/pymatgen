@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.apps.borg.hive &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.apps.borg.hive &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -95,7 +94,7 @@
     <span class="n">ComputedStructureEntry</span>
 <span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="AbstractDrone"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.AbstractDrone">[docs]</a><span class="k">class</span> <span class="nc">AbstractDrone</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">,</span> <span class="n">MSONable</span><span class="p">)):</span>
@@ -240,12 +239,12 @@
                               <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">,</span>
                               <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">},</span>
                 <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span>
-                <span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">}</span></div>
+                <span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">}</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="VaspToComputedEntryDrone.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.VaspToComputedEntryDrone.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span></div></div>
+<div class="viewcode-block" id="VaspToComputedEntryDrone.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.VaspToComputedEntryDrone.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span></div></div>
 
 
 <div class="viewcode-block" id="SimpleVaspToComputedEntryDrone"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.SimpleVaspToComputedEntryDrone">[docs]</a><span class="k">class</span> <span class="nc">SimpleVaspToComputedEntryDrone</span><span class="p">(</span><span class="n">VaspToComputedEntryDrone</span><span class="p">):</span>
@@ -339,7 +338,7 @@
                 <span class="n">param</span><span class="p">[</span><span class="s2">&quot;run_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GGA+U&quot;</span> <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="s2">&quot;is_hubbard&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;GGA&quot;</span>
             <span class="n">param</span><span class="p">[</span><span class="s2">&quot;history&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_transformation_history</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
             <span class="n">param</span><span class="p">[</span><span class="s2">&quot;potcar_spec&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">potcar</span><span class="o">.</span><span class="n">spec</span> <span class="k">if</span> <span class="n">potcar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
-            <span class="n">energy</span> <span class="o">=</span> <span class="n">oszicar</span><span class="o">.</span><span class="n">final_energy</span> <span class="k">if</span> <span class="n">oszicar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">1</span><span class="n">e10</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="n">oszicar</span><span class="o">.</span><span class="n">final_energy</span> <span class="k">if</span> <span class="n">oszicar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">1e10</span>
             <span class="n">structure</span> <span class="o">=</span> <span class="n">contcar</span><span class="o">.</span><span class="n">structure</span> <span class="k">if</span> <span class="n">contcar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>\
                 <span class="k">else</span> <span class="n">poscar</span><span class="o">.</span><span class="n">structure</span>
             <span class="n">initial_vol</span> <span class="o">=</span> <span class="n">poscar</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">volume</span> <span class="k">if</span> <span class="n">poscar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> \
@@ -371,12 +370,12 @@
 
 <div class="viewcode-block" id="SimpleVaspToComputedEntryDrone.as_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.SimpleVaspToComputedEntryDrone.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;init_args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;inc_structure&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inc_structure</span><span class="p">},</span>
-                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">}</span></div>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">}</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="SimpleVaspToComputedEntryDrone.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.SimpleVaspToComputedEntryDrone.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span></div></div>
+<div class="viewcode-block" id="SimpleVaspToComputedEntryDrone.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.SimpleVaspToComputedEntryDrone.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span></div></div>
 
 
 <div class="viewcode-block" id="GaussianToComputedEntryDrone"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.GaussianToComputedEntryDrone">[docs]</a><span class="k">class</span> <span class="nc">GaussianToComputedEntryDrone</span><span class="p">(</span><span class="n">AbstractDrone</span><span class="p">):</span>
@@ -459,12 +458,12 @@
                               <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">,</span>
                               <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span>
                               <span class="s2">&quot;file_extensions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file_extensions</span><span class="p">},</span>
-                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">}</span></div>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">}</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="GaussianToComputedEntryDrone.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.GaussianToComputedEntryDrone.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span></div></div>
+<div class="viewcode-block" id="GaussianToComputedEntryDrone.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.borg.hive.html#pymatgen.apps.borg.hive.GaussianToComputedEntryDrone.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">_get_transformation_history</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -509,14 +508,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

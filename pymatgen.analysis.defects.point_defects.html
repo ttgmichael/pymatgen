@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.defects.point_defects module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.analysis.defects.point_defects module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -765,13 +765,13 @@ in a pattern that resembles a supported structure motif
 <li><strong>struct</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; input structure for which symmetrically
 distinct interstitial sites are to be found.</li>
 <li><strong>inter_elem</strong> (<em>string</em>) &#8211; element symbol of desired interstitial.</li>
-<li><strong>motif_types</strong> (<em>[string]</em>) &#8211; list of structure motif types that are
+<li><strong>motif_types</strong> (<em></em><em>[</em><em>string</em><em>]</em><em></em>) &#8211; list of structure motif types that are
 to be considered.  Permissible types are:
 tet (tetrahedron), oct (octahedron),
 tetoct (tetrahedron-octahedron overlay).</li>
-<li><strong>op_targets</strong> (<em>[float]</em>) &#8211; target values for the underlying order
+<li><strong>op_targets</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; target values for the underlying order
 parameters to recognize a given structural motif.</li>
-<li><strong>op_threshs</strong> (<em>[float]</em>) &#8211; threshold values for the underlying order
+<li><strong>op_threshs</strong> (<em></em><em>[</em><em>float</em><em>]</em><em></em>) &#8211; threshold values for the underlying order
 parameters to still recognize a given structural motif
 (i.e., for an OP value &gt;= threshold the coordination pattern
 match is positive, for OP &lt; threshold the match is
@@ -817,13 +817,13 @@ write out times for sections of the interstitial search
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>defect_sites</strong> &#8211;<dl class="docutils">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
 <dt>list of periodic sites</dt>
 <dd>representing the interstitials.</dd>
 </dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[PeriodicSite]</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">defect_sites ([<a class="reference internal" href="pymatgen.core.sites.html#pymatgen.core.sites.PeriodicSite" title="pymatgen.core.sites.PeriodicSite">PeriodicSite</a>])</td>
 </tr>
 </tbody>
 </table>
@@ -837,14 +837,14 @@ write out times for sections of the interstitial search
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>elem_cn</strong> &#8211;<dl class="docutils">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
 <dt>dictionary storing the coordination numbers (int)</dt>
 <dd>with string representation of elements as keys.
 (i.e., {elem1 (string): cn1 (int), ...}).</dd>
 </dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">elem_cn (dict)</td>
 </tr>
 </tbody>
 </table>
@@ -858,9 +858,9 @@ write out times for sections of the interstitial search
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>motif</strong> &#8211; motif type.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">motif type.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">motif (string)</td>
 </tr>
 </tbody>
 </table>
@@ -880,9 +880,9 @@ which is a copy of the defect-free input structure.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scaling_matrix</strong> (<em>3x3 integer array</em>) &#8211; scaling matrix
 to transform the lattice vectors.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>scs</strong> &#8211; sequence of supercells.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">sequence of supercells.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">[Structure]</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">scs ([<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure">Structure</a>])</td>
 </tr>
 </tbody>
 </table>
@@ -1123,7 +1123,7 @@ pymatgen.symmetry.finder.SpacegroupAnalyzer</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.analysis.defects.point_defects.txt"
+      <li><a href="_sources/pymatgen.analysis.defects.point_defects.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -1150,13 +1150,13 @@ pymatgen.symmetry.finder.SpacegroupAnalyzer</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

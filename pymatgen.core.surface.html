@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.surface module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.core.surface module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -103,7 +103,7 @@ and methods pertaining to slabs.</p>
 simply as any 2D array. Each row should correspond to a lattice
 vector. E.g., [[10,0,0], [20,10,0], [0,0,30]] specifies a
 lattice with lattice vectors [10,0,0], [20,10,0] and [0,0,30].</li>
-<li><strong>species</strong> (<em>[Specie]</em>) &#8211; <p>Sequence of species on each site. Can take in
+<li><strong>species</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Specie" title="pymatgen.core.periodic_table.Specie"><em>Specie</em></a><em>]</em><em></em>) &#8211; <p>Sequence of species on each site. Can take in
 flexible input, including:</p>
 <ol class="lowerroman">
 <li>A sequence of element / specie specified either as string
@@ -116,7 +116,7 @@ disordered structures.</li>
 </li>
 <li><strong>coords</strong> (<em>Nx3 array</em>) &#8211; list of fractional/cartesian coordinates of
 each species.</li>
-<li><strong>miller_index</strong> (<em>[h, k, l]</em>) &#8211; Miller index of plane parallel to
+<li><strong>miller_index</strong> (<em></em><em>[</em><em>h</em><em>, </em><em>k</em><em>, </em><em>l</em><em>]</em><em></em>) &#8211; Miller index of plane parallel to
 surface. Note that this is referenced to the input structure. If
 you need this to be based on the conventional cell,
 you should supply the conventional structure.</li>
@@ -150,7 +150,7 @@ slab structure from the Slab class(in [0, 0, 1])</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>indices</strong> (<em>[int]</em>) &#8211; Indices of sites on which to put the absorbate.
+<li><strong>indices</strong> (<em></em><em>[</em><em>int</em><em>]</em><em></em>) &#8211; Indices of sites on which to put the absorbate.
 Absorbed atom will be displaced relative to the center of
 these sites.</li>
 <li><strong>specie</strong> (<em>Specie/Element/str</em>) &#8211; adsorbed atom species</li>
@@ -355,7 +355,7 @@ Also stores the initial information needed later on to generate a slab.</p>
 ensure that the miller indices correspond to usual
 crystallographic definitions, you should supply a conventional
 unit cell structure.</li>
-<li><strong>miller_index</strong> (<em>[h, k, l]</em>) &#8211; Miller index of plane parallel to
+<li><strong>miller_index</strong> (<em></em><em>[</em><em>h</em><em>, </em><em>k</em><em>, </em><em>l</em><em>]</em><em></em>) &#8211; Miller index of plane parallel to
 surface. Note that this is referenced to the input structure. If
 you need this to be based on the conventional cell,
 you should supply the conventional structure.</li>
@@ -428,7 +428,7 @@ that do so.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>bonds</strong> (<em>{(specie1, specie2</em>) &#8211; max_bond_dist}: bonds are
+<li><strong>bonds</strong> (<em>{</em><em>(</em><em>specie1</em><em>, </em><em>specie2</em>) &#8211; max_bond_dist}: bonds are
 specified as a dict of tuples: float of specie1, specie2
 and the max bonding distance. For example, PO4 groups may be
 defined as {(&#8220;P&#8221;, &#8220;O&#8221;): 3}.</li>
@@ -470,9 +470,9 @@ tol (float): Tolerance for SpaceGroupanalyzer.</div></blockquote>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Slab</strong> &#8211; A symmetrized Slab object.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A symmetrized Slab object.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="pymatgen.analysis.defects.point_defects.html#pymatgen.analysis.defects.point_defects.ValenceIonicRadiusEvaluator.structure" title="pymatgen.analysis.defects.point_defects.ValenceIonicRadiusEvaluator.structure">structure</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#pymatgen.core.surface.Slab" title="pymatgen.core.surface.Slab">Slab</a> (<a class="reference internal" href="pymatgen.analysis.defects.point_defects.html#pymatgen.analysis.defects.point_defects.Defect.structure" title="pymatgen.analysis.defects.point_defects.Defect.structure">structure</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -500,7 +500,7 @@ unit cell structure.</li>
 <li><strong>max_index</strong> (<em>int</em>) &#8211; The maximum Miller index to go up to.</li>
 <li><strong>min_slab_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
 <li><strong>min_vac_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
-<li><strong>bonds</strong> (<em>{(specie1, specie2</em>) &#8211; max_bond_dist}: bonds are
+<li><strong>bonds</strong> (<em>{</em><em>(</em><em>specie1</em><em>, </em><em>specie2</em>) &#8211; max_bond_dist}: bonds are
 specified as a dict of tuples: float of specie1, specie2
 and the max bonding distance. For example, PO4 groups may be
 defined as {(&#8220;P&#8221;, &#8220;O&#8221;): 3}.</li>
@@ -587,7 +587,7 @@ structure. All other indices are equivalent to one of these.</div></blockquote>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.core.surface.txt"
+      <li><a href="_sources/pymatgen.core.surface.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -614,13 +614,13 @@ structure. All other indices are equivalent to one of these.</div></blockquote>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

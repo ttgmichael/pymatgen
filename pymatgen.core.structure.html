@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.structure module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.core.structure module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -186,7 +186,7 @@ installed.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sites</strong> (<em>[Site]</em>) &#8211; Sequence of Sites.</li>
+<li><strong>sites</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.sites.html#pymatgen.core.sites.Site" title="pymatgen.core.sites.Site"><em>Site</em></a><em>]</em><em></em>) &#8211; Sequence of Sites.</li>
 <li><strong>charge</strong> (<em>int</em>) &#8211; Charge of molecule. Defaults to 0.</li>
 <li><strong>spin_multiplicity</strong> (<em>int</em>) &#8211; Spin multicipity. Defaults to None,
 in which it is determined automatically.</li>
@@ -453,7 +453,7 @@ structure is equivalent to going through the sites in sequence.</p>
 simply as any 2D array. Each row should correspond to a lattice
 vector. E.g., [[10,0,0], [20,10,0], [0,0,30]] specifies a
 lattice with lattice vectors [10,0,0], [20,10,0] and [0,0,30].</li>
-<li><strong>species</strong> (<em>[Specie]</em>) &#8211; <p>Sequence of species on each site. Can take in
+<li><strong>species</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Specie" title="pymatgen.core.periodic_table.Specie"><em>Specie</em></a><em>]</em><em></em>) &#8211; <p>Sequence of species on each site. Can take in
 flexible input, including:</p>
 <ol class="lowerroman">
 <li>A sequence of element / specie specified either as string
@@ -498,7 +498,7 @@ object.</li>
 which is the default format used in pymatgen. Other options
 include &#8220;abivars&#8221;.</li>
 <li><strong>**kwargs</strong> &#8211; Allow passing of other kwargs needed for certain</li>
-<li><strong>e.g., &quot;abivars&quot;.</strong> (<em>formats,</em>) &#8211; </li>
+<li><strong>e.g.</strong><strong>, </strong><strong>&quot;abivars&quot;.</strong> (<em>formats</em><em>,</em><em></em>) &#8211; </li>
 </ul>
 </td>
 </tr>
@@ -654,7 +654,7 @@ lattice with lattice vectors [10,0,0], [20,10,0] and [0,0,30].
 Note that no attempt is made to check that the lattice is
 compatible with the spacegroup specified. This may be
 introduced in a future version.</li>
-<li><strong>species</strong> (<em>[Specie]</em>) &#8211; <p>Sequence of species on each site. Can take in
+<li><strong>species</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Specie" title="pymatgen.core.periodic_table.Specie"><em>Specie</em></a><em>]</em><em></em>) &#8211; <p>Sequence of species on each site. Can take in
 flexible input, including:</p>
 <ol class="lowerroman">
 <li>A sequence of element / specie specified either as string
@@ -1731,7 +1731,7 @@ is applied in cartesian coordinates.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strain</strong> (<em>float or list</em>) &#8211; Amount of strain to apply. Can be a float,
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strain</strong> (<em>float</em><em> or </em><em>list</em>) &#8211; Amount of strain to apply. Can be a float,
 or a sequence of 3 numbers. E.g., 0.01 means all lattice
 vectors are increased by 1%. This is equivalent to calling
 modify_lattice with a lattice with lattice parameters that
@@ -2019,7 +2019,7 @@ Raised when the structure has problems, e.g., atoms that are too close.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.core.structure.txt"
+      <li><a href="_sources/pymatgen.core.structure.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -2046,13 +2046,13 @@ Raised when the structure has problems, e.g., atoms that are too close.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

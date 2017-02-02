@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.apps.battery.conversion_battery &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.apps.battery.conversion_battery &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -201,13 +200,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">adjacent_only</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
                                    <span class="bp">self</span><span class="o">.</span><span class="n">_working_ion_entry</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_composition</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">))]</span>
         <span class="n">sub_electrodes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">)):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">)):</span>
-                <span class="n">sub_electrodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">sub_electrodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
                                                      <span class="bp">self</span><span class="o">.</span><span class="n">_working_ion_entry</span><span class="p">,</span>
                                                      <span class="bp">self</span><span class="o">.</span><span class="n">_composition</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">sub_electrodes</span></div>
@@ -244,12 +243,12 @@
             <span class="n">rxn1</span> <span class="o">=</span> <span class="n">pair1</span><span class="o">.</span><span class="n">rxn</span>
             <span class="n">all_formulas1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">rxn1</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_formula</span>
                                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rxn1</span><span class="o">.</span><span class="n">all_comp</span><span class="p">))</span>
-                                 <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn1</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+                                 <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn1</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-5</span><span class="p">])</span>
             <span class="k">for</span> <span class="n">pair2</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
                 <span class="n">rxn2</span> <span class="o">=</span> <span class="n">pair2</span><span class="o">.</span><span class="n">rxn</span>
                 <span class="n">all_formulas2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">rxn2</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_formula</span>
                                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rxn2</span><span class="o">.</span><span class="n">all_comp</span><span class="p">))</span>
-                                     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn2</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+                                     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn2</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-5</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">all_formulas1</span> <span class="o">==</span> <span class="n">all_formulas2</span><span class="p">:</span>
                     <span class="k">break</span>
             <span class="k">else</span><span class="p">:</span>
@@ -267,12 +266,12 @@
             <span class="n">rxn1</span> <span class="o">=</span> <span class="n">pair1</span><span class="o">.</span><span class="n">rxn</span>
             <span class="n">all_formulas1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">rxn1</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_formula</span>
                                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rxn1</span><span class="o">.</span><span class="n">all_comp</span><span class="p">))</span>
-                                 <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn1</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+                                 <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn1</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-5</span><span class="p">])</span>
             <span class="k">for</span> <span class="n">pair2</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
                 <span class="n">rxn2</span> <span class="o">=</span> <span class="n">pair2</span><span class="o">.</span><span class="n">rxn</span>
                 <span class="n">all_formulas2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">rxn2</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_formula</span>
                                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rxn2</span><span class="o">.</span><span class="n">all_comp</span><span class="p">))</span>
-                                     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn2</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">])</span>
+                                     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn2</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-5</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">all_formulas1</span> <span class="o">==</span> <span class="n">all_formulas2</span><span class="p">:</span>
                     <span class="k">break</span>
             <span class="k">else</span><span class="p">:</span>
@@ -283,7 +282,7 @@
         <span class="k">return</span> <span class="mi">7</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Conversion electrode with formula </span><span class="si">{}</span><span class="s2"> and nsteps </span><span class="si">{}</span><span class="s2">&quot;</span>
@@ -300,15 +299,15 @@
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="ConversionElectrode.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.battery.conversion_battery.html#pymatgen.apps.battery.conversion_battery.ConversionElectrode.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="ConversionElectrode.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.battery.conversion_battery.html#pymatgen.apps.battery.conversion_battery.ConversionElectrode.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="n">dec</span> <span class="o">=</span> <span class="n">MontyDecoder</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">dec</span><span class="o">.</span><span class="n">process_decoded</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;voltage_pairs&quot;</span><span class="p">]),</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">dec</span><span class="o">.</span><span class="n">process_decoded</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;voltage_pairs&quot;</span><span class="p">]),</span>
                    <span class="n">dec</span><span class="o">.</span><span class="n">process_decoded</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;working_ion_entry&quot;</span><span class="p">]),</span>
                    <span class="n">Composition</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;initial_comp&quot;</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="ConversionElectrode.as_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.battery.conversion_battery.html#pymatgen.apps.battery.conversion_battery.ConversionElectrode.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                 <span class="s2">&quot;voltage_pairs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vpairs</span><span class="p">],</span>
                 <span class="s2">&quot;working_ion_entry&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">working_ion_entry</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
                 <span class="s2">&quot;initial_comp&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_composition</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()}</span></div>
@@ -352,9 +351,9 @@
             <span class="n">frac</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="o">.</span><span class="n">frac_discharge</span><span class="p">)</span>
             <span class="n">d</span><span class="p">[</span><span class="s2">&quot;reactions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rxn</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">coeffs</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span> <span class="ow">and</span> <span class="n">rxn</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">comps</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-5</span> <span class="ow">and</span> <span class="n">rxn</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">comps</span><span class="p">:</span>
                     <span class="n">comps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span> <span class="ow">and</span> \
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-5</span> <span class="ow">and</span> \
                         <span class="n">rxn</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_formula</span> <span class="o">!=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;working_ion&quot;</span><span class="p">]:</span>
                     <span class="n">reduced_comp</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">all_comp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_composition</span>
                     <span class="n">comp_dict</span> <span class="o">=</span> <span class="n">reduced_comp</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
@@ -441,7 +440,7 @@
         <span class="n">rxn</span> <span class="o">=</span> <span class="n">BalancedReaction</span><span class="p">(</span><span class="n">reactants</span><span class="p">,</span> <span class="n">products</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">el</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="n">normalization_els</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_el_amount</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">6</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rxn</span><span class="o">.</span><span class="n">get_el_amount</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">:</span>
                 <span class="n">rxn</span><span class="o">.</span><span class="n">normalize_to_element</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">amt</span><span class="p">)</span>
                 <span class="k">break</span>
 
@@ -551,10 +550,10 @@
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="ConversionVoltagePair.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.battery.conversion_battery.html#pymatgen.apps.battery.conversion_battery.ConversionVoltagePair.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="ConversionVoltagePair.from_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.battery.conversion_battery.html#pymatgen.apps.battery.conversion_battery.ConversionVoltagePair.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="n">dec</span> <span class="o">=</span> <span class="n">MontyDecoder</span><span class="p">()</span>
         <span class="n">working_ion_entry</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">process_decoded</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;working_ion_entry&quot;</span><span class="p">])</span>
         <span class="n">balanced_rxn</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">process_decoded</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;balanced_rxn&quot;</span><span class="p">])</span>
@@ -568,8 +567,8 @@
                                    <span class="n">working_ion_entry</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ConversionVoltagePair.as_dict"><a class="viewcode-back" href="../../../../pymatgen.apps.battery.conversion_battery.html#pymatgen.apps.battery.conversion_battery.ConversionVoltagePair.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                 <span class="s2">&quot;working_ion_entry&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_working_ion_entry</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
                 <span class="s2">&quot;voltage&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voltage</span><span class="p">,</span> <span class="s2">&quot;mAh&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mAh</span><span class="p">,</span>
                 <span class="s2">&quot;vol_charge&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vol_charge</span><span class="p">,</span>
@@ -612,14 +611,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

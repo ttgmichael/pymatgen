@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.dos &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.electronic_structure.dos &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -302,7 +301,7 @@
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stringarray</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Dos.from_dict"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.dos.html#pymatgen.electronic_structure.dos.Dos.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="Dos.from_dict"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.dos.html#pymatgen.electronic_structure.dos.Dos.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns Dos object from dict representation of Dos.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -314,8 +313,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Json-serializable dict representation of Dos.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="s2">&quot;efermi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+                <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;efermi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span>
                 <span class="s2">&quot;energies&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">),</span>
                 <span class="s2">&quot;densities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">spin</span><span class="p">):</span> <span class="nb">list</span><span class="p">(</span><span class="n">dens</span><span class="p">)</span>
                               <span class="k">for</span> <span class="n">spin</span><span class="p">,</span> <span class="n">dens</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">densities</span><span class="o">.</span><span class="n">items</span><span class="p">()}}</span></div></div>
@@ -343,7 +342,7 @@
 <span class="sd">        Dict of partial densities of the form {Site:{Orbital:{Spin:Densities}}}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">total_dos</span><span class="p">,</span> <span class="n">pdoss</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CompleteDos</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CompleteDos</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">total_dos</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span> <span class="n">energies</span><span class="o">=</span><span class="n">total_dos</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span>
             <span class="n">densities</span><span class="o">=</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">total_dos</span><span class="o">.</span><span class="n">densities</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdos</span> <span class="o">=</span> <span class="n">pdoss</span>
@@ -484,7 +483,7 @@
                 <span class="k">for</span> <span class="n">orb</span><span class="p">,</span> <span class="n">densities</span> <span class="ow">in</span> <span class="n">el_dos</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="CompleteDos.from_dict"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.dos.html#pymatgen.electronic_structure.dos.CompleteDos.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="CompleteDos.from_dict"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.dos.html#pymatgen.electronic_structure.dos.CompleteDos.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns CompleteDos object from dict representation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -505,8 +504,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Json-serializable dict representation of CompleteDos.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-             <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="s2">&quot;efermi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+             <span class="s2">&quot;@class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;efermi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span>
              <span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(),</span>
              <span class="s2">&quot;energies&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energies</span><span class="p">),</span>
              <span class="s2">&quot;densities&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">spin</span><span class="p">):</span> <span class="nb">list</span><span class="p">(</span><span class="n">dens</span><span class="p">)</span>
@@ -580,14 +579,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

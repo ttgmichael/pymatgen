@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.inputs module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.vasp.inputs module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -493,32 +493,32 @@ vectors. Defaults to (2,2,2)</li>
 <p>An enumeration.</p>
 <dl class="attribute">
 <dt id="pymatgen.io.vasp.inputs.Kpoints_supported_modes.Automatic">
-<code class="descname">Automatic</code><em class="property"> = &lt;Kpoints_supported_modes.Automatic: 0&gt;</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Automatic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Automatic</code><em class="property"> = 0</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Automatic" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="pymatgen.io.vasp.inputs.Kpoints_supported_modes.Cartesian">
-<code class="descname">Cartesian</code><em class="property"> = &lt;Kpoints_supported_modes.Cartesian: 4&gt;</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Cartesian" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Cartesian</code><em class="property"> = 4</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Cartesian" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="pymatgen.io.vasp.inputs.Kpoints_supported_modes.Gamma">
-<code class="descname">Gamma</code><em class="property"> = &lt;Kpoints_supported_modes.Gamma: 1&gt;</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Gamma" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Gamma</code><em class="property"> = 1</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Gamma" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="pymatgen.io.vasp.inputs.Kpoints_supported_modes.Line_mode">
-<code class="descname">Line_mode</code><em class="property"> = &lt;Kpoints_supported_modes.Line_mode: 3&gt;</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Line_mode" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Line_mode</code><em class="property"> = 3</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Line_mode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="pymatgen.io.vasp.inputs.Kpoints_supported_modes.Monkhorst">
-<code class="descname">Monkhorst</code><em class="property"> = &lt;Kpoints_supported_modes.Monkhorst: 2&gt;</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Monkhorst" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Monkhorst</code><em class="property"> = 2</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Monkhorst" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="pymatgen.io.vasp.inputs.Kpoints_supported_modes.Reciprocal">
-<code class="descname">Reciprocal</code><em class="property"> = &lt;Kpoints_supported_modes.Reciprocal: 5&gt;</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Reciprocal" title="Permalink to this definition">¶</a></dt>
+<code class="descname">Reciprocal</code><em class="property"> = 5</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Kpoints_supported_modes.Reciprocal" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="staticmethod">
@@ -686,7 +686,7 @@ require specific elemental properties should work fine.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>data</strong> (<em>str</em>) &#8211; String containing Poscar data.</li>
-<li><strong>default_names</strong> (<em>[str]</em>) &#8211; Default symbols for the POSCAR file,
+<li><strong>default_names</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; Default symbols for the POSCAR file,
 usually coming from a POTCAR in the same directory.</li>
 <li><strong>read_velocities</strong> (<em>bool</em>) &#8211; Whether to read or not velocities if they
 are present in the POSCAR. Default is True.</li>
@@ -798,7 +798,7 @@ list of PotcarSingle.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>symbols</strong> (<em>[str]</em>) &#8211; Element symbols for POTCAR. This should correspond
+<li><strong>symbols</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; Element symbols for POTCAR. This should correspond
 to the symbols used by VASP. E.g., &#8220;Mg&#8221;, &#8220;Fe_pv&#8221;, etc.</li>
 <li><strong>functional</strong> (<em>str</em>) &#8211; Functional used. To know what functional options
 there are, use Potcar.FUNCTIONAL_CHOICES. Note that VASP has
@@ -817,7 +817,7 @@ symbol to raw POTCAR mapping.</li>
 </table>
 <dl class="attribute">
 <dt id="pymatgen.io.vasp.inputs.Potcar.FUNCTIONAL_CHOICES">
-<code class="descname">FUNCTIONAL_CHOICES</code><em class="property"> = ['LDA', 'PBE_54', 'PW91_US', 'PBE', 'LDA_52', 'PW91', 'PBE_52', 'LDA_54', 'LDA_US']</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Potcar.FUNCTIONAL_CHOICES" title="Permalink to this definition">¶</a></dt>
+<code class="descname">FUNCTIONAL_CHOICES</code><em class="property"> = ['PBE', 'PBE_52', 'PBE_54', 'LDA', 'LDA_52', 'LDA_54', 'PW91', 'LDA_US', 'PW91_US']</em><a class="headerlink" href="#pymatgen.io.vasp.inputs.Potcar.FUNCTIONAL_CHOICES" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -846,7 +846,7 @@ to add this setting.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>symbols</strong> (<em>[str]</em>) &#8211; A list of element symbols</li>
+<li><strong>symbols</strong> (<em></em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; A list of element symbols</li>
 <li><strong>functional</strong> (<em>str</em>) &#8211; The functional to use. If None, the setting
 PMG_DEFAULT_FUNCTIONAL in .pmgrc.yaml is used, or if this is
 not set, it will default to PBE.</li>
@@ -1031,7 +1031,7 @@ present. Defaults to True.</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.io.vasp.inputs.txt"
+      <li><a href="_sources/pymatgen.io.vasp.inputs.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -1058,13 +1058,13 @@ present. Defaults to True.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

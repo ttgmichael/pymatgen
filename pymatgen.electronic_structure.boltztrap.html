@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.boltztrap module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.electronic_structure.boltztrap module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -172,24 +172,19 @@ Return a dictionary with these keys:
 <li>&#8220;branch_name&#8221;: energy distance for that branch</li>
 </ul>
 </div></blockquote>
-<ul>
-<li><p class="first">&#8220;avg_corr&#8221;: average of correlation coefficient over the 8 bands</p>
-</li>
-<li><p class="first">&#8220;avg_dist&#8221;: average of energy distance over the 8 bands</p>
-</li>
-<li><p class="first">&#8220;nb_list&#8221;: list of indexes of the 8 compared bands</p>
-</li>
+<ul class="simple">
+<li>&#8220;avg_corr&#8221;: average of correlation coefficient over the 8 bands</li>
+<li>&#8220;avg_dist&#8221;: average of energy distance over the 8 bands</li>
+<li>&#8220;nb_list&#8221;: list of indexes of the 8 compared bands</li>
 <li><dl class="first docutils">
 <dt>&#8220;acc_thr&#8221;: list of two float corresponing to the two warning</dt>
-<dd><p class="first last">thresholds in input</p>
-</dd>
+<dd>thresholds in input</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>&#8220;acc_err&#8221;: list of two bools:</dt>
-<dd><p class="first last">True if the avg_corr &gt; warn_thr[0], and
-True if the avg_dist &gt; warn_thr[1]</p>
-</dd>
+<dd>True if the avg_corr &gt; warn_thr[0], and
+True if the avg_dist &gt; warn_thr[1]</dd>
 </dl>
 </li>
 </ul>
@@ -330,10 +325,10 @@ of electron chemical potential values</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full</li>
-<li><strong>tensor, 'eigs' its 3 eigenvalues and</strong> (<em>3x3</em>) &#8211; </li>
+<li><strong>tensor</strong><strong>, </strong><strong>'eigs' its 3 eigenvalues and</strong> (<em>3x3</em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
-<li><strong>doping levels, False for results</strong> (<em>different</em>) &#8211; </li>
+<li><strong>doping levels</strong><strong>, </strong><strong>False for results</strong> (<em>different</em>) &#8211; </li>
 <li><strong>different electron chemical potentials</strong> (<em>at</em>) &#8211; </li>
 <li><strong>relaxation_time</strong> (<em>float</em>) &#8211; constant relaxation time in secs</li>
 </ul>
@@ -429,10 +424,10 @@ electron chemical potential values</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
-<li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor,</em>) &#8211; </li>
+<li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor</em><em>,</em><em></em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
-<li><strong>doping levels, False for results</strong> (<em>different</em>) &#8211; </li>
+<li><strong>doping levels</strong><strong>, </strong><strong>False for results</strong> (<em>different</em>) &#8211; </li>
 <li><strong>different electron chemical potentials</strong> (<em>at</em>) &#8211; </li>
 <li><strong>relaxation_time</strong> (<em>float</em>) &#8211; constant relaxation time in secs</li>
 </ul>
@@ -474,10 +469,10 @@ of electron chemical potential values</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full</li>
-<li><strong>tensor, 'eigs' its 3 eigenvalues and</strong> (<em>3x3</em>) &#8211; </li>
+<li><strong>tensor</strong><strong>, </strong><strong>'eigs' its 3 eigenvalues and</strong> (<em>3x3</em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
-<li><strong>doping levels, False for results</strong> (<em>different</em>) &#8211; </li>
+<li><strong>doping levels</strong><strong>, </strong><strong>False for results</strong> (<em>different</em>) &#8211; </li>
 <li><strong>different electron chemical potentials</strong> (<em>at</em>) &#8211; </li>
 </ul>
 </td>
@@ -531,10 +526,10 @@ electron chemical potential values</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
-<li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor,</em>) &#8211; </li>
+<li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor</em><em>,</em><em></em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
-<li><strong>doping levels, False for results</strong> (<em>different</em>) &#8211; </li>
+<li><strong>doping levels</strong><strong>, </strong><strong>False for results</strong> (<em>different</em>) &#8211; </li>
 <li><strong>different electron chemical potentials</strong> (<em>at</em>) &#8211; </li>
 <li><strong>k_el</strong> (<em>boolean</em>) &#8211; True for k_0-PF*T, False for k_0</li>
 <li><strong>relaxation_time</strong> (<em>float</em>) &#8211; constant relaxation time in secs</li>
@@ -580,10 +575,10 @@ lattice thermal conductivity</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
-<li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor,</em>) &#8211; </li>
+<li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor</em><em>,</em><em></em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
-<li><strong>doping levels, False for results</strong> (<em>different</em>) &#8211; </li>
+<li><strong>doping levels</strong><strong>, </strong><strong>False for results</strong> (<em>different</em>) &#8211; </li>
 <li><strong>different electron chemical potentials</strong> (<em>at</em>) &#8211; </li>
 <li><strong>relaxation_time</strong> (<em>float</em>) &#8211; constant relaxation time in secs</li>
 <li><strong>k_l</strong> (<em>float</em>) &#8211; lattice thermal cond in W/(m*K)</li>
@@ -636,9 +631,9 @@ hall_doping, carrier_conc</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>intrans</strong> &#8211; a dictionary containing various inputs that had been used in the Boltztrap run.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a dictionary containing various inputs that had been used in the Boltztrap run.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">intrans (dict)</td>
 </tr>
 </tbody>
 </table>
@@ -863,7 +858,7 @@ squared (%) if nb is specified.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.electronic_structure.boltztrap.txt"
+      <li><a href="_sources/pymatgen.electronic_structure.boltztrap.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -890,13 +885,13 @@ squared (%) if nb is specified.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

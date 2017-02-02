@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.transformations.advanced_transformations module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.transformations.advanced_transformations module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -343,6 +343,49 @@ the structure using that specie.</li>
 </dd></dl>
 
 <dl class="class">
+<dt id="pymatgen.transformations.advanced_transformations.SlabTransformation">
+<em class="property">class </em><code class="descname">SlabTransformation</code><span class="sig-paren">(</span><em>miller_index</em>, <em>min_slab_size</em>, <em>min_vacuum_size</em>, <em>lll_reduce=False</em>, <em>center_slab=False</em>, <em>primitive=True</em>, <em>max_normal_search=None</em>, <em>shift=0</em>, <em>tol=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/transformations/advanced_transformations.html#SlabTransformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.transformations.advanced_transformations.SlabTransformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pymatgen.transformations.transformation_abc.html#pymatgen.transformations.transformation_abc.AbstractTransformation" title="pymatgen.transformations.transformation_abc.AbstractTransformation"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.transformations.transformation_abc.AbstractTransformation</span></code></a></p>
+<p>A transformation that creates a slab from a structure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>miller_index</strong> (<em>3-tuple</em><em> or </em><em>list</em>) &#8211; miller index of slab</li>
+<li><strong>min_slab_size</strong> (<em>float</em>) &#8211; minimum slab size in angstroms</li>
+<li><strong>min_vacuum_size</strong> (<em>float</em>) &#8211; minimum size of vacuum</li>
+<li><strong>lll_reduce</strong> (<em>bool</em>) &#8211; whether to apply LLL reduction</li>
+<li><strong>center_slab</strong> (<em>bool</em>) &#8211; whether to center the slab</li>
+<li><strong>primitive</strong> (<em>bool</em>) &#8211; whether to reduce slabs to most primitive cell</li>
+<li><strong>max_normal_search</strong> (<em>int</em>) &#8211; maximum index to include in linear
+combinations of indices to find c lattice vector orthogonal
+to slab surface</li>
+<li><strong>shift</strong> (<em>float</em>) &#8211; shift to get termination</li>
+<li><strong>tol</strong> (<em>float</em>) &#8211; tolerance for primitive cell finding</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pymatgen.transformations.advanced_transformations.SlabTransformation.apply_transformation">
+<code class="descname">apply_transformation</code><span class="sig-paren">(</span><em>structure</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/transformations/advanced_transformations.html#SlabTransformation.apply_transformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.transformations.advanced_transformations.SlabTransformation.apply_transformation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.transformations.advanced_transformations.SlabTransformation.inverse">
+<code class="descname">inverse</code><a class="headerlink" href="#pymatgen.transformations.advanced_transformations.SlabTransformation.inverse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.transformations.advanced_transformations.SlabTransformation.is_one_to_many">
+<code class="descname">is_one_to_many</code><a class="headerlink" href="#pymatgen.transformations.advanced_transformations.SlabTransformation.is_one_to_many" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="pymatgen.transformations.advanced_transformations.SubstitutionPredictorTransformation">
 <em class="property">class </em><code class="descname">SubstitutionPredictorTransformation</code><span class="sig-paren">(</span><em>threshold=0.01</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/transformations/advanced_transformations.html#SubstitutionPredictorTransformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.transformations.advanced_transformations.SubstitutionPredictorTransformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="pymatgen.transformations.transformation_abc.html#pymatgen.transformations.transformation_abc.AbstractTransformation" title="pymatgen.transformations.transformation_abc.AbstractTransformation"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.transformations.transformation_abc.AbstractTransformation</span></code></a></p>
@@ -390,7 +433,7 @@ object.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>transformations</strong> (<em>[transformations]</em>) &#8211; List of transformations to apply
+<li><strong>transformations</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.transformations.html#module-pymatgen.transformations" title="pymatgen.transformations"><em>transformations</em></a><em>]</em><em></em>) &#8211; List of transformations to apply
 to a structure. One transformation is applied to each output
 structure.</li>
 <li><strong>nstructures_per_trans</strong> (<em>int</em>) &#8211; If the transformations are one-to-many and,
@@ -429,7 +472,7 @@ added to the full list. Defaults to 1, i.e., only best structure.</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.transformations.advanced_transformations.txt"
+      <li><a href="_sources/pymatgen.transformations.advanced_transformations.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -456,13 +499,13 @@ added to the full list. Defaults to 1, i.e., only best structure.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.boltztrap &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.electronic_structure.boltztrap &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -222,9 +221,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">doping</span> <span class="o">=</span> <span class="n">doping</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">doping</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="n">e16</span><span class="p">,</span> <span class="mi">1</span><span class="n">e17</span><span class="p">,</span> <span class="mi">1</span><span class="n">e18</span><span class="p">,</span> <span class="mi">1</span><span class="n">e19</span><span class="p">,</span> <span class="mi">1</span><span class="n">e20</span><span class="p">,</span> <span class="mi">1</span><span class="n">e21</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1e16</span><span class="p">,</span> <span class="mf">1e17</span><span class="p">,</span> <span class="mf">1e18</span><span class="p">,</span> <span class="mf">1e19</span><span class="p">,</span> <span class="mf">1e20</span><span class="p">,</span> <span class="mf">1e21</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">1</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mf">2.5</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">5</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mf">7.5</span><span class="o">*</span><span class="n">d</span><span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="n">e22</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e22</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">energy_span_around_fermi</span> <span class="o">=</span> <span class="n">energy_span_around_fermi</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scissor</span> <span class="o">=</span> <span class="n">scissor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tmax</span> <span class="o">=</span> <span class="n">tmax</span>
@@ -874,7 +873,7 @@
             <span class="c1">#       kpt_dense=np.array([kp for kp in self._bz_kpoints])</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">kp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kpt_line</span><span class="p">):</span>
                 <span class="n">w</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="n">prec</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">05</span>
+                <span class="n">prec</span> <span class="o">=</span> <span class="mf">1e-05</span>
                 <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
                         <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">kp</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz_kpoints</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">[</span><span class="n">prec</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
@@ -1007,10 +1006,10 @@
         <span class="k">return</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span><span class="n">_format_to_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seebeck</span><span class="p">,</span>
                                                    <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">,</span>
                                                    <span class="n">output</span><span class="p">,</span>
-                                                   <span class="n">doping_levels</span><span class="p">,</span> <span class="mi">1</span><span class="n">e6</span><span class="p">)</span></div>
+                                                   <span class="n">doping_levels</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BoltztrapAnalyzer.get_conductivity"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_conductivity">[docs]</a>    <span class="k">def</span> <span class="nf">get_conductivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                         <span class="n">relaxation_time</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">):</span>
+                         <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Gives the conductivity (1/Ohm*m) in either a full 3x3 tensor</span>
 <span class="sd">            form, as 3 eigenvalues, or as the average value</span>
@@ -1048,7 +1047,7 @@
                                                    <span class="n">relaxation_time</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BoltztrapAnalyzer.get_power_factor"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_power_factor">[docs]</a>    <span class="k">def</span> <span class="nf">get_power_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                         <span class="n">relaxation_time</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">):</span>
+                         <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gives the power factor (Seebeck^2 * conductivity) in units</span>
 <span class="sd">        microW/(m*K^2) in either a full 3x3 tensor form,</span>
@@ -1110,10 +1109,10 @@
 
         <span class="k">return</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span><span class="n">_format_to_output</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result_doping</span><span class="p">,</span>
                                                    <span class="n">output</span><span class="p">,</span> <span class="n">doping_levels</span><span class="p">,</span>
-                                                   <span class="n">multi</span><span class="o">=</span><span class="mi">1</span><span class="n">e6</span> <span class="o">*</span> <span class="n">relaxation_time</span><span class="p">)</span></div>
+                                                   <span class="n">multi</span><span class="o">=</span><span class="mf">1e6</span> <span class="o">*</span> <span class="n">relaxation_time</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BoltztrapAnalyzer.get_thermal_conductivity"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_thermal_conductivity">[docs]</a>    <span class="k">def</span> <span class="nf">get_thermal_conductivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                 <span class="n">k_el</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">):</span>
+                                 <span class="n">k_el</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gives the electronic part of the thermal conductivity in either a</span>
 <span class="sd">        full 3x3 tensor form,</span>
@@ -1181,7 +1180,7 @@
                                                    <span class="n">output</span><span class="p">,</span> <span class="n">doping_levels</span><span class="p">,</span>
                                                    <span class="n">multi</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BoltztrapAnalyzer.get_zt"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_zt">[docs]</a>    <span class="k">def</span> <span class="nf">get_zt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
+<div class="viewcode-block" id="BoltztrapAnalyzer.get_zt"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_zt">[docs]</a>    <span class="k">def</span> <span class="nf">get_zt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span>
                <span class="n">kl</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gives the ZT coefficient (S^2*cond*T/thermal cond) in either a full</span>
@@ -1560,7 +1559,7 @@
 <span class="sd">            The array relates to each step of electron chemical potential</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="p">{</span><span class="n">temp</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">e24</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">vol</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_carrier_conc</span><span class="p">[</span><span class="n">temp</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">temp</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e24</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">vol</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_carrier_conc</span><span class="p">[</span><span class="n">temp</span><span class="p">]]</span>
                 <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_carrier_conc</span><span class="p">}</span></div>
 
 <div class="viewcode-block" id="BoltztrapAnalyzer.get_hall_carrier_concentration"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_hall_carrier_concentration">[docs]</a>    <span class="k">def</span> <span class="nf">get_hall_carrier_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1579,7 +1578,7 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hall</span><span class="p">[</span><span class="n">temp</span><span class="p">]:</span>
                 <span class="n">trace</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">3.0</span>
                 <span class="k">if</span> <span class="n">trace</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
-                    <span class="n">result</span><span class="p">[</span><span class="n">temp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">6</span> <span class="o">/</span> <span class="p">(</span><span class="n">trace</span> <span class="o">*</span> <span class="n">e</span><span class="p">))</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">temp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-6</span> <span class="o">/</span> <span class="p">(</span><span class="n">trace</span> <span class="o">*</span> <span class="n">e</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">result</span><span class="p">[</span><span class="n">temp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
@@ -2130,14 +2129,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

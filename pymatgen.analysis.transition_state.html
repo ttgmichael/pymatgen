@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.transition_state module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.analysis.transition_state module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -73,7 +73,7 @@ interpolation_order for the analysis.</p>
 <li><strong>r</strong> &#8211; Root mean square distances between structures</li>
 <li><strong>energies</strong> &#8211; Energies of each structure along reaction coordinate</li>
 <li><strong>forces</strong> &#8211; Tangent forces along the reaction coordinate.</li>
-<li><strong>structures</strong> (<em>[Structure]</em>) &#8211; List of Structures along reaction
+<li><strong>structures</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a><em>]</em><em></em>) &#8211; List of Structures along reaction
 coordinate.</li>
 <li><strong>spline_options</strong> (<em>dict</em>) &#8211; Options for cubic spline. For example,
 {&#8220;saddle_point&#8221;: &#8220;zero_slope&#8221;} forces the slope at the saddle to
@@ -154,9 +154,9 @@ calculations.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>outcars</strong> (<em>[Outcar]</em>) &#8211; List of Outcar objects. Note that these have
+<li><strong>outcars</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar" title="pymatgen.io.vasp.outputs.Outcar"><em>Outcar</em></a><em>]</em><em></em>) &#8211; List of Outcar objects. Note that these have
 to be ordered from start to end along reaction coordinates.</li>
-<li><strong>structures</strong> (<em>[Structure]</em>) &#8211; List of Structures along reaction
+<li><strong>structures</strong> (<em></em><em>[</em><a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a><em>]</em><em></em>) &#8211; List of Structures along reaction
 coordinate. Must be same length as outcar.</li>
 <li><strong>interpolation_order</strong> (<em>int</em>) &#8211; Order of polynomial to use to
 interpolate between images. Same format as order parameter in
@@ -239,7 +239,7 @@ be zero.</td>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.analysis.transition_state.txt"
+      <li><a href="_sources/pymatgen.analysis.transition_state.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -266,13 +266,13 @@ be zero.</td>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

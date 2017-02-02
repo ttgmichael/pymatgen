@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.lammps.data &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.lammps.data &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -166,7 +165,7 @@
 <span class="sd">            filename (string): data file name</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">())</span></div>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span></div>
 
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="LammpsData.get_basic_system_info"><a class="viewcode-back" href="../../../../pymatgen.io.lammps.data.html#pymatgen.io.lammps.data.LammpsData.get_basic_system_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_basic_system_info</span><span class="p">(</span><span class="n">structure</span><span class="p">):</span>
@@ -323,10 +322,10 @@
         <span class="k">return</span> <span class="n">d</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="LammpsData.from_dict"><a class="viewcode-back" href="../../../../pymatgen.io.lammps.data.html#pymatgen.io.lammps.data.LammpsData.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="LammpsData.from_dict"><a class="viewcode-back" href="../../../../pymatgen.io.lammps.data.html#pymatgen.io.lammps.data.LammpsData.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="n">decoded</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">MontyDecoder</span><span class="p">()</span><span class="o">.</span><span class="n">process_decoded</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                    <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)}</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">decoded</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">decoded</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="LammpsForceFieldData"><a class="viewcode-back" href="../../../../pymatgen.io.lammps.data.html#pymatgen.io.lammps.data.LammpsForceFieldData">[docs]</a><span class="k">class</span> <span class="nc">LammpsForceFieldData</span><span class="p">(</span><span class="n">LammpsData</span><span class="p">):</span>
@@ -361,7 +360,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">box_size</span><span class="p">,</span> <span class="n">atomic_masses</span><span class="p">,</span> <span class="n">pair_coeffs</span><span class="p">,</span> <span class="n">bond_coeffs</span><span class="p">,</span>
                  <span class="n">angle_coeffs</span><span class="p">,</span> <span class="n">dihedral_coeffs</span><span class="p">,</span> <span class="n">improper_coeffs</span><span class="p">,</span> <span class="n">atoms_data</span><span class="p">,</span>
                  <span class="n">bonds_data</span><span class="p">,</span> <span class="n">angles_data</span><span class="p">,</span> <span class="n">dihedrals_data</span><span class="p">,</span> <span class="n">imdihedrals_data</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">LammpsForceFieldData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">box_size</span><span class="p">,</span> <span class="n">atomic_masses</span><span class="p">,</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LammpsForceFieldData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">box_size</span><span class="p">,</span> <span class="n">atomic_masses</span><span class="p">,</span>
                                                    <span class="n">atoms_data</span><span class="p">)</span>
         <span class="c1"># number of types</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nbond_types</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bond_coeffs</span><span class="p">)</span>
@@ -826,14 +825,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

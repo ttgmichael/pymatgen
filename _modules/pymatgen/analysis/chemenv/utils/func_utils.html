@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.chemenv.utils.func_utils &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.analysis.chemenv.utils.func_utils &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -89,8 +88,8 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">options_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">function</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ALLOWED_FUNCTIONS</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Function &quot;</span><span class="si">{}</span><span class="s1">&quot; is not allowed in RatioFunction of &#39;</span>
-                             <span class="s1">&#39;type &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">eval</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+                             <span class="s1">&#39;type &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">function</span> <span class="o">=</span> <span class="n">function</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setup_parameters</span><span class="p">(</span><span class="n">options_dict</span><span class="o">=</span><span class="n">options_dict</span><span class="p">)</span>
 
@@ -127,14 +126,14 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> should be provided for function &quot;</span><span class="si">{}</span><span class="s1">&quot; in RatioFunction of &#39;</span>
                                  <span class="s1">&#39;type &quot;</span><span class="si">{}</span><span class="s1">&quot; while </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opts</span><span class="p">,</span>
                                                              <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span>
-                                                             <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                                                             <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                                                              <span class="n">missing</span><span class="p">))</span>
             <span class="c1"># Setup the options and raise an error if a wrong option is provided</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">options_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">function_options</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Option &quot;</span><span class="si">{}</span><span class="s1">&quot; not allowed for function &quot;</span><span class="si">{}</span><span class="s1">&quot; in RatioFunction of &#39;</span>
-                                     <span class="s1">&#39;type &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span></div>
+                                     <span class="s1">&#39;type &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RatioFunction.evaluate"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.RatioFunction.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div></div>
@@ -148,13 +147,13 @@
                          <span class="p">}</span>
 
 <div class="viewcode-block" id="CSMFiniteRatioFunction.power2_decreasing_exp"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMFiniteRatioFunction.power2_decreasing_exp">[docs]</a>    <span class="k">def</span> <span class="nf">power2_decreasing_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">power2_decreasing_exp</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;max_csm&#39;</span><span class="p">]],</span> <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="n">power2_decreasing_exp</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;max_csm&#39;</span><span class="p">]],</span> <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="CSMFiniteRatioFunction.smootherstep"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMFiniteRatioFunction.smootherstep">[docs]</a>    <span class="k">def</span> <span class="nf">smootherstep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">smootherstep</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;lower_csm&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;upper_csm&#39;</span><span class="p">]],</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">smootherstep</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;lower_csm&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;upper_csm&#39;</span><span class="p">]],</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CSMFiniteRatioFunction.smoothstep"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMFiniteRatioFunction.smoothstep">[docs]</a>    <span class="k">def</span> <span class="nf">smoothstep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">smootherstep</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;lower_csm&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;upper_csm&#39;</span><span class="p">]],</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">smootherstep</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;lower_csm&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;upper_csm&#39;</span><span class="p">]],</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CSMFiniteRatioFunction.fractions"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMFiniteRatioFunction.fractions">[docs]</a>    <span class="k">def</span> <span class="nf">fractions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -177,8 +176,8 @@
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fractions</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="CSMFiniteRatioFunction.from_dict"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMFiniteRatioFunction.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">],</span> <span class="n">options_dict</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">])</span></div>
+<div class="viewcode-block" id="CSMFiniteRatioFunction.from_dict"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMFiniteRatioFunction.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">],</span> <span class="n">options_dict</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">])</span></div>
 
     <span class="n">ratios</span> <span class="o">=</span> <span class="n">fractions</span></div>
 
@@ -189,15 +188,15 @@
                          <span class="s1">&#39;power2_inverse_power2_decreasing&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;max_csm&#39;</span><span class="p">]}</span>
 
 <div class="viewcode-block" id="CSMInfiniteRatioFunction.power2_inverse_decreasing"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMInfiniteRatioFunction.power2_inverse_decreasing">[docs]</a>    <span class="k">def</span> <span class="nf">power2_inverse_decreasing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">power2_inverse_decreasing</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;max_csm&#39;</span><span class="p">]])</span></div>
+        <span class="k">return</span> <span class="n">power2_inverse_decreasing</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;max_csm&#39;</span><span class="p">]])</span></div>
 
 <div class="viewcode-block" id="CSMInfiniteRatioFunction.power2_inverse_power2_decreasing"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMInfiniteRatioFunction.power2_inverse_power2_decreasing">[docs]</a>    <span class="k">def</span> <span class="nf">power2_inverse_power2_decreasing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">power2_inverse_power2_decreasing</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;max_csm&#39;</span><span class="p">]])</span></div>
+        <span class="k">return</span> <span class="n">power2_inverse_power2_decreasing</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;max_csm&#39;</span><span class="p">]])</span></div>
 
 <div class="viewcode-block" id="CSMInfiniteRatioFunction.fractions"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMInfiniteRatioFunction.fractions">[docs]</a>    <span class="k">def</span> <span class="nf">fractions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">close_to_zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">close_to_zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="n">nzeros</span> <span class="o">=</span> <span class="n">close_to_zero</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">nzeros</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">fractions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -225,8 +224,8 @@
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fractions</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="CSMInfiniteRatioFunction.from_dict"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMInfiniteRatioFunction.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">],</span> <span class="n">options_dict</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">])</span></div>
+<div class="viewcode-block" id="CSMInfiniteRatioFunction.from_dict"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.CSMInfiniteRatioFunction.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">],</span> <span class="n">options_dict</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">])</span></div>
 
     <span class="n">ratios</span> <span class="o">=</span> <span class="n">fractions</span></div>
 
@@ -236,11 +235,11 @@
     <span class="n">ALLOWED_FUNCTIONS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;smootherstep&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;delta_csm_min&#39;</span><span class="p">,</span> <span class="s1">&#39;delta_csm_max&#39;</span><span class="p">]}</span>
 
 <div class="viewcode-block" id="DeltaCSMRatioFunction.smootherstep"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.DeltaCSMRatioFunction.smootherstep">[docs]</a>    <span class="k">def</span> <span class="nf">smootherstep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">smootherstep</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;delta_csm_min&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s1">&#39;delta_csm_max&#39;</span><span class="p">]])</span></div>
+        <span class="k">return</span> <span class="n">smootherstep</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;delta_csm_min&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;delta_csm_max&#39;</span><span class="p">]])</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DeltaCSMRatioFunction.from_dict"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.DeltaCSMRatioFunction.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">],</span> <span class="n">options_dict</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">])</span></div></div>
+<div class="viewcode-block" id="DeltaCSMRatioFunction.from_dict"><a class="viewcode-back" href="../../../../../pymatgen.analysis.chemenv.utils.func_utils.html#pymatgen.analysis.chemenv.utils.func_utils.DeltaCSMRatioFunction.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dd</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">],</span> <span class="n">options_dict</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">])</span></div></div>
 </pre></div>
 
           </div>
@@ -271,14 +270,14 @@
         <li class="right" >
           <a href="../../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

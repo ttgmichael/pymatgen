@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.tasks &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.abinit.tasks &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -116,7 +115,7 @@
 <span class="p">]</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="c1"># Tools and helper functions.</span>
 
@@ -165,9 +164,9 @@
     <span class="p">}</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_node</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_node</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize an instance from an :class:`AbinitTask` instance.&quot;&quot;&quot;</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">TaskResults</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">from_node</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">TaskResults</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">from_node</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
 
         <span class="n">new</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
             <span class="n">executable</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span>
@@ -227,7 +226,7 @@
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ParalConf</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ParalConf</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># Add default values if not already in self.</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULTS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -313,7 +312,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ParalConf</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">confs</span><span class="p">]</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_mpi_omp_lists</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">mpi_procs</span><span class="p">,</span> <span class="n">omp_threads</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_mpi_omp_lists</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mpi_procs</span><span class="p">,</span> <span class="n">omp_threads</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a list of Parallel configurations from two lists</span>
 <span class="sd">        containing the number of MPI processes and the number of OpenMP threads</span>
@@ -325,16 +324,16 @@
         <span class="n">confs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ParalConf</span><span class="p">(</span><span class="n">mpi_ncpus</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">omp_ncpus</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
                  <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">mpi_procs</span><span class="p">,</span> <span class="n">omp_threads</span><span class="p">)]</span>
 
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="o">.</span><span class="n">__iter__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span> <span class="k">for</span> <span class="n">conf</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span>
@@ -367,8 +366,8 @@
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="s2">&quot;confs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="p">}</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">],</span> <span class="n">confs</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;confs&quot;</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">],</span> <span class="n">confs</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;confs&quot;</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Shallow copy of self.&quot;&quot;&quot;</span>
@@ -424,7 +423,7 @@
             <span class="n">opt_confs</span> <span class="o">=</span> <span class="n">histogram</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
 
         <span class="c1">#histogram.plot(show=True, savefig=&quot;hello.pdf&quot;)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="o">=</span><span class="n">opt_confs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="o">=</span><span class="n">opt_confs</span><span class="p">)</span>
 
     <span class="c1">#def histogram_efficiency(self, step=0.1):</span>
     <span class="c1">#    &quot;&quot;&quot;Returns a :class:`SparseHistogram` with configuration grouped by parallel efficiency.&quot;&quot;&quot;</span>
@@ -448,7 +447,7 @@
 <span class="sd">        Sort and return a new list of configurations ordered according to the :class:`TaskPolicy` policy.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Build new list since we are gonna change the object in place.</span>
-        <span class="n">hints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="o">=</span><span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">num_cores</span> <span class="o">&lt;=</span> <span class="n">max_ncpus</span><span class="p">])</span>
+        <span class="n">hints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="o">=</span><span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">num_cores</span> <span class="o">&lt;=</span> <span class="n">max_ncpus</span><span class="p">])</span>
 
         <span class="c1"># First select the configurations satisfying the condition specified by the user (if any)</span>
         <span class="n">bkp_hints</span> <span class="o">=</span> <span class="n">hints</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -502,7 +501,7 @@
 <span class="sd">    and the conditions used to select the optimal configuration for the parallel run</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">as_policy</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">as_policy</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts an object obj into a `:class:`TaskPolicy. Accepts:</span>
 
@@ -514,15 +513,15 @@
             <span class="c1"># Use default policy.</span>
             <span class="k">return</span> <span class="n">TaskPolicy</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">obj</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">obj</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">obj</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to convert type </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="n">cls</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to convert type </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="bp">cls</span><span class="p">))</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">autodoc</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">autodoc</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    autoparal:                # (integer). 0 to disable the autoparal feature (DEFAULT: 1 i.e. autoparal is on)</span>
 <span class="s2">    condition:                # condition used to filter the autoparal configurations (Mongodb-like syntax).</span>
@@ -559,7 +558,7 @@
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">app</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">append</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span> <span class="k">continue</span>
             <span class="n">app</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
@@ -596,7 +595,7 @@
     <span class="n">ENTRIES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;policy&quot;</span><span class="p">,</span> <span class="s2">&quot;qadapters&quot;</span><span class="p">,</span> <span class="s2">&quot;db_connector&quot;</span><span class="p">,</span> <span class="s2">&quot;batch_adapter&quot;</span><span class="p">}</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TaskManager.autodoc"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.autodoc">[docs]</a>    <span class="k">def</span> <span class="nf">autodoc</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskManager.autodoc"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.autodoc">[docs]</a>    <span class="k">def</span> <span class="nf">autodoc</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.db</span> <span class="k">import</span> <span class="n">DBConnector</span>
         <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2"># TaskManager configuration file (YAML Format)</span>
@@ -626,7 +625,7 @@
         <span class="k">return</span> <span class="n">s</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TaskManager.from_user_config"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_user_config">[docs]</a>    <span class="k">def</span> <span class="nf">from_user_config</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskManager.from_user_config"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_user_config">[docs]</a>    <span class="k">def</span> <span class="nf">from_user_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the :class:`TaskManager` from the YAML file &#39;manager.yaml&#39;.</span>
 <span class="sd">        Search first in the working directory and then in the abipy configuration directory.</span>
@@ -639,9 +638,9 @@
             <span class="k">return</span> <span class="n">_USER_CONFIG_TASKMANAGER</span>
 
         <span class="c1"># Try in the current directory then in user configuration directory.</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">USER_CONFIG_DIR</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">USER_CONFIG_DIR</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span>
@@ -650,50 +649,50 @@
                 <span class="s2">&quot;!!! PLEASE READ THIS: !!!</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;To use abipy to run jobs this file must be present</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;It provides a description of the cluster/computer you are running on</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="s2">&quot;Examples are provided in abipy/data/managers.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">,</span> <span class="n">path</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">))</span>
+                <span class="s2">&quot;Examples are provided in abipy/data/managers.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">,</span> <span class="n">path</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">))</span>
 
-        <span class="n">_USER_CONFIG_TASKMANAGER</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">_USER_CONFIG_TASKMANAGER</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_USER_CONFIG_TASKMANAGER</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TaskManager.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskManager.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read the configuration parameters from the Yaml file filename.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fh</span><span class="p">))</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fh</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error while reading TaskManager parameters from </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
             <span class="k">raise</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TaskManager.from_string"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_string">[docs]</a>    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskManager.from_string"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_string">[docs]</a>    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an instance from string s containing a YAML dictionary.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">s</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">s</span><span class="p">))</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TaskManager.as_manager"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.as_manager">[docs]</a>    <span class="k">def</span> <span class="nf">as_manager</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskManager.as_manager"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.as_manager">[docs]</a>    <span class="k">def</span> <span class="nf">as_manager</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert obj into TaskManager instance. Accepts string, filepath, dictionary, `TaskManager` object.</span>
 <span class="sd">        If obj is None, the manager is initialized from the user config file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span> <span class="k">return</span> <span class="n">obj</span>
-        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_user_config</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span> <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_user_config</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">is_string</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to convert type </span><span class="si">%s</span><span class="s2"> to TaskManager&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="TaskManager.from_dict"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskManager.from_dict"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an instance from a dictionary.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">ENTRIES</span><span class="p">})</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">ENTRIES</span><span class="p">})</span></div>
 
     <span class="nd">@pmg_serialize</span>
 <div class="viewcode-block" id="TaskManager.as_dict"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.TaskManager.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -786,7 +785,7 @@
                 <span class="c1">#print(&quot;shell_runner:&quot;, shell_runner)</span>
 
         <span class="c1">#print(my_kwargs)</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="o">**</span><span class="n">my_kwargs</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="o">**</span><span class="n">my_kwargs</span><span class="p">)</span>
         <span class="n">new</span><span class="o">.</span><span class="n">set_mpi_procs</span><span class="p">(</span><span class="n">mpi_procs</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">new</span></div>
@@ -1256,22 +1255,22 @@
 
 <span class="k">class</span> <span class="nc">MyTimedelta</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A customized version of timedelta whose __str__ method doesn&#39;t print microseconds.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">microseconds</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">microseconds</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">microseconds</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">microseconds</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove microseconds from timedelta default __str__&quot;&quot;&quot;</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MyTimedelta</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MyTimedelta</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
         <span class="n">microsec</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">microsec</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="n">microsec</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">s</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">as_timedelta</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">as_timedelta</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert delta into a MyTimedelta object.&quot;&quot;&quot;</span>
         <span class="c1"># Cannot monkey patch the __class__ and must pass through __new__ as the object is immutable.</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">cls</span><span class="p">):</span> <span class="k">return</span> <span class="n">delta</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">days</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">microseconds</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span> <span class="k">return</span> <span class="n">delta</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">days</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span> <span class="n">delta</span><span class="o">.</span><span class="n">microseconds</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">TaskDateTimes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -1302,7 +1301,7 @@
 
     <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reinitialize the counters.&quot;&quot;&quot;</span>
-        <span class="bp">self</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">()</span>
+        <span class="bp">self</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">get_runtime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;:class:`timedelta` with the run-time, None if the Task is not running&quot;&quot;&quot;</span>
@@ -1371,7 +1370,7 @@
 <span class="sd">                  None means that this Task has no dependency.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Init the node</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Task</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Task</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_input</span> <span class="o">=</span> <span class="nb">input</span>
 
@@ -1409,7 +1408,7 @@
 <span class="sd">        This is the reason why we have to store the returncode in self._returncode instead</span>
 <span class="sd">        of using self.process.returncode.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;_process&quot;</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;_process&quot;</span><span class="p">]}</span>
 
     <span class="c1">#@check_spectator</span>
     <span class="k">def</span> <span class="nf">set_workdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workdir</span><span class="p">,</span> <span class="n">chroot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2500,7 +2499,7 @@
     <span class="n">Results</span> <span class="o">=</span> <span class="n">TaskResults</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_input</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create an instance of `AbinitTask` from an ABINIT input.</span>
 
@@ -2509,10 +2508,10 @@
 <span class="sd">            workdir: Path to the working directory.</span>
 <span class="sd">            manager: :class:`TaskManager` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">temp_shell_task</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">temp_shell_task</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a Task with a temporary workdir. The task is executed via the shell with 1 MPI proc.</span>
 <span class="sd">        Mainly used for invoking Abinit to get important parameters needed to prepare the real task.</span>
@@ -2523,7 +2522,7 @@
         <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">TaskManager</span><span class="o">.</span><span class="n">from_user_config</span><span class="p">()</span>
 
         <span class="c1"># Construct the task and run it</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_input</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">to_shell_manager</span><span class="p">(</span><span class="n">mpi_procs</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_input</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">to_shell_manager</span><span class="p">(</span><span class="n">mpi_procs</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">task</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s1">&#39;temp_shell_task&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">task</span>
 
@@ -3173,7 +3172,7 @@
 <span class="sd">    initialized from the previous WFK file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CollinearThenNonCollinearScfTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">deps</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CollinearThenNonCollinearScfTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">deps</span><span class="p">)</span>
         <span class="c1"># Enforce nspinor = 1, nsppol = 2 and prtwf = 1.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">set_spin_mode</span><span class="p">(</span><span class="s2">&quot;polarized&quot;</span><span class="p">)</span>
@@ -3887,7 +3886,7 @@
         <span class="c1">#deps = {n: &quot;DDK&quot; for n in self.ddk_nodes}</span>
         <span class="n">deps</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">nscf_node</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">})</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">OpticTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">optic_input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">deps</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OpticTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">optic_input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">deps</span><span class="p">)</span>
 
 <div class="viewcode-block" id="OpticTask.set_workdir"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.OpticTask.set_workdir">[docs]</a>    <span class="k">def</span> <span class="nf">set_workdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workdir</span><span class="p">,</span> <span class="n">chroot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the working directory of the task.&quot;&quot;&quot;</span>
@@ -4253,10 +4252,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddk_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">deps</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">ddk_node</span><span class="p">:</span> <span class="s2">&quot;DDK&quot;</span><span class="p">})</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">AnaddbTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">anaddb_input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">deps</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AnaddbTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">anaddb_input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">deps</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="AnaddbTask.temp_shell_task"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AnaddbTask.temp_shell_task">[docs]</a>    <span class="k">def</span> <span class="nf">temp_shell_task</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">ddb_node</span><span class="p">,</span>
+<div class="viewcode-block" id="AnaddbTask.temp_shell_task"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AnaddbTask.temp_shell_task">[docs]</a>    <span class="k">def</span> <span class="nf">temp_shell_task</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">ddb_node</span><span class="p">,</span>
                         <span class="n">gkk_node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">md_node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ddk_node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a :class:`AnaddbTask` with a temporary workdir. The task is executed via</span>
@@ -4274,7 +4273,7 @@
         <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">TaskManager</span><span class="o">.</span><span class="n">from_user_config</span><span class="p">()</span>
 
         <span class="c1"># Construct the task and run it</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">ddb_node</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">ddb_node</span><span class="p">,</span>
                    <span class="n">gkk_node</span><span class="o">=</span><span class="n">gkk_node</span><span class="p">,</span> <span class="n">md_node</span><span class="o">=</span><span class="n">md_node</span><span class="p">,</span> <span class="n">ddk_node</span><span class="o">=</span><span class="n">ddk_node</span><span class="p">,</span>
                    <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">to_shell_manager</span><span class="p">(</span><span class="n">mpi_procs</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></div>
 
@@ -4409,14 +4408,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

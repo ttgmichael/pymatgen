@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.launcher &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.io.abinit.launcher &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="Module code" href="../../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -89,7 +88,7 @@
     <span class="n">has_apscheduler</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;ScriptEditor&quot;</span><span class="p">,</span>
@@ -338,9 +337,9 @@
     <span class="n">Error</span> <span class="o">=</span> <span class="n">PyFlowSchedulerError</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="PyFlowScheduler.autodoc"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.autodoc">[docs]</a>    <span class="k">def</span> <span class="nf">autodoc</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">__init__</span><span class="o">.</span><span class="n">__doc__</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;Args:&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">__init__</span><span class="o">.</span><span class="n">__doc__</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">:]</span></div>
+<div class="viewcode-block" id="PyFlowScheduler.autodoc"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.autodoc">[docs]</a>    <span class="k">def</span> <span class="nf">autodoc</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;Args:&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">:]</span></div>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -432,20 +431,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="PyFlowScheduler.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+<div class="viewcode-block" id="PyFlowScheduler.from_file"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.from_file">[docs]</a>    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Read the configuration parameters from a Yaml file.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fh</span><span class="p">))</span></div>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fh</span><span class="p">))</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="PyFlowScheduler.from_string"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.from_string">[docs]</a>    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<div class="viewcode-block" id="PyFlowScheduler.from_string"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.from_string">[docs]</a>    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create an istance from string s containing a YAML dictionary.&quot;&quot;&quot;</span>
         <span class="n">stream</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">stream</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">stream</span><span class="p">))</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="PyFlowScheduler.from_user_config"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.from_user_config">[docs]</a>    <span class="k">def</span> <span class="nf">from_user_config</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="PyFlowScheduler.from_user_config"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.from_user_config">[docs]</a>    <span class="k">def</span> <span class="nf">from_user_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the :class:`PyFlowScheduler` from the YAML file &#39;scheduler.yml&#39;.</span>
 <span class="sd">        Search first in the working directory and then in the configuration directory of abipy.</span>
@@ -454,22 +453,22 @@
 <span class="sd">            `RuntimeError` if file is not found.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Try in the current directory.</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
         <span class="c1"># Try in the configuration directory.</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">USER_CONFIG_DIR</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">USER_CONFIG_DIR</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="k">raise</span> <span class="n">cls</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Cannot locate </span><span class="si">%s</span><span class="s2"> neither in current directory nor in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Cannot locate </span><span class="si">%s</span><span class="s2"> neither in current directory nor in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">YAML_FILE</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String representation.&quot;&quot;&quot;</span>
-        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span> <span class="o">+</span> <span class="s2">&quot;, Pid: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">]</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;, Pid: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">]</span>
         <span class="n">app</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">append</span>
         <span class="n">app</span><span class="p">(</span><span class="s2">&quot;Scheduler options: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sched_options</span><span class="p">))</span>
 
@@ -1008,7 +1007,7 @@
     <span class="n">Error</span> <span class="o">=</span> <span class="n">BatchLauncherError</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_dir</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_dir</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find all flows located withing the directory `top` and build the `BatchLauncher`.</span>
 
@@ -1040,7 +1039,7 @@
 
         <span class="c1">#workdir = os.path.join(top, &quot;batch&quot;) if workdir is None else workdir</span>
         <span class="n">workdir</span> <span class="o">=</span> <span class="s2">&quot;batch&quot;</span> <span class="k">if</span> <span class="n">workdir</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">workdir</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">workdir</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">pickle_paths</span><span class="p">:</span>
             <span class="n">new</span><span class="o">.</span><span class="n">add_flow</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -1048,7 +1047,7 @@
         <span class="k">return</span> <span class="n">new</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">pickle_load</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">pickle_load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads the object from a pickle file.</span>
 
@@ -1061,7 +1060,7 @@
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
             <span class="c1"># Walk through each directory inside path and find the pickle database.</span>
             <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
-                <span class="n">fnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="n">cls</span><span class="o">.</span><span class="n">PICKLE_FNAME</span><span class="p">]</span>
+                <span class="n">fnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">PICKLE_FNAME</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">fnames</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fnames</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">fnames</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -1070,7 +1069,7 @@
                         <span class="n">err_msg</span> <span class="o">=</span> <span class="s2">&quot;Found multiple databases:</span><span class="se">\n</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">fnames</span><span class="p">)</span>
                         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">err_msg</span> <span class="o">=</span> <span class="s2">&quot;Cannot find </span><span class="si">%s</span><span class="s2"> inside directory </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">PICKLE_FNAME</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
+                <span class="n">err_msg</span> <span class="o">=</span> <span class="s2">&quot;Cannot find </span><span class="si">%s</span><span class="s2"> inside directory </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">PICKLE_FNAME</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
@@ -1098,7 +1097,7 @@
 <span class="sd">        Here we replace the flow objects with their workdir because we are observing</span>
 <span class="sd">        the flows and we want to have the updated version when we reload the `BatchLauncher` from pickle.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;flows&quot;</span><span class="p">]}</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;flows&quot;</span><span class="p">]}</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;flows&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">flow</span><span class="o">.</span><span class="n">workdir</span> <span class="k">for</span> <span class="n">flow</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">flows</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">d</span>
 
@@ -1392,14 +1391,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

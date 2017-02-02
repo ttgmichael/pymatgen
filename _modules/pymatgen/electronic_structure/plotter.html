@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.plotter &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.electronic_structure.plotter &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
@@ -27,8 +28,6 @@
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -47,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -95,7 +94,7 @@
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;May 1, 2012&quot;</span>
 
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="DosPlotter"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.DosPlotter">[docs]</a><span class="k">class</span> <span class="nc">DosPlotter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -584,9 +583,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_maketicks</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>
 
         <span class="c1"># Main X and Y Labels</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">r&#39;$\mathrm{Wave\ Vector}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-        <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">r&#39;$\mathrm{E\ -\ E_f\ (eV)}$&#39;</span> <span class="k">if</span> <span class="n">zero_to_efermi</span> \
-            <span class="k">else</span> <span class="s1">r&#39;$\mathrm{Energy\ (eV)}$&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{Wave\ Vector}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{E\ -\ E_f\ (eV)}$&#39;</span> <span class="k">if</span> <span class="n">zero_to_efermi</span> \
+            <span class="k">else</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{Energy\ (eV)}$&#39;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
         <span class="c1"># Draw Fermi energy, only if not the zero</span>
@@ -757,7 +756,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bs</span><span class="o">.</span><span class="n">projections</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;try to plot projections&quot;</span>
                              <span class="s2">&quot; on a band structure without any&quot;</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">BSPlotterProjected</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BSPlotterProjected</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_projections_by_branches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictio</span><span class="p">):</span>
         <span class="n">proj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">get_projections_on_elements_and_orbitals</span><span class="p">(</span><span class="n">dictio</span><span class="p">)</span>
@@ -1167,10 +1166,10 @@
 
         <span class="c1"># add BS fermi level line at E=0 and gridlines</span>
         <span class="n">bs_ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">x_distances</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">bs_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">emin</span><span class="p">,</span> <span class="n">emax</span><span class="o">+</span><span class="mi">1</span><span class="n">E</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">egrid_interval</span><span class="p">))</span>
-        <span class="n">bs_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">emin</span><span class="p">,</span> <span class="n">emax</span><span class="o">+</span><span class="mi">1</span><span class="n">E</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">egrid_interval</span><span class="p">),</span>
+        <span class="n">bs_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">emin</span><span class="p">,</span> <span class="n">emax</span><span class="o">+</span><span class="mf">1E-5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">egrid_interval</span><span class="p">))</span>
+        <span class="n">bs_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">emin</span><span class="p">,</span> <span class="n">emax</span><span class="o">+</span><span class="mf">1E-5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">egrid_interval</span><span class="p">),</span>
                               <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tick_fontsize</span><span class="p">)</span>
-        <span class="n">dos_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">emin</span><span class="p">,</span> <span class="n">emax</span><span class="o">+</span><span class="mi">1</span><span class="n">E</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">egrid_interval</span><span class="p">))</span>
+        <span class="n">dos_ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">emin</span><span class="p">,</span> <span class="n">emax</span><span class="o">+</span><span class="mf">1E-5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">egrid_interval</span><span class="p">))</span>
         <span class="n">bs_ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">dos_ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span>
         <span class="n">dos_ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1437,7 +1436,7 @@
         <span class="k">return</span> <span class="n">plt</span></div>
 
 <div class="viewcode-block" id="BoltztrapPlotter.plot_conductivity_mu"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_conductivity_mu">[docs]</a>    <span class="k">def</span> <span class="nf">plot_conductivity_mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eig&#39;</span><span class="p">,</span>
-                             <span class="n">relaxation_time</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                             <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the conductivity in function of Fermi level. Semi-log plot</span>
 
@@ -1464,7 +1463,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">gap</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">1</span><span class="n">e13</span> <span class="o">*</span> <span class="n">relaxation_time</span><span class="p">,</span> <span class="mi">1</span><span class="n">e20</span> <span class="o">*</span> <span class="n">relaxation_time</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">1e13</span> <span class="o">*</span> <span class="n">relaxation_time</span><span class="p">,</span> <span class="mf">1e20</span> <span class="o">*</span> <span class="n">relaxation_time</span><span class="p">])</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;conductivity,</span><span class="se">\n</span><span class="s2"> $\sigma$ (1/($\Omega$ m))&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;E-E$_f$ (eV)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
@@ -1472,7 +1471,7 @@
         <span class="k">return</span> <span class="n">plt</span></div>
 
 <div class="viewcode-block" id="BoltztrapPlotter.plot_power_factor_mu"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_power_factor_mu">[docs]</a>    <span class="k">def</span> <span class="nf">plot_power_factor_mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eig&#39;</span><span class="p">,</span>
-                             <span class="n">relaxation_time</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                             <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the power factor in function of Fermi level. Semi-log plot</span>
 
@@ -1505,7 +1504,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">plt</span></div>
 
-<div class="viewcode-block" id="BoltztrapPlotter.plot_zt_mu"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_zt_mu">[docs]</a>    <span class="k">def</span> <span class="nf">plot_zt_mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eig&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
+<div class="viewcode-block" id="BoltztrapPlotter.plot_zt_mu"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_zt_mu">[docs]</a>    <span class="k">def</span> <span class="nf">plot_zt_mu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eig&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span>
                    <span class="n">xlim</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the ZT in function of Fermi level.</span>
@@ -1564,12 +1563,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">mu_steps</span><span class="p">,</span>
-                     <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">carrier_conc</span><span class="p">[</span><span class="n">temp</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">vol</span> <span class="o">*</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">24</span><span class="p">)),</span>
+                     <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">carrier_conc</span><span class="p">[</span><span class="n">temp</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">vol</span> <span class="o">*</span> <span class="mf">1e-24</span><span class="p">)),</span>
                      <span class="n">linewidth</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_plot_bg_limits</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_plot_doping</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">gap</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">1</span><span class="n">e14</span><span class="p">,</span> <span class="mi">1</span><span class="n">e22</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1e14</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;carrier concentration (cm-3)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;E-E$_f$ (eV)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
@@ -1595,7 +1594,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_plot_bg_limits</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_plot_doping</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">gap</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">1</span><span class="n">e14</span><span class="p">,</span> <span class="mi">1</span><span class="n">e22</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1e14</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Hall carrier concentration (cm-3)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;E-E$_f$ (eV)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
@@ -1825,7 +1824,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mf">0.5</span><span class="o">-</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="o">+</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mf">0.5</span><span class="o">-</span><span class="mf">1e-10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="o">+</span><span class="mf">1e-10</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">get_cartesian_coords</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
     <span class="n">closest_lattice_point</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2046,14 +2045,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

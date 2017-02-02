@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.composition module &#8212; pymatgen 4.6.0 documentation</title>
+    <title>pymatgen.core.composition module &#8212; pymatgen 4.6.1 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,10 +14,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.0',
+        VERSION:     '4.6.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -27,7 +28,6 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="pymatgen 4.6.0 documentation" href="index.html" />
  
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -69,7 +69,7 @@ added/subtracted with other ChemicalPotentials.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> (<em>*args,</em>) &#8211; <p>any valid dict init arguments</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> (<em>*args</em><em>,</em><em></em>) &#8211; <p>any valid dict init arguments</p>
 </td>
 </tr>
 </tbody>
@@ -137,15 +137,15 @@ dict(). Also extended to allow simple string init.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>form supported by the Python built-in dict() function.</strong> (<em>Any</em>) &#8211; </li>
+<li><strong>form supported by the Python built-in dict</strong><strong>(</strong><strong></strong><strong>) </strong><strong>function.</strong> (<em>Any</em>) &#8211; </li>
 <li><strong>A dict of either {Element/Specie</strong> (<em>1.</em>) &#8211; <p>amount},</p>
 <p>{string symbol:amount}, or {atomic number:amount} or any mixture
 of these. E.g., {Element(&#8220;Li&#8221;):2 ,Element(&#8220;O&#8221;):1},
 {&#8220;Li&#8221;:2, &#8220;O&#8221;:1}, {3:2, 8:1} all result in a Li2O composition.</p>
 </li>
-<li><strong>Keyword arg initialization, similar to a dict, e.g.,</strong> (<em>2.</em>) &#8211; Composition(Li = 2, O = 1)</li>
-<li><strong>addition, the Composition constructor also allows a single</strong> (<a class="reference internal" href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.In" title="pymatgen.core.periodic_table.Element.In"><em>In</em></a>) &#8211; </li>
-<li><strong>as an input formula. E.g., Composition</strong> (<em>string</em>) &#8211; </li>
+<li><strong>Keyword arg initialization</strong><strong>, </strong><strong>similar to a dict</strong><strong>, </strong><strong>e.g.</strong><strong>,</strong><strong></strong> (<em>2.</em>) &#8211; Composition(Li = 2, O = 1)</li>
+<li><strong>addition</strong><strong>, </strong><strong>the Composition constructor also allows a single</strong> (<a class="reference internal" href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.In" title="pymatgen.core.periodic_table.Element.In"><em>In</em></a>) &#8211; </li>
+<li><strong>as an input formula. E.g.</strong><strong>, </strong><strong>Composition</strong> (<em>string</em>) &#8211; </li>
 <li><strong>allow_negative</strong> &#8211; Whether to allow negative compositions. This
 argument must be popped from the **kwargs due to *args
 ambiguity.</li>
@@ -424,7 +424,7 @@ Li4Fe4P4O16.</p>
 
 <dl class="attribute">
 <dt id="pymatgen.core.composition.Composition.special_formulas">
-<code class="descname">special_formulas</code><em class="property"> = {'H': 'H2', 'HO': 'H2O2', 'LiO': 'Li2O2', 'N': 'N2', 'RbO': 'Rb2O2', 'O': 'O2', 'KO': 'K2O2', 'CsO': 'Cs2O2', 'NaO': 'Na2O2', 'F': 'F2', 'Cl': 'Cl2'}</em><a class="headerlink" href="#pymatgen.core.composition.Composition.special_formulas" title="Permalink to this definition">¶</a></dt>
+<code class="descname">special_formulas</code><em class="property"> = {'LiO': 'Li2O2', 'NaO': 'Na2O2', 'KO': 'K2O2', 'HO': 'H2O2', 'CsO': 'Cs2O2', 'RbO': 'Rb2O2', 'O': 'O2', 'N': 'N2', 'F': 'F2', 'Cl': 'Cl2', 'H': 'H2'}</em><a class="headerlink" href="#pymatgen.core.composition.Composition.special_formulas" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -483,7 +483,7 @@ reduced_cell_formula, elements and nelements.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/pymatgen.core.composition.txt"
+      <li><a href="_sources/pymatgen.core.composition.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -510,13 +510,13 @@ reduced_cell_formula, elements and nelements.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
