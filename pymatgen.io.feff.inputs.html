@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.feff.inputs module &#8212; pymatgen 4.6.1 documentation</title>
+    <title>pymatgen.io.feff.inputs module &#8212; pymatgen 4.6.2 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.1',
+        VERSION:     '4.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -303,6 +303,34 @@ Will also read a header from a non-pymatgen generated feff.inp file</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymatgen.io.feff.inputs.Paths">
+<em class="property">class </em><code class="descname">Paths</code><span class="sig-paren">(</span><em>atoms</em>, <em>paths</em>, <em>degeneracies=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/feff/inputs.html#Paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.feff.inputs.Paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">monty.json.MSONable</span></code></p>
+<p>Set FEFF scattering paths(&#8216;paths.dat&#8217; file used by the &#8216;genfmt&#8217; module).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>atoms</strong> (<a class="reference internal" href="#pymatgen.io.feff.inputs.Atoms" title="pymatgen.io.feff.inputs.Atoms"><em>Atoms</em></a>) &#8211; Atoms object</li>
+<li><strong>paths</strong> (<em>list</em><em>(</em><em>list</em><em>)</em><em></em>) &#8211; list of paths. Each path is a list of atom indices in the atomic
+cluster(the molecular cluster created by Atoms class).
+e.g. [[0, 1, 2], [5, 9, 4, 1]] -&gt; 2 paths: one with 3 legs and the other with 4 legs.</li>
+<li><strong>degeneracies</strong> (<em>list</em>) &#8211; list of degeneracies, one for each path. Set to 1 if not specified.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pymatgen.io.feff.inputs.Paths.write_file">
+<code class="descname">write_file</code><span class="sig-paren">(</span><em>filename='paths.dat'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/feff/inputs.html#Paths.write_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.feff.inputs.Paths.write_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write paths.dat.</p>
 </dd></dl>
 
 </dd></dl>
@@ -597,7 +625,7 @@ from 1.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
       </ul>
     </div>
 

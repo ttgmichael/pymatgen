@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.util.io_utils &#8212; pymatgen 4.6.1 documentation</title>
+    <title>pymatgen.util.io_utils &#8212; pymatgen 4.6.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.1',
+        VERSION:     '4.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -62,6 +62,9 @@
 <span class="c1"># Distributed under the terms of the MIT License.</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">monty.io</span> <span class="k">import</span> <span class="n">zopen</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module provides utility classes for io operations.</span>
@@ -75,24 +78,10 @@
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Production&quot;</span>
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;Sep 23, 2011&quot;</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">monty.io</span> <span class="k">import</span> <span class="n">zopen</span>
-
-
-<div class="viewcode-block" id="prompt"><a class="viewcode-back" href="../../../pymatgen.util.io_utils.html#pymatgen.util.io_utils.prompt">[docs]</a><span class="k">def</span> <span class="nf">prompt</span><span class="p">(</span><span class="n">question</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">six</span>
-    <span class="c1"># Fix python 2.x.</span>
-    <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span><span class="p">:</span>
-        <span class="n">my_input</span> <span class="o">=</span> <span class="n">raw_input</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">my_input</span> <span class="o">=</span> <span class="nb">input</span>
-    
-    <span class="k">return</span> <span class="n">my_input</span><span class="p">(</span><span class="n">question</span><span class="p">)</span></div>
-
 
 <div class="viewcode-block" id="ask_yesno"><a class="viewcode-back" href="../../../pymatgen.util.io_utils.html#pymatgen.util.io_utils.ask_yesno">[docs]</a><span class="k">def</span> <span class="nf">ask_yesno</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">answer</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">six</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">default</span></div>
@@ -286,7 +275,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

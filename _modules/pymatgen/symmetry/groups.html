@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.symmetry.groups &#8212; pymatgen 4.6.1 documentation</title>
+    <title>pymatgen.symmetry.groups &#8212; pymatgen 4.6.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.1',
+        VERSION:     '4.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -245,8 +245,22 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">SYMM_OPS</span> <span class="o">=</span> <span class="n">loadfn</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span>
                                    <span class="s2">&quot;symm_ops.yaml&quot;</span><span class="p">))</span>
-    <span class="c1"># Contains the entire list of supported Space Group symbols.</span>
-    <span class="n">SG_SYMBOLS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;space_group_encoding&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">SG_SYMBOLS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;space_group_encoding&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">SYMM_OPS</span><span class="p">:</span>
+        <span class="n">op</span><span class="p">[</span><span class="s2">&quot;hermann_mauguin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">op</span><span class="p">[</span><span class="s2">&quot;hermann_mauguin&quot;</span><span class="p">])</span>
+        <span class="n">op</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">op</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">])</span>
+        <span class="n">SG_SYMBOLS</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="s2">&quot;hermann_mauguin&quot;</span><span class="p">])</span>
+        <span class="n">SG_SYMBOLS</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">])</span>
+
+    <span class="n">gen_matrices</span> <span class="o">=</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;generator_matrices&quot;</span><span class="p">)</span>
+    <span class="c1"># POINT_GROUP_ENC = SYMM_DATA[&quot;point_group_encoding&quot;]</span>
+    <span class="n">sgencoding</span> <span class="o">=</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;space_group_encoding&quot;</span><span class="p">)</span>
+    <span class="n">abbrev_sg_mapping</span> <span class="o">=</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;abbreviated_spacegroup_symbols&quot;</span><span class="p">)</span>
+    <span class="n">translations</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">get_symm_data</span><span class="p">(</span>
+        <span class="s2">&quot;translations&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">full_sg_mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">v</span><span class="p">[</span><span class="s2">&quot;full_symbol&quot;</span><span class="p">]:</span> <span class="n">k</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;space_group_encoding&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">int_symbol</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -257,34 +271,29 @@
 <span class="sd">            int_symbol (str): Full International (e.g., &quot;P2/m2/m2/m&quot;) or</span>
 <span class="sd">                Hermann-Mauguin Symbol (&quot;Pmmm&quot;) or abbreviated symbol. The</span>
 <span class="sd">                notation is a LaTeX-like string, with screw axes being</span>
-<span class="sd">                represented by an underscore. For example, &quot;P6_3/mmc&quot;. Note</span>
-<span class="sd">                that for rhomohedral cells, the hexagonal setting can be</span>
-<span class="sd">                accessed by adding a &quot;H&quot;, e.g., &quot;R-3mH&quot;.</span>
+<span class="sd">                represented by an underscore. For example, &quot;P6_3/mmc&quot;.</span>
+<span class="sd">                Alternative settings can be access by adding a &quot;:identifier&quot;.</span>
+<span class="sd">                For example, the hexagonal setting  for rhombohedral cells can be</span>
+<span class="sd">                accessed by adding a &quot;:H&quot;, e.g., &quot;R-3m:H&quot;. To find out all</span>
+<span class="sd">                possible settings for a spacegroup, use the get_settings</span>
+<span class="sd">                classmethod. Alternative origin choices can be indicated by a</span>
+<span class="sd">                translation vector, e.g., &#39;Fm-3m(a-1/4,b-1/4,c-1/4)&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">gen_matrices</span> <span class="o">=</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;generator_matrices&quot;</span><span class="p">)</span>
-        <span class="c1"># POINT_GROUP_ENC = SYMM_DATA[&quot;point_group_encoding&quot;]</span>
-        <span class="n">sgencoding</span> <span class="o">=</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;space_group_encoding&quot;</span><span class="p">)</span>
-        <span class="n">abbrev_sg_mapping</span> <span class="o">=</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;abbreviated_spacegroup_symbols&quot;</span><span class="p">)</span>
-        <span class="n">translations</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">get_symm_data</span><span class="p">(</span>
-            <span class="s2">&quot;translations&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-        <span class="n">full_sg_mapping</span> <span class="o">=</span> <span class="p">{</span>
-             <span class="n">v</span><span class="p">[</span><span class="s2">&quot;full_symbol&quot;</span><span class="p">]:</span> <span class="n">k</span>
-             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">get_symm_data</span><span class="p">(</span><span class="s2">&quot;space_group_encoding&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
         <span class="n">int_symbol</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">int_symbol</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">abbrev_sg_mapping</span><span class="p">:</span>
-            <span class="n">int_symbol</span> <span class="o">=</span> <span class="n">abbrev_sg_mapping</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">full_sg_mapping</span><span class="p">:</span>
-            <span class="n">int_symbol</span> <span class="o">=</span> <span class="n">full_sg_mapping</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">abbrev_sg_mapping</span><span class="p">:</span>
+            <span class="n">int_symbol</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">abbrev_sg_mapping</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">full_sg_mapping</span><span class="p">:</span>
+            <span class="n">int_symbol</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">full_sg_mapping</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">]</span>
 
         <span class="k">for</span> <span class="n">spg</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">SYMM_OPS</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;hermann_mauguin&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="n">int_symbol</span> <span class="ow">or</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">]))</span> <span class="o">==</span> <span class="n">int_symbol</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="p">[</span><span class="n">spg</span><span class="p">[</span><span class="s2">&quot;hermann_mauguin&quot;</span><span class="p">],</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">]]:</span>
                 <span class="n">ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">SymmOp</span><span class="o">.</span><span class="n">from_xyz_string</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;symops&quot;</span><span class="p">]]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                                      <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">]))</span>
-                <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">sgencoding</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">full_symbol</span> <span class="o">=</span> <span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">][</span><span class="s2">&quot;full_symbol&quot;</span><span class="p">]</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">point_group</span> <span class="o">=</span> <span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">][</span><span class="s2">&quot;point_group&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">sgencoding</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">full_symbol</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">][</span><span class="s2">&quot;full_symbol&quot;</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">point_group</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">][</span><span class="s2">&quot;point_group&quot;</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">full_symbol</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                                               <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">])</span>
@@ -294,10 +303,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_symmetry_ops</span> <span class="o">=</span> <span class="n">ops</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sgencoding</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">sgencoding</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bad international symbol </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">int_symbol</span><span class="p">)</span>
 
-            <span class="n">data</span> <span class="o">=</span> <span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">]</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">int_symbol</span>
             <span class="c1"># TODO: Support different origin choices.</span>
@@ -311,10 +320,10 @@
                      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]))</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ngen</span><span class="p">):</span>
                 <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-                <span class="n">m</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">gen_matrices</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
-                <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">translations</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
-                <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">translations</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
-                <span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">translations</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+                <span class="n">m</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">gen_matrices</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+                <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+                <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+                <span class="n">m</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="n">enc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
                 <span class="n">symm_ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="n">symm_ops</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">full_symbol</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;full_symbol&quot;</span><span class="p">]</span>
@@ -342,6 +351,38 @@
             <span class="n">new_ops</span> <span class="o">=</span> <span class="n">gen_ops</span>
         <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">symm_ops</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
         <span class="k">return</span> <span class="n">symm_ops</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">int_symbol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all the settings for a particular international symbol.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            int_symbol (str): Full International (e.g., &quot;P2/m2/m2/m&quot;) or</span>
+<span class="sd">                Hermann-Mauguin Symbol (&quot;Pmmm&quot;) or abbreviated symbol. The</span>
+<span class="sd">                notation is a LaTeX-like string, with screw axes being</span>
+<span class="sd">                represented by an underscore. For example, &quot;P6_3/mmc&quot;.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">abbrev_sg_mapping</span><span class="p">:</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SpaceGroup</span><span class="o">.</span><span class="n">abbrev_sg_mapping</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">])</span>
+            <span class="n">int_number</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">][</span><span class="s2">&quot;int_number&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">full_sg_mapping</span><span class="p">:</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SpaceGroup</span><span class="o">.</span><span class="n">full_sg_mapping</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">])</span>
+            <span class="n">int_number</span> <span class="o">=</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">sgencoding</span><span class="p">[</span><span class="n">int_symbol</span><span class="p">][</span><span class="s2">&quot;int_number&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">spg</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">SYMM_OPS</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">int_symbol</span> <span class="ow">in</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;\(|:&quot;</span><span class="p">,</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;hermann_mauguin&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span>
+                                  <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;\(|:&quot;</span><span class="p">,</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]]:</span>
+                    <span class="n">int_number</span> <span class="o">=</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]</span>
+                    <span class="k">break</span>
+
+        <span class="k">for</span> <span class="n">spg</span> <span class="ow">in</span> <span class="n">SpaceGroup</span><span class="o">.</span><span class="n">SYMM_OPS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">int_number</span> <span class="o">==</span> <span class="n">spg</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]:</span>
+                <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spg</span><span class="p">[</span><span class="s2">&quot;hermann_mauguin&quot;</span><span class="p">])</span>
+                <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spg</span><span class="p">[</span><span class="s2">&quot;universal_h_m&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">symmetry_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -575,7 +616,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

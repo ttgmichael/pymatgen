@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.structure_analyzer module &#8212; pymatgen 4.6.1 documentation</title>
+    <title>pymatgen.analysis.structure_analyzer module &#8212; pymatgen 4.6.2 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.1',
+        VERSION:     '4.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -76,19 +76,27 @@ same type may occur. Currently available types are
 <blockquote>
 <div>if desired),</div></blockquote>
 <dl class="docutils">
-<dt>&#8220;tet&#8221; [Shetty&#8211;Peters style OP recognizing tetrahedral</dt>
+<dt>&#8220;lin&#8221; [Peters-style OP recognizing linear coordination</dt>
+<dd>(Zimmermann &amp; Jain, in progress, 2017)],</dd>
+<dt>&#8220;bent&#8221; [Peters-style OP recognizing bent coordination</dt>
+<dd>(Zimmermann &amp; Jain, in progress, 2017)],</dd>
+<dt>&#8220;tet&#8221; [Peters-style OP recognizing tetrahedral</dt>
 <dd>coordination (Zimmermann et al.,
 J. Am. Chem. Soc., 137, 13352-13361, 2015)],</dd>
-<dt>&#8220;oct&#8221; [Shetty&#8211;Peters style OP recognizing octahedral</dt>
+<dt>&#8220;oct&#8221; [Peters-style OP recognizing octahedral</dt>
 <dd>coordination (Zimmermann et al.,
 J. Am. Chem. Soc., 137, 13352-13361, 2015)],</dd>
-<dt>&#8220;bcc&#8221; [Shetty&#8211;Peters style OP recognizing local</dt>
+<dt>&#8220;bcc&#8221; [Peters-style OP recognizing local</dt>
 <dd>body-centered cubic environment (Peters,
 J. Chem. Phys., 131, 244103, 2009)],</dd>
-<dt>&#8220;q2&#8221;  [Bond orientational order parameter (BOOP)</dt>
-<dd>of weight l=2 (Steinhardt et al., Phys. Rev. B,
-28, 784-805, 1983)],</dd>
 </dl>
+<p>&#8220;reg_tri&#8221; (OP recognizing coordination with a regular triangle),
+&#8220;sq&#8221; (OP recognizing square coordination),
+&#8220;sq_pyr&#8221; (OP recognizing square pyramidal coordination),
+&#8220;q2&#8221;  [Bond orientational order parameter (BOOP)</p>
+<blockquote>
+<div>of weight l=2 (Steinhardt et al., Phys. Rev. B,
+28, 784-805, 1983)],</div></blockquote>
 <p>&#8220;q4&#8221;  (BOOP of weight l=4),
 &#8220;q6&#8221;  (BOOP of weight l=6).</p>
 </li>
@@ -102,12 +110,17 @@ for their computation (values in brackets denote default
 values):</p>
 <blockquote>
 <div>&#8220;cn&#8221;:  normalizing constant (1);
-&#8220;tet&#8221;: Gaussian width in fractions of pi (180 degrees)<blockquote>
-<div>reflecting the &#8220;speed of
-penalizing&#8221; deviations away from the perfect
-tetrahedral angle of any individual
+&#8220;lin&#8221;: Gaussian width in fractions of pi (180 degrees)<blockquote>
+<div>reflecting the &#8220;speed of penalizing&#8221; deviations
+away from 180 degrees of any individual
 neighbor1-center-neighbor2 configuration (0.0667);</div></blockquote>
 <dl class="docutils">
+<dt>&#8220;bent&#8221;: target angle in degrees (180);</dt>
+<dd>Gaussian width for penalizing deviations away
+from perfect target angle in fractions of pi
+(0.0667);</dd>
+<dt>&#8220;tet&#8221;: Gaussian width for penalizing deviations away</dt>
+<dd>perfecttetrahedral angle (0.0667);</dd>
 <dt>&#8220;oct&#8221;: threshold angle in degrees distinguishing a second</dt>
 <dd>neighbor to be either close to the south pole or
 close to the equator (160.0);
@@ -121,7 +134,22 @@ tune the capabilities of distinguishing between
 different environments (e.g., tet vs oct)
 given a single mutual threshold q_thresh;</dd>
 <dt>&#8220;bcc&#8221;: south-pole threshold angle as for &#8220;oct&#8221; (160.0);</dt>
-<dd>south-pole Gaussian width as for &#8220;oct&#8221; (0.0667).</dd>
+<dd>south-pole Gaussian width as for &#8220;oct&#8221; (0.0667);</dd>
+<dt>&#8220;reg_tri&#8221;: Gaussian width for penalizing angles away from</dt>
+<dd>the expected angles, given the estimated
+height-to-side ratio of the trigonal pyramid
+in which the central atom is located at the
+tip (0.0222);</dd>
+<dt>&#8220;sq&#8221;: Gaussian width for penalizing angles away from</dt>
+<dd>the expected angles, given the estimated
+height-to-diagonal ratio of the pyramid in which
+the central atom is located at the tip
+(0.0333);</dd>
+<dt>&#8220;sq_pyr&#8221;: Gaussian width in fractions of pi</dt>
+<dd>for penalizing angles away from 90 degrees
+(0.0333);
+Gaussian width in Angstrom for penalizing
+variations in neighbor distances (0.1).</dd>
 </dl>
 </div></blockquote>
 </li>
@@ -896,7 +924,7 @@ center.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
       </ul>
     </div>
 
