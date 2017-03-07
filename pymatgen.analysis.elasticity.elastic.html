@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.elastic module &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.analysis.elasticity.elastic module &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -349,6 +349,70 @@ averages of bulk and shear moduli</p>
 
 </dd></dl>
 
+<dl class="function">
+<dt id="pymatgen.analysis.elasticity.elastic.central_diff">
+<code class="descname">central_diff</code><span class="sig-paren">(</span><em>k</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/elastic.html#central_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.elastic.central_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates central difference operator</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymatgen.analysis.elasticity.elastic.generate_pseudo">
+<code class="descname">generate_pseudo</code><span class="sig-paren">(</span><em>strain_states</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/elastic.html#generate_pseudo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.elastic.generate_pseudo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the pseudoinverse for a given set of strains</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymatgen.analysis.elasticity.elastic.get_symbol_list">
+<code class="descname">get_symbol_list</code><span class="sig-paren">(</span><em>dim</em>, <em>rank</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/elastic.html#get_symbol_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.elastic.get_symbol_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pymatgen.analysis.elasticity.elastic.toec_fit">
+<code class="descname">toec_fit</code><span class="sig-paren">(</span><em>strains</em>, <em>stresses</em>, <em>eq_stress=None</em>, <em>zero_crit=1e-10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/elastic.html#toec_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.elastic.toec_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A third-order elastic constant fitting function based on
+central-difference derivatives with respect to distinct
+strain states.  The algorithm is summarized as follows:</p>
+<ol class="arabic simple">
+<li>Identify distinct strain states as sets of indices
+for which nonzero strain values exist, typically
+[(0), (1), (2), (3), (4), (5), (0, 1) etc.]</li>
+<li>For each strain state, find and sort strains and
+stresses by strain value.</li>
+<li>Find first and second derivatives of each stress
+with respect to scalar variable corresponding to
+the smallest perturbation in the strain.</li>
+<li>Use the pseudoinverse of a matrix-vector expression
+corresponding to the parameterized stress-strain
+relationship and multiply that matrix by the respective
+calculated first or second derivatives from the
+previous step.</li>
+<li>Place the calculated second and third-order elastic
+constants appropriately.</li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>strains</strong> (<em>nx3x3 array-like</em>) &#8211; Array of 3x3 strains
+to use in fitting of TOEC and SOEC</li>
+<li><strong>stresses</strong> (<em>nx3x3 array-like</em>) &#8211; Array of 3x3 stresses
+to use in fitting of TOEC and SOEC.  These
+should be PK2 stresses.</li>
+<li><strong>eq_stress</strong> (<em>3x3 array-like</em>) &#8211; stress corresponding to
+equilibrium strain (i. e. &#8220;0&#8221; strain state).
+If not specified, function will try to find
+the state in the list of provided stresses
+and strains.  If not found, defaults to 0.</li>
+<li><strong>zero_crit</strong> (<em>float</em>) &#8211; value for which strains below
+are ignored in identifying strain states.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
@@ -387,13 +451,13 @@ averages of bulk and shear moduli</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.wulff &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.analysis.wulff &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -85,10 +85,6 @@
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">ConvexHull</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">as</span> <span class="nn">mpl3</span>
 
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Zihan Xu, Richard Tran, Shyue Ping Ong&#39;</span>
@@ -364,6 +360,8 @@
 <span class="sd">            (color_list, color_proxy, color_proxy_on_wulff, miller_on_wulff,</span>
 <span class="sd">            e_surf_on_wulff_list)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="n">color_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">off_color</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hkl_list</span><span class="p">)</span>
         <span class="n">color_proxy_on_wulff</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">miller_on_wulff</span> <span class="o">=</span> <span class="p">[]</span>
@@ -429,7 +427,9 @@
 <span class="sd">        Return:</span>
 <span class="sd">            (matplotlib.pyplot)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
+        <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="kn">import</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">as</span> <span class="nn">mpl3</span>
         <span class="n">color_list</span><span class="p">,</span> <span class="n">color_proxy</span><span class="p">,</span> <span class="n">color_proxy_on_wulff</span><span class="p">,</span> \
             <span class="n">miller_on_wulff</span><span class="p">,</span> <span class="n">e_surf_on_wulff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_colors</span><span class="p">(</span>
                 <span class="n">color_set</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">off_color</span><span class="p">)</span>
@@ -650,14 +650,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

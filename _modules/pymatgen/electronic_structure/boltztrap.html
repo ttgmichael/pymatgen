@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.boltztrap &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.electronic_structure.boltztrap &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -91,7 +91,7 @@
 
 <span class="sd">Boltztrap has been developed by Georg Madsen.</span>
 
-<span class="sd">http://www.icams.de/content/departments/ams/madsen/boltztrap.html</span>
+<span class="sd">http://www.icams.de/content/research/software-development/boltztrap/</span>
 
 <span class="sd">You need version 1.2.3 or higher</span>
 
@@ -182,26 +182,29 @@
 <span class="sd">                gap in DFT. Default is 0.0 (no scissor)</span>
 <span class="sd">            kpt_line:</span>
 <span class="sd">                list of fractional coordinates of kpoints as arrays or list of</span>
-<span class="sd">                Kpoint objects for BANDS mode calculation (standard path of </span>
+<span class="sd">                Kpoint objects for BANDS mode calculation (standard path of</span>
 <span class="sd">                high symmetry k-points is automatically set as default)</span>
 <span class="sd">            tmax:</span>
 <span class="sd">                Maximum temperature (K) for calculation (default=1300)</span>
 <span class="sd">            tgrid:</span>
 <span class="sd">                Temperature interval for calculation (default=50)</span>
+<span class="sd">            symprec: 1e-3 is the default in pymatgen. If the kmesh has been</span>
+<span class="sd">                generated using a different symprec, it has to be specified</span>
+<span class="sd">                to avoid a &quot;factorization error&quot; in BoltzTraP calculation.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@requires</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="s1">&#39;x_trans&#39;</span><span class="p">),</span>
               <span class="s2">&quot;BoltztrapRunner requires the executables &#39;x_trans&#39; to be in &quot;</span>
-              <span class="s2">&quot;the path. Please download the Boltztrap at &quot;</span>
-              <span class="s2">&quot;http://www.icams.de/content/departments/ams/madsen/boltztrap&quot;</span>
-              <span class="s2">&quot;.html and follow the instructions in the README to compile &quot;</span>
+              <span class="s2">&quot;the path. Please download the Boltztrap at http://&quot;</span>
+              <span class="s2">&quot;www.icams.de/content/research/software-development/boltztrap/ &quot;</span>
+              <span class="s2">&quot;and follow the instructions in the README to compile &quot;</span>
               <span class="s2">&quot;Bolztrap accordingly. Then add x_trans to your path&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">dos_type</span><span class="o">=</span><span class="s2">&quot;HISTO&quot;</span><span class="p">,</span> <span class="n">energy_grid</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
                  <span class="n">lpfac</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">run_type</span><span class="o">=</span><span class="s2">&quot;BOLTZ&quot;</span><span class="p">,</span> <span class="n">band_nb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tauref</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tauexp</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                  <span class="n">tauen</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">soc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">energy_span_around_fermi</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
                  <span class="n">scissor</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">kpt_line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cond_band</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">tmax</span><span class="o">=</span><span class="mi">1300</span><span class="p">,</span> <span class="n">tgrid</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+                 <span class="n">tmax</span><span class="o">=</span><span class="mi">1300</span><span class="p">,</span> <span class="n">tgrid</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lpfac</span> <span class="o">=</span> <span class="n">lpfac</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span> <span class="o">=</span> <span class="n">bs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span> <span class="o">=</span> <span class="n">nelec</span>
@@ -222,12 +225,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">doping</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1e16</span><span class="p">,</span> <span class="mf">1e17</span><span class="p">,</span> <span class="mf">1e18</span><span class="p">,</span> <span class="mf">1e19</span><span class="p">,</span> <span class="mf">1e20</span><span class="p">,</span> <span class="mf">1e21</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">1</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mf">2.5</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mi">5</span><span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="mf">7.5</span><span class="o">*</span><span class="n">d</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">1</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="mf">7.5</span> <span class="o">*</span> <span class="n">d</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e22</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">energy_span_around_fermi</span> <span class="o">=</span> <span class="n">energy_span_around_fermi</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scissor</span> <span class="o">=</span> <span class="n">scissor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tmax</span> <span class="o">=</span> <span class="n">tmax</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tgrid</span> <span class="o">=</span> <span class="n">tgrid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_symprec</span> <span class="o">=</span> <span class="n">symprec</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;DOS&quot;</span><span class="p">,</span> <span class="s2">&quot;BANDS&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_auto_set_energy_range</span><span class="p">()</span>
 
@@ -246,9 +250,9 @@
             <span class="n">emaxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">([</span><span class="n">e_k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">e_k</span> <span class="ow">in</span>
                               <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">bands</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">]]))</span>
 
-        <span class="n">min_eigenval</span> <span class="o">=</span> <span class="n">Energy</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">emins</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span> <span class="s2">&quot;eV&quot;</span><span class="p">)</span><span class="o">.</span>\
+        <span class="n">min_eigenval</span> <span class="o">=</span> <span class="n">Energy</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">emins</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span> <span class="s2">&quot;eV&quot;</span><span class="p">)</span><span class="o">.</span> \
             <span class="n">to</span><span class="p">(</span><span class="s2">&quot;Ry&quot;</span><span class="p">)</span>
-        <span class="n">max_eigenval</span> <span class="o">=</span> <span class="n">Energy</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">emaxs</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span> <span class="s2">&quot;eV&quot;</span><span class="p">)</span><span class="o">.</span>\
+        <span class="n">max_eigenval</span> <span class="o">=</span> <span class="n">Energy</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">emaxs</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span> <span class="s2">&quot;eV&quot;</span><span class="p">)</span><span class="o">.</span> \
             <span class="n">to</span><span class="p">(</span><span class="s2">&quot;Ry&quot;</span><span class="p">)</span>
 
         <span class="c1"># set energy range to buffer around min/max EV</span>
@@ -326,11 +330,11 @@
                         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%18.8f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">eigs</span><span class="p">[</span><span class="n">j</span><span class="p">])))</span></div>
 
 <div class="viewcode-block" id="BoltztrapRunner.write_struct"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapRunner.write_struct">[docs]</a>    <span class="k">def</span> <span class="nf">write_struct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
-        <span class="n">sym</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+        <span class="n">sym</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_symprec</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span>
-                    <span class="n">sym</span><span class="o">.</span><span class="n">get_space_group_symbol</span><span class="p">()))</span>
+                                     <span class="n">sym</span><span class="o">.</span><span class="n">get_space_group_symbol</span><span class="p">()))</span>
 
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="p">[</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%.5f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">Length</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;ang&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;bohr&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">row</span><span class="p">])</span>
@@ -355,7 +359,7 @@
                     <span class="s2">&quot;&#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                     <span class="s2">&quot;20,&#39;boltztrap.struct&#39;,         &#39;old&#39;,    &#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="o">+</span> <span class="s2">&quot;10,&#39;boltztrap.energy&quot;</span> <span class="o">+</span> <span class="n">so</span> <span class="o">+</span> <span class="s2">&quot;&#39;,         &#39;old&#39;,    &quot;</span>
-                                                  <span class="s2">&quot;&#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                                    <span class="s2">&quot;&#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                     <span class="s2">&quot;48,&#39;boltztrap.engre&#39;,         &#39;unknown&#39;,    &quot;</span>
                     <span class="s2">&quot;&#39;unformatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                     <span class="s2">&quot;49,&#39;boltztrap.transdos&#39;,        &#39;unknown&#39;,    &quot;</span>
@@ -376,11 +380,12 @@
 <div class="viewcode-block" id="BoltztrapRunner.write_proj"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapRunner.write_proj">[docs]</a>    <span class="k">def</span> <span class="nf">write_proj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_file_proj</span><span class="p">,</span> <span class="n">output_file_def</span><span class="p">):</span>
         <span class="c1"># This function is useless in std version of BoltzTraP code</span>
         <span class="c1"># because x_trans script overwrite BoltzTraP.def</span>
-        <span class="k">for</span> <span class="n">oi</span><span class="p">,</span><span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Orbital</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">oi</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Orbital</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">site_nb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">sites</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">oi</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">projections</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span>
-                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_proj</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">site_nb</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">),</span>
-                                <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_proj</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">site_nb</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                            <span class="n">o</span><span class="p">),</span>
+                              <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">formula</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
                         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">kpoints</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
                         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">kpoints</span><span class="p">)):</span>
@@ -401,9 +406,9 @@
 
                             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%12.8f</span><span class="s2"> </span><span class="si">%12.8f</span><span class="s2"> </span><span class="si">%12.8f</span><span class="s2"> </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span>
                                     <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">kpoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">kpoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">kpoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
-                                        <span class="nb">len</span><span class="p">(</span><span class="n">tmp_proj</span><span class="p">)))</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">kpoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">kpoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                       <span class="nb">len</span><span class="p">(</span><span class="n">tmp_proj</span><span class="p">)))</span>
                             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tmp_proj</span><span class="p">)):</span>
                                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%18.8f</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp_proj</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_def</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -415,7 +420,7 @@
                     <span class="s2">&quot;&#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                     <span class="s2">&quot;20,&#39;boltztrap.struct&#39;,         &#39;old&#39;,    &#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="o">+</span> <span class="s2">&quot;10,&#39;boltztrap.energy&quot;</span> <span class="o">+</span> <span class="n">so</span> <span class="o">+</span> <span class="s2">&quot;&#39;,         &#39;old&#39;,    &quot;</span>
-                                                  <span class="s2">&quot;&#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                                    <span class="s2">&quot;&#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                     <span class="s2">&quot;48,&#39;boltztrap.engre&#39;,         &#39;unknown&#39;,    &quot;</span>
                     <span class="s2">&quot;&#39;unformatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
                     <span class="s2">&quot;49,&#39;boltztrap.transdos&#39;,        &#39;unknown&#39;,    &quot;</span>
@@ -433,7 +438,7 @@
                     <span class="s2">&quot;30,&#39;boltztrap_BZ.cube&#39;,           &#39;unknown&#39;,    &quot;</span>
                     <span class="s2">&quot;&#39;formatted&#39;,0</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">i</span> <span class="o">=</span> <span class="mi">1000</span>
-            <span class="k">for</span> <span class="n">oi</span><span class="p">,</span><span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Orbital</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">oi</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Orbital</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">site_nb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">sites</span><span class="p">)):</span>
                     <span class="k">if</span> <span class="n">oi</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">projections</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span>
                         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,</span><span class="se">\&#39;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;boltztrap.proj_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
@@ -470,8 +475,8 @@
                     <span class="s2">&quot;.15                       # (efcut) energy range of &quot;</span>
                     <span class="s2">&quot;chemical potential</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                    <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">                  # Tmax, temperature grid</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span>\
-                    <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgrid</span><span class="p">))</span>
+                    <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">                  # Tmax, temperature grid</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span> \
+                        <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tgrid</span><span class="p">))</span>
                 <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
                     <span class="s2">&quot;-1.  # energyrange of bands given DOS output sig_xxx and &quot;</span>
                     <span class="s2">&quot;dos_xxx (xxx is band number)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -594,7 +599,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;BANDS&quot;</span><span class="p">,</span> <span class="s2">&quot;DOS&quot;</span><span class="p">,</span> <span class="s2">&quot;FERMI&quot;</span><span class="p">):</span>
             <span class="n">convergence</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lpfac</span> <span class="o">&gt;</span> <span class="n">max_lpfac</span><span class="p">:</span>
-                <span class="n">max_lpfac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lpfac</span> 
+                <span class="n">max_lpfac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lpfac</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_type</span> <span class="o">==</span> <span class="s2">&quot;BANDS&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="o">.</span><span class="n">is_spin_polarized</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reminder: for run_type &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
@@ -648,8 +653,8 @@
 
                     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">():</span>
                         <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="s2">&quot;STOP error in factorization&quot;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="n">BoltztrapError</span><span class="p">(</span><span class="s2">&quot;STOP error in factorization&quot;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="s2">&quot;error in factorization&quot;</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span>
+                            <span class="k">raise</span> <span class="n">BoltztrapError</span><span class="p">(</span><span class="s2">&quot;error in factorization&quot;</span><span class="p">)</span>
 
                     <span class="n">warning</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
@@ -666,7 +671,7 @@
                             <span class="k">if</span> <span class="s2">&quot;Error - Fermi level was not found&quot;</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
                                 <span class="n">warning</span> <span class="o">=</span> <span class="n">l</span>
                                 <span class="k">break</span>
-                            
+
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">warning</span> <span class="ow">and</span> <span class="n">convergence</span><span class="p">:</span>
                         <span class="c1"># check convergence for warning</span>
                         <span class="n">analyzer</span> <span class="o">=</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span><span class="n">from_files</span><span class="p">(</span><span class="n">path_dir</span><span class="p">)</span>
@@ -738,7 +743,7 @@
                  <span class="n">kappa</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hall</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">mu_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seebeck_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cond_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">kappa_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">hall_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">intrans</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dos_partial</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">hall_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">intrans</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dos</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dos_partial</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">carrier_conc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">warning</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">bz_bands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bz_kpoints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fermi_surface_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -820,7 +825,7 @@
 <span class="sd">            bz_kpoints: k-point in reciprocal coordinates for interpolated</span>
 <span class="sd">                bands (run_type=BANDS)</span>
 <span class="sd">            fermi_surface_data: energy values in a 3D grid imported from the</span>
-<span class="sd">                output .cube file using ase.io.cube.read_cube</span>
+<span class="sd">                output .cube file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gap</span> <span class="o">=</span> <span class="n">gap</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mu_steps</span> <span class="o">=</span> <span class="n">mu_steps</span>
@@ -859,7 +864,8 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">kpt_line</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">kpath</span> <span class="o">=</span> <span class="n">HighSymmKpath</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
-                <span class="n">kpt_line</span> <span class="o">=</span> <span class="p">[</span><span class="n">Kpoint</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">reciprocal_lattice</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span>
+                <span class="n">kpt_line</span> <span class="o">=</span> <span class="p">[</span><span class="n">Kpoint</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">reciprocal_lattice</span><span class="p">)</span> <span class="k">for</span>
+                            <span class="n">k</span> <span class="ow">in</span>
                             <span class="n">kpath</span><span class="o">.</span><span class="n">get_kpoints</span><span class="p">(</span><span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
                 <span class="n">labels_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">l</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
                     <span class="o">*</span><span class="n">kpath</span><span class="o">.</span><span class="n">get_kpoints</span><span class="p">(</span><span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span> <span class="k">if</span> <span class="n">l</span><span class="p">}</span>
@@ -898,7 +904,8 @@
             <span class="c1"># bz_kpoints = bz_kpoints[idx_list[:,1]].tolist()</span>
 
             <span class="n">sbs</span> <span class="o">=</span> <span class="n">BandStructureSymmLine</span><span class="p">(</span><span class="n">kpt_line</span><span class="p">,</span> <span class="n">bands_dict</span><span class="p">,</span>
-                                        <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">reciprocal_lattice</span><span class="p">,</span> <span class="n">efermi</span><span class="p">,</span>
+                                        <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">reciprocal_lattice</span><span class="p">,</span>
+                                        <span class="n">efermi</span><span class="p">,</span>
                                         <span class="n">labels_dict</span><span class="o">=</span><span class="n">labels_dict</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">sbs</span>
@@ -909,7 +916,7 @@
                 <span class="s2">&quot;be run with run_type=BANDS&quot;</span><span class="p">)</span></div>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="BoltztrapAnalyzer.check_acc_bzt_bands"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.check_acc_bzt_bands">[docs]</a>    <span class="k">def</span> <span class="nf">check_acc_bzt_bands</span><span class="p">(</span><span class="n">sbs_bz</span><span class="p">,</span> <span class="n">sbs_ref</span><span class="p">,</span> <span class="n">warn_thr</span><span class="o">=</span><span class="p">(</span><span class="mf">0.03</span><span class="p">,</span><span class="mf">0.03</span><span class="p">)):</span>
+<div class="viewcode-block" id="BoltztrapAnalyzer.check_acc_bzt_bands"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.check_acc_bzt_bands">[docs]</a>    <span class="k">def</span> <span class="nf">check_acc_bzt_bands</span><span class="p">(</span><span class="n">sbs_bz</span><span class="p">,</span> <span class="n">sbs_ref</span><span class="p">,</span> <span class="n">warn_thr</span><span class="o">=</span><span class="p">(</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Compare sbs_bz BandStructureSymmLine calculated with boltztrap with</span>
 <span class="sd">            the sbs_ref BandStructureSymmLine as reference (from MP for</span>
@@ -925,9 +932,9 @@
 <span class="sd">            - &quot;avg_corr&quot;: average of correlation coefficient over the 8 bands</span>
 <span class="sd">            - &quot;avg_dist&quot;: average of energy distance over the 8 bands</span>
 <span class="sd">            - &quot;nb_list&quot;: list of indexes of the 8 compared bands</span>
-<span class="sd">            - &quot;acc_thr&quot;: list of two float corresponing to the two warning </span>
+<span class="sd">            - &quot;acc_thr&quot;: list of two float corresponing to the two warning</span>
 <span class="sd">                         thresholds in input</span>
-<span class="sd">            - &quot;acc_err&quot;: list of two bools: </span>
+<span class="sd">            - &quot;acc_err&quot;: list of two bools:</span>
 <span class="sd">                         True if the avg_corr &gt; warn_thr[0], and</span>
 <span class="sd">                         True if the avg_dist &gt; warn_thr[1]</span>
 <span class="sd">            See also compare_sym_bands function doc</span>
@@ -935,43 +942,48 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">sbs_ref</span><span class="o">.</span><span class="n">is_metal</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sbs_bz</span><span class="o">.</span><span class="n">is_metal</span><span class="p">():</span>
             <span class="n">vbm_idx</span> <span class="o">=</span> <span class="n">sbs_bz</span><span class="o">.</span><span class="n">get_vbm</span><span class="p">()[</span><span class="s1">&#39;band_index&#39;</span><span class="p">][</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">cbm_idx</span> <span class="o">=</span> <span class="n">sbs_bz</span><span class="o">.</span><span class="n">get_cbm</span><span class="p">()[</span><span class="s1">&#39;band_index&#39;</span><span class="p">][</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">nb_list</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">vbm_idx</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">cbm_idx</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">nb_list</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">vbm_idx</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">cbm_idx</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">bnd_around_efermi</span><span class="o">=</span><span class="p">[]</span>
-            <span class="n">delta</span><span class="o">=</span><span class="mi">0</span>
-            <span class="n">spin</span><span class="o">=</span><span class="n">sbs_bz</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">bnd_around_efermi</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">:</span>
-                <span class="n">delta</span><span class="o">+=</span><span class="mf">0.1</span>
-                <span class="n">bnd_around_efermi</span><span class="o">=</span><span class="p">[]</span>
+            <span class="n">bnd_around_efermi</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">spin</span> <span class="o">=</span> <span class="n">sbs_bz</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">bnd_around_efermi</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span> <span class="ow">and</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">delta</span> <span class="o">+=</span> <span class="mf">0.1</span>
+                <span class="n">bnd_around_efermi</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">nb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sbs_bz</span><span class="o">.</span><span class="n">bands</span><span class="p">[</span><span class="n">spin</span><span class="p">])):</span>
                     <span class="k">for</span> <span class="n">kp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sbs_bz</span><span class="o">.</span><span class="n">bands</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">nb</span><span class="p">])):</span>
-                        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sbs_bz</span><span class="o">.</span><span class="n">bands</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">nb</span><span class="p">][</span><span class="n">kp</span><span class="p">]</span><span class="o">-</span><span class="n">sbs_bz</span><span class="o">.</span><span class="n">efermi</span><span class="p">)</span><span class="o">&lt;</span><span class="n">delta</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sbs_bz</span><span class="o">.</span><span class="n">bands</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">nb</span><span class="p">][</span>
+                                   <span class="n">kp</span><span class="p">]</span> <span class="o">-</span> <span class="n">sbs_bz</span><span class="o">.</span><span class="n">efermi</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">delta</span><span class="p">:</span>
                             <span class="n">bnd_around_efermi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nb</span><span class="p">)</span>
                             <span class="k">break</span>
-            <span class="n">nb_list</span> <span class="o">=</span> <span class="n">bnd_around_efermi</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span>
-        
-        <span class="c1">#print(nb_list)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bnd_around_efermi</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning! check performed on &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">bnd_around_efermi</span><span class="p">)))</span>
+                <span class="n">nb_list</span> <span class="o">=</span> <span class="n">bnd_around_efermi</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nb_list</span> <span class="o">=</span> <span class="n">bnd_around_efermi</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span>
+
+        <span class="c1"># print(nb_list)</span>
         <span class="n">bcheck</span> <span class="o">=</span> <span class="n">compare_sym_bands</span><span class="p">(</span><span class="n">sbs_bz</span><span class="p">,</span> <span class="n">sbs_ref</span><span class="p">,</span> <span class="n">nb_list</span><span class="p">)</span>
-        <span class="c1">#print(bcheck)</span>
-        <span class="n">acc_err</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">]</span>
-        <span class="n">avg_corr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Corr&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bcheck</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()])</span><span class="o">/</span><span class="mi">8</span>
-        <span class="n">avg_distance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Dist&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bcheck</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()])</span><span class="o">/</span><span class="mi">8</span>
-        
+        <span class="c1"># print(bcheck)</span>
+        <span class="n">acc_err</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+        <span class="n">avg_corr</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Corr&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bcheck</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()])</span> <span class="o">/</span> <span class="mi">8</span>
+        <span class="n">avg_distance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Dist&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bcheck</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()])</span> <span class="o">/</span> <span class="mi">8</span>
+
         <span class="k">if</span> <span class="n">avg_corr</span> <span class="o">&gt;</span> <span class="n">warn_thr</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">acc_err</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">avg_distance</span> <span class="o">&gt;</span> <span class="n">warn_thr</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">acc_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        
+
         <span class="n">bcheck</span><span class="p">[</span><span class="s1">&#39;avg_corr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg_corr</span>
         <span class="n">bcheck</span><span class="p">[</span><span class="s1">&#39;avg_distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg_distance</span>
         <span class="n">bcheck</span><span class="p">[</span><span class="s1">&#39;acc_err&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc_err</span>
         <span class="n">bcheck</span><span class="p">[</span><span class="s1">&#39;acc_thr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">warn_thr</span>
         <span class="n">bcheck</span><span class="p">[</span><span class="s1">&#39;nb_list&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nb_list</span>
-        
+
         <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="n">acc_err</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning! some bands around gap are not accurate&quot;</span><span class="p">)</span>
-            
-        <span class="k">return</span> <span class="n">bcheck</span></div>
 
+        <span class="k">return</span> <span class="n">bcheck</span></div>
 
 <div class="viewcode-block" id="BoltztrapAnalyzer.get_seebeck"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_seebeck">[docs]</a>    <span class="k">def</span> <span class="nf">get_seebeck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1083,10 +1095,10 @@
         <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">result_doping</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">doping_levels</span><span class="p">:</span>
-            <span class="n">result_doping</span> <span class="o">=</span> <span class="p">{</span><span class="n">doping</span><span class="p">:</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> 
-                                      <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]}</span> <span class="k">for</span> 
+            <span class="n">result_doping</span> <span class="o">=</span> <span class="p">{</span><span class="n">doping</span><span class="p">:</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]}</span> <span class="k">for</span>
                              <span class="n">doping</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">}</span>
-            
+
             <span class="k">for</span> <span class="n">doping</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]:</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">doping</span><span class="p">])):</span>
@@ -1149,18 +1161,22 @@
         <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">result_doping</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">doping_levels</span><span class="p">:</span>
-            <span class="n">result_doping</span> <span class="o">=</span> <span class="p">{</span><span class="n">doping</span><span class="p">:</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> 
-                                      <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]}</span> <span class="k">for</span> 
+            <span class="n">result_doping</span> <span class="o">=</span> <span class="p">{</span><span class="n">doping</span><span class="p">:</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]}</span> <span class="k">for</span>
                              <span class="n">doping</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">}</span>
             <span class="k">for</span> <span class="n">doping</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]:</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">doping</span><span class="p">])):</span>
                         <span class="k">if</span> <span class="n">k_el</span><span class="p">:</span>
                             <span class="n">pf_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cond_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
-                                        <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
-                                            <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+                                               <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span>
+                                                       <span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span>
+                                                       <span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
                             <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">_kappa_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pf_tensor</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_kappa_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">][</span>
+                                    <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pf_tensor</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">_kappa_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
@@ -1170,8 +1186,8 @@
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_steps</span><span class="p">)):</span>
                     <span class="k">if</span> <span class="n">k_el</span><span class="p">:</span>
                         <span class="n">pf_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cond</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
-                                       <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seebeck</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
-                                              <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+                                           <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_seebeck</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+                                                  <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
                         <span class="n">result</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_kappa</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pf_tensor</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">result</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_kappa</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
@@ -1247,14 +1263,14 @@
                     <span class="n">thermal_conduct</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_kappa</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
                                        <span class="o">-</span> <span class="n">pf_tensor</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">relaxation_time</span>
                     <span class="n">result</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pf_tensor</span> <span class="o">*</span> <span class="n">relaxation_time</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span>
-                                               <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span>
-                                                   <span class="n">thermal_conduct</span> <span class="o">+</span> <span class="n">kl</span> <span class="o">*</span>
-                                                   <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))))</span>
+                                            <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span>
+                                                <span class="n">thermal_conduct</span> <span class="o">+</span> <span class="n">kl</span> <span class="o">*</span>
+                                                <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))))</span>
 
         <span class="k">return</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span><span class="n">_format_to_output</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result_doping</span><span class="p">,</span>
                                                    <span class="n">output</span><span class="p">,</span> <span class="n">doping_levels</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BoltztrapAnalyzer.get_average_eff_mass"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_average_eff_mass">[docs]</a>    <span class="k">def</span> <span class="nf">get_average_eff_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="BoltztrapAnalyzer.get_average_eff_mass"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_average_eff_mass">[docs]</a>    <span class="k">def</span> <span class="nf">get_average_eff_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gives the average effective mass tensor. We call it average because</span>
 <span class="sd">        it takes into account all the bands</span>
@@ -1291,45 +1307,44 @@
 <span class="sd">        Args:</span>
 <span class="sd">            output (string): &#39;eigs&#39; for eigenvalues, &#39;tensor&#39; for the full</span>
 <span class="sd">            tensor and &#39;average&#39; for an average (trace/3)</span>
-
+<span class="sd">            doping_levels (boolean): True for the results to be given at</span>
+<span class="sd">            different doping levels, False for results</span>
+<span class="sd">            at different electron chemical potentials</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            a dictionary {&#39;p&#39;:{temp:[]},&#39;n&#39;:{temp:[]}} with an array of</span>
-<span class="sd">            effective mass tensor, eigenvalues of average</span>
+<span class="sd">            If doping_levels=True,a dictionary {&#39;p&#39;:{temp:[]},&#39;n&#39;:{temp:[]}}</span>
+<span class="sd">            with an array of effective mass tensor, eigenvalues of average</span>
 <span class="sd">            value (depending on output) for each temperature and for each</span>
 <span class="sd">            doping level.</span>
 <span class="sd">            The &#39;p&#39; links to hole effective mass tensor and &#39;n&#39; to electron</span>
 <span class="sd">            effective mass tensor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">result_doping</span> <span class="o">=</span> <span class="p">{</span><span class="n">doping</span><span class="p">:</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cond_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]}</span> <span class="k">for</span>
-                         <span class="n">doping</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">}</span>
-        <span class="k">for</span> <span class="n">doping</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]:</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">doping</span><span class="p">])):</span>
-                    <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;tensor&#39;</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">result_doping</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">conc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_carrier_concentration</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">doping_levels</span><span class="p">:</span>
+            <span class="n">result_doping</span> <span class="o">=</span> <span class="p">{</span><span class="n">doping</span><span class="p">:</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cond_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]}</span>
+                             <span class="k">for</span>
+                             <span class="n">doping</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">doping</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">]:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">doping</span><span class="p">])):</span>
                         <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">temp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span>
-                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cond_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span> \
-                                                           <span class="o">*</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cond_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span> <span class="o">*</span> \
                                                            <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span>
-                                                               <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">*</span>
-                                                           <span class="n">e</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span>
-                                                           <span class="n">m_e</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="n">output</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;eig&#39;</span><span class="p">,</span> <span class="s1">&#39;eigs&#39;</span><span class="p">]:</span>
-                        <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">temp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                            <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span>
-                                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cond_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span> <span class="o">*</span>
-                                                  <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span>
-                                                      <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">e</span> <span class="o">**</span> <span class="mi">2</span> \
-                                                  <span class="o">/</span> <span class="n">m_e</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">full_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span>
-                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cond_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span> \
-                                      <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span>
-                                          <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">e</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">m_e</span>
-                        <span class="n">result_doping</span><span class="p">[</span><span class="n">doping</span><span class="p">][</span><span class="n">temp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                            <span class="p">(</span><span class="n">full_tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">full_tensor</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
-                             <span class="n">full_tensor</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result_doping</span></div>
+                                                               <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">e</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">m_e</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seebeck</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mu_steps</span><span class="p">)):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">cond_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cond</span><span class="p">[</span><span class="n">temp</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+                    <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+                        <span class="k">pass</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">temp</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cond_inv</span> <span class="o">*</span> \
+                                        <span class="n">conc</span><span class="p">[</span><span class="n">temp</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">e</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">m_e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span><span class="n">_format_to_output</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result_doping</span><span class="p">,</span>
+                                                   <span class="n">output</span><span class="p">,</span> <span class="n">doping_levels</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BoltztrapAnalyzer.get_extreme"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_extreme">[docs]</a>    <span class="k">def</span> <span class="nf">get_extreme</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_prop</span><span class="p">,</span> <span class="n">maximize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_temp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">max_temp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_doping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1370,10 +1385,10 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid input to is_isotropic!&quot;</span><span class="p">)</span>
 
             <span class="n">st</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">all</span><span class="p">([</span><span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span> <span class="ow">and</span> \
-                   <span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">isotropy_tolerance</span><span class="p">)</span> <span class="ow">and</span> \
-                   <span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">isotropy_tolerance</span><span class="p">)</span> <span class="ow">and</span> \
-                   <span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">isotropy_tolerance</span><span class="p">))</span>
+            <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">all</span><span class="p">([</span><span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span> <span class="ow">and</span> \
+                        <span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">isotropy_tolerance</span><span class="p">)</span> <span class="ow">and</span> \
+                        <span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">/</span> <span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">isotropy_tolerance</span><span class="p">)</span> <span class="ow">and</span> \
+                        <span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">isotropy_tolerance</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">target_prop</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;seebeck&quot;</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_seebeck</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s2">&quot;eigs&quot;</span><span class="p">,</span> <span class="n">doping_levels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1417,7 +1432,7 @@
                             <span class="k">if</span> <span class="n">absval</span><span class="p">:</span>
                                 <span class="n">evs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">evs</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">use_average</span><span class="p">:</span>
-                                <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">evs</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">evs</span><span class="p">)</span>
+                                <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">evs</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">evs</span><span class="p">)</span>
                             <span class="k">else</span><span class="p">:</span>
                                 <span class="n">val</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">evs</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">x_val</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">x_val</span> <span class="ow">and</span> <span class="n">maximize</span><span class="p">)</span> \
@@ -1501,7 +1516,7 @@
 <span class="sd">            Returns:</span>
 <span class="sd">                a CompleteDos object</span>
 <span class="sd">            Example of use in case of spin polarized case:</span>
-<span class="sd">            </span>
+
 <span class="sd">                BoltztrapRunner(bs=bs,nelec=10,run_type=&quot;DOS&quot;,spin=1).run(path_dir=&#39;dos_up/&#39;)</span>
 <span class="sd">                an_up=BoltztrapAnalyzer.from_files(&quot;dos_up/boltztrap/&quot;,dos_spin=1)</span>
 
@@ -1602,7 +1617,7 @@
         <span class="n">doping_levels</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="s2">&quot;boltztrap.outputtrans&quot;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> \
-                    <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
                 <span class="k">if</span> <span class="s2">&quot;WARNING&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
                     <span class="n">warning</span> <span class="o">=</span> <span class="n">line</span>
@@ -1616,7 +1631,6 @@
                     <span class="n">doping_levels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">6</span><span class="p">]))</span>
 
         <span class="k">return</span> <span class="n">run_type</span><span class="p">,</span> <span class="n">warning</span><span class="p">,</span> <span class="n">efermi</span><span class="p">,</span> <span class="n">gap</span><span class="p">,</span> <span class="n">doping_levels</span></div>
-
 
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="BoltztrapAnalyzer.parse_transdos"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.parse_transdos">[docs]</a>    <span class="k">def</span> <span class="nf">parse_transdos</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="n">efermi</span><span class="p">,</span> <span class="n">dos_spin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">trim_dos</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1649,6 +1663,8 @@
                          <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])])</span>
                     <span class="n">total_elec</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
 
+        <span class="n">lw_l</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">hg_l</span> <span class="o">=</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">data_dos</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">trim_dos</span><span class="p">:</span>
             <span class="c1"># Francesco knows what this does</span>
             <span class="c1"># It has something to do with a trick of adding fake energies</span>
@@ -1708,8 +1724,10 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="s2">&quot;boltztrap.intrans&quot;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
                 <span class="k">if</span> <span class="s2">&quot;iskip&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-                    <span class="n">intrans</span><span class="p">[</span><span class="s2">&quot;scissor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Energy</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]),</span> <span class="s2">&quot;Ry&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">)</span>
-                    <span class="k">break</span>
+                    <span class="n">intrans</span><span class="p">[</span><span class="s2">&quot;scissor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Energy</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]),</span>
+                                                <span class="s2">&quot;Ry&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;HISTO&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s2">&quot;TETRA&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="n">intrans</span><span class="p">[</span><span class="s2">&quot;dos_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">intrans</span></div>
 
     <span class="nd">@staticmethod</span>
@@ -1886,9 +1904,9 @@
             <span class="n">dos</span><span class="p">,</span> <span class="n">pdos</span> <span class="o">=</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span><span class="n">parse_transdos</span><span class="p">(</span>
                 <span class="n">path_dir</span><span class="p">,</span> <span class="n">efermi</span><span class="p">,</span> <span class="n">dos_spin</span><span class="o">=</span><span class="n">dos_spin</span><span class="p">,</span> <span class="n">trim_dos</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-            <span class="n">mu_steps</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">seebeck</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">hall</span><span class="p">,</span> <span class="n">pn_doping_levels</span><span class="p">,</span> <span class="n">mu_doping</span><span class="p">,</span>\
-            <span class="n">seebeck_doping</span><span class="p">,</span> <span class="n">cond_doping</span><span class="p">,</span> <span class="n">kappa_doping</span><span class="p">,</span> <span class="n">hall_doping</span><span class="p">,</span>\
-            <span class="n">carrier_conc</span> <span class="o">=</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span>\
+            <span class="n">mu_steps</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">seebeck</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">hall</span><span class="p">,</span> <span class="n">pn_doping_levels</span><span class="p">,</span> <span class="n">mu_doping</span><span class="p">,</span> \
+            <span class="n">seebeck_doping</span><span class="p">,</span> <span class="n">cond_doping</span><span class="p">,</span> <span class="n">kappa_doping</span><span class="p">,</span> <span class="n">hall_doping</span><span class="p">,</span> \
+            <span class="n">carrier_conc</span> <span class="o">=</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span> \
                 <span class="n">parse_cond_and_hall</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="n">doping_levels</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">BoltztrapAnalyzer</span><span class="p">(</span>
@@ -1897,8 +1915,9 @@
                 <span class="n">hall_doping</span><span class="p">,</span> <span class="n">intrans</span><span class="p">,</span> <span class="n">dos</span><span class="p">,</span> <span class="n">pdos</span><span class="p">,</span> <span class="n">carrier_conc</span><span class="p">,</span> <span class="n">vol</span><span class="p">,</span> <span class="n">warning</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">run_type</span> <span class="o">==</span> <span class="s2">&quot;DOS&quot;</span><span class="p">:</span>
+            <span class="n">trim</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">intrans</span><span class="p">[</span><span class="s2">&quot;dos_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;HISTO&quot;</span> <span class="k">else</span> <span class="kc">False</span>
             <span class="n">dos</span><span class="p">,</span> <span class="n">pdos</span> <span class="o">=</span> <span class="n">BoltztrapAnalyzer</span><span class="o">.</span><span class="n">parse_transdos</span><span class="p">(</span>
-                <span class="n">path_dir</span><span class="p">,</span> <span class="n">efermi</span><span class="p">,</span> <span class="n">dos_spin</span><span class="o">=</span><span class="n">dos_spin</span><span class="p">,</span> <span class="n">trim_dos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">path_dir</span><span class="p">,</span> <span class="n">efermi</span><span class="p">,</span> <span class="n">dos_spin</span><span class="o">=</span><span class="n">dos_spin</span><span class="p">,</span> <span class="n">trim_dos</span><span class="o">=</span><span class="n">trim</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">BoltztrapAnalyzer</span><span class="p">(</span><span class="n">gap</span><span class="o">=</span><span class="n">gap</span><span class="p">,</span> <span class="n">dos</span><span class="o">=</span><span class="n">dos</span><span class="p">,</span> <span class="n">dos_partial</span><span class="o">=</span><span class="n">pdos</span><span class="p">,</span>
                                      <span class="n">warning</span><span class="o">=</span><span class="n">warning</span><span class="p">,</span> <span class="n">vol</span><span class="o">=</span><span class="n">vol</span><span class="p">)</span>
@@ -1912,21 +1931,17 @@
                                      <span class="n">warning</span><span class="o">=</span><span class="n">warning</span><span class="p">,</span> <span class="n">vol</span><span class="o">=</span><span class="n">vol</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">run_type</span> <span class="o">==</span> <span class="s2">&quot;FERMI&quot;</span><span class="p">:</span>
-            <span class="c1"># TODO: There is no way to get this shitty ASE crap working.</span>
-            <span class="c1"># If you want to read CUBE files, write a proper IO class in</span>
-            <span class="c1"># pymatgen. I refuse to let pymatgen be bogged down by ASE crap.</span>
-
             <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            from ase.io.cube import read_cube</span>
-<span class="sd">            if os.path.exists(os.path.join(path_dir, &#39;boltztrap_BZ.cube&#39;)):</span>
-<span class="sd">                 fs_data = read_cube(open(os.path.join(path_dir, &#39;boltztrap_BZ.cube&#39;), &quot;rt&quot;),  read_data=True)</span>
-<span class="sd">            if os.path.exists(os.path.join(path_dir, &#39;fort.30&#39;)):</span>
-<span class="sd">                 fs_data = read_cube(open(os.path.join(path_dir, &#39;fort.30&#39;), &quot;rt&quot;), read_data=True)</span>
-<span class="sd">            else:</span>
-<span class="sd">                 raise BoltztrapError(&quot;No data file found for fermi surface&quot;)</span>
-<span class="sd">            return BoltztrapAnalyzer(fermi_surface_data=fermi_surface_data)</span>
 <span class="sd">            &quot;&quot;&quot;</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;FERMI mode parsing is currently unavailable!&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="s1">&#39;boltztrap_BZ.cube&#39;</span><span class="p">)):</span>
+                <span class="n">fs_data</span> <span class="o">=</span> <span class="n">read_cube_file</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="s1">&#39;boltztrap_BZ.cube&#39;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="s1">&#39;fort.30&#39;</span><span class="p">)):</span>
+                <span class="n">fs_data</span> <span class="o">=</span> <span class="n">read_cube_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_dir</span><span class="p">,</span> <span class="s1">&#39;fort.30&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">BoltztrapError</span><span class="p">(</span><span class="s2">&quot;No data file found for fermi surface&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">BoltztrapAnalyzer</span><span class="p">(</span><span class="n">fermi_surface_data</span><span class="o">=</span><span class="n">fs_data</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Run type: </span><span class="si">{}</span><span class="s2"> not recognized!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">run_type</span><span class="p">))</span></div>
@@ -1969,7 +1984,7 @@
         <span class="n">mu_steps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mu_steps&#39;</span><span class="p">]]</span> <span class="k">if</span> \
             <span class="s1">&#39;mu_steps&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="n">cond</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
-             <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond&#39;</span><span class="p">]}</span> <span class="k">if</span> <span class="s1">&#39;cond&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond&#39;</span><span class="p">]}</span> <span class="k">if</span> <span class="s1">&#39;cond&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="n">seebeck</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
                    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck&#39;</span><span class="p">]}</span> <span class="k">if</span> <span class="s1">&#39;seebeck&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="n">kappa</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kappa&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
@@ -1983,38 +1998,42 @@
         <span class="n">mu_doping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span>
             <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mu_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>
                            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mu_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]},</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span>
-            <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mu_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
-             <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mu_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s1">&#39;mu_doping&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
+                         <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mu_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
+                          <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mu_doping&#39;</span><span class="p">][</span>
+                              <span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s1">&#39;mu_doping&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="n">seebeck_doping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span>
             <span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
                                 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]},</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span>
-            <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
-                      <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>
-             <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s1">&#39;seebeck_doping&#39;</span> <span class="ow">in</span> <span class="n">data</span> \
+                              <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                                        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>
+                               <span class="n">data</span><span class="p">[</span><span class="s1">&#39;seebeck_doping&#39;</span><span class="p">][</span>
+                                   <span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s1">&#39;seebeck_doping&#39;</span> <span class="ow">in</span> <span class="n">data</span> \
             <span class="k">else</span> <span class="kc">None</span>
 
         <span class="n">cond_doping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
                                       <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
                              <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]},</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span>
-            <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
-                      <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span>
-             <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s1">&#39;cond_doping&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
+                           <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                                     <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span>
+                            <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cond_doping&#39;</span><span class="p">][</span>
+                                <span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s1">&#39;cond_doping&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="n">kappa_doping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
                                        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kappa_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
                               <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kappa_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]},</span>
                         <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
                                        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kappa_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span>
-                              <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kappa_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">]}}</span>\
+                              <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kappa_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">]}}</span> \
             <span class="k">if</span> <span class="s1">&#39;kappa_doping&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="n">hall_doping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_hall</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
                                       <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hall_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>
                              <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hall_doping&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]},</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span>
-            <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_hall</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
-                      <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hall_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>
-             <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hall_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s2">&quot;hall_doping&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
+                           <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="p">[</span><span class="n">_make_float_hall</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                                     <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hall_doping&#39;</span><span class="p">][</span><span class="s1">&#39;n&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>
+                            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;hall_doping&#39;</span><span class="p">][</span>
+                                <span class="s1">&#39;n&#39;</span><span class="p">]}}</span> <span class="k">if</span> <span class="s2">&quot;hall_doping&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="n">dos</span> <span class="o">=</span> <span class="n">Dos</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dos&#39;</span><span class="p">])</span> <span class="k">if</span> <span class="s1">&#39;dos&#39;</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="n">dos_partial</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dos_partial&#39;</span><span class="p">)</span>
@@ -2028,11 +2047,43 @@
                                  <span class="n">dos_partial</span><span class="p">,</span> <span class="n">carrier_conc</span><span class="p">,</span> <span class="n">vol</span><span class="p">,</span> <span class="n">warning</span><span class="p">)</span></div></div>
 
 
+<div class="viewcode-block" id="read_cube_file"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.read_cube_file">[docs]</a><span class="k">def</span> <span class="nf">read_cube_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">natoms</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">count_line</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">count_line</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s2">&quot;CUBE&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CUBE file format not recognized&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">count_line</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">natoms</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">count_line</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">count_line</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">count_line</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">n3</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">count_line</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="n">count_line</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">energy_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">natoms</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span>
+    <span class="n">energy_data</span> <span class="o">/=</span> <span class="n">Energy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;eV&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;Ry&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">energy_data</span></div>
+
+
 <div class="viewcode-block" id="compare_sym_bands"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.boltztrap.html#pymatgen.electronic_structure.boltztrap.compare_sym_bands">[docs]</a><span class="k">def</span> <span class="nf">compare_sym_bands</span><span class="p">(</span><span class="n">bands_obj</span><span class="p">,</span> <span class="n">bands_ref_obj</span><span class="p">,</span> <span class="n">nb</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the mean of correlation between bzt and vasp bandstructure on</span>
-<span class="sd">        sym line, for all bands and locally (for each branches) the difference</span>
-<span class="sd">        squared (%) if nb is specified.</span>
+<span class="sd">    Compute the mean of correlation between bzt and vasp bandstructure on</span>
+<span class="sd">    sym line, for all bands and locally (for each branches) the difference</span>
+<span class="sd">    squared (%) if nb is specified.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">nkpt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bands_obj</span><span class="o">.</span><span class="n">kpoints</span><span class="p">)</span>
@@ -2065,13 +2116,13 @@
          <span class="nb">range</span><span class="p">(</span><span class="n">nbands</span><span class="p">)])</span>
 
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">nb</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> <span class="n">nb</span> <span class="o">=</span> <span class="p">[</span><span class="n">nb</span><span class="p">]</span>
-    
-    <span class="n">bcheck</span><span class="o">=</span><span class="p">{}</span>
-    
+
+    <span class="n">bcheck</span> <span class="o">=</span> <span class="p">{}</span>
+
     <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">nb</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">nbands</span><span class="p">:</span>
         <span class="n">branches</span> <span class="o">=</span> <span class="p">[[</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;start_index&#39;</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;end_index&#39;</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span>
                     <span class="n">bands_ref_obj</span><span class="o">.</span><span class="n">branches</span><span class="p">]</span>
-        
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">bands_obj</span><span class="o">.</span><span class="n">is_metal</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">bands_ref_obj</span><span class="o">.</span><span class="n">is_metal</span><span class="p">():</span>
             <span class="n">zero_ref</span> <span class="o">=</span> <span class="n">bands_ref_obj</span><span class="o">.</span><span class="n">get_vbm</span><span class="p">()[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span>
             <span class="n">zero</span> <span class="o">=</span> <span class="n">bands_obj</span><span class="o">.</span><span class="n">get_vbm</span><span class="p">()[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span>
@@ -2079,22 +2130,24 @@
                 <span class="n">vbm</span> <span class="o">=</span> <span class="n">bands_ref_obj</span><span class="o">.</span><span class="n">get_vbm</span><span class="p">()[</span><span class="s1">&#39;band_index&#39;</span><span class="p">][</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">zero</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">arr_bands</span><span class="p">[</span><span class="n">vbm</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">zero_ref</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">#bands_ref_obj.efermi</span>
-            <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">#bands_obj.efermi</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span><span class="n">zero_ref</span><span class="p">)</span>
-            
+            <span class="n">zero_ref</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># bands_ref_obj.efermi</span>
+            <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># bands_obj.efermi</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="n">zero_ref</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">nbi</span> <span class="ow">in</span> <span class="n">nb</span><span class="p">:</span>
-            <span class="n">bcheck</span><span class="p">[</span><span class="n">nbi</span><span class="p">]</span><span class="o">=</span><span class="p">{}</span>
-            
-            <span class="n">bcheck</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="s1">&#39;Dist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">arr_bands</span><span class="p">[</span><span class="n">nbi</span><span class="p">]</span> <span class="o">-</span> <span class="n">zero</span> <span class="o">-</span> <span class="n">arr_bands_ref</span><span class="p">[</span><span class="n">nbi</span><span class="p">]</span> <span class="o">+</span> <span class="n">zero_ref</span><span class="p">))</span>
+            <span class="n">bcheck</span><span class="p">[</span><span class="n">nbi</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="n">bcheck</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="s1">&#39;Dist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">arr_bands</span><span class="p">[</span><span class="n">nbi</span><span class="p">]</span> <span class="o">-</span> <span class="n">zero</span>
+                                              <span class="o">-</span> <span class="n">arr_bands_ref</span><span class="p">[</span><span class="n">nbi</span><span class="p">]</span> <span class="o">+</span> <span class="n">zero_ref</span><span class="p">))</span>
             <span class="n">bcheck</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="s1">&#39;Corr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="n">nbi</span><span class="p">]</span>
-            
+
             <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">branches</span><span class="p">:</span>
                 <span class="c1"># werr.append((sum((arr_bands_corr[nb][start:end+1] -</span>
                 <span class="c1"># arr_bands_ref_corr[nb][start:end+1])**2)/(end+1-start)*100,name))</span>
-                <span class="n">bcheck</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">arr_bands</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">zero</span> <span class="o">-</span>
-                                        <span class="n">arr_bands_ref</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">zero_ref</span><span class="p">))</span>
-    <span class="c1">#                                abs(arr_bands_ref[nb][start:end + 1])) / (end + 1 - start) * 100</span>
+                <span class="n">bcheck</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">arr_bands</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                                                <span class="o">-</span> <span class="n">zero</span>
+                                                <span class="o">-</span> <span class="n">arr_bands_ref</span><span class="p">[</span><span class="n">nbi</span><span class="p">][</span>
+                                                  <span class="n">start</span><span class="p">:</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">zero_ref</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">bcheck</span> <span class="o">=</span> <span class="s2">&quot;No nb given&quot;</span>
 
@@ -2129,14 +2182,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

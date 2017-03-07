@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.diffusion_analyzer module &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.analysis.diffusion_analyzer module &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -59,7 +59,7 @@
 <span id="pymatgen-analysis-diffusion-analyzer-module"></span><h1>pymatgen.analysis.diffusion_analyzer module<a class="headerlink" href="#module-pymatgen.analysis.diffusion_analyzer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer">
-<em class="property">class </em><code class="descname">DiffusionAnalyzer</code><span class="sig-paren">(</span><em>structure</em>, <em>displacements</em>, <em>specie</em>, <em>temperature</em>, <em>time_step</em>, <em>step_skip</em>, <em>smoothed='max'</em>, <em>min_obs=30</em>, <em>avg_nsteps=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">DiffusionAnalyzer</code><span class="sig-paren">(</span><em>structure</em>, <em>displacements</em>, <em>specie</em>, <em>temperature</em>, <em>time_step</em>, <em>step_skip</em>, <em>smoothed='max'</em>, <em>min_obs=30</em>, <em>avg_nsteps=1000</em>, <em>lattices=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">monty.json.MSONable</span></code></p>
 <p>Class for performing diffusion analysis.</p>
 <p>This constructor is meant to be used with pre-processed data.
@@ -114,6 +114,8 @@ Only applies in smoothed=&#8221;max&#8221;.</li>
 <li><strong>avg_nsteps</strong> (<em>int</em>) &#8211; Used with smoothed=&#8221;constant&#8221;. Determines the
 number of time steps to average over to get the msd for each
 timestep. Default of 1000 is usually pretty good.</li>
+<li><strong>lattices</strong> (<em>array</em>) &#8211; Numpy array of lattice matrix of every step
+in NPT-AIMD. For NVT-AIMD, lattices has only one item.</li>
 </ul>
 </td>
 </tr>
@@ -206,7 +208,7 @@ smoothed=False.</li>
 <li><strong>initial_structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; Like initial_disp, this is used
 for iterative computations of estimates of the diffusivity. You
 typically need to supply both variables. This stipulates the
-initial strcture from which the current set of displacements
+initial structure from which the current set of displacements
 are computed.</li>
 </ul>
 </td>
@@ -268,7 +270,7 @@ smoothed=False.</li>
 <li><strong>initial_structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; Like initial_disp, this is used
 for iterative computations of estimates of the diffusivity. You
 typically need to supply both variables. This stipulates the
-initial strcture from which the current set of displacements
+initial structure from which the current set of displacements
 are computed.</li>
 </ul>
 </td>
@@ -330,7 +332,7 @@ smoothed=False.</li>
 <li><strong>initial_structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; Like initial_disp, this is used
 for iterative computations of estimates of the diffusivity. You
 typically need to supply both variables. This stipulates the
-initial strcture from which the current set of displacements
+initial stricture from which the current set of displacements
 are computed.</li>
 </ul>
 </td>
@@ -369,6 +371,8 @@ but doesn&#8217;t constitute melting).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>plt</strong> (<em>matplotlib.pyplot</em>) &#8211; If plt is supplied, changes will be made to an
+existing plot. Otherwise, a new plot will be created.</li>
 <li><strong>granularity</strong> (<em>int</em>) &#8211; Number of structures to match</li>
 <li><strong>matching_s</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; Optionally match to a disordered structure
 instead of the first structure in the analyzer. Required when
@@ -378,6 +382,8 @@ a secondary mobile ion is present.</li>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Notes</p>
+<p>The method doesn&#8217;t apply to NPT-AIMD simulation analysis.</p>
 </dd></dl>
 
 <dl class="method">
@@ -597,13 +603,13 @@ from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

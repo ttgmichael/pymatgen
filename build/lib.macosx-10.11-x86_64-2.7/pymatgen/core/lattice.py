@@ -29,7 +29,7 @@ from scipy.spatial import Voronoi
 
 from monty.json import MSONable
 from monty.dev import deprecated
-from pymatgen.util.num_utils import abs_cap
+from pymatgen.util.num import abs_cap
 from pymatgen.core.units import ArrayWithUnit
 
 

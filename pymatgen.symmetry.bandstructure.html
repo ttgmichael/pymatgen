@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.symmetry.bandstructure module &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.symmetry.bandstructure module &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -59,7 +59,7 @@
 <span id="pymatgen-symmetry-bandstructure-module"></span><h1>pymatgen.symmetry.bandstructure module<a class="headerlink" href="#module-pymatgen.symmetry.bandstructure" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pymatgen.symmetry.bandstructure.HighSymmKpath">
-<em class="property">class </em><code class="descname">HighSymmKpath</code><span class="sig-paren">(</span><em>structure</em>, <em>symprec=0.01</em>, <em>angle_tolerance=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/symmetry/bandstructure.html#HighSymmKpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.symmetry.bandstructure.HighSymmKpath" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">HighSymmKpath</code><span class="sig-paren">(</span><em>structure</em>, <em>symprec=0.01</em>, <em>angle_tolerance=5</em>, <em>atol=1e-08</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/symmetry/bandstructure.html#HighSymmKpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.symmetry.bandstructure.HighSymmKpath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>This class looks for path along high symmetry lines in
 the Brillouin Zone.
@@ -67,8 +67,14 @@ It is based on Setyawan, W., &amp; Curtarolo, S. (2010).
 High-throughput electronic band structure calculations:
 Challenges and tools. Computational Materials Science,
 49(2), 299-312. doi:10.1016/j.commatsci.2010.05.010
+It should be used with primitive structures that
+comply with the definition from the paper.
 The symmetry is determined by spglib through the
-SpacegroupAnalyzer class</p>
+SpacegroupAnalyzer class. The analyzer can be used to
+produce the correct primitive structure (method
+get_primitive_standard_structure(international_monoclinic=False)).
+A warning will signal possible compatibility problems
+with the given structure.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -77,6 +83,9 @@ SpacegroupAnalyzer class</p>
 <li><strong>structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; Structure object</li>
 <li><strong>symprec</strong> (<em>float</em>) &#8211; Tolerance for symmetry finding</li>
 <li><strong>angle_tolerance</strong> (<em>float</em>) &#8211; Angle tolerance for symmetry finding.</li>
+<li><strong>atol</strong> (<em>float</em>) &#8211; Absolute tolerance used to compare the input
+structure with the one expected as primitive standard.
+A warning will be issued if the lattices don&#8217;t match.</li>
 </ul>
 </td>
 </tr>
@@ -281,13 +290,13 @@ together with the labels for symmetry points -Wei</td>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

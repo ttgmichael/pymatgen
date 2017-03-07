@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.surface &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.core.surface &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -222,6 +222,115 @@
                     <span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scale_factor</span><span class="p">,</span>
                     <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Slab.get_tasker2_slabs"><a class="viewcode-back" href="../../../pymatgen.core.surface.html#pymatgen.core.surface.Slab.get_tasker2_slabs">[docs]</a>    <span class="k">def</span> <span class="nf">get_tasker2_slabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">same_species_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of slabs that have been Tasker 2 corrected.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tol (float): Tolerance to determine if atoms are within same plane.</span>
+<span class="sd">                This is a fractional tolerance, not an absolute one.</span>
+<span class="sd">            same_species_only (bool): If True, only that are of the exact same</span>
+<span class="sd">                species as the atom at the outermost surface are considered for</span>
+<span class="sd">                moving. Otherwise, all atoms regardless of species that is</span>
+<span class="sd">                within tol are considered for moving. Default is True (usually</span>
+<span class="sd">                the desired behavior).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ([Slab]) List of tasker 2 corrected slabs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="p">)</span>
+        <span class="n">slabs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">sortedcsites</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">sites</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">site</span><span class="p">:</span> <span class="n">site</span><span class="o">.</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="c1"># Determine what fraction the slab is of the total cell size in the</span>
+        <span class="c1"># c direction. Round to nearest rational number.</span>
+        <span class="n">nlayers_total</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">c</span> <span class="o">/</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">oriented_unit_cell</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">c</span><span class="p">))</span>
+        <span class="n">nlayers_slab</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">sortedcsites</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span> <span class="n">sortedcsites</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">c</span><span class="p">)</span>
+                                 <span class="o">*</span> <span class="n">nlayers_total</span><span class="p">))</span>
+        <span class="n">slab_ratio</span> <span class="o">=</span> <span class="n">nlayers_slab</span> <span class="o">/</span> <span class="n">nlayers_total</span>
+
+        <span class="n">a</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">symm_structure</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_symmetrized_structure</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">equi_index</span><span class="p">(</span><span class="n">site</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">equi_sites</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">symm_structure</span><span class="o">.</span><span class="n">equivalent_sites</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">equi_sites</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">i</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot determine equi index!&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">surface_site</span><span class="p">,</span> <span class="n">shift</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">sortedcsites</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">slab_ratio</span><span class="p">),</span>
+                                    <span class="p">(</span><span class="n">sortedcsites</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">slab_ratio</span><span class="p">)]:</span>
+            <span class="n">tomove</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">fixed</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span> <span class="n">surface_site</span><span class="o">.</span><span class="n">c</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span> <span class="ow">and</span> <span class="p">(</span>
+                        <span class="p">(</span><span class="ow">not</span> <span class="n">same_species_only</span><span class="p">)</span> <span class="ow">or</span>
+                        <span class="n">site</span><span class="o">.</span><span class="n">species_and_occu</span> <span class="o">==</span> <span class="n">surface_site</span><span class="o">.</span><span class="n">species_and_occu</span><span class="p">):</span>
+                    <span class="n">tomove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fixed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+
+            <span class="c1"># Sort and group the sites by the species and symmetry equivalence</span>
+            <span class="n">tomove</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tomove</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">equi_index</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+            <span class="n">grouped</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">sites</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">sites</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+                <span class="n">tomove</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">equi_index</span><span class="p">(</span><span class="n">s</span><span class="p">))]</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tomove</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">]):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Odd number of sites to divide! Try changing &quot;</span>
+                              <span class="s2">&quot;the tolerance to ensure even division of &quot;</span>
+                              <span class="s2">&quot;sites or create supercells in a or b directions &quot;</span>
+                              <span class="s2">&quot;to allow for atoms to be moved!&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">combinations</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+                <span class="n">combinations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))])</span>
+
+            <span class="k">for</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">combinations</span><span class="p">):</span>
+                <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="o">.</span><span class="n">species_and_occu</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">fixed</span><span class="p">]</span>
+                <span class="n">fcoords</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="o">.</span><span class="n">frac_coords</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">fixed</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">tomove</span><span class="p">:</span>
+                    <span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">species_and_occu</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span>
+                            <span class="n">fcoords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">)</span>
+                            <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># Move unselected atom to the opposite surface.</span>
+                        <span class="n">fcoords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">frac_coords</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">shift</span><span class="p">])</span>
+
+                <span class="c1"># sort by species to put all similar species together.</span>
+                <span class="n">sp_fcoord</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">fcoords</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sp_fcoord</span><span class="p">]</span>
+                <span class="n">fcoords</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sp_fcoord</span><span class="p">]</span>
+                <span class="n">slab</span> <span class="o">=</span> <span class="n">Slab</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">fcoords</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">miller_index</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">oriented_unit_cell</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">scale_factor</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span>
+                <span class="n">slabs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slab</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">StructureMatcher</span><span class="p">()</span>
+        <span class="n">unique</span> <span class="o">=</span> <span class="p">[</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">group_structures</span><span class="p">(</span><span class="n">slabs</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">unique</span></div>
+
+<div class="viewcode-block" id="Slab.is_symmetric"><a class="viewcode-back" href="../../../pymatgen.core.surface.html#pymatgen.core.surface.Slab.is_symmetric">[docs]</a>    <span class="k">def</span> <span class="nf">is_symmetric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if slab is symmetric, i.e., contains inversion symmetry.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            symprec (float): Symmetry precision used for SpaceGroup analyzer.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (bool) Whether slab contains inversion symmetry.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">laue</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;-1&quot;</span><span class="p">,</span> <span class="s2">&quot;2/m&quot;</span><span class="p">,</span> <span class="s2">&quot;mmm&quot;</span><span class="p">,</span> <span class="s2">&quot;4/m&quot;</span><span class="p">,</span> <span class="s2">&quot;4/mmm&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;-3&quot;</span><span class="p">,</span> <span class="s2">&quot;-3m&quot;</span><span class="p">,</span> <span class="s2">&quot;6/m&quot;</span><span class="p">,</span> <span class="s2">&quot;6/mmm&quot;</span><span class="p">,</span> <span class="s2">&quot;m-3&quot;</span><span class="p">,</span> <span class="s2">&quot;m-3m&quot;</span><span class="p">]</span>
+        <span class="n">sg</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">)</span>
+        <span class="n">pg</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">get_point_group_symbol</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">pg</span><span class="p">)</span> <span class="ow">in</span> <span class="n">laue</span></div>
+
 <div class="viewcode-block" id="Slab.get_sorted_structure"><a class="viewcode-back" href="../../../pymatgen.core.surface.html#pymatgen.core.surface.Slab.get_sorted_structure">[docs]</a>    <span class="k">def</span> <span class="nf">get_sorted_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a sorted copy of the structure. The parameters have the same</span>
@@ -334,7 +443,7 @@
 <span class="sd">            distance (float): between centers of the adsorbed atom and the</span>
 <span class="sd">                given site in Angstroms.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1">#Let&#39;s do the work in cartesian coords</span>
+        <span class="c1"># Let&#39;s do the work in cartesian coords</span>
         <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
             <span class="n">indices</span><span class="p">)</span>
 
@@ -392,8 +501,8 @@
 <div class="viewcode-block" id="SlabGenerator"><a class="viewcode-back" href="../../../pymatgen.core.surface.html#pymatgen.core.surface.SlabGenerator">[docs]</a><span class="k">class</span> <span class="nc">SlabGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class generates different slabs using shift values determined by where a</span>
-<span class="sd">    unique termination can be found along with other criterias such as where a</span>
+<span class="sd">    This class generates different slabs using shift values determined by where</span>
+<span class="sd">    a unique termination can be found along with other criterias such as where a</span>
 <span class="sd">    termination doesn&#39;t break a polyhedral bond. The shift value then indicates</span>
 <span class="sd">    where the slab layer will begin and terminate in the slab-vacuum system.</span>
 
@@ -452,7 +561,7 @@
 <span class="sd">                you need this to be based on the conventional cell,</span>
 <span class="sd">                you should supply the conventional structure.</span>
 <span class="sd">            min_slab_size (float): In Angstroms</span>
-<span class="sd">            min_vac_size (float): In Angstroms</span>
+<span class="sd">            min_vacuum_size (float): In Angstroms</span>
 <span class="sd">            lll_reduce (bool): Whether to perform an LLL reduction on the</span>
 <span class="sd">                eventual structure.</span>
 <span class="sd">            center_slab (bool): Whether to center the slab in the cell with</span>
@@ -477,7 +586,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">latt</span> <span class="o">=</span> <span class="n">initial_structure</span><span class="o">.</span><span class="n">lattice</span>
         <span class="n">miller_index</span> <span class="o">=</span> <span class="n">reduce_vector</span><span class="p">(</span><span class="n">miller_index</span><span class="p">)</span>
-        <span class="c1">#Calculate the surface normal using the reciprocal lattice vector.</span>
+        <span class="c1"># Calculate the surface normal using the reciprocal lattice vector.</span>
         <span class="n">recp</span> <span class="o">=</span> <span class="n">latt</span><span class="o">.</span><span class="n">reciprocal_lattice_crystallographic</span>
         <span class="n">normal</span> <span class="o">=</span> <span class="n">recp</span><span class="o">.</span><span class="n">get_cartesian_coords</span><span class="p">(</span><span class="n">miller_index</span><span class="p">)</span>
         <span class="n">normal</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
@@ -492,7 +601,7 @@
                 <span class="c1"># vector as one of the basis vectors.</span>
                 <span class="n">slab_scale_factor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eye</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c1">#Calculate projection of lattice vector onto surface normal.</span>
+                <span class="c1"># Calculate projection of lattice vector onto surface normal.</span>
                 <span class="n">d</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">latt</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">/</span> <span class="n">latt</span><span class="o">.</span><span class="n">abc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="n">non_orth_ind</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
 
@@ -531,7 +640,7 @@
                     <span class="k">break</span>
             <span class="c1"># We want the indices with the maximum absolute cosine,</span>
             <span class="c1"># but smallest possible length.</span>
-            <span class="n">uvw</span><span class="p">,</span> <span class="n">cosine</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">l</span><span class="p">))</span>
+            <span class="n">uvw</span><span class="p">,</span> <span class="n">cosine</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
             <span class="n">slab_scale_factor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uvw</span><span class="p">)</span>
 
         <span class="n">slab_scale_factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">slab_scale_factor</span><span class="p">)</span>
@@ -591,7 +700,7 @@
         <span class="n">frac_coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oriented_unit_cell</span><span class="o">.</span><span class="n">frac_coords</span>
         <span class="n">frac_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">frac_coords</span><span class="p">)</span> <span class="o">+</span>\
                       <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">shift</span><span class="p">])[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
-        <span class="n">frac_coords</span> <span class="o">=</span> <span class="n">frac_coords</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">frac_coords</span><span class="p">)</span>
+        <span class="n">frac_coords</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">frac_coords</span><span class="p">)</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oriented_unit_cell</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">matrix</span>
         <span class="n">new_lattice</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">nlayers</span> <span class="o">*</span> <span class="n">c</span><span class="p">]</span>
         <span class="n">frac_coords</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">frac_coords</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">nlayers</span>
@@ -656,10 +765,10 @@
         <span class="n">z</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">condensed_m</span><span class="p">)</span>
         <span class="n">clusters</span> <span class="o">=</span> <span class="n">fcluster</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;distance&quot;</span><span class="p">)</span>
 
-        <span class="c1">#Generate dict of cluster# to c val - doesn&#39;t matter what the c is.</span>
+        <span class="c1"># Generate dict of cluster# to c val - doesn&#39;t matter what the c is.</span>
         <span class="n">c_loc</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">frac_coords</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clusters</span><span class="p">)}</span>
 
-        <span class="c1">#Put all c into the unit cell.</span>
+        <span class="c1"># Put all c into the unit cell.</span>
         <span class="n">possible_c</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">c_loc</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
 
         <span class="c1"># Calculate the shifts</span>
@@ -704,14 +813,15 @@
                                 <span class="n">c_ranges</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c_range</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">c_ranges</span>
 
-<div class="viewcode-block" id="SlabGenerator.get_slabs"><a class="viewcode-back" href="../../../pymatgen.core.surface.html#pymatgen.core.surface.SlabGenerator.get_slabs">[docs]</a>    <span class="k">def</span> <span class="nf">get_slabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_broken_bonds</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">symmetrize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SlabGenerator.get_slabs"><a class="viewcode-back" href="../../../pymatgen.core.surface.html#pymatgen.core.surface.SlabGenerator.get_slabs">[docs]</a>    <span class="k">def</span> <span class="nf">get_slabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_broken_bonds</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                  <span class="n">symmetrize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns a list of slabs that are generated using the list of</span>
 <span class="sd">        shift values from the method, _calculate_possible_shifts(). Before the</span>
 <span class="sd">        shifts are used to create the slabs however, if the user decides to take</span>
 <span class="sd">        into account whether or not a termination will break any polyhedral</span>
-<span class="sd">        structure (bonds is not None), this method will filter out any shift values</span>
-<span class="sd">        that do so.</span>
+<span class="sd">        structure (bonds is not None), this method will filter out any shift</span>
+<span class="sd">        values that do so.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            bonds ({(specie1, specie2): max_bond_dist}: bonds are</span>
@@ -758,8 +868,8 @@
             <span class="k">if</span> <span class="n">symmetrize</span><span class="p">:</span>
                 <span class="n">slab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetrize_slab</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">original_formula</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">(</span><span class="n">slab</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">reduced_formula</span><span class="p">):</span>
-                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;WARNING: Stoichiometry is no longer the same &quot;</span>\
-                                  <span class="s2">&quot;due to symmetrization&quot;</span><span class="p">)</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;WARNING: Stoichiometry is no longer the &quot;</span>
+                                  <span class="s2">&quot;same due to symmetrization&quot;</span><span class="p">)</span>
                 <span class="n">new_slabs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slab</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">new_slabs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -770,15 +880,18 @@
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method checks whether or not the two surfaces of the slab are</span>
-<span class="sd">        equivalent. If the point group of the slab has an inversion symmetry (ie.</span>
-<span class="sd">        belong to one of the Laue groups), then it is assumed that the surfaces</span>
-<span class="sd">        should be equivalent. Otherwise, sites at the bottom of the slab will be</span>
-<span class="sd">        removed until the slab is symmetric. Note that this method should only be</span>
-<span class="sd">        limited to elemental structures as the removal of sites can destroy the</span>
-<span class="sd">        stoichiometry of the slab. For non-elemental structures, use is_polar().</span>
+<span class="sd">        equivalent. If the point group of the slab has an inversion symmetry (</span>
+<span class="sd">        ie. belong to one of the Laue groups), then it is assumed that the</span>
+<span class="sd">        surfaces should be equivalent. Otherwise, sites at the bottom of the</span>
+<span class="sd">        slab will be removed until the slab is symmetric. Note that this method</span>
+<span class="sd">        should only be limited to elemental structures as the removal of sites</span>
+<span class="sd">        can destroy the stoichiometry of the slab. For non-elemental</span>
+<span class="sd">        structures, use is_polar().</span>
+
 <span class="sd">        Arg:</span>
 <span class="sd">            slab (Structure): A single slab structure</span>
 <span class="sd">            tol (float): Tolerance for SpaceGroupanalyzer.</span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            Slab (structure): A symmetrized Slab object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -813,7 +926,8 @@
                     <span class="n">asym</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">slab</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Too many sites removed, please use a larger slab size.&quot;</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Too many sites removed, please use a larger slab &quot;</span>
+                          <span class="s2">&quot;size.&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">slab</span></div></div>
 
@@ -891,7 +1005,7 @@
 <span class="sd">                unit cell structure.</span>
 <span class="sd">        max_index (int): The maximum Miller index to go up to.</span>
 <span class="sd">        min_slab_size (float): In Angstroms</span>
-<span class="sd">        min_vac_size (float): In Angstroms</span>
+<span class="sd">        min_vacuum_size (float): In Angstroms</span>
 <span class="sd">        bonds ({(specie1, specie2): max_bond_dist}: bonds are</span>
 <span class="sd">            specified as a dict of tuples: float of specie1, specie2</span>
 <span class="sd">            and the max bonding distance. For example, PO4 groups may be</span>
@@ -929,7 +1043,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">all_slabs</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">for</span> <span class="n">miller</span> <span class="ow">in</span> <span class="n">get_symmetrically_distinct_miller_indices</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">max_index</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">miller</span> <span class="ow">in</span> <span class="n">get_symmetrically_distinct_miller_indices</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span>
+                                                            <span class="n">max_index</span><span class="p">):</span>
         <span class="n">gen</span> <span class="o">=</span> <span class="n">SlabGenerator</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">miller</span><span class="p">,</span> <span class="n">min_slab_size</span><span class="p">,</span>
                             <span class="n">min_vacuum_size</span><span class="p">,</span> <span class="n">lll_reduce</span><span class="o">=</span><span class="n">lll_reduce</span><span class="p">,</span>
                             <span class="n">center_slab</span><span class="o">=</span><span class="n">center_slab</span><span class="p">,</span> <span class="n">primitive</span><span class="o">=</span><span class="n">primitive</span><span class="p">,</span>
@@ -981,14 +1096,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

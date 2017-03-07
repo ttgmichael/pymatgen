@@ -10,7 +10,7 @@ import pymatgen.core.units as units
 
 from monty.functools import return_none_if_raise
 from pymatgen.core.units import FloatWithUnit
-from pymatgen.util.plotting_utils import add_fig_kwargs, get_ax_fig_plt
+from pymatgen.util.plotting import add_fig_kwargs, get_ax_fig_plt
 
 import logging
 logger = logging.getLogger(__file__)

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.symmetry.bandstructure &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.symmetry.bandstructure &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -70,7 +70,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">ceil</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">cos</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sin</span>
@@ -88,16 +88,25 @@
 <span class="sd">    High-throughput electronic band structure calculations:</span>
 <span class="sd">    Challenges and tools. Computational Materials Science,</span>
 <span class="sd">    49(2), 299-312. doi:10.1016/j.commatsci.2010.05.010</span>
+<span class="sd">    It should be used with primitive structures that</span>
+<span class="sd">    comply with the definition from the paper.</span>
 <span class="sd">    The symmetry is determined by spglib through the</span>
-<span class="sd">    SpacegroupAnalyzer class</span>
+<span class="sd">    SpacegroupAnalyzer class. The analyzer can be used to</span>
+<span class="sd">    produce the correct primitive structure (method</span>
+<span class="sd">    get_primitive_standard_structure(international_monoclinic=False)).</span>
+<span class="sd">    A warning will signal possible compatibility problems</span>
+<span class="sd">    with the given structure.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        structure (Structure): Structure object</span>
 <span class="sd">        symprec (float): Tolerance for symmetry finding</span>
 <span class="sd">        angle_tolerance (float): Angle tolerance for symmetry finding.</span>
+<span class="sd">        atol (float): Absolute tolerance used to compare the input</span>
+<span class="sd">            structure with the one expected as primitive standard.</span>
+<span class="sd">            A warning will be issued if the lattices don&#39;t match.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">angle_tolerance</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">angle_tolerance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_structure</span> <span class="o">=</span> <span class="n">structure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">,</span>
                                    <span class="n">angle_tolerance</span><span class="o">=</span><span class="n">angle_tolerance</span><span class="p">)</span>
@@ -106,6 +115,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_conv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span><span class="o">.</span><span class="n">get_conventional_standard_structure</span><span class="p">(</span><span class="n">international_monoclinic</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prim_rec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">reciprocal_lattice</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_kpath</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prim</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">matrix</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The input structure does not match the expected standard primitive! &quot;</span>
+                          <span class="s2">&quot;The path can be incorrect. Use at your own risk.&quot;</span><span class="p">)</span>
 
         <span class="n">lattice_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span><span class="o">.</span><span class="n">get_lattice_type</span><span class="p">()</span>
         <span class="n">spg_symbol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sym</span><span class="o">.</span><span class="n">get_space_group_symbol</span><span class="p">()</span>
@@ -741,14 +754,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

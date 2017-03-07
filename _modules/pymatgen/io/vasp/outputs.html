@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -712,7 +712,6 @@
                                  <span class="bp">self</span><span class="o">.</span><span class="n">final_energy</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                                  <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-    <span class="c1">#@profile</span>
 <div class="viewcode-block" id="Vasprun.get_band_structure"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Vasprun.get_band_structure">[docs]</a>    <span class="k">def</span> <span class="nf">get_band_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kpoints_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">efermi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">line_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -811,17 +810,20 @@
                             <span class="n">kpoint_file</span><span class="o">.</span><span class="n">kpts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="c1"># remake the data only considering line band structure k-points</span>
                 <span class="c1"># (weight = 0.0 kpoints)</span>
-                <span class="n">kpoints</span> <span class="o">=</span> <span class="n">kpoints</span><span class="p">[</span><span class="n">start_bs_index</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">kpoints</span><span class="p">)]</span>
-                <span class="n">up_eigen</span> <span class="o">=</span> <span class="p">[</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="n">i</span><span class="p">][</span>
-                            <span class="n">start_bs_index</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span>
-                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">]))]</span>
+                <span class="n">nbands</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">])</span>
+                <span class="n">kpoints</span> <span class="o">=</span> <span class="n">kpoints</span><span class="p">[</span><span class="n">start_bs_index</span><span class="p">:</span><span class="n">nkpts</span><span class="p">]</span>
+                <span class="n">up_eigen</span> <span class="o">=</span> <span class="p">[</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">start_bs_index</span><span class="p">:</span><span class="n">nkpts</span><span class="p">]</span>
+                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbands</span><span class="p">)]</span>
+                <span class="n">p_eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">p_eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="n">i</span><span class="p">][</span>
+                                        <span class="n">start_bs_index</span><span class="p">:</span><span class="n">nkpts</span><span class="p">]</span>
+                                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbands</span><span class="p">)]</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_spin</span><span class="p">:</span>
-                    <span class="n">down_eigen</span> <span class="o">=</span> <span class="p">[</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
-                                  <span class="p">[</span><span class="n">start_bs_index</span><span class="p">:</span>
-                                   <span class="nb">len</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">][</span><span class="n">i</span><span class="p">])]</span>
-                                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">]))]</span>
-                    <span class="n">eigenvals</span> <span class="o">=</span> <span class="p">{</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">:</span> <span class="n">up_eigen</span><span class="p">,</span>
-                                 <span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">:</span> <span class="n">down_eigen</span><span class="p">}</span>
+                    <span class="n">down_eigen</span> <span class="o">=</span> <span class="p">[</span><span class="n">eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">start_bs_index</span><span class="p">:</span><span class="n">nkpts</span><span class="p">]</span>
+                                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbands</span><span class="p">)]</span>
+                    <span class="n">eigenvals</span> <span class="o">=</span> <span class="p">{</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">:</span> <span class="n">up_eigen</span><span class="p">,</span> <span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">:</span> <span class="n">down_eigen</span><span class="p">}</span>
+                    <span class="n">p_eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">p_eigenvals</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">][</span><span class="n">i</span><span class="p">][</span>
+                                              <span class="n">start_bs_index</span><span class="p">:</span><span class="n">nkpts</span><span class="p">]</span>
+                                              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbands</span><span class="p">)]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">eigenvals</span> <span class="o">=</span> <span class="p">{</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">:</span> <span class="n">up_eigen</span><span class="p">}</span>
             <span class="k">else</span><span class="p">:</span>
@@ -1384,7 +1386,7 @@
 
 <span class="sd">    One can then call a specific reader depending on the type of run being</span>
 <span class="sd">    performed. These are currently: read_igpar(), read_lepsilon() and</span>
-<span class="sd">    read_lcalcpol(), read_core_state_eign().</span>
+<span class="sd">    read_lcalcpol(), read_core_state_eign(), read_avg_core_pot().</span>
 
 <span class="sd">    See the documentation of those methods for more documentation.</span>
 
@@ -1709,7 +1711,7 @@
                          <span class="s2">&quot;\-+&quot;</span>
         <span class="n">row_pattern</span> <span class="o">=</span> <span class="s2">&quot;[X-Z][X-Z]\s+&quot;</span><span class="o">+</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;(\-*[\.\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span>
         <span class="n">footer_pattern</span> <span class="o">=</span> <span class="s2">&quot;\-+&quot;</span>
-        <span class="n">et_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span> 
+        <span class="n">et_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span>
                                            <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;elastic_tensor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">et_table</span></div>
 
@@ -2150,7 +2152,7 @@
             <span class="n">line</span> <span class="o">=</span> <span class="n">foutcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
             <span class="k">while</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="n">foutcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-                <span class="k">if</span> <span class="s2">&quot;NIONS =&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>   
+                <span class="k">if</span> <span class="s2">&quot;NIONS =&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
                     <span class="n">natom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;NIONS =&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
                     <span class="n">cl</span> <span class="o">=</span> <span class="p">[</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">natom</span><span class="p">)]</span>
                 <span class="k">if</span> <span class="s2">&quot;the core state eigen&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
@@ -2172,6 +2174,46 @@
                         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
                             <span class="n">cl</span><span class="p">[</span><span class="n">iat</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">cl</span></div>
+
+<div class="viewcode-block" id="Outcar.read_avg_core_poten"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_avg_core_poten">[docs]</a>    <span class="k">def</span> <span class="nf">read_avg_core_poten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read the core potential at each ionic step.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list for each ionic step containing a list of the average core</span>
+<span class="sd">            potentials for each atom: [[avg core pot]].</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            The average core potential of the 2nd atom of the structure at the</span>
+<span class="sd">            last ionic step is: [-1][1]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">pairwise</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+            <span class="s2">&quot;s -&gt; (s0,s1), (s1,s2), (s2, s3), ...&quot;</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">zopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">foutcar</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">foutcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="n">aps</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">while</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">foutcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                <span class="k">if</span> <span class="s2">&quot;the norm of the test charge is&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="n">ap</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">while</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="n">foutcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                        <span class="c1"># don&#39;t know number of lines to parse without knowing</span>
+                        <span class="c1"># specific species, so stop parsing when we reach</span>
+                        <span class="c1"># &quot;E-fermi&quot; instead</span>
+                        <span class="k">if</span> <span class="s2">&quot;E-fermi&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                            <span class="n">aps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+                            <span class="k">break</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                        <span class="c1"># the average core potentials of up to 5 elements are</span>
+                        <span class="c1"># given per line</span>
+                        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pot</span> <span class="ow">in</span> <span class="n">pairwise</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+                            <span class="n">ap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">pot</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">aps</span></div>
 
 <div class="viewcode-block" id="Outcar.as_dict"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@module&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
@@ -2970,7 +3012,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">syms</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">structures</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="k">return</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">syms</span><span class="p">)]</span>
-    
+
 <div class="viewcode-block" id="Xdatcar.concatenate"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Xdatcar.concatenate">[docs]</a>    <span class="k">def</span> <span class="nf">concatenate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">ionicstep_start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">ionicstep_end</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3059,7 +3101,7 @@
         <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span><span class="p">]))</span>
         <span class="n">format_str</span> <span class="o">=</span> <span class="s2">&quot;{{:.</span><span class="si">{0}</span><span class="s2">f}}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">significant_figures</span><span class="p">)</span>
         <span class="n">ionicstep_cnt</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">output_cnt</span> <span class="o">=</span> <span class="mi">1</span>        
+        <span class="n">output_cnt</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">cnt</span><span class="p">,</span> <span class="n">structure</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structures</span><span class="p">):</span>
             <span class="n">ionicstep_cnt</span> <span class="o">=</span> <span class="n">cnt</span> <span class="o">+</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="n">ionicstep_end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -3082,17 +3124,17 @@
                         <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
                     <span class="n">output_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></div>
-    
+
 <div class="viewcode-block" id="Xdatcar.write_file"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Xdatcar.write_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Write  Xdatcar class into a file. </span>
+<span class="sd">        Write  Xdatcar class into a file.</span>
 <span class="sd">        Args:</span>
 <span class="sd">            filename (str): Filename of output XDATCAR file.</span>
 <span class="sd">            The supported kwargs are the same as those for the Xdatcar.get_string method and are passed through directly.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="n">zopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div></div>
-    
+
 
 <div class="viewcode-block" id="Dynmat"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Dynmat">[docs]</a><span class="k">class</span> <span class="nc">Dynmat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -3330,14 +3372,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

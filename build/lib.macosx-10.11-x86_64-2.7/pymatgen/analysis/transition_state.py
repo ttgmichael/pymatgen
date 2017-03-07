@@ -25,7 +25,7 @@ import glob
 import numpy as np
 from scipy.interpolate import PiecewisePolynomial
 
-from pymatgen.util.plotting_utils import get_publication_quality_plot
+from pymatgen.util.plotting import get_publication_quality_plot
 from pymatgen.io.vasp import Poscar, Outcar
 
 

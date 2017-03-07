@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.structure_analyzer &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.analysis.structure_analyzer &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -85,7 +85,7 @@
 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">Voronoi</span>
 <span class="kn">from</span> <span class="nn">pymatgen</span> <span class="k">import</span> <span class="n">PeriodicSite</span>
 <span class="kn">from</span> <span class="nn">pymatgen</span> <span class="k">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">Specie</span><span class="p">,</span> <span class="n">Composition</span>
-<span class="kn">from</span> <span class="nn">pymatgen.util.num_utils</span> <span class="k">import</span> <span class="n">abs_cap</span>
+<span class="kn">from</span> <span class="nn">pymatgen.util.num</span> <span class="k">import</span> <span class="n">abs_cap</span>
 <span class="kn">from</span> <span class="nn">pymatgen.symmetry.analyzer</span> <span class="k">import</span> <span class="n">SpacegroupAnalyzer</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.surface</span> <span class="k">import</span> <span class="n">Slab</span>
 
@@ -144,9 +144,10 @@
                 <span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">vind</span><span class="p">:</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_pathological</span><span class="p">:</span>
                         <span class="k">continue</span>
-                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;This structure is pathological,&quot;</span>
-                                       <span class="s2">&quot; infinite vertex in the voronoi &quot;</span>
-                                       <span class="s2">&quot;construction&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;This structure is pathological,&quot;</span>
+                                           <span class="s2">&quot; infinite vertex in the voronoi &quot;</span>
+                                           <span class="s2">&quot;construction&quot;</span><span class="p">)</span>
 
                 <span class="n">facets</span> <span class="o">=</span> <span class="p">[</span><span class="n">all_vertices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vind</span><span class="p">]</span>
                 <span class="n">results</span><span class="p">[</span><span class="n">neighbors</span><span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">nn</span><span class="p">)[</span><span class="mi">1</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">solid_angle</span><span class="p">(</span>
@@ -1779,26 +1780,21 @@
             <span class="c1"># Normalize Peters-style OPs.</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_types</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;lin&quot;</span><span class="p">:</span>
-                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nneigh</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="n">nneigh</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
                 <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;bent&quot;</span><span class="p">:</span>
-                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nneigh</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="n">nneigh</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
                 <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tet&quot;</span><span class="p">:</span>
-                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">24.0</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="kc">None</span>
-
+                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nneigh</span> <span class="o">*</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="n">nneigh</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="kc">None</span>
                 <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;oct&quot;</span><span class="p">:</span>
-                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">90.0</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="kc">None</span>
-
+                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nneigh</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+                            <span class="n">nneigh</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)))</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="kc">None</span>
                 <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;bcc&quot;</span><span class="p">:</span>
-                    <span class="c1"># Reassured 144 by pen-and-paper for perfect bcc</span>
-                    <span class="c1"># structure (24 from i-j-k South pole contributions</span>
-                    <span class="c1"># and 4 * 6 * 5 = 120 from i-j-k-m non-South</span>
-                    <span class="c1"># pole-containing quadruples.</span>
-                    <span class="c1"># Because qbcc has a separate South pole contribution</span>
-                    <span class="c1"># as summand, it is sufficient to have 2 neighbors to</span>
-                    <span class="c1"># obtain a configuration that is well-defined by</span>
-                    <span class="c1"># yielding a contribution to qbcc via thetak alone:</span>
-                    <span class="c1"># ==&gt; nneigh &gt; 1.</span>
-                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mf">144.0</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span>
+                            <span class="n">nneigh</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span> <span class="o">+</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))))</span> \
+                            <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="kc">None</span>
                 <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;sq_pyr&quot;</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="n">dmean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
@@ -1806,7 +1802,8 @@
                         <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dist</span><span class="p">:</span>
                             <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">dmean</span><span class="p">)</span>
                             <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tmp</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span>
-                        <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">qsptheta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="mf">20.0</span>
+                        <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">qsptheta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span>
+                                <span class="n">nneigh</span> <span class="o">*</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -1879,14 +1876,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

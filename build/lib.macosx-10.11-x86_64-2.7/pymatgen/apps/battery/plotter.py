@@ -18,7 +18,7 @@ __date__ = "Jul 12, 2012"
 
 
 from collections import OrderedDict
-from pymatgen.util.plotting_utils import get_publication_quality_plot
+from pymatgen.util.plotting import get_publication_quality_plot
 
 
 class VoltageProfilePlotter(object):

@@ -37,7 +37,7 @@ from tabulate import tabulate
 
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 from pymatgen.io.cif import CifParser
-from pymatgen.util.string_utils import str_delimited
+from pymatgen.util.string import str_delimited
 from monty.io import zopen
 from pymatgen.util.io_utils import clean_lines
 from pymatgen.electronic_structure.core import Spin, Orbital

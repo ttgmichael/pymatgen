@@ -319,7 +319,7 @@ class XRDCalculator(object):
         Returns:
             (matplotlib.pyplot)
         """
-        from pymatgen.util.plotting_utils import get_publication_quality_plot
+        from pymatgen.util.plotting import get_publication_quality_plot
         plt = get_publication_quality_plot(16, 10)
         for two_theta, i, hkls, d_hkl in self.get_xrd_data(
                 structure, two_theta_range=two_theta_range):

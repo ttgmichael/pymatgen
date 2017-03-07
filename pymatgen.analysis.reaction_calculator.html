@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.reaction_calculator module &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.analysis.reaction_calculator module &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -289,7 +289,9 @@ coefficients.</p>
 <em class="property">class </em><code class="descname">Reaction</code><span class="sig-paren">(</span><em>reactants</em>, <em>products</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/reaction_calculator.html#Reaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.reaction_calculator.Reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pymatgen.analysis.reaction_calculator.BalancedReaction" title="pymatgen.analysis.reaction_calculator.BalancedReaction"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.analysis.reaction_calculator.BalancedReaction</span></code></a></p>
 <p>A more flexible class representing a Reaction. The reaction amounts will
-be automatically balanced.</p>
+be automatically balanced. Reactants and products can swap sides so that
+all coefficients are positive. Normalizes so that the <em>FIRST</em> product
+(or products, if underdetermined) has a coefficient of one.</p>
 <p>Reactants and products to be specified as list of
 pymatgen.core.structure.Composition.  e.g., [comp1, comp2]</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -330,21 +332,6 @@ pymatgen.core.structure.Composition.  e.g., [comp1, comp2]</p>
 messages to cover situations not covered by standard exception classes.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="pymatgen.analysis.reaction_calculator.smart_float_gcd">
-<code class="descname">smart_float_gcd</code><span class="sig-paren">(</span><em>list_of_floats</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/reaction_calculator.html#smart_float_gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.reaction_calculator.smart_float_gcd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines the great common denominator (gcd).  Works on floats as well as
-integers.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>list_of_floats</strong> &#8211; List of floats to determine gcd.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 
 
@@ -383,13 +370,13 @@ integers.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

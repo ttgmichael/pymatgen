@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.plotter module &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.electronic_structure.plotter module &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -59,7 +59,7 @@
 <span id="pymatgen-electronic-structure-plotter-module"></span><h1>pymatgen.electronic_structure.plotter module<a class="headerlink" href="#module-pymatgen.electronic_structure.plotter" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pymatgen.electronic_structure.plotter.BSDOSPlotter">
-<em class="property">class </em><code class="descname">BSDOSPlotter</code><span class="sig-paren">(</span><em>bs_projection='elements'</em>, <em>dos_projection='elements'</em>, <em>vb_energy_range=4</em>, <em>cb_energy_range=4</em>, <em>fixed_cb_energy=False</em>, <em>egrid_interval=1</em>, <em>font='Times New Roman'</em>, <em>axis_fontsize=20</em>, <em>tick_fontsize=15</em>, <em>legend_fontsize=14</em>, <em>bs_legend='best'</em>, <em>dos_legend='best'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/plotter.html#BSDOSPlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.plotter.BSDOSPlotter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">BSDOSPlotter</code><span class="sig-paren">(</span><em>bs_projection='elements'</em>, <em>dos_projection='elements'</em>, <em>vb_energy_range=4</em>, <em>cb_energy_range=4</em>, <em>fixed_cb_energy=False</em>, <em>egrid_interval=1</em>, <em>font='Times New Roman'</em>, <em>axis_fontsize=20</em>, <em>tick_fontsize=15</em>, <em>legend_fontsize=14</em>, <em>bs_legend='best'</em>, <em>dos_legend='best'</em>, <em>rgb_legend=True</em>, <em>fig_size=(11</em>, <em>8.5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/plotter.html#BSDOSPlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.plotter.BSDOSPlotter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>A joint, aligned band structure and density of states plot. Contributions from Jan Pohls
 as well as the online example from Germain Salvato-Vallverdu:
@@ -83,6 +83,8 @@ as constant (i.e., no gap correction for cb energy)</li>
 <li><strong>legend_fontsize</strong> (<em>float</em>) &#8211; font size for legends</li>
 <li><strong>bs_legend</strong> (<em>str</em>) &#8211; matplotlib string location for legend or None</li>
 <li><strong>dos_legend</strong> (<em>str</em>) &#8211; matplotlib string location for legend or None</li>
+<li><strong>rgb_legend</strong> (<em>bool</em>) &#8211; (T/F) whether to draw RGB triangle/bar for element proj.</li>
+<li><strong>fig_size</strong> (<em>tuple</em>) &#8211; dimensions of figure size (width, height)</li>
 </ul>
 </td>
 </tr>
@@ -346,6 +348,70 @@ character for the corresponding element and orbital.</td>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="pymatgen.electronic_structure.plotter.BSPlotterProjected.get_projected_plots_dots_patom_pmorb">
+<code class="descname">get_projected_plots_dots_patom_pmorb</code><span class="sig-paren">(</span><em>dictio</em>, <em>dictpa</em>, <em>sum_atoms=None</em>, <em>sum_morbs=None</em>, <em>zero_to_efermi=True</em>, <em>ylim=None</em>, <em>vbm_cbm_marker=False</em>, <em>selected_branches=None</em>, <em>w_h_size=(12</em>, <em>8)</em>, <em>num_column=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/plotter.html#BSPlotterProjected.get_projected_plots_dots_patom_pmorb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.plotter.BSPlotterProjected.get_projected_plots_dots_patom_pmorb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method returns a plot composed of subplots for different atoms and orbitals (subshell orbitals such as
+&#8216;s&#8217;, &#8216;p&#8217;, &#8216;d&#8217; and &#8216;f&#8217; defined by azimuthal quantum numbers l = 0, 1, 2 and 3, respectively or
+individual orbitals like &#8216;px&#8217;, &#8216;py&#8217; and &#8216;pz&#8217; defined by magnetic quantum numbers m = -1, 1 and 0, respectively).
+This is an extension of &#8220;get_projected_plots_dots&#8221; method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dictio</strong> &#8211; The elements and the orbitals you need to project on. The format is {Element:[Orbitals]},
+for instance:
+{&#8216;Cu&#8217;:[&#8216;dxy&#8217;,&#8217;s&#8217;,&#8217;px&#8217;],&#8217;O&#8217;:[&#8216;px&#8217;,&#8217;py&#8217;,&#8217;pz&#8217;]} will give projections for Cu on orbitals dxy, s, px and
+for O on orbitals px, py, pz. If you want to sum over all individual orbitals of subshell orbitals,
+for example, &#8216;px&#8217;, &#8216;py&#8217; and &#8216;pz&#8217; of O, just simply set
+{&#8216;Cu&#8217;:[&#8216;dxy&#8217;,&#8217;s&#8217;,&#8217;px&#8217;],&#8217;O&#8217;:[&#8216;p&#8217;]} and set sum_morbs (see explainations below) as {&#8216;O&#8217;:[p],...}.
+Otherwise, you will get an error.</li>
+<li><strong>dictpa</strong> &#8211; The elements and their sites (defined by site numbers) you need to project on. The format is
+{Element: [Site numbers]}, for instance: {&#8216;Cu&#8217;:[1,5],&#8217;O&#8217;:[3,4]} will give projections for Cu on site-1
+and on site-5, O on site-3 and on site-4 in the cell.
+Attention:
+The correct site numbers of atoms are consistent with themselves in the structure computed. Normally,
+the structure should be totally similar with POSCAR file, however, sometimes VASP can rotate or
+translate the cell. Thus, it would be safe if using Vasprun class to get the final_structure and as a
+result, correct index numbers of atoms.</li>
+<li><strong>sum_atoms</strong> &#8211; <p>Sum projection of the similar atoms together (e.g.: Cu on site-1 and Cu on site-5). The format is
+{Element: [Site numbers]}, for instance:</p>
+<blockquote>
+<div>{&#8216;Cu&#8217;: [1,5], &#8216;O&#8217;: [3,4]} means summing projections over Cu on site-1 and Cu on site-5 and O on site-3
+and on site-4. If you do not want to use this functional, just turn it off by setting sum_atoms = None.</div></blockquote>
+</li>
+<li><strong>sum_morbs</strong> &#8211; Sum projections of individual orbitals of similar atoms together (e.g.: &#8216;dxy&#8217; and &#8216;dxz&#8217;). The
+format is {Element: [individual orbitals]}, for instance:
+{&#8216;Cu&#8217;: [&#8216;dxy&#8217;, &#8216;dxz&#8217;], &#8216;O&#8217;: [&#8216;px&#8217;, &#8216;py&#8217;]} means summing projections over &#8216;dxy&#8217; and &#8216;dxz&#8217; of Cu and &#8216;px&#8217;
+and &#8216;py&#8217; of O. If you do not want to use this functional, just turn it off by setting sum_morbs = None.</li>
+<li><strong>selected_branches</strong> &#8211; The index of symmetry lines you chose for plotting. This can be useful when the number of
+symmetry lines (in KPOINTS file) are manny while you only want to show for certain ones. The format is
+[index of line], for instance:
+[1, 3, 4] means you just need to do projection along lines number 1, 3 and 4 while neglecting lines
+number 2 and so on. By default, this is None type and all symmetry lines will be plotted.</li>
+<li><strong>w_h_size</strong> &#8211; This variable help you to control the width and height of figure. By default, width = 12 and
+height = 8 (inches). The width/height ratio is kept the same for subfigures and the size of each depends
+on how many number of subfigures are plotted.</li>
+<li><strong>num_column</strong> &#8211; This variable help you to manage how the subfigures are arranged in the figure by setting
+up the number of columns of subfigures. The value should be an int number. For example, num_column = 3
+means you want to plot subfigures in 3 columns. By default, num_column = None and subfigures are
+aligned in 2 columns.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A pylab object with different subfigures for different projections. The blue and red colors lines are bands
+for spin up and spin down. The green and cyan dots are projections for spin up and spin down. The bigger
+the green or cyan dots in the projected band structures, the higher character for the corresponding elements
+and orbitals. List of individual orbitals and their numbers (set up by VASP and no special meaning):
+s = 0; py = 1 pz = 2 px = 3; dxy = 4 dyz = 5 dz2 = 6 dxz = 7 dx2 = 8;
+f_3 = 9 f_2 = 10 f_1 = 11 f0 = 12 f1 = 13 f2 = 14 f3 = 15</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -415,28 +481,6 @@ units of relaxation time</li>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="method">
-<dt id="pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_fermi_surface">
-<code class="descname">plot_fermi_surface</code><span class="sig-paren">(</span><em>structure=None</em>, <em>isolevel=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/plotter.html#BoltztrapPlotter.plot_fermi_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_fermi_surface" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the Fermi surface at a aspecific energy value</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>bz_lattice</strong> &#8211; structure object of the material</li>
-<li><strong>isolevel</strong> &#8211; energy value fo fermi surface, Default: max energy value + 0.1eV</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a matplotlib object</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Note: Experimental</p>
 </dd></dl>
 
 <dl class="method">
@@ -835,7 +879,8 @@ of a band in a single k-point.</p>
 <li><strong>ax</strong> &#8211; matplotlib <code class="xref py py-class docutils literal"><span class="pre">Axes</span></code> or None if a new figure should be created.</li>
 <li><strong>coords_are_cartesian</strong> &#8211; Set to True if you are providing a center in
 cartesian coordinates. Defaults to False.</li>
-<li><strong>kwargs</strong> &#8211; kwargs passed to the matplotlib function &#8216;plot_wireframe&#8217;. Color defaults to blue, rstride and cstride
+<li><strong>kwargs</strong> &#8211; kwargs passed to the matplotlib function &#8216;plot_wireframe&#8217;.
+Color defaults to blue, rstride and cstride
 default to 4, alpha defaults to 0.2.</li>
 </ul>
 </td>
@@ -849,6 +894,54 @@ default to 4, alpha defaults to 0.2.</li>
 <dt>Example of use:</dt>
 <dd>fig,ax=plot_wigner_seitz(struct.reciprocal_lattice)
 plot_ellipsoid(hessian,[0.0,0.0,0.0], struct.reciprocal_lattice,ax=ax)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pymatgen.electronic_structure.plotter.plot_fermi_surface">
+<code class="descname">plot_fermi_surface</code><span class="sig-paren">(</span><em>data</em>, <em>structure</em>, <em>cbm</em>, <em>energy_levels=[]</em>, <em>multiple_figure=True</em>, <em>mlab_figure=None</em>, <em>kpoints_dict={}</em>, <em>color=(0</em>, <em>0</em>, <em>1)</em>, <em>transparency_factor=[]</em>, <em>labels_scale_factor=0.05</em>, <em>points_scale_factor=0.02</em>, <em>interative=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/plotter.html#plot_fermi_surface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.plotter.plot_fermi_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the Fermi surface at specific energy value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> &#8211; energy values in a 3D grid from a CUBE file
+via read_cube_file function, or from a
+BoltztrapAnalyzer.fermi_surface_data</li>
+<li><strong>structure</strong> &#8211; structure object of the material</li>
+<li><strong>energy_levels</strong> &#8211; list of energy value of the fermi surface.
+Default: max energy value + 0.01 eV</li>
+<li><strong>cbm</strong> &#8211; Boolean value to specify if the considered band is
+a conduction band or not</li>
+<li><strong>multiple_figure</strong> &#8211; if True a figure for each energy level will be shown.
+If False all the surfaces will be shown in the same figure.
+In this las case, tune the transparency factor.</li>
+<li><strong>mlab_figure</strong> &#8211; provide a previous figure to plot a new surface on it.</li>
+<li><strong>kpoints_dict</strong> &#8211; dictionary of kpoints to show in the plot.
+example: {&#8220;K&#8221;:[0.5,0.0,0.5]},
+where the coords are fractional.</li>
+<li><strong>color</strong> &#8211; tuple (r,g,b) of integers to define the color of the surface.</li>
+<li><strong>transparency_factor</strong> &#8211; list of values in the range [0,1] to tune
+the opacity of the surfaces.</li>
+<li><strong>labels_scale_factor</strong> &#8211; factor to tune the size of the kpoint labels</li>
+<li><strong>points_scale_factor</strong> &#8211; factor to tune the size of the kpoint points</li>
+<li><strong>interative</strong> &#8211; if True an interactive figure will be shown.
+If False a non interactive figure will be shown, but
+it is possible to plot other surfaces on the same figure.
+To make it interactive, run mlab.show().</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a Mayavi figure and a mlab module to control the plot.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Note: Experimental.</dt>
+<dd>Please, double check the surface shown by using some
+other software and report issues.</dd>
 </dl>
 </dd></dl>
 
@@ -1018,13 +1111,13 @@ and linewidth to 1.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

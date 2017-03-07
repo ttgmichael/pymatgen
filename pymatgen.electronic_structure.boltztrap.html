@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.boltztrap module &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.electronic_structure.boltztrap module &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -143,7 +143,7 @@ orbitals</li>
 <li><strong>bz_kpoints</strong> &#8211; k-point in reciprocal coordinates for interpolated
 bands (run_type=BANDS)</li>
 <li><strong>fermi_surface_data</strong> &#8211; energy values in a 3D grid imported from the
-output .cube file using ase.io.cube.read_cube</li>
+output .cube file.</li>
 </ul>
 </td>
 </tr>
@@ -219,7 +219,7 @@ True if the avg_dist &gt; warn_thr[1]</dd>
 
 <dl class="method">
 <dt id="pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_average_eff_mass">
-<code class="descname">get_average_eff_mass</code><span class="sig-paren">(</span><em>output='eigs'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/boltztrap.html#BoltztrapAnalyzer.get_average_eff_mass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_average_eff_mass" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_average_eff_mass</code><span class="sig-paren">(</span><em>output='eigs'</em>, <em>doping_levels=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/boltztrap.html#BoltztrapAnalyzer.get_average_eff_mass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.boltztrap.BoltztrapAnalyzer.get_average_eff_mass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gives the average effective mass tensor. We call it average because
 it takes into account all the bands
 and regions in the Brillouin zone. This is different than the standard
@@ -251,20 +251,23 @@ its 3 eigenvalues or an average</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>output</strong> (<em>string</em>) &#8211; &#8216;eigs&#8217; for eigenvalues, &#8216;tensor&#8217; for the full</li>
+<li><strong>output</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; &#8216;eigs&#8217; for eigenvalues, &#8216;tensor&#8217; for the full</li>
 <li><strong>and 'average' for an average</strong> (<em>tensor</em>) &#8211; </li>
+<li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
+<li><strong>doping levels</strong><strong>, </strong><strong>False for results</strong> (<em>different</em>) &#8211; </li>
+<li><strong>different electron chemical potentials</strong> (<em>at</em>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">{temp:[]},&#8217;n&#8217;:{temp:[]}} with an array of
-effective mass tensor, eigenvalues of average
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">{temp:[]},&#8217;n&#8217;:{temp:[]}}
+with an array of effective mass tensor, eigenvalues of average
 value (depending on output) for each temperature and for each
 doping level.
 The &#8216;p&#8217; links to hole effective mass tensor and &#8216;n&#8217; to electron
 effective mass tensor.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">a dictionary {&#8216;p&#8217;</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">If doping_levels=True,a dictionary {&#8216;p&#8217;</p>
 </td>
 </tr>
 </tbody>
@@ -324,7 +327,7 @@ of electron chemical potential values</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full</li>
+<li><strong>output</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; the type of output. &#8216;tensor&#8217; give the full</li>
 <li><strong>tensor</strong><strong>, </strong><strong>'eigs' its 3 eigenvalues and</strong> (<em>3x3</em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
@@ -423,7 +426,7 @@ electron chemical potential values</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
+<li><strong>output</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
 <li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor</em><em>,</em><em></em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
@@ -468,7 +471,7 @@ of electron chemical potential values</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full</li>
+<li><strong>output</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; the type of output. &#8216;tensor&#8217; give the full</li>
 <li><strong>tensor</strong><strong>, </strong><strong>'eigs' its 3 eigenvalues and</strong> (<em>3x3</em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
@@ -525,7 +528,7 @@ electron chemical potential values</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
+<li><strong>output</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
 <li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor</em><em>,</em><em></em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
@@ -574,7 +577,7 @@ lattice thermal conductivity</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>output</strong> (<em>string</em>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
+<li><strong>output</strong> (<a class="reference internal" href="pymatgen.util.string.html#module-pymatgen.util.string" title="pymatgen.util.string"><em>string</em></a>) &#8211; the type of output. &#8216;tensor&#8217; give the full 3x3</li>
 <li><strong>'eigs' its 3 eigenvalues and</strong> (<em>tensor</em><em>,</em><em></em>) &#8211; </li>
 <li><strong>the average of the three eigenvalues</strong> (<em>'average'</em>) &#8211; </li>
 <li><strong>doping_levels</strong> (<em>boolean</em>) &#8211; True for the results to be given at</li>
@@ -700,7 +703,7 @@ Raised when the boltztrap gives an error</p>
 
 <dl class="class">
 <dt id="pymatgen.electronic_structure.boltztrap.BoltztrapRunner">
-<em class="property">class </em><code class="descname">BoltztrapRunner</code><span class="sig-paren">(</span><em>bs</em>, <em>nelec</em>, <em>dos_type='HISTO'</em>, <em>energy_grid=0.005</em>, <em>lpfac=10</em>, <em>run_type='BOLTZ'</em>, <em>band_nb=None</em>, <em>tauref=0</em>, <em>tauexp=0</em>, <em>tauen=0</em>, <em>soc=False</em>, <em>doping=None</em>, <em>energy_span_around_fermi=1.5</em>, <em>scissor=0.0</em>, <em>kpt_line=None</em>, <em>spin=None</em>, <em>cond_band=False</em>, <em>tmax=1300</em>, <em>tgrid=50</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/boltztrap.html#BoltztrapRunner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.boltztrap.BoltztrapRunner" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">BoltztrapRunner</code><span class="sig-paren">(</span><em>bs</em>, <em>nelec</em>, <em>dos_type='HISTO'</em>, <em>energy_grid=0.005</em>, <em>lpfac=10</em>, <em>run_type='BOLTZ'</em>, <em>band_nb=None</em>, <em>tauref=0</em>, <em>tauexp=0</em>, <em>tauen=0</em>, <em>soc=False</em>, <em>doping=None</em>, <em>energy_span_around_fermi=1.5</em>, <em>scissor=0.0</em>, <em>kpt_line=None</em>, <em>spin=None</em>, <em>cond_band=False</em>, <em>tmax=1300</em>, <em>tgrid=50</em>, <em>symprec=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/boltztrap.html#BoltztrapRunner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.boltztrap.BoltztrapRunner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>This class is used to run Boltztrap on a band structure object.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -761,6 +764,9 @@ Kpoint objects for BANDS mode calculation (standard path of
 high symmetry k-points is automatically set as default)</li>
 <li><strong>tmax</strong> &#8211; Maximum temperature (K) for calculation (default=1300)</li>
 <li><strong>tgrid</strong> &#8211; Temperature interval for calculation (default=50)</li>
+<li><strong>symprec</strong> &#8211; 1e-3 is the default in pymatgen. If the kmesh has been
+generated using a different symprec, it has to be specified
+to avoid a &#8220;factorization error&#8221; in BoltzTraP calculation.</li>
 </ul>
 </td>
 </tr>
@@ -847,6 +853,11 @@ sym line, for all bands and locally (for each branches) the difference
 squared (%) if nb is specified.</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="pymatgen.electronic_structure.boltztrap.read_cube_file">
+<code class="descname">read_cube_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/electronic_structure/boltztrap.html#read_cube_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.electronic_structure.boltztrap.read_cube_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -885,13 +896,13 @@ squared (%) if nb is specified.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.surface module &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.core.surface module &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -250,6 +250,32 @@ as if each comparison were reversed.</li>
 </dd></dl>
 
 <dl class="method">
+<dt id="pymatgen.core.surface.Slab.get_tasker2_slabs">
+<code class="descname">get_tasker2_slabs</code><span class="sig-paren">(</span><em>tol=0.01</em>, <em>same_species_only=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/core/surface.html#Slab.get_tasker2_slabs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.core.surface.Slab.get_tasker2_slabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of slabs that have been Tasker 2 corrected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tol</strong> (<em>float</em>) &#8211; Tolerance to determine if atoms are within same plane.
+This is a fractional tolerance, not an absolute one.</li>
+<li><strong>same_species_only</strong> (<em>bool</em>) &#8211; If True, only that are of the exact same
+species as the atom at the outermost surface are considered for
+moving. Otherwise, all atoms regardless of species that is
+within tol are considered for moving. Default is True (usually
+the desired behavior).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">([Slab]) List of tasker 2 corrected slabs.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pymatgen.core.surface.Slab.is_polar">
 <code class="descname">is_polar</code><span class="sig-paren">(</span><em>tol_dipole_per_unit_area=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/core/surface.html#Slab.is_polar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.core.surface.Slab.is_polar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether the surface is polar by computing the dipole per unit
@@ -265,6 +291,22 @@ considered non-polar. Defaults to 1e-3, which is usually
 pretty good. Normalized dipole per unit area is used as it is
 more reliable than using the total, which tends to be larger for
 slabs with larger surface areas.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.core.surface.Slab.is_symmetric">
+<code class="descname">is_symmetric</code><span class="sig-paren">(</span><em>symprec=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/core/surface.html#Slab.is_symmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.core.surface.Slab.is_symmetric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if slab is symmetric, i.e., contains inversion symmetry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>symprec</strong> (<em>float</em>) &#8211; Symmetry precision used for SpaceGroup analyzer.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(bool) Whether slab contains inversion symmetry.</td>
 </tr>
 </tbody>
 </table>
@@ -288,8 +330,8 @@ slabs with larger surface areas.</td>
 <dt id="pymatgen.core.surface.SlabGenerator">
 <em class="property">class </em><code class="descname">SlabGenerator</code><span class="sig-paren">(</span><em>initial_structure</em>, <em>miller_index</em>, <em>min_slab_size</em>, <em>min_vacuum_size</em>, <em>lll_reduce=False</em>, <em>center_slab=False</em>, <em>primitive=True</em>, <em>max_normal_search=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/core/surface.html#SlabGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.core.surface.SlabGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>This class generates different slabs using shift values determined by where a
-unique termination can be found along with other criterias such as where a
+<p>This class generates different slabs using shift values determined by where
+a unique termination can be found along with other criterias such as where a
 termination doesn&#8217;t break a polyhedral bond. The shift value then indicates
 where the slab layer will begin and terminate in the slab-vacuum system.</p>
 <dl class="attribute">
@@ -360,7 +402,7 @@ surface. Note that this is referenced to the input structure. If
 you need this to be based on the conventional cell,
 you should supply the conventional structure.</li>
 <li><strong>min_slab_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
-<li><strong>min_vac_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
+<li><strong>min_vacuum_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
 <li><strong>lll_reduce</strong> (<em>bool</em>) &#8211; Whether to perform an LLL reduction on the
 eventual structure.</li>
 <li><strong>center_slab</strong> (<em>bool</em>) &#8211; Whether to center the slab in the cell with
@@ -421,8 +463,8 @@ energy (float): An energy to assign to the slab.</p>
 shift values from the method, _calculate_possible_shifts(). Before the
 shifts are used to create the slabs however, if the user decides to take
 into account whether or not a termination will break any polyhedral
-structure (bonds is not None), this method will filter out any shift values
-that do so.</p>
+structure (bonds is not None), this method will filter out any shift
+values that do so.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -456,16 +498,18 @@ Slabs are sorted by the # of bonds broken.</p>
 <dt id="pymatgen.core.surface.SlabGenerator.symmetrize_slab">
 <code class="descname">symmetrize_slab</code><span class="sig-paren">(</span><em>slab</em>, <em>tol=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/core/surface.html#SlabGenerator.symmetrize_slab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.core.surface.SlabGenerator.symmetrize_slab" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method checks whether or not the two surfaces of the slab are
-equivalent. If the point group of the slab has an inversion symmetry (ie.
-belong to one of the Laue groups), then it is assumed that the surfaces
-should be equivalent. Otherwise, sites at the bottom of the slab will be
-removed until the slab is symmetric. Note that this method should only be
-limited to elemental structures as the removal of sites can destroy the
-stoichiometry of the slab. For non-elemental structures, use is_polar().
-Arg:</p>
-<blockquote>
-<div>slab (Structure): A single slab structure
-tol (float): Tolerance for SpaceGroupanalyzer.</div></blockquote>
+equivalent. If the point group of the slab has an inversion symmetry (
+ie. belong to one of the Laue groups), then it is assumed that the
+surfaces should be equivalent. Otherwise, sites at the bottom of the
+slab will be removed until the slab is symmetric. Note that this method
+should only be limited to elemental structures as the removal of sites
+can destroy the stoichiometry of the slab. For non-elemental
+structures, use is_polar().</p>
+<dl class="docutils">
+<dt>Arg:</dt>
+<dd>slab (Structure): A single slab structure
+tol (float): Tolerance for SpaceGroupanalyzer.</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -499,7 +543,7 @@ crystallographic definitions, you should supply a conventional
 unit cell structure.</li>
 <li><strong>max_index</strong> (<em>int</em>) &#8211; The maximum Miller index to go up to.</li>
 <li><strong>min_slab_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
-<li><strong>min_vac_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
+<li><strong>min_vacuum_size</strong> (<em>float</em>) &#8211; In Angstroms</li>
 <li><strong>bonds</strong> (<em>{</em><em>(</em><em>specie1</em><em>, </em><em>specie2</em>) &#8211; max_bond_dist}: bonds are
 specified as a dict of tuples: float of specie1, specie2
 and the max bonding distance. For example, PO4 groups may be
@@ -614,13 +658,13 @@ structure. All other indices are equivalent to one of these.</div></blockquote>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.6.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.0 documentation</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

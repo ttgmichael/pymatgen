@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.diffusion_analyzer &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.analysis.diffusion_analyzer &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -63,6 +63,7 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">scipy.constants</span> <span class="k">as</span> <span class="nn">const</span>
 
 <span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
@@ -104,7 +105,7 @@
 
 <span class="sd">    .. attribute: diffusivity</span>
 
-<span class="sd">        Diffusivity in cm^2 / cm</span>
+<span class="sd">        Diffusivity in cm^2 / s</span>
 
 <span class="sd">    .. attribute: conductivity</span>
 
@@ -112,7 +113,7 @@
 
 <span class="sd">    .. attribute: diffusivity_components</span>
 
-<span class="sd">        A vector with diffusivity in the a, b and c directions in cm^2 / cm</span>
+<span class="sd">        A vector with diffusivity in the a, b and c directions in cm^2 / s</span>
 
 <span class="sd">    .. attribute: conductivity_components</span>
 
@@ -120,7 +121,7 @@
 
 <span class="sd">    .. attribute: diffusivity_sigma</span>
 
-<span class="sd">        Std dev in diffusivity in cm^2 / cm. Note that this makes sense only</span>
+<span class="sd">        Std dev in diffusivity in cm^2 / s. Note that this makes sense only</span>
 <span class="sd">        for non-smoothed analyses.</span>
 
 <span class="sd">    .. attribute: conductivity_sigma</span>
@@ -167,7 +168,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">displacements</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span>
                  <span class="n">time_step</span><span class="p">,</span> <span class="n">step_skip</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">min_obs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-                 <span class="n">avg_nsteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+                 <span class="n">avg_nsteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">lattices</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This constructor is meant to be used with pre-processed data.</span>
 <span class="sd">        Other convenient constructors are provided as class methods (see</span>
@@ -218,6 +219,8 @@
 <span class="sd">            avg_nsteps (int): Used with smoothed=&quot;constant&quot;. Determines the</span>
 <span class="sd">                number of time steps to average over to get the msd for each</span>
 <span class="sd">                timestep. Default of 1000 is usually pretty good.</span>
+<span class="sd">            lattices (array): Numpy array of lattice matrix of every step</span>
+<span class="sd">                in NPT-AIMD. For NVT-AIMD, lattices has only one item.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="n">structure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">disp</span> <span class="o">=</span> <span class="n">displacements</span>
@@ -228,6 +231,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">min_obs</span> <span class="o">=</span> <span class="n">min_obs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">smoothed</span> <span class="o">=</span> <span class="n">smoothed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">avg_nsteps</span> <span class="o">=</span> <span class="n">avg_nsteps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lattices</span> <span class="o">=</span> <span class="n">lattices</span>
+
+        <span class="k">if</span> <span class="n">lattices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lattices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">tolist</span><span class="p">()])</span>
 
         <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">framework_indices</span> <span class="o">=</span> <span class="p">[]</span>
@@ -248,7 +255,6 @@
 
             <span class="c1">#drift corrected position</span>
             <span class="n">dc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disp</span> <span class="o">-</span> <span class="n">drift</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">get_fractional_coords</span><span class="p">(</span><span class="n">dc</span><span class="p">)</span>
 
             <span class="n">nions</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">shape</span>
 
@@ -274,19 +280,17 @@
             <span class="n">sq_disp_ions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">dc</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">dt</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">)</span>
             <span class="n">msd_components</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
 
-            <span class="n">lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">abc</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
-
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">timesteps</span><span class="p">):</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">smoothed</span><span class="p">:</span>
                     <span class="n">dx</span> <span class="o">=</span> <span class="n">dc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
-                    <span class="n">dcomponents</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">lengths</span>
+                    <span class="n">dcomponents</span> <span class="o">=</span> <span class="n">dc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
                 <span class="k">elif</span> <span class="n">smoothed</span> <span class="o">==</span> <span class="s2">&quot;constant&quot;</span><span class="p">:</span>
                     <span class="n">dx</span> <span class="o">=</span> <span class="n">dc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">avg_nsteps</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">dc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">avg_nsteps</span><span class="p">,</span> <span class="p">:]</span>
-                    <span class="n">dcomponents</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">avg_nsteps</span><span class="p">,</span> <span class="p">:]</span>
-                                   <span class="o">-</span> <span class="n">df</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">avg_nsteps</span><span class="p">,</span> <span class="p">:])</span> <span class="o">*</span> <span class="n">lengths</span>
+                    <span class="n">dcomponents</span> <span class="o">=</span> <span class="n">dc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">avg_nsteps</span><span class="p">,</span> <span class="p">:]</span> \
+                        <span class="o">-</span> <span class="n">dc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">avg_nsteps</span><span class="p">,</span> <span class="p">:]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">dx</span> <span class="o">=</span> <span class="n">dc</span><span class="p">[:,</span> <span class="n">n</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">dc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="p">:]</span>
-                    <span class="n">dcomponents</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[:,</span> <span class="n">n</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="p">:])</span> <span class="o">*</span> <span class="n">lengths</span>
+                    <span class="n">dcomponents</span> <span class="o">=</span> <span class="n">dc</span><span class="p">[:,</span> <span class="n">n</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">dc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="p">:]</span>
                 <span class="n">sq_disp</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span>
                 <span class="n">sq_disp_ions</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sq_disp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">msd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">sq_disp_ions</span><span class="p">[:,</span> <span class="n">i</span><span class="p">][</span><span class="n">indices</span><span class="p">])</span>
@@ -372,9 +376,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">cart_coords</span><span class="p">)</span>
         <span class="n">species</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">species_and_occu</span>
-        <span class="n">latt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">lattice</span>
+        <span class="n">lattices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattices</span>
         <span class="n">nsites</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corrected_displacements</span><span class="o">.</span><span class="n">shape</span>
+
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span> <span class="n">stop</span> <span class="ow">or</span> <span class="n">nsteps</span><span class="p">,</span> <span class="n">step</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">latt</span> <span class="o">=</span> <span class="n">lattices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lattices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">lattices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">yield</span> <span class="n">Structure</span><span class="p">(</span>
                     <span class="n">latt</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span>
                     <span class="n">coords</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">corrected_displacements</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:],</span>
@@ -420,13 +426,21 @@
 <span class="sd">        but doesn&#39;t constitute melting).</span>
 
 <span class="sd">        Args:</span>
+<span class="sd">            plt (matplotlib.pyplot): If plt is supplied, changes will be made to an</span>
+<span class="sd">                existing plot. Otherwise, a new plot will be created.</span>
 <span class="sd">            granularity (int): Number of structures to match</span>
 <span class="sd">            matching_s (Structure): Optionally match to a disordered structure</span>
 <span class="sd">                instead of the first structure in the analyzer. Required when</span>
 <span class="sd">                a secondary mobile ion is present.</span>
+<span class="sd">        Notes:</span>
+<span class="sd">            The method doesn&#39;t apply to NPT-AIMD simulation analysis.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">pymatgen.util.plotting_utils</span> <span class="k">import</span> <span class="n">get_publication_quality_plot</span>
-        <span class="n">plt</span> <span class="o">=</span> <span class="n">get_publication_quality_plot</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">pymatgen.util.plotting</span> <span class="k">import</span> <span class="n">pretty_plot</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattices</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Note the method doesn&#39;t apply to NPT-AIMD &quot;</span>
+                          <span class="s2">&quot;simulation analysis!&quot;</span><span class="p">)</span>
+
+        <span class="n">plt</span> <span class="o">=</span> <span class="n">pretty_plot</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
         <span class="n">step</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">corrected_displacements</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">granularity</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">matching_s</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">f</span><span class="o">.</span><span class="n">remove_species</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">specie</span><span class="p">])</span>
@@ -468,8 +482,8 @@
 <span class="sd">            mode (str): Determines type of msd plot. By &quot;species&quot;, &quot;sites&quot;,</span>
 <span class="sd">                or direction (default).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">pymatgen.util.plotting_utils</span> <span class="k">import</span> <span class="n">get_publication_quality_plot</span>
-        <span class="n">plt</span> <span class="o">=</span> <span class="n">get_publication_quality_plot</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">pymatgen.util.plotting</span> <span class="k">import</span> <span class="n">pretty_plot</span>
+        <span class="n">plt</span> <span class="o">=</span> <span class="n">pretty_plot</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100000</span><span class="p">:</span>
             <span class="n">plot_dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">/</span> <span class="mi">1000</span>
             <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;ps&#39;</span>
@@ -588,31 +602,37 @@
 <span class="sd">            initial_structure (Structure): Like initial_disp, this is used</span>
 <span class="sd">                for iterative computations of estimates of the diffusivity. You</span>
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
-<span class="sd">                initial strcture from which the current set of displacements</span>
+<span class="sd">                initial structure from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">structures</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">structure</span> <span class="o">=</span> <span class="n">s</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">])</span>
-
+            <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">cart_coords</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">])</span>
+            <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">initial_structure</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">initial_structure</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">])</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">initial_structure</span><span class="o">.</span><span class="n">cart_coords</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">])</span>
+            <span class="n">l</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">initial_structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">l</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># If is NVT-AIMD, clear lattice data.</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">dp</span> <span class="o">=</span> <span class="n">p</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">dp</span> <span class="o">=</span> <span class="n">dp</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span>
-        <span class="n">f_disp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">disp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">initial_disp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">f_disp</span> <span class="o">+=</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">get_fractional_coords</span><span class="p">(</span><span class="n">initial_disp</span><span class="p">)[:,</span>
-                                                              <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
-        <span class="n">disp</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">get_cartesian_coords</span><span class="p">(</span><span class="n">f_disp</span><span class="p">)</span>
+            <span class="n">disp</span> <span class="o">+=</span> <span class="n">initial_disp</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span>
-                   <span class="n">time_step</span><span class="p">,</span> <span class="n">step_skip</span><span class="o">=</span><span class="n">step_skip</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="n">smoothed</span><span class="p">,</span>
-                   <span class="n">min_obs</span><span class="o">=</span><span class="n">min_obs</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">avg_nsteps</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span>
+                   <span class="n">step_skip</span><span class="o">=</span><span class="n">step_skip</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="n">smoothed</span><span class="p">,</span>
+                   <span class="n">min_obs</span><span class="o">=</span><span class="n">min_obs</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">avg_nsteps</span><span class="p">,</span> <span class="n">lattices</span><span class="o">=</span><span class="n">l</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="DiffusionAnalyzer.from_vaspruns"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_vaspruns">[docs]</a>    <span class="k">def</span> <span class="nf">from_vaspruns</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">vaspruns</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">min_obs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
@@ -664,7 +684,7 @@
 <span class="sd">            initial_structure (Structure): Like initial_disp, this is used</span>
 <span class="sd">                for iterative computations of estimates of the diffusivity. You</span>
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
-<span class="sd">                initial strcture from which the current set of displacements</span>
+<span class="sd">                initial stricture from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -753,7 +773,7 @@
 <span class="sd">            initial_structure (Structure): Like initial_disp, this is used</span>
 <span class="sd">                for iterative computations of estimates of the diffusivity. You</span>
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
-<span class="sd">                initial strcture from which the current set of displacements</span>
+<span class="sd">                initial structure from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ncores</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">filepaths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -776,6 +796,7 @@
                     <span class="k">yield</span> <span class="n">v</span>
                     <span class="c1"># Recompute offset.</span>
                     <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">nionic_steps</span> <span class="o">-</span> <span class="n">offset</span><span class="p">))</span> <span class="o">%</span> <span class="n">step_skip</span>
+
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_vaspruns</span><span class="p">(</span><span class="n">vr</span><span class="p">(</span><span class="n">filepaths</span><span class="p">),</span> <span class="n">min_obs</span><span class="o">=</span><span class="n">min_obs</span><span class="p">,</span>
                 <span class="n">smoothed</span><span class="o">=</span><span class="n">smoothed</span><span class="p">,</span> <span class="n">specie</span><span class="o">=</span><span class="n">specie</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="n">initial_disp</span><span class="p">,</span>
                 <span class="n">initial_structure</span><span class="o">=</span><span class="n">initial_structure</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">avg_nsteps</span><span class="p">)</span></div>
@@ -792,7 +813,8 @@
             <span class="s2">&quot;step_skip&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_skip</span><span class="p">,</span>
             <span class="s2">&quot;min_obs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_obs</span><span class="p">,</span>
             <span class="s2">&quot;smoothed&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">smoothed</span><span class="p">,</span>
-            <span class="s2">&quot;avg_nsteps&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_nsteps</span>
+            <span class="s2">&quot;avg_nsteps&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_nsteps</span><span class="p">,</span>
+            <span class="s2">&quot;lattices&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattices</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="p">}</span></div>
 
     <span class="nd">@classmethod</span>
@@ -802,7 +824,9 @@
                    <span class="n">temperature</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span> <span class="n">time_step</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;time_step&quot;</span><span class="p">],</span>
                    <span class="n">step_skip</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;step_skip&quot;</span><span class="p">],</span> <span class="n">min_obs</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;min_obs&quot;</span><span class="p">],</span>
                    <span class="n">smoothed</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;smoothed&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">),</span>
-                   <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;avg_nsteps&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span></div></div>
+                   <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;avg_nsteps&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
+                   <span class="n">lattices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lattices&quot;</span><span class="p">,</span>
+                                           <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">][</span><span class="s2">&quot;lattice&quot;</span><span class="p">][</span><span class="s2">&quot;matrix&quot;</span><span class="p">]])))</span></div></div>
 
 
 <div class="viewcode-block" id="get_conversion_factor"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.get_conversion_factor">[docs]</a><span class="k">def</span> <span class="nf">get_conversion_factor</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
@@ -923,8 +947,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Ea</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fit_arrhenius</span><span class="p">(</span><span class="n">temps</span><span class="p">,</span> <span class="n">diffusivities</span><span class="p">)</span>
 
-    <span class="kn">from</span> <span class="nn">pymatgen.util.plotting_utils</span> <span class="k">import</span> <span class="n">get_publication_quality_plot</span>
-    <span class="n">plt</span> <span class="o">=</span> <span class="n">get_publication_quality_plot</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">pymatgen.util.plotting</span> <span class="k">import</span> <span class="n">pretty_plot</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="n">pretty_plot</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 
     <span class="c1"># log10 of the arrhenius fit</span>
     <span class="n">arr</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">k</span> <span class="o">/</span> <span class="n">const</span><span class="o">.</span><span class="n">e</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temps</span><span class="p">)))</span>
@@ -975,14 +999,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

@@ -1063,7 +1063,7 @@ class GaussianOutput(object):
         Args:
             coords: internal coordinate name to use as abcissa.
         """
-        from pymatgen.util.plotting_utils import get_publication_quality_plot
+        from pymatgen.util.plotting import get_publication_quality_plot
 
         plt = get_publication_quality_plot(12, 8)
 
@@ -1140,7 +1140,7 @@ class GaussianOutput(object):
                     the sum of gaussian functions (spectra).
             A matplotlib plot.
         """
-        from pymatgen.util.plotting_utils import get_publication_quality_plot
+        from pymatgen.util.plotting import get_publication_quality_plot
         from matplotlib.mlab import normpdf
         plt = get_publication_quality_plot(12, 8)
 

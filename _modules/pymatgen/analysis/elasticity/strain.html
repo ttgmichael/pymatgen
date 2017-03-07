@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.strain &#8212; pymatgen 4.6.2 documentation</title>
+    <title>pymatgen.analysis.elasticity.strain &#8212; pymatgen 4.7.0 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.6.2',
+        VERSION:     '4.7.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -73,7 +73,6 @@
 <span class="kn">from</span> <span class="nn">pymatgen.core.lattice</span> <span class="k">import</span> <span class="n">Lattice</span>
 <span class="kn">from</span> <span class="nn">pymatgen.analysis.elasticity.tensors</span> <span class="k">import</span> <span class="n">SquareTensor</span><span class="p">,</span> <span class="n">voigt_map</span>
 <span class="kn">from</span> <span class="nn">pymatgen.symmetry.analyzer</span> <span class="k">import</span> <span class="n">SpacegroupAnalyzer</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
 
@@ -274,11 +273,6 @@
         <span class="n">vscale</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span> <span class="o">*=</span> <span class="mi">2</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Strain</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">strain_matrix</span><span class="p">,</span> <span class="n">vscale</span><span class="o">=</span><span class="n">vscale</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dfm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Constructing a strain object without a deformation&quot;</span>
-                          <span class="s2">&quot; matrix may result in a non-independent &quot;</span>
-                          <span class="s2">&quot;deformation  Use Strain.from_deformation to &quot;</span>
-                          <span class="s2">&quot;construct a Strain from a deformation gradient.&quot;</span><span class="p">)</span>
-
             <span class="n">obj</span><span class="o">.</span><span class="n">_dfm</span> <span class="o">=</span> <span class="n">convert_strain_to_deformation</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dfm</span> <span class="o">=</span> <span class="n">Deformation</span><span class="p">(</span><span class="n">dfm</span><span class="p">)</span>
@@ -381,19 +375,15 @@
     <span class="k">def</span> <span class="nf">j</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j</span></div>
 
-<div class="viewcode-block" id="convert_strain_to_deformation"><a class="viewcode-back" href="../../../../pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.convert_strain_to_deformation">[docs]</a><span class="k">def</span> <span class="nf">convert_strain_to_deformation</span><span class="p">(</span><span class="n">strain</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+<div class="viewcode-block" id="convert_strain_to_deformation"><a class="viewcode-back" href="../../../../pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.convert_strain_to_deformation">[docs]</a><span class="k">def</span> <span class="nf">convert_strain_to_deformation</span><span class="p">(</span><span class="n">strain</span><span class="p">):</span>
     <span class="n">strain</span> <span class="o">=</span> <span class="n">SquareTensor</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span>
     <span class="n">ftdotf</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">strain</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">eigs</span><span class="p">,</span> <span class="n">eigvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">ftdotf</span><span class="p">)</span>
+    <span class="n">eigs</span><span class="p">,</span> <span class="n">eigvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">ftdotf</span><span class="p">)</span>
     <span class="n">rotated</span> <span class="o">=</span> <span class="n">ftdotf</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">eigvecs</span><span class="p">))</span>
     <span class="n">rotated</span> <span class="o">=</span> <span class="n">rotated</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">defo</span> <span class="o">=</span> <span class="n">Deformation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rotated</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">defo</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">eigvecs</span><span class="p">)</span>
-    <span class="n">rd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">strain</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">result</span><span class="p">),</span><span class="n">result</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
-    <span class="k">assert</span> <span class="p">(</span><span class="n">rd</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="s2">&quot;Strain-generated deformation is not valid!&quot;</span>
     <span class="k">return</span> <span class="n">result</span></div>
-
-
 </pre></div>
 
           </div>
@@ -424,14 +414,14 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.6.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
