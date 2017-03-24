@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.structure_analyzer module &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.analysis.structure_analyzer module &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -166,7 +166,7 @@ VoronoiCoordFinder class.</li>
 </table>
 <dl class="method">
 <dt id="pymatgen.analysis.structure_analyzer.OrderParameters.compute_trigonometric_terms">
-<code class="descname">compute_trigonometric_terms</code><span class="sig-paren">(</span><em>thetas=[]</em>, <em>phis=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.compute_trigonometric_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.compute_trigonometric_terms" title="Permalink to this definition">¶</a></dt>
+<code class="descname">compute_trigonometric_terms</code><span class="sig-paren">(</span><em>thetas</em>, <em>phis</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.compute_trigonometric_terms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.compute_trigonometric_terms" title="Permalink to this definition">¶</a></dt>
 <dd><p>&#8221;
 Computes trigonometric terms that are required to
 calculate bond orientational order parameters.</p>
@@ -193,7 +193,7 @@ of neighbors in the list of polar angles.</li>
 
 <dl class="method">
 <dt id="pymatgen.analysis.structure_analyzer.OrderParameters.get_order_parameters">
-<code class="descname">get_order_parameters</code><span class="sig-paren">(</span><em>structure</em>, <em>n</em>, <em>indeces_neighs=[]</em>, <em>tol=0.0</em>, <em>target_spec=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_order_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_order_parameters" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_order_parameters</code><span class="sig-paren">(</span><em>structure</em>, <em>n</em>, <em>indeces_neighs=None</em>, <em>tol=0.0</em>, <em>target_spec=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_order_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_order_parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute all order parameters of site n.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -264,7 +264,7 @@ are to be returned</td>
 
 <dl class="method">
 <dt id="pymatgen.analysis.structure_analyzer.OrderParameters.get_q2">
-<code class="descname">get_q2</code><span class="sig-paren">(</span><em>thetas=[]</em>, <em>phis=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_q2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_q2" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_q2</code><span class="sig-paren">(</span><em>thetas=None</em>, <em>phis=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_q2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_q2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the value of the bond orientational order parameter of
 weight l=2.  If the function is called with non-empty lists of
 polar and azimuthal angles the corresponding trigonometric terms
@@ -297,7 +297,7 @@ compute_trigonometric_terms function has been just called.</p>
 
 <dl class="method">
 <dt id="pymatgen.analysis.structure_analyzer.OrderParameters.get_q4">
-<code class="descname">get_q4</code><span class="sig-paren">(</span><em>thetas=[]</em>, <em>phis=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_q4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_q4" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_q4</code><span class="sig-paren">(</span><em>thetas=None</em>, <em>phis=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_q4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_q4" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the value of the bond orientational order parameter of
 weight l=4.  If the function is called with non-empty lists of
 polar and azimuthal angles the corresponding trigonometric terms
@@ -330,7 +330,7 @@ compute_trigonometric_terms function has been just called.</p>
 
 <dl class="method">
 <dt id="pymatgen.analysis.structure_analyzer.OrderParameters.get_q6">
-<code class="descname">get_q6</code><span class="sig-paren">(</span><em>thetas=[]</em>, <em>phis=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_q6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_q6" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_q6</code><span class="sig-paren">(</span><em>thetas=None</em>, <em>phis=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/structure_analyzer.html#OrderParameters.get_q6"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.structure_analyzer.OrderParameters.get_q6" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the value of the bond orientational order parameter of
 weight l=6.  If the function is called with non-empty lists of
 polar and azimuthal angles the corresponding trigonometric terms
@@ -924,7 +924,7 @@ center.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.serializers.pickle_coders &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.serializers.pickle_coders &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -72,7 +72,7 @@
 
 <div class="viewcode-block" id="PmgPickler"><a class="viewcode-back" href="../../../pymatgen.serializers.pickle_coders.html#pymatgen.serializers.pickle_coders.PmgPickler">[docs]</a><span class="k">class</span> <span class="nc">PmgPickler</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">Pickler</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Persistence of External Objects as described in section 12.1.5.1 of </span>
+<span class="sd">    Persistence of External Objects as described in section 12.1.5.1 of</span>
 <span class="sd">    https://docs.python.org/3/library/pickle.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="PmgPickler.persistent_id"><a class="viewcode-back" href="../../../pymatgen.serializers.pickle_coders.html#pymatgen.serializers.pickle_coders.PmgPickler.persistent_id">[docs]</a>    <span class="k">def</span> <span class="nf">persistent_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
@@ -87,7 +87,7 @@
 
 <div class="viewcode-block" id="PmgUnpickler"><a class="viewcode-back" href="../../../pymatgen.serializers.pickle_coders.html#pymatgen.serializers.pickle_coders.PmgUnpickler">[docs]</a><span class="k">class</span> <span class="nc">PmgUnpickler</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">Unpickler</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Persistence of External Objects as described in section 12.1.5.1 of </span>
+<span class="sd">    Persistence of External Objects as described in section 12.1.5.1 of</span>
 <span class="sd">    https://docs.python.org/3/library/pickle.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="PmgUnpickler.persistent_load"><a class="viewcode-back" href="../../../pymatgen.serializers.pickle_coders.html#pymatgen.serializers.pickle_coders.PmgUnpickler.persistent_load">[docs]</a>    <span class="k">def</span> <span class="nf">persistent_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">):</span>
@@ -98,11 +98,11 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">type_tag</span><span class="p">,</span> <span class="n">key_id</span> <span class="o">=</span> <span class="n">pid</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="c1"># Sometimes we get a string such as (&#39;Element&#39;, u&#39;C&#39;) instead </span>
+            <span class="c1"># Sometimes we get a string such as (&#39;Element&#39;, u&#39;C&#39;) instead</span>
             <span class="c1"># of a real tuple. Use ast to evalute the expression (much safer than eval).</span>
             <span class="kn">import</span> <span class="nn">ast</span>
             <span class="n">type_tag</span><span class="p">,</span> <span class="n">key_id</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
-            <span class="c1">#raise pickle.UnpicklingError(&quot;Exception:\n%s\npid: %s\ntype(pid)%s&quot; % </span>
+            <span class="c1">#raise pickle.UnpicklingError(&quot;Exception:\n%s\npid: %s\ntype(pid)%s&quot; %</span>
             <span class="c1">#    (str(exc), str(pid), type(pid)))</span>
 
         <span class="k">if</span> <span class="n">type_tag</span> <span class="o">==</span> <span class="s2">&quot;Element&quot;</span><span class="p">:</span>
@@ -122,7 +122,7 @@
 <span class="sd">        \*\*kwargs: Any of the keyword arguments supported by PmgUnpickler</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Deserialized object. </span>
+<span class="sd">        Deserialized object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#return pickle.load(filobj, **kwargs)</span>
     <span class="k">return</span> <span class="n">PmgUnpickler</span><span class="p">(</span><span class="n">filobj</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span></div>
@@ -140,6 +140,20 @@
     <span class="c1">#return pickle.dump(obj, filobj)</span>
     <span class="c1">#print(type(obj), type(filobj))</span>
     <span class="k">return</span> <span class="n">PmgPickler</span><span class="p">(</span><span class="n">filobj</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SlotPickleMixin"><a class="viewcode-back" href="../../../pymatgen.serializers.pickle_coders.html#pymatgen.serializers.pickle_coders.SlotPickleMixin">[docs]</a><span class="k">class</span> <span class="nc">SlotPickleMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This mixin makes it possible to pickle/unpickle objects with __slots__ defined.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">))</span> <span class="k">for</span> <span class="n">slot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__slots__</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">slot</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -170,7 +184,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

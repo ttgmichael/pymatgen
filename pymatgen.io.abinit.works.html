@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.works module &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.works module &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -57,7 +57,7 @@
             
   <div class="section" id="module-pymatgen.io.abinit.works">
 <span id="pymatgen-io-abinit-works-module"></span><h1>pymatgen.io.abinit.works module<a class="headerlink" href="#module-pymatgen.io.abinit.works" title="Permalink to this headline">¶</a></h1>
-<p>Works for Abinit:</p>
+<p>Works for Abinit</p>
 <dl class="class">
 <dt id="pymatgen.io.abinit.works.Work">
 <em class="property">class </em><code class="descname">Work</code><span class="sig-paren">(</span><em>workdir=None</em>, <em>manager=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/works.html#Work"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.works.Work" title="Permalink to this definition">¶</a></dt>
@@ -505,14 +505,14 @@ All input can be either single inputs or lists of inputs</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>scf_inputs</strong> &#8211; Input for the SCF run, if it is a list add all but only link
+<li><strong>scf_inputs</strong> &#8211; Input(s) for the SCF run, if it is a list add all but only link
 to the last input (used for convergence studies on the KS band gap)</li>
-<li><strong>nscf_inputs</strong> &#8211; Input for the NSCF run, if it is a list add all but only
+<li><strong>nscf_inputs</strong> &#8211; Input(s) for the NSCF run, if it is a list add all but only
 link to the last (i.e. addditiona DOS and BANDS)</li>
 <li><strong>scr_inputs</strong> &#8211; Input for the screening run</li>
 <li><strong>sigma_inputs</strong> &#8211; List of :class:AbinitInput`for the self-energy run.
-if scr and sigma are lists of the same length every sigma gets it&#8217;s own screening
-if there is only one screening all sigma&#8217;s link to this one</li>
+if scr and sigma are lists of the same length, every sigma gets its own screening.
+if there is only one screening all sigma inputs are linked to this one</li>
 <li><strong>workdir</strong> &#8211; Working directory of the calculation.</li>
 <li><strong>manager</strong> &#8211; <code class="xref py py-class docutils literal"><span class="pre">TaskManager</span></code> object.</li>
 </ul>
@@ -744,7 +744,7 @@ the final DDB file in the outdir of the <cite>Work</cite>.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>
 

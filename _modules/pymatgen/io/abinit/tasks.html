@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.tasks &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.tasks &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -79,7 +79,7 @@
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">zip</span><span class="p">,</span> <span class="n">StringIO</span>
 <span class="kn">from</span> <span class="nn">monty.dev</span> <span class="k">import</span> <span class="n">deprecated</span>
 <span class="kn">from</span> <span class="nn">monty.string</span> <span class="k">import</span> <span class="n">is_string</span><span class="p">,</span> <span class="n">list_strings</span>
-<span class="kn">from</span> <span class="nn">monty.termcolor</span> <span class="k">import</span> <span class="n">colored</span>
+<span class="kn">from</span> <span class="nn">monty.termcolor</span> <span class="k">import</span> <span class="n">colored</span><span class="p">,</span> <span class="n">cprint</span>
 <span class="kn">from</span> <span class="nn">monty.collections</span> <span class="k">import</span> <span class="n">AttrDict</span>
 <span class="kn">from</span> <span class="nn">monty.functools</span> <span class="k">import</span> <span class="n">lazy_property</span><span class="p">,</span> <span class="n">return_none_if_raise</span>
 <span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
@@ -104,6 +104,8 @@
     <span class="s2">&quot;TaskManager&quot;</span><span class="p">,</span>
     <span class="s2">&quot;AbinitBuild&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ParalHintsParser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ParalHints&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AbinitTask&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ScfTask&quot;</span><span class="p">,</span>
     <span class="s2">&quot;NscfTask&quot;</span><span class="p">,</span>
     <span class="s2">&quot;RelaxTask&quot;</span><span class="p">,</span>
@@ -301,7 +303,7 @@
                 <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">ParalHints</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints">[docs]</a><span class="k">class</span> <span class="nc">ParalHints</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Iterable with the hints for the parallel execution reported by ABINIT.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -312,7 +314,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ParalConf</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">confs</span><span class="p">]</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_mpi_omp_lists</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mpi_procs</span><span class="p">,</span> <span class="n">omp_threads</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.from_mpi_omp_lists"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.from_mpi_omp_lists">[docs]</a>    <span class="k">def</span> <span class="nf">from_mpi_omp_lists</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mpi_procs</span><span class="p">,</span> <span class="n">omp_threads</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a list of Parallel configurations from two lists</span>
 <span class="sd">        containing the number of MPI processes and the number of OpenMP threads</span>
@@ -324,7 +326,7 @@
         <span class="n">confs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ParalConf</span><span class="p">(</span><span class="n">mpi_ncpus</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">omp_ncpus</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
                  <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">mpi_procs</span><span class="p">,</span> <span class="n">omp_threads</span><span class="p">)]</span>
 
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
@@ -342,38 +344,38 @@
         <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">max_cores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.max_cores"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.max_cores">[docs]</a>    <span class="k">def</span> <span class="nf">max_cores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Maximum number of cores.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">mpi_procs</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">omp_threads</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">mpi_procs</span> <span class="o">*</span> <span class="n">c</span><span class="o">.</span><span class="n">omp_threads</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span></div>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">max_mem_per_proc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.max_mem_per_proc"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.max_mem_per_proc">[docs]</a>    <span class="k">def</span> <span class="nf">max_mem_per_proc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Maximum memory per MPI process.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">mem_per_proc</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">mem_per_proc</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span></div>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">max_speedup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.max_speedup"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.max_speedup">[docs]</a>    <span class="k">def</span> <span class="nf">max_speedup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Maximum speedup.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">speedup</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">speedup</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span></div>
 
     <span class="nd">@lazy_property</span>
-    <span class="k">def</span> <span class="nf">max_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.max_efficiency"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.max_efficiency">[docs]</a>    <span class="k">def</span> <span class="nf">max_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Maximum parallel efficiency.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">efficiency</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">efficiency</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span></div>
 
     <span class="nd">@pmg_serialize</span>
-    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="s2">&quot;confs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="p">}</span>
+<div class="viewcode-block" id="ParalHints.as_dict"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="s2">&quot;confs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="p">}</span></div>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">],</span> <span class="n">confs</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;confs&quot;</span><span class="p">])</span>
+<div class="viewcode-block" id="ParalHints.from_dict"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.from_dict">[docs]</a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">],</span> <span class="n">confs</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;confs&quot;</span><span class="p">])</span></div>
 
-    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.copy"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Shallow copy of self.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">select_with_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.select_with_condition"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.select_with_condition">[docs]</a>    <span class="k">def</span> <span class="nf">select_with_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove all the configurations that do not satisfy the given condition.</span>
 
@@ -392,26 +394,26 @@
             <span class="c1">#if key is &quot;vars&quot;: print(&quot;conf&quot;, conf, &quot;added:&quot;, add_it)</span>
             <span class="k">if</span> <span class="n">add_it</span><span class="p">:</span> <span class="n">new_confs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span> <span class="o">=</span> <span class="n">new_confs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span> <span class="o">=</span> <span class="n">new_confs</span></div>
 
-    <span class="k">def</span> <span class="nf">sort_by_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.sort_by_efficiency"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.sort_by_efficiency">[docs]</a>    <span class="k">def</span> <span class="nf">sort_by_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sort the configurations in place. items with highest efficiency come first&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">efficiency</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
-    <span class="k">def</span> <span class="nf">sort_by_speedup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.sort_by_speedup"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.sort_by_speedup">[docs]</a>    <span class="k">def</span> <span class="nf">sort_by_speedup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sort the configurations in place. items with highest speedup come first&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">speedup</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
-    <span class="k">def</span> <span class="nf">sort_by_mem_per_proc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.sort_by_mem_per_proc"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.sort_by_mem_per_proc">[docs]</a>    <span class="k">def</span> <span class="nf">sort_by_mem_per_proc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sort the configurations in place. items with lowest memory per proc come first.&quot;&quot;&quot;</span>
         <span class="c1"># Avoid sorting if mem_per_cpu is not available.</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">mem_per_proc</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_confs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">mem_per_proc</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
-    <span class="k">def</span> <span class="nf">multidimensional_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priorities</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;speedup&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">)):</span>
+<div class="viewcode-block" id="ParalHints.multidimensional_optimization"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.multidimensional_optimization">[docs]</a>    <span class="k">def</span> <span class="nf">multidimensional_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priorities</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;speedup&quot;</span><span class="p">,</span> <span class="s2">&quot;efficiency&quot;</span><span class="p">)):</span>
         <span class="c1"># Mapping property --&gt; options passed to sparse_histogram</span>
         <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">speedup</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">efficiency</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">mem_per_proc</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="mi">1024</span><span class="p">))</span>
         <span class="c1">#opts = dict(zip(priorities, bin_widths))</span>
@@ -423,7 +425,7 @@
             <span class="n">opt_confs</span> <span class="o">=</span> <span class="n">histogram</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
 
         <span class="c1">#histogram.plot(show=True, savefig=&quot;hello.pdf&quot;)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="o">=</span><span class="n">opt_confs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">confs</span><span class="o">=</span><span class="n">opt_confs</span><span class="p">)</span></div>
 
     <span class="c1">#def histogram_efficiency(self, step=0.1):</span>
     <span class="c1">#    &quot;&quot;&quot;Returns a :class:`SparseHistogram` with configuration grouped by parallel efficiency.&quot;&quot;&quot;</span>
@@ -442,7 +444,7 @@
     <span class="c1">#    new_confs = [pconf for pconf in self if qadapter.can_run_pconf(pconf)]</span>
     <span class="c1">#    return self.__class__(info=self.info, confs=new_confs)</span>
 
-    <span class="k">def</span> <span class="nf">get_ordered_with_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">max_ncpus</span><span class="p">):</span>
+<div class="viewcode-block" id="ParalHints.get_ordered_with_policy"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.ParalHints.get_ordered_with_policy">[docs]</a>    <span class="k">def</span> <span class="nf">get_ordered_with_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">max_ncpus</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sort and return a new list of configurations ordered according to the :class:`TaskPolicy` policy.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -489,7 +491,7 @@
         <span class="c1">#    hints.select_with_condition(dict(num_cores={&quot;$eq&quot;: 1)))</span>
 
         <span class="c1"># Return final (orderded ) list of configurations (best first).</span>
-        <span class="k">return</span> <span class="n">hints</span>
+        <span class="k">return</span> <span class="n">hints</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">TaskPolicy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -645,7 +647,6 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">colored</span><span class="p">(</span>
 		<span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cannot locate </span><span class="si">%s</span><span class="s2"> neither in current directory nor in </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cannot locate </span><span class="si">%s</span><span class="s2"> neither in current directory nor in </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;!!! PLEASE READ THIS: !!!</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;To use abipy to run jobs this file must be present</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;It provides a description of the cluster/computer you are running on</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -839,6 +840,7 @@
                 <span class="n">possible_pconfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">pc</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pconfs</span> <span class="k">if</span> <span class="n">qad</span><span class="o">.</span><span class="n">can_run_pconf</span><span class="p">(</span><span class="n">pc</span><span class="p">)]</span>
 
                 <span class="k">if</span> <span class="n">qad</span><span class="o">.</span><span class="n">allocation</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+                <span class="c1">#if qad.allocation in [&quot;nodes&quot;, &quot;force_nodes&quot;]:</span>
                     <span class="c1"># Select the configuration divisible by nodes if possible.</span>
                     <span class="k">for</span> <span class="n">pconf</span> <span class="ow">in</span> <span class="n">possible_pconfs</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">pconf</span><span class="o">.</span><span class="n">num_cores</span> <span class="o">%</span> <span class="n">qad</span><span class="o">.</span><span class="n">hw</span><span class="o">.</span><span class="n">cores_per_node</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1027,7 +1029,7 @@
         <span class="c1"># Submit the task and save the queue id.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">qjob</span><span class="p">,</span> <span class="n">process</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qadapter</span><span class="o">.</span><span class="n">submit_to_queue</span><span class="p">(</span><span class="n">script_file</span><span class="p">)</span>
-            <span class="n">task</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">S_SUB</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;submitted to queue&#39;</span><span class="p">)</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">S_SUB</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Submitted to queue&#39;</span><span class="p">)</span>
             <span class="n">task</span><span class="o">.</span><span class="n">set_qjob</span><span class="p">(</span><span class="n">qjob</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">process</span>
 
@@ -1108,9 +1110,6 @@
 <span class="sd">        .. attribute:: has_netcdf</span>
 <span class="sd">            True if netcdf is enabled.</span>
 
-<span class="sd">        .. attribute:: has_etsfio</span>
-<span class="sd">            True if etsf-io is enabled.</span>
-
 <span class="sd">        .. attribute:: has_omp</span>
 <span class="sd">            True if OpenMP is enabled.</span>
 
@@ -1147,11 +1146,13 @@
             <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
         <span class="n">qjob</span><span class="p">,</span> <span class="n">process</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">qadapter</span><span class="o">.</span><span class="n">submit_to_queue</span><span class="p">(</span><span class="n">script_file</span><span class="p">)</span>
         <span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="c1"># To avoid: ResourceWarning: unclosed file &lt;_io.BufferedReader name=87&gt; in py3k</span>
+        <span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;Error while executing </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">script_file</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
         <span class="c1"># info string has the following format.</span>
@@ -1202,7 +1203,6 @@
 <span class="sd">         Committed : 0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_netcdf</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">has_etsfio</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_omp</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_mpi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_mpiio</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span>
 
@@ -1215,7 +1215,6 @@
             <span class="k">if</span> <span class="s2">&quot;Version&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="s2">&quot;TRIO flavor&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">has_netcdf</span> <span class="o">=</span> <span class="s2">&quot;netcdf&quot;</span> <span class="ow">in</span> <span class="n">line</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">has_etsfio</span> <span class="o">=</span> <span class="s2">&quot;etsf_io&quot;</span> <span class="ow">in</span> <span class="n">line</span>
             <span class="k">if</span> <span class="s2">&quot;openMP support&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_omp</span> <span class="o">=</span> <span class="n">yesno2bool</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
             <span class="k">if</span> <span class="s2">&quot;Parallel build&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_mpi</span> <span class="o">=</span> <span class="n">yesno2bool</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
             <span class="k">if</span> <span class="s2">&quot;Parallel I/O&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_mpiio</span> <span class="o">=</span> <span class="n">yesno2bool</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
@@ -1226,7 +1225,7 @@
         <span class="n">app</span><span class="p">(</span><span class="s2">&quot;Abinit Build Information:&quot;</span><span class="p">)</span>
         <span class="n">app</span><span class="p">(</span><span class="s2">&quot;    Abinit version: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
         <span class="n">app</span><span class="p">(</span><span class="s2">&quot;    MPI: </span><span class="si">%s</span><span class="s2">, MPI-IO: </span><span class="si">%s</span><span class="s2">, OpenMP: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_mpi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_mpiio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_omp</span><span class="p">))</span>
-        <span class="n">app</span><span class="p">(</span><span class="s2">&quot;    Netcdf: </span><span class="si">%s</span><span class="s2">, ETSF-IO: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">has_netcdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_etsfio</span><span class="p">))</span>
+        <span class="n">app</span><span class="p">(</span><span class="s2">&quot;    Netcdf: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_netcdf</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
 
@@ -1686,6 +1685,10 @@
     <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Wait for child process to terminate. Set and return returncode attribute.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_returncode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S_DONE</span><span class="p">,</span> <span class="s2">&quot;status set to Done&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_returncode</span>
@@ -2131,17 +2134,20 @@
                 <span class="n">dest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipath_from_ext</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-                    <span class="c1"># Try netcdf file. TODO: this case should be treated in a cleaner way.</span>
+                    <span class="c1"># Try netcdf file.</span>
+                    <span class="c1"># TODO: this case should be treated in a cleaner way.</span>
                     <span class="n">path</span> <span class="o">+=</span> <span class="s2">&quot;.nc&quot;</span>
                     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span> <span class="n">dest</span> <span class="o">+=</span> <span class="s2">&quot;.nc&quot;</span>
 
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2"> is needed by this task but it does not exist&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span>
 
+                <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dest</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">):</span> <span class="c1"># NC --&gt; NC file</span>
+                    <span class="n">dest</span> <span class="o">+=</span> <span class="s2">&quot;.nc&quot;</span>
+
                 <span class="c1"># Link path to dest if dest link does not exist.</span>
                 <span class="c1"># else check that it points to the expected file.</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Linking path </span><span class="si">%s</span><span class="s2"> --&gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dest</span><span class="p">))</span>
-
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -2443,7 +2449,8 @@
             <span class="k">except</span> <span class="n">QueueAdapterError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                 <span class="c1"># If autoparal cannot find a qadapter to run the calculation raises an Exception</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error trying to find a running configuration:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">straceback</span><span class="p">()</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error while trying to run autoparal in task:</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">task</span><span class="p">),</span> <span class="n">straceback</span><span class="p">())</span>
+                <span class="n">cprint</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S_QCRITICAL</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
                 <span class="k">return</span> <span class="mi">0</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
@@ -2463,11 +2470,12 @@
                 <span class="k">try</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">autoparal_run</span><span class="p">()</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Second call to autoparal succeeded!&quot;</span><span class="p">)</span>
+                    <span class="c1">#cprint(&quot;Second call to autoparal succeeded!&quot;, &quot;green&quot;)</span>
 
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;Second call to autoparal failed with </span><span class="si">%s</span><span class="s2">. Cannot recover!&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
                     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Tried autoparal again but got:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">straceback</span><span class="p">()</span>
-                    <span class="c1"># logger.critical(msg)</span>
+                    <span class="n">cprint</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S_ABICRITICAL</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
                     <span class="k">return</span> <span class="mi">0</span>
 
@@ -2492,14 +2500,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 
-<span class="k">class</span> <span class="nc">AbinitTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask">[docs]</a><span class="k">class</span> <span class="nc">AbinitTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class defining an ABINIT calculation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Results</span> <span class="o">=</span> <span class="n">TaskResults</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.from_input"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.from_input">[docs]</a>    <span class="k">def</span> <span class="nf">from_input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create an instance of `AbinitTask` from an ABINIT input.</span>
 
@@ -2508,10 +2516,10 @@
 <span class="sd">            workdir: Path to the working directory.</span>
 <span class="sd">            manager: :class:`TaskManager` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">temp_shell_task</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.temp_shell_task"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.temp_shell_task">[docs]</a>    <span class="k">def</span> <span class="nf">temp_shell_task</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a Task with a temporary workdir. The task is executed via the shell with 1 MPI proc.</span>
 <span class="sd">        Mainly used for invoking Abinit to get important parameters needed to prepare the real task.</span>
@@ -2524,9 +2532,9 @@
         <span class="c1"># Construct the task and run it</span>
         <span class="n">task</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_input</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">to_shell_manager</span><span class="p">(</span><span class="n">mpi_procs</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">task</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s1">&#39;temp_shell_task&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">task</span>
+        <span class="k">return</span> <span class="n">task</span></div>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.setup"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Abinit has the very *bad* habit of changing the file extension by appending the characters in [A,B ..., Z]</span>
 <span class="sd">        to the output file, and this breaks a lot of code that relies of the use of a unique file extension.</span>
@@ -2550,7 +2558,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_file</span><span class="o">.</span><span class="n">exists</span><span class="p">:</span> <span class="n">logs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rename_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_file</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">logs</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">logs</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">logs</span><span class="p">))</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">executable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2609,9 +2617,9 @@
 
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_pconfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pconfs</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.set_pconfs"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.set_pconfs">[docs]</a>    <span class="k">def</span> <span class="nf">set_pconfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pconfs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the list of autoparal configurations.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pconfs</span> <span class="o">=</span> <span class="n">pconfs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pconfs</span> <span class="o">=</span> <span class="n">pconfs</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">pconfs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2621,11 +2629,11 @@
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">uses_paral_kgb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.uses_paral_kgb"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.uses_paral_kgb">[docs]</a>    <span class="k">def</span> <span class="nf">uses_paral_kgb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;True if the task is a GS Task and uses paral_kgb with the given value.&quot;&quot;&quot;</span>
         <span class="n">paral_kgb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_inpvar</span><span class="p">(</span><span class="s2">&quot;paral_kgb&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># paral_kgb is used only in the GS part.</span>
-        <span class="k">return</span> <span class="n">paral_kgb</span> <span class="o">==</span> <span class="n">value</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">GsTask</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">paral_kgb</span> <span class="o">==</span> <span class="n">value</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">GsTask</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_change_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_structure</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change the input structure.&quot;&quot;&quot;</span>
@@ -2662,7 +2670,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">set_structure</span><span class="p">(</span><span class="n">new_structure</span><span class="p">)</span>
         <span class="c1">#assert self.input.structure == new_structure</span>
 
-    <span class="k">def</span> <span class="nf">autoparal_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.autoparal_run"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.autoparal_run">[docs]</a>    <span class="k">def</span> <span class="nf">autoparal_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find an optimal set of parameters for the execution of the task</span>
 <span class="sd">        This method can change the ABINIT input variables and/or the</span>
@@ -2701,9 +2709,11 @@
         <span class="n">process</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">to_shell_manager</span><span class="p">(</span><span class="n">mpi_procs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
         <span class="n">retcode</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="c1"># To avoid: ResourceWarning: unclosed file &lt;_io.BufferedReader name=87&gt; in py3k</span>
+        <span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="c1"># Remove the variables added for the automatic parallelization</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">remove_vars</span><span class="p">(</span><span class="n">autoparal_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">remove_vars</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">autoparal_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 
         <span class="c1">##############################################################</span>
         <span class="c1"># Parse the autoparal configurations from the main output file</span>
@@ -2742,18 +2752,18 @@
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stderr_file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
 
-    <span class="k">def</span> <span class="nf">find_optconf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pconfs</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.find_optconf"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.find_optconf">[docs]</a>    <span class="k">def</span> <span class="nf">find_optconf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pconfs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Find the optimal Parallel configuration.&quot;&quot;&quot;</span>
         <span class="c1"># Save pconfs for future reference.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_pconfs</span><span class="p">(</span><span class="n">pconfs</span><span class="p">)</span>
 
         <span class="c1"># Select the partition on which we&#39;ll be running and set MPI/OMP cores.</span>
         <span class="n">optconf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">select_qadapter</span><span class="p">(</span><span class="n">pconfs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">optconf</span>
+        <span class="k">return</span> <span class="n">optconf</span></div>
 
-    <span class="k">def</span> <span class="nf">select_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">what</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.select_files"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.select_files">[docs]</a>    <span class="k">def</span> <span class="nf">select_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">what</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper function used to select the files of a task.</span>
 
@@ -2789,16 +2799,16 @@
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Wrong keyword </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">c</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">selected</span>
+        <span class="k">return</span> <span class="n">selected</span></div>
 
-    <span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.restart"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.restart">[docs]</a>    <span class="k">def</span> <span class="nf">restart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        general restart used when scheduler problems have been taken care of</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_restart</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_restart</span><span class="p">()</span></div>
 
     <span class="c1">#@check_spectator</span>
-    <span class="k">def</span> <span class="nf">reset_from_scratch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.reset_from_scratch"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.reset_from_scratch">[docs]</a>    <span class="k">def</span> <span class="nf">reset_from_scratch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Restart from scratch, this is to be used if a job is restarted with more resources after a crash</span>
 
@@ -2834,10 +2844,10 @@
         <span class="c1"># Reset datetimes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">datetimes</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_restart</span><span class="p">(</span><span class="n">submit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_restart</span><span class="p">(</span><span class="n">submit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
     <span class="c1">#@check_spectator</span>
-    <span class="k">def</span> <span class="nf">fix_abicritical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.fix_abicritical"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.fix_abicritical">[docs]</a>    <span class="k">def</span> <span class="nf">fix_abicritical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        method to fix crashes/error caused by abinit</span>
 
@@ -2878,10 +2888,10 @@
             <span class="k">return</span> <span class="mi">1</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">S_ERROR</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;We encountered AbiCritical events that could not be fixed&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
 
     <span class="c1">#@check_spectator</span>
-    <span class="k">def</span> <span class="nf">fix_queue_critical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.fix_queue_critical"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.fix_queue_critical">[docs]</a>    <span class="k">def</span> <span class="nf">fix_queue_critical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function tries to fix critical events originating from the queue submission system.</span>
 
@@ -3016,9 +3026,9 @@
                     <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;No solution provided for error </span><span class="si">%s</span><span class="s1">. Unrecoverable error.&#39;</span> <span class="o">%</span> <span class="n">error</span><span class="o">.</span><span class="n">name</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S_ERROR</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
 
-    <span class="k">def</span> <span class="nf">parse_timing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AbinitTask.parse_timing"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.parse_timing">[docs]</a>    <span class="k">def</span> <span class="nf">parse_timing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parse the timer data in the main output file of Abinit.</span>
 <span class="sd">        Requires timopt /= 0 in the input file (usually timopt = -1)</span>
@@ -3030,7 +3040,7 @@
         <span class="n">read_ok</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">read_ok</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">parser</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="kc">None</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">ProduceHist</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -3281,10 +3291,12 @@
         <span class="c1"># by the last run that has executed on_done.</span>
         <span class="c1"># ********************************************************************************</span>
         <span class="k">if</span> <span class="n">restart_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">out_den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;out_DEN&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_den</span><span class="p">):</span>
-                <span class="n">irdvars</span> <span class="o">=</span> <span class="n">irdvars_for_ext</span><span class="p">(</span><span class="s2">&quot;DEN&quot;</span><span class="p">)</span>
-                <span class="n">restart_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_to_in</span><span class="p">(</span><span class="n">out_den</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;.nc&quot;</span><span class="p">):</span>
+                <span class="n">out_den</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;out_DEN&quot;</span> <span class="o">+</span> <span class="n">ext</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_den</span><span class="p">):</span>
+                    <span class="n">irdvars</span> <span class="o">=</span> <span class="n">irdvars_for_ext</span><span class="p">(</span><span class="s2">&quot;DEN&quot;</span><span class="p">)</span>
+                    <span class="n">restart_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_to_in</span><span class="p">(</span><span class="n">out_den</span><span class="p">)</span>
+                    <span class="k">break</span>
 
         <span class="k">if</span> <span class="n">restart_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Try to restart from the last TIM?_DEN file.</span>
@@ -3292,7 +3304,10 @@
             <span class="c1"># Find the last TIM?_DEN file.</span>
             <span class="n">last_timden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">find_last_timden_file</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">last_timden</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">ofile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;out_DEN&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">last_timden</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">):</span>
+                    <span class="n">ofile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;out_DEN.nc&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">ofile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;out_DEN&quot;</span><span class="p">)</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">last_timden</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">ofile</span><span class="p">)</span>
                 <span class="n">restart_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_to_in</span><span class="p">(</span><span class="n">ofile</span><span class="p">)</span>
                 <span class="n">irdvars</span> <span class="o">=</span> <span class="n">irdvars_for_ext</span><span class="p">(</span><span class="s2">&quot;DEN&quot;</span><span class="p">)</span>
@@ -3378,6 +3393,7 @@
 
         <span class="c1"># Rename last TIMDEN with out_DEN.</span>
         <span class="n">ofile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;out_DEN&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">last_timden</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">):</span> <span class="n">ofile</span> <span class="o">+=</span> <span class="s2">&quot;.nc&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Renaming last_denfile </span><span class="si">%s</span><span class="s2"> --&gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">last_timden</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">ofile</span><span class="p">))</span>
         <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">last_timden</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">ofile</span><span class="p">)</span></div></div>
 
@@ -3423,9 +3439,115 @@
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<span class="c1"># TODO Remove</span>
 <span class="k">class</span> <span class="nc">DdeTask</span><span class="p">(</span><span class="n">DfptTask</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Task for DDE calculations.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">make_links</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Replace the default behaviour of make_links&quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deps</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dep</span><span class="o">.</span><span class="n">exts</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;DDK&quot;</span><span class="p">]:</span>
+                <span class="n">ddk_task</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">node</span>
+                <span class="n">out_ddk</span> <span class="o">=</span> <span class="n">ddk_task</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;DDK&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">out_ddk</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> didn&#39;t produce the DDK file&quot;</span> <span class="o">%</span> <span class="n">ddk_task</span><span class="p">)</span>
+
+                <span class="c1"># Get (fortran) idir and costruct the name of the 1WF expected by Abinit</span>
+                <span class="n">rfdir</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ddk_task</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;rfdir&quot;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">rfdir</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Only one direction should be specifned in rfdir but rfdir = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rfdir</span><span class="p">)</span>
+
+                <span class="n">idir</span> <span class="o">=</span> <span class="n">rfdir</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">ddk_case</span> <span class="o">=</span> <span class="n">idir</span> <span class="o">+</span>  <span class="mi">3</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ddk_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span>
+
+                <span class="n">infile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_1WF</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ddk_case</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">out_ddk</span><span class="p">,</span> <span class="n">infile</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">dep</span><span class="o">.</span><span class="n">exts</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;WFK&quot;</span><span class="p">]:</span>
+                <span class="n">gs_task</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">node</span>
+                <span class="n">out_wfk</span> <span class="o">=</span> <span class="n">gs_task</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;WFK&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">out_wfk</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> didn&#39;t produce the WFK file&quot;</span> <span class="o">%</span> <span class="n">gs_task</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_WFK&quot;</span><span class="p">)):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">out_wfk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_WFK&quot;</span><span class="p">))</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to handle extension: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">dep</span><span class="o">.</span><span class="n">exts</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DdeTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span><span class="o">.</span><span class="n">register_gridfs_file</span><span class="p">(</span><span class="n">DDB</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;DDE&quot;</span><span class="p">),</span> <span class="s2">&quot;t&quot;</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">DteTask</span><span class="p">(</span><span class="n">DfptTask</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Task for DTE calculations.&quot;&quot;&quot;</span>
+
+    <span class="c1"># @check_spectator</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;autoparal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">DteTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">make_links</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Replace the default behaviour of make_links&quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deps</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dep</span><span class="o">.</span><span class="n">exts</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="s2">&quot;DDK&quot;</span><span class="p">:</span>
+                    <span class="n">ddk_task</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">node</span>
+                    <span class="n">out_ddk</span> <span class="o">=</span> <span class="n">ddk_task</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;DDK&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">out_ddk</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> didn&#39;t produce the DDK file&quot;</span> <span class="o">%</span> <span class="n">ddk_task</span><span class="p">)</span>
+
+                    <span class="c1"># Get (fortran) idir and costruct the name of the 1WF expected by Abinit</span>
+                    <span class="n">rfdir</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ddk_task</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="s2">&quot;rfdir&quot;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">rfdir</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Only one direction should be specifned in rfdir but rfdir = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rfdir</span><span class="p">)</span>
+
+                    <span class="n">idir</span> <span class="o">=</span> <span class="n">rfdir</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">ddk_case</span> <span class="o">=</span> <span class="n">idir</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ddk_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span>
+
+                    <span class="n">infile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_1WF</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ddk_case</span><span class="p">)</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">out_ddk</span><span class="p">,</span> <span class="n">infile</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s2">&quot;WFK&quot;</span><span class="p">:</span>
+                    <span class="n">gs_task</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">node</span>
+                    <span class="n">out_wfk</span> <span class="o">=</span> <span class="n">gs_task</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;WFK&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">out_wfk</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> didn&#39;t produce the WFK file&quot;</span> <span class="o">%</span> <span class="n">gs_task</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_WFK&quot;</span><span class="p">)):</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">out_wfk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_WFK&quot;</span><span class="p">))</span>
+
+
+                <span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s2">&quot;DEN&quot;</span><span class="p">:</span>
+                    <span class="n">gs_task</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">node</span>
+                    <span class="n">out_wfk</span> <span class="o">=</span> <span class="n">gs_task</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;DEN&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">out_wfk</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> didn&#39;t produce the WFK file&quot;</span> <span class="o">%</span> <span class="n">gs_task</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_DEN&quot;</span><span class="p">)):</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">out_wfk</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_DEN&quot;</span><span class="p">))</span>
+
+                <span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s2">&quot;1WF&quot;</span><span class="p">:</span>
+                    <span class="n">gs_task</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">node</span>
+                    <span class="n">out_wfk</span> <span class="o">=</span> <span class="n">gs_task</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;1WF&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">out_wfk</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> didn&#39;t produce the 1WF file&quot;</span> <span class="o">%</span> <span class="n">gs_task</span><span class="p">)</span>
+                    <span class="n">dest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_&quot;</span> <span class="o">+</span> <span class="n">out_wfk</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">out_wfk</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s2">&quot;1DEN&quot;</span><span class="p">:</span>
+                    <span class="n">gs_task</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">node</span>
+                    <span class="n">out_wfk</span> <span class="o">=</span> <span class="n">gs_task</span><span class="o">.</span><span class="n">outdir</span><span class="o">.</span><span class="n">has_abiext</span><span class="p">(</span><span class="s2">&quot;DEN&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">out_wfk</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> didn&#39;t produce the 1WF file&quot;</span> <span class="o">%</span> <span class="n">gs_task</span><span class="p">)</span>
+                    <span class="n">dest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indir</span><span class="o">.</span><span class="n">path_in</span><span class="p">(</span><span class="s2">&quot;in_&quot;</span> <span class="o">+</span> <span class="n">out_wfk</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">out_wfk</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to handle extension: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">dep</span><span class="o">.</span><span class="n">exts</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">results</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DdeTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -4170,9 +4292,11 @@
         <span class="n">process</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">to_shell_manager</span><span class="p">(</span><span class="n">mpi_procs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
         <span class="n">retcode</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="c1"># To avoid: ResourceWarning: unclosed file &lt;_io.BufferedReader name=87&gt; in py3k</span>
+        <span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="c1"># Remove the variables added for the automatic parallelization</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">remove_vars</span><span class="p">(</span><span class="n">autoparal_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">remove_vars</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">autoparal_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 
         <span class="c1">##############################################################</span>
         <span class="c1"># Parse the autoparal configurations from the main output file</span>
@@ -4408,7 +4532,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

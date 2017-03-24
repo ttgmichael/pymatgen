@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.abiobjects &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.abiobjects &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -87,15 +87,15 @@
 <div class="viewcode-block" id="lattice_from_abivars"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiobjects.html#pymatgen.io.abinit.abiobjects.lattice_from_abivars">[docs]</a><span class="k">def</span> <span class="nf">lattice_from_abivars</span><span class="p">(</span><span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a `Lattice` object from a dictionary</span>
-<span class="sd">    with the Abinit variables `acell` and `rprim` in Bohr.</span>
+<span class="sd">    with the Abinit variables `acell` and either `rprim` in Bohr or `angdeg`</span>
 <span class="sd">    If acell is not given, the Abinit default is used i.e. [1,1,1] Bohr</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        cls: Lattice class to be instantiated. pymatgen.core.lattice.Lattice if cls is None</span>
+<span class="sd">        cls: Lattice class to be instantiated. pymatgen.core.lattice.Lattice if `cls` is None</span>
 
 <span class="sd">    Example:</span>
 
-<span class="sd">    lattice_from_abivars(acell=3*[10], rprim=np.eye(3))</span>
+<span class="sd">        lattice_from_abivars(acell=3*[10], rprim=np.eye(3))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">cls</span> <span class="o">=</span> <span class="n">Lattice</span> <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">cls</span>
     <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span>
@@ -105,24 +105,52 @@
     <span class="n">angdeg</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;angdeg&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">acell</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;acell&quot;</span><span class="p">]</span>
 
-    <span class="c1"># Call pymatgen constructors (note that pymatgen uses Angstrom instead of Bohr).</span>
     <span class="k">if</span> <span class="n">rprim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="n">angdeg</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">angdeg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;angdeg and rprimd are mutually exclusive&quot;</span><span class="p">)</span>
         <span class="n">rprim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">rprim</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
         <span class="n">rprimd</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">acell</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">rprim</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="c1"># Call pymatgen constructors (note that pymatgen uses Angstrom instead of Bohr).</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">ArrayWithUnit</span><span class="p">(</span><span class="n">rprimd</span><span class="p">,</span> <span class="s2">&quot;bohr&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;ang&quot;</span><span class="p">))</span>
 
     <span class="k">elif</span> <span class="n">angdeg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># angdeg(0) is the angle between the 2nd and 3rd vectors,</span>
-        <span class="c1"># angdeg(1) is the angle between the 1st and 3rd vectors,</span>
-        <span class="c1"># angdeg(2) is the angle between the 1st and 2nd vectors,</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;angdeg convention should be tested&quot;</span><span class="p">)</span>
-        <span class="n">angles</span> <span class="o">=</span> <span class="n">angdeg</span>
-        <span class="n">angles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">angles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">l</span> <span class="o">=</span> <span class="n">ArrayWithUnit</span><span class="p">(</span><span class="n">acell</span><span class="p">,</span> <span class="s2">&quot;bohr&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;ang&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_lengths_and_angles</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">angdeg</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to construct a Lattice from dict: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span></div>
+        <span class="n">angdeg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">angdeg</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">angdeg</span> <span class="o">&lt;=</span> <span class="mf">0.</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Angles must be &gt; 0 but got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">angdeg</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">angdeg</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mf">360.</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The sum of angdeg must be lower that 360, angdeg </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">angdeg</span><span class="p">))</span>
+
+        <span class="c1"># This code follows the implementation in ingeo.F90</span>
+        <span class="c1"># See also http://www.abinit.org/doc/helpfiles/for-v7.8/input_variables/varbas.html#angdeg</span>
+        <span class="n">tol12</span> <span class="o">=</span> <span class="mf">1e-12</span>
+        <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span>
+        <span class="n">rprim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol12</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">angdeg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol12</span> <span class="ow">and</span>
+            <span class="nb">abs</span><span class="p">(</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mf">90.</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mf">90.</span><span class="p">)</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol12</span><span class="p">):</span>
+            <span class="c1"># Treat the case of equal angles (except all right angles):</span>
+            <span class="c1"># generates trigonal symmetry wrt third axis</span>
+            <span class="n">cosang</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span> <span class="o">*</span> <span class="n">angdeg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">180.0</span><span class="p">)</span>
+            <span class="n">a2</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">/</span><span class="mf">3.0</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">cosang</span><span class="p">)</span>
+            <span class="n">aa</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
+            <span class="n">cc</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">a2</span><span class="p">)</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">aa</span>     <span class="p">;</span> <span class="n">rprim</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>              <span class="p">;</span> <span class="n">rprim</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">aa</span><span class="p">;</span> <span class="n">rprim</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="n">aa</span> <span class="p">;</span> <span class="n">rprim</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">aa</span><span class="p">;</span> <span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="n">aa</span><span class="p">;</span> <span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">cc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Treat all the other cases</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">angdeg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">180.0</span><span class="p">)</span><span class="o">-</span><span class="n">rprim</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">rprim</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">rprim</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Call pymatgen constructors (note that pymatgen uses Angstrom instead of Bohr).</span>
+        <span class="n">rprimd</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">acell</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">rprim</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">ArrayWithUnit</span><span class="p">(</span><span class="n">rprimd</span><span class="p">,</span> <span class="s2">&quot;bohr&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;ang&quot;</span><span class="p">))</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t know how to construct a Lattice from dict: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="structure_from_abivars"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiobjects.html#pymatgen.io.abinit.abiobjects.structure_from_abivars">[docs]</a><span class="k">def</span> <span class="nf">structure_from_abivars</span><span class="p">(</span><span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -152,7 +180,8 @@
 
     <span class="bp">cls</span> <span class="o">=</span> <span class="n">Structure</span> <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">cls</span>
 
-    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;abivars&quot;</span><span class="p">)</span>
+    <span class="c1">#lattice = Lattice.from_dict(d, fmt=&quot;abivars&quot;)</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">lattice_from_abivars</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span>
     <span class="n">coords</span><span class="p">,</span> <span class="n">coords_are_cartesian</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;xred&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">coords</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -178,7 +207,8 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typat</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
         <span class="n">typat</span> <span class="o">=</span> <span class="p">[</span><span class="n">typat</span><span class="p">]</span>
 
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">typat</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">typat</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;len(typat) != len(coords):</span><span class="se">\n</span><span class="s2">typat: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">coords: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">typat</span><span class="p">,</span> <span class="n">coords</span><span class="p">))</span>
 
     <span class="c1"># Note Fortran --&gt; C indexing</span>
     <span class="c1">#znucl_type = np.rint(znucl_type)</span>
@@ -189,7 +219,9 @@
 
 
 <div class="viewcode-block" id="structure_to_abivars"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiobjects.html#pymatgen.io.abinit.abiobjects.structure_to_abivars">[docs]</a><span class="k">def</span> <span class="nf">structure_to_abivars</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a dictionary with the ABINIT variables.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Receives a structure and returns a dictionary with the ABINIT variables.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">types_of_specie</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">types_of_specie</span>
     <span class="n">natom</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">num_sites</span>
 
@@ -488,7 +520,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="n">comment</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">smearing</span> <span class="o">=</span> <span class="n">Smearing</span><span class="o">.</span><span class="n">as_smearing</span><span class="p">(</span><span class="n">smearing</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">spin_mode</span> <span class="o">=</span> <span class="n">SpinMode</span><span class="o">.</span><span class="n">as_spinmode</span><span class="p">(</span><span class="n">spin_mode</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">nband</span> <span class="o">=</span> <span class="n">nband</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fband</span> <span class="o">=</span> <span class="n">fband</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="n">charge</span>
@@ -531,7 +562,6 @@
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;algorithm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">process_decoded</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;algorithm&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;algorithm&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span></div>
 
-
 <div class="viewcode-block" id="Electrons.to_abivars"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiobjects.html#pymatgen.io.abinit.abiobjects.Electrons.to_abivars">[docs]</a>    <span class="k">def</span> <span class="nf">to_abivars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">abivars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spin_mode</span><span class="o">.</span><span class="n">to_abivars</span><span class="p">()</span>
 
@@ -560,8 +590,6 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Input variables defining the K-point sampling.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Modes supported by the constructor.</span>
-
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">KSamplingModes</span><span class="o">.</span><span class="n">monkhorst</span><span class="p">,</span> <span class="n">num_kpts</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
                  <span class="n">kpts</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),),</span>
@@ -813,7 +841,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lattice</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">lattice</span>
         <span class="n">lengths</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">abc</span>
-        <span class="n">ngrid</span> <span class="o">=</span> <span class="n">kppa</span> <span class="o">/</span> <span class="n">structure</span><span class="o">.</span><span class="n">num_sites</span>
+        <span class="n">shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shifts</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">ngrid</span> <span class="o">=</span> <span class="n">kppa</span> <span class="o">/</span> <span class="n">structure</span><span class="o">.</span><span class="n">num_sites</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">shifts</span><span class="p">)</span>
 
         <span class="n">mult</span> <span class="o">=</span> <span class="p">(</span><span class="n">ngrid</span> <span class="o">*</span> <span class="n">lengths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">lengths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">lengths</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">3.</span><span class="p">)</span>
 
@@ -841,8 +870,6 @@
         <span class="c1">#    style = KSamplingModes.monkhorst</span>
 
         <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;pymatge.io.abinit generated KPOINTS with grid density = &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> / atom&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kppa</span><span class="p">)</span>
-
-        <span class="n">shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shifts</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;monkhorst&quot;</span><span class="p">,</span> <span class="n">num_kpts</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">kpts</span><span class="o">=</span><span class="p">[</span><span class="n">num_div</span><span class="p">],</span> <span class="n">kpt_shifts</span><span class="o">=</span><span class="n">shifts</span><span class="p">,</span>
@@ -1003,7 +1030,6 @@
 <span class="sd">    Parameters defining the plasmon-pole technique.</span>
 <span class="sd">    The common way to instanciate a PPModel object is via the class method PPModel.as_ppmodel(string)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="PPModel.as_ppmodel"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.abiobjects.html#pymatgen.io.abinit.abiobjects.PPModel.as_ppmodel">[docs]</a>    <span class="k">def</span> <span class="nf">as_ppmodel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
@@ -1213,6 +1239,7 @@
             <span class="s2">&quot;gwpara&quot;</span>    <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gwpara</span><span class="p">,</span>
             <span class="s2">&quot;awtr&quot;</span>      <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">awtr</span><span class="p">,</span>
             <span class="s2">&quot;symchi&quot;</span>    <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">symchi</span><span class="p">,</span>
+            <span class="s2">&quot;nband&quot;</span>     <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">nband</span><span class="p">,</span>
             <span class="c1">#&quot;gwcalctyp&quot;: self.gwcalctyp,</span>
             <span class="c1">#&quot;fftgw&quot;    : self.fftgw,</span>
             <span class="s2">&quot;optdriver&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">optdriver</span><span class="p">,</span>
@@ -1332,6 +1359,7 @@
             <span class="n">gw_qprange</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gw_qprange</span><span class="p">,</span>
             <span class="n">gwpara</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gwpara</span><span class="p">,</span>
             <span class="n">optdriver</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">optdriver</span><span class="p">,</span>
+            <span class="n">nband</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nband</span>
             <span class="c1">#&quot;ecutwfn&quot;  : self.ecutwfn,</span>
             <span class="c1">#&quot;kptgw&quot;    : self.kptgw,</span>
             <span class="c1">#&quot;nkptgw&quot;   : self.nkptgw,</span>
@@ -1518,7 +1546,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

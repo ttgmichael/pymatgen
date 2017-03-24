@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.abiobjects module &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.abiobjects module &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -789,17 +789,17 @@ One can use as_spinmode to construct the object via SpinMode.as_spinmode
 <dt id="pymatgen.io.abinit.abiobjects.lattice_from_abivars">
 <code class="descname">lattice_from_abivars</code><span class="sig-paren">(</span><em>cls=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/abiobjects.html#lattice_from_abivars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.abiobjects.lattice_from_abivars" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a <cite>Lattice</cite> object from a dictionary
-with the Abinit variables <cite>acell</cite> and <cite>rprim</cite> in Bohr.
+with the Abinit variables <cite>acell</cite> and either <cite>rprim</cite> in Bohr or <cite>angdeg</cite>
 If acell is not given, the Abinit default is used i.e. [1,1,1] Bohr</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cls</strong> &#8211; Lattice class to be instantiated. pymatgen.core.lattice.Lattice if cls is None</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cls</strong> &#8211; Lattice class to be instantiated. pymatgen.core.lattice.Lattice if <cite>cls</cite> is None</td>
 </tr>
 </tbody>
 </table>
-<p>Example:</p>
+<p class="rubric">Example</p>
 <p>lattice_from_abivars(acell=3*[10], rprim=np.eye(3))</p>
 </dd></dl>
 
@@ -836,7 +836,7 @@ znucl=13,</p>
 <dl class="function">
 <dt id="pymatgen.io.abinit.abiobjects.structure_to_abivars">
 <code class="descname">structure_to_abivars</code><span class="sig-paren">(</span><em>structure</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/abiobjects.html#structure_to_abivars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.abiobjects.structure_to_abivars" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary with the ABINIT variables.</p>
+<dd><p>Receives a structure and returns a dictionary with the ABINIT variables.</p>
 </dd></dl>
 
 </div>
@@ -877,7 +877,7 @@ znucl=13,</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>
 

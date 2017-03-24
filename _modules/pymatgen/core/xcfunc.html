@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.xcfunc &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.core.xcfunc &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -184,6 +184,7 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="XcFunc.from_abinit_ixc"><a class="viewcode-back" href="../../../pymatgen.core.xcfunc.html#pymatgen.core.xcfunc.XcFunc.from_abinit_ixc">[docs]</a>    <span class="k">def</span> <span class="nf">from_abinit_ixc</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ixc</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build the object from Abinit ixc (integer)&quot;&quot;&quot;</span>
+        <span class="n">ixc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ixc</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ixc</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="bp">cls</span><span class="o">.</span><span class="n">abinitixc_to_libxc</span><span class="p">[</span><span class="n">ixc</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -349,7 +350,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

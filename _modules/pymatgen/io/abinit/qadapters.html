@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.qadapters &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.qadapters &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -131,7 +131,7 @@
 <span class="sd">    different syntax and options supported by the different mpirunners.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
 
@@ -163,7 +163,7 @@
                            <span class="s2">&quot;--exe `which &quot;</span> <span class="o">+</span> <span class="n">executable</span> <span class="o">+</span> <span class="s2">&quot;` &quot;</span><span class="p">,</span> <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">qad</span><span class="o">.</span><span class="n">mpi_procs</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot use mpi_procs &gt; when mpi_runner basename=%&quot;</span> <span class="o">%</span> <span class="n">basename</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot use mpi_procs &gt; when mpi_runner basename=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">basename</span><span class="p">)</span>
             <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">executable</span><span class="p">,</span> <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">cmd</span>
@@ -171,7 +171,7 @@
     <span class="c1">#@property</span>
     <span class="c1">#def has_mpirun(self):</span>
     <span class="c1">#    &quot;&quot;&quot;True if we are running via mpirun, mpiexec ...&quot;&quot;&quot;</span>
-    <span class="c1">#    return self.name is not None</span>
+    <span class="c1">#    return self.name in (&quot;mpirun&quot;, &quot;mpiexec&quot;)</span>
 
 
 <span class="k">class</span> <span class="nc">OmpEnv</span><span class="p">(</span><span class="n">AttrDict</span><span class="p">):</span>
@@ -433,7 +433,7 @@
 <span class="s2">    modules:          # List of modules to be imported before running the code (DEFAULT: empty).</span>
 <span class="s2">                      # NB: Error messages produced by module load are redirected to mods.err</span>
 <span class="s2">    shell_env:        # Dictionary with shell environment variables.</span>
-<span class="s2">    mpi_runner:       # MPI runner. Possible values in [mpirun, mpiexec, None]</span>
+<span class="s2">    mpi_runner:       # MPI runner. Possible values in [&quot;mpirun&quot;, &quot;mpiexec&quot;, &quot;srun&quot;, None]</span>
 <span class="s2">                      # DEFAULT: None i.e. no mpirunner is used.</span>
 <span class="s2">    shell_runner:     # Used for running small sequential jobs on the front-end. Set it to None</span>
 <span class="s2">                      # if mpirun or mpiexec are not available on the fron-end. If not</span>
@@ -444,9 +444,13 @@
 <span class="s2"># dictionary with the name of the queue and optional parameters</span>
 <span class="s2"># used to build/customize the header of the submission script.</span>
 <span class="s2">queue:</span>
-<span class="s2">    qname:            # Name of the queue (string, MANDATORY)</span>
+<span class="s2">    qtype:            # String defining the qapapter type e.g. slurm, shell ...</span>
+<span class="s2">    qname:            # Name of the submission queue (string, MANDATORY)</span>
 <span class="s2">    qparams:          # Dictionary with values used to generate the header of the job script</span>
+<span class="s2">                      # We use the *normalized* version of the options i.e dashes in the official name</span>
+<span class="s2">                      # are replaced by underscores e.g. ``--mail-type`` becomes ``mail_type``</span>
 <span class="s2">                      # See pymatgen.io.abinit.qadapters.py for the list of supported values.</span>
+<span class="s2">                      # Use ``qverbatim`` to pass additional options that are not included in the template.</span>
 
 <span class="s2"># dictionary with the constraints that must be fulfilled in order to run on this queue.</span>
 <span class="s2">limits:</span>
@@ -2068,7 +2072,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

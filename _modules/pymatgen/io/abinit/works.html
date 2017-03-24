@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.works &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.works &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -61,7 +61,7 @@
 <span class="c1"># Copyright (c) Pymatgen Development Team.</span>
 <span class="c1"># Distributed under the terms of the MIT License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Works for Abinit:</span>
+<span class="sd">Works for Abinit</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
@@ -86,7 +86,7 @@
 <span class="kn">from</span> <span class="nn">.nodes</span> <span class="k">import</span> <span class="n">Dependency</span><span class="p">,</span> <span class="n">Node</span><span class="p">,</span> <span class="n">NodeError</span><span class="p">,</span> <span class="n">NodeResults</span><span class="p">,</span> <span class="n">check_spectator</span>
 <span class="kn">from</span> <span class="nn">.tasks</span> <span class="k">import</span> <span class="p">(</span><span class="n">Task</span><span class="p">,</span> <span class="n">AbinitTask</span><span class="p">,</span> <span class="n">ScfTask</span><span class="p">,</span> <span class="n">NscfTask</span><span class="p">,</span> <span class="n">DfptTask</span><span class="p">,</span> <span class="n">PhononTask</span><span class="p">,</span> <span class="n">DdkTask</span><span class="p">,</span>
                     <span class="n">BseTask</span><span class="p">,</span> <span class="n">RelaxTask</span><span class="p">,</span> <span class="n">DdeTask</span><span class="p">,</span> <span class="n">BecTask</span><span class="p">,</span> <span class="n">ScrTask</span><span class="p">,</span> <span class="n">SigmaTask</span><span class="p">,</span>
-                    <span class="n">EphTask</span><span class="p">,</span> <span class="n">CollinearThenNonCollinearScfTask</span><span class="p">)</span>
+                    <span class="n">DteTask</span><span class="p">,</span> <span class="n">EphTask</span><span class="p">,</span> <span class="n">CollinearThenNonCollinearScfTask</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">Directory</span>
 <span class="kn">from</span> <span class="nn">.netcdf</span> <span class="k">import</span> <span class="n">ETSF_Reader</span><span class="p">,</span> <span class="n">NetcdfReader</span>
@@ -377,6 +377,11 @@
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;task_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DdeTask</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_task</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">register_dte_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register a Dte task.&quot;&quot;&quot;</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;task_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DteTask</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_task</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">register_bec_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Register a BEC task.&quot;&quot;&quot;</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;task_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BecTask</span>
@@ -569,8 +574,15 @@
 
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="s2">&quot;manager&quot;</span><span class="p">):</span>
                 <span class="c1"># Set the manager</span>
-                <span class="c1"># Use the one provided in input else the one of the work.</span>
-                <span class="n">task</span><span class="o">.</span><span class="n">set_manager</span><span class="p">(</span><span class="n">manager</span><span class="p">)</span> <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">task</span><span class="o">.</span><span class="n">set_manager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="p">)</span>
+                <span class="c1"># Use the one provided in input else the one of the work/flow.</span>
+                <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">task</span><span class="o">.</span><span class="n">set_manager</span><span class="p">(</span><span class="n">manager</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Look first in work and then in the flow.</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;manager&quot;</span><span class="p">):</span>
+                        <span class="n">task</span><span class="o">.</span><span class="n">set_manager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">task</span><span class="o">.</span><span class="n">set_manager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">manager</span><span class="p">)</span>
 
             <span class="n">task_workdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workdir</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 
@@ -902,7 +914,7 @@
                 <span class="n">ngkpt</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">get_inpvar</span><span class="p">(</span><span class="s2">&quot;ngkpt&quot;</span><span class="p">)</span>
                 <span class="n">plotter</span><span class="o">.</span><span class="n">add_edos</span><span class="p">(</span><span class="s2">&quot;ngkpt </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">ngkpt</span><span class="p">),</span> <span class="n">edos</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">plotter</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">plotter</span><span class="o">.</span><span class="n">combiplot</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="RelaxWork"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.works.html#pymatgen.io.abinit.works.RelaxWork">[docs]</a><span class="k">class</span> <span class="nc">RelaxWork</span><span class="p">(</span><span class="n">Work</span><span class="p">):</span>
@@ -1003,55 +1015,57 @@
                  <span class="n">workdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            scf_inputs: Input for the SCF run, if it is a list add all but only link</span>
+<span class="sd">            scf_inputs: Input(s) for the SCF run, if it is a list add all but only link</span>
 <span class="sd">                to the last input (used for convergence studies on the KS band gap)</span>
-<span class="sd">            nscf_inputs: Input for the NSCF run, if it is a list add all but only</span>
+<span class="sd">            nscf_inputs: Input(s) for the NSCF run, if it is a list add all but only</span>
 <span class="sd">                link to the last (i.e. addditiona DOS and BANDS)</span>
 <span class="sd">            scr_inputs: Input for the screening run</span>
 <span class="sd">            sigma_inputs: List of :class:AbinitInput`for the self-energy run.</span>
-<span class="sd">                if scr and sigma are lists of the same length every sigma gets it&#39;s own screening</span>
-<span class="sd">                if there is only one screening all sigma&#39;s link to this one</span>
+<span class="sd">                if scr and sigma are lists of the same length, every sigma gets its own screening.</span>
+<span class="sd">                if there is only one screening all sigma inputs are linked to this one</span>
 <span class="sd">            workdir: Working directory of the calculation.</span>
 <span class="sd">            manager: :class:`TaskManager` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">G0W0Work</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">workdir</span><span class="o">=</span><span class="n">workdir</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">):</span>
-            <span class="n">spread_scr</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">spread_scr</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">spread_scr</span> <span class="o">=</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span>
+                      <span class="nb">isinstance</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span>
+                      <span class="nb">len</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">))</span>
+        <span class="c1">#print(&quot;spread_scr&quot;, spread_scr)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">sigma_tasks</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># Register the GS-SCF run.</span>
         <span class="c1"># register all scf_inputs but link the nscf only the last scf in the list</span>
         <span class="c1"># multiple scf_inputs can be provided to perform convergence studies</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scf_inputs</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scf_inputs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="k">for</span> <span class="n">scf_input</span> <span class="ow">in</span> <span class="n">scf_inputs</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">scf_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_scf_task</span><span class="p">(</span><span class="n">scf_input</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">scf_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_scf_task</span><span class="p">(</span><span class="n">scf_inputs</span><span class="p">)</span>
 
         <span class="c1"># Register the NSCF run (s).</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nscf_inputs</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nscf_inputs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="k">for</span> <span class="n">nscf_input</span> <span class="ow">in</span> <span class="n">nscf_inputs</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">nscf_task</span> <span class="o">=</span> <span class="n">nscf_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_nscf_task</span><span class="p">(</span><span class="n">nscf_input</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">scf_task</span><span class="p">:</span> <span class="s2">&quot;DEN&quot;</span><span class="p">})</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nscf_task</span> <span class="o">=</span> <span class="n">nscf_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_nscf_task</span><span class="p">(</span><span class="n">nscf_inputs</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">scf_task</span><span class="p">:</span> <span class="s2">&quot;DEN&quot;</span><span class="p">})</span>
 
         <span class="c1"># Register the SCR and SIGMA run(s).</span>
-
         <span class="k">if</span> <span class="n">spread_scr</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">scr_input</span><span class="p">,</span> <span class="n">sigma_input</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">,</span> <span class="n">sigma_inputs</span><span class="p">):</span>
                 <span class="n">scr_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_scr_task</span><span class="p">(</span><span class="n">scr_input</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="n">nscf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">})</span>
                 <span class="n">sigma_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_sigma_task</span><span class="p">(</span><span class="n">sigma_input</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="n">nscf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">,</span> <span class="n">scr_task</span><span class="p">:</span> <span class="s2">&quot;SCR&quot;</span><span class="p">})</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sigma_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sigma_task</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Sigma work(s) connected to the same screening.</span>
             <span class="n">scr_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_scr_task</span><span class="p">(</span><span class="n">scr_inputs</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="n">nscf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">})</span>
-            <span class="k">for</span> <span class="n">sigma_input</span> <span class="ow">in</span> <span class="n">sigma_inputs</span><span class="p">:</span>
-                <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_sigma_task</span><span class="p">(</span><span class="n">sigma_input</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="n">nscf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">,</span> <span class="n">scr_task</span><span class="p">:</span> <span class="s2">&quot;SCR&quot;</span><span class="p">})</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">sigma_inputs</span><span class="p">:</span>
+                    <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_sigma_task</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="n">nscf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">,</span> <span class="n">scr_task</span><span class="p">:</span> <span class="s2">&quot;SCR&quot;</span><span class="p">})</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sigma_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">register_sigma_task</span><span class="p">(</span><span class="n">sigma_inputs</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="n">nscf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">,</span> <span class="n">scr_task</span><span class="p">:</span> <span class="s2">&quot;SCR&quot;</span><span class="p">})</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sigma_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span></div>
 
 
@@ -1491,6 +1505,69 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Merge DDB files.</span>
         <span class="n">out_ddb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_ddb_files</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Results</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;DDB merge done&quot;</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">register_gridfs_files</span><span class="p">(</span><span class="n">DDB</span><span class="o">=</span><span class="p">(</span><span class="n">out_ddb</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">results</span>
+
+
+<span class="k">class</span> <span class="nc">DteWork</span><span class="p">(</span><span class="n">Work</span><span class="p">,</span> <span class="n">MergeDdb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Work for the computation of the third derivative of the energy.</span>
+
+<span class="sd">    This work consists of DDK tasks and electric field perturbation.</span>
+<span class="sd">    It provides the callback method (on_all_ok) that calls mrgddb to merge the partial DDB files produced</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_scf_task</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">scf_task</span><span class="p">,</span> <span class="n">ddk_tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build a DteWork from a ground-state task.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scf_task</span><span class="p">,</span> <span class="n">ScfTask</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;task </span><span class="si">%s</span><span class="s2"> does not inherit from GsTask&quot;</span> <span class="o">%</span> <span class="n">scf_task</span><span class="p">)</span>
+
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span> <span class="c1">#manager=scf_task.manager)</span>
+
+        <span class="c1"># DDK calculations</span>
+        <span class="n">multi_ddk</span> <span class="o">=</span> <span class="n">scf_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">make_ddk_inputs</span><span class="p">(</span><span class="n">tolerance</span><span class="o">=</span><span class="n">ddk_tolerance</span><span class="p">)</span>
+
+        <span class="n">ddk_tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ddk_inp</span> <span class="ow">in</span> <span class="n">multi_ddk</span><span class="p">:</span>
+            <span class="n">ddk_task</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">register_ddk_task</span><span class="p">(</span><span class="n">ddk_inp</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">{</span><span class="n">scf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">})</span>
+            <span class="n">ddk_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ddk_task</span><span class="p">)</span>
+
+        <span class="c1"># Build the list of inputs for electric field perturbation</span>
+        <span class="c1"># Each task is connected to all the previous DDK, DDE task and to the scf_task.</span>
+
+        <span class="n">multi_dde</span> <span class="o">=</span> <span class="n">scf_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">make_dde_inputs</span><span class="p">(</span><span class="n">use_symmetries</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># To compute the nonlinear coefficients all the directions of the perturbation</span>
+        <span class="c1"># have to be taken in consideration</span>
+        <span class="c1"># DDE calculations</span>
+        <span class="n">dde_tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dde_deps</span> <span class="o">=</span> <span class="p">{</span><span class="n">ddk_task</span><span class="p">:</span> <span class="s2">&quot;DDK&quot;</span> <span class="k">for</span> <span class="n">ddk_task</span> <span class="ow">in</span> <span class="n">ddk_tasks</span><span class="p">}</span>
+        <span class="n">dde_deps</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">scf_task</span><span class="p">:</span> <span class="s2">&quot;WFK&quot;</span><span class="p">})</span>
+        <span class="k">for</span> <span class="n">dde_inp</span> <span class="ow">in</span> <span class="n">multi_dde</span><span class="p">:</span>
+            <span class="n">dde_task</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">register_dde_task</span><span class="p">(</span><span class="n">dde_inp</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">dde_deps</span><span class="p">)</span>
+            <span class="n">dde_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dde_task</span><span class="p">)</span>
+
+        <span class="c1">#DTE calculations</span>
+        <span class="n">dte_deps</span> <span class="o">=</span> <span class="p">{</span><span class="n">scf_task</span><span class="p">:</span> <span class="s2">&quot;WFK DEN&quot;</span><span class="p">}</span>
+        <span class="n">dte_deps</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">dde_task</span><span class="p">:</span> <span class="s2">&quot;1WF 1DEN&quot;</span> <span class="k">for</span> <span class="n">dde_task</span> <span class="ow">in</span> <span class="n">dde_tasks</span><span class="p">})</span>
+
+        <span class="n">multi_dte</span> <span class="o">=</span> <span class="n">scf_task</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">make_dte_inputs</span><span class="p">()</span>
+        <span class="n">dte_tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dte_inp</span> <span class="ow">in</span> <span class="n">multi_dte</span><span class="p">:</span>
+             <span class="n">dte_task</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">register_dte_task</span><span class="p">(</span><span class="n">dte_inp</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="n">dte_deps</span><span class="p">)</span>
+             <span class="n">dte_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dte_task</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new</span>
+
+    <span class="k">def</span> <span class="nf">on_all_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is called when all the task reach S_OK</span>
+<span class="sd">        Ir runs `mrgddb` in sequential on the local machine to produce</span>
+<span class="sd">        the final DDB file in the outdir of the `Work`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Merge DDB files.</span>
+        <span class="n">out_ddb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_ddb_files</span><span class="p">()</span>
 
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Results</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">returncode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;DDB merge done&quot;</span><span class="p">)</span>
         <span class="n">results</span><span class="o">.</span><span class="n">register_gridfs_files</span><span class="p">(</span><span class="n">DDB</span><span class="o">=</span><span class="p">(</span><span class="n">out_ddb</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">))</span>
@@ -1526,7 +1603,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

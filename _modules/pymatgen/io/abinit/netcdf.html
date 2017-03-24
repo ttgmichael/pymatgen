@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.netcdf &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.netcdf &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -89,6 +89,7 @@
     <span class="s2">&quot;as_etsfreader&quot;</span><span class="p">,</span>
     <span class="s2">&quot;NetcdfReader&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ETSF_Reader&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NO_DEFAULT&quot;</span><span class="p">,</span>
     <span class="s2">&quot;structure_from_ncdata&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
@@ -122,8 +123,8 @@
     <span class="sd">&quot;&quot;&quot;Base error class for NetcdfReader&quot;&quot;&quot;</span>
 
 
-<span class="k">class</span> <span class="nc">NO_DEFAULT</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Signal that read_value should raise an Error&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="NO_DEFAULT"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.NO_DEFAULT">[docs]</a><span class="k">class</span> <span class="nc">NO_DEFAULT</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Signal that read_value should raise an Error&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="NetcdfReader"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.NetcdfReader">[docs]</a><span class="k">class</span> <span class="nc">NetcdfReader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -190,10 +191,22 @@
             <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NetcdfReader.read_dimvalue"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.NetcdfReader.read_dimvalue">[docs]</a>    <span class="k">def</span> <span class="nf">read_dimvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimname</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the value of a dimension.&quot;&quot;&quot;</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_dimensions</span><span class="p">(</span><span class="n">dimname</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span></div>
+<div class="viewcode-block" id="NetcdfReader.read_dimvalue"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.NetcdfReader.read_dimvalue">[docs]</a>    <span class="k">def</span> <span class="nf">read_dimvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimname</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">NO_DEFAULT</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a dimension.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dimname: Name of the variable</span>
+<span class="sd">            path: path to the group.</span>
+<span class="sd">            default: return `default` if `dimname` is not present and</span>
+<span class="sd">                `default` is not `NO_DEFAULT` else raise self.Error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_dimensions</span><span class="p">(</span><span class="n">dimname</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">except</span> <span class="bp">self</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">NO_DEFAULT</span><span class="p">:</span> <span class="k">raise</span>
+            <span class="k">return</span> <span class="n">default</span></div>
 
 <div class="viewcode-block" id="NetcdfReader.read_varnames"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.NetcdfReader.read_varnames">[docs]</a>    <span class="k">def</span> <span class="nf">read_varnames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;List of variable names stored in the group specified by path.&quot;&quot;&quot;</span>
@@ -212,7 +225,8 @@
 <span class="sd">            path: path to the group.</span>
 <span class="sd">            cmode: if cmode==&quot;c&quot;, a complex ndarrays is constructed and returned</span>
 <span class="sd">                (netcdf does not provide native support from complex datatype).</span>
-<span class="sd">            default: read_value returns default if varname is not present.</span>
+<span class="sd">            default: returns default if varname is not present.</span>
+<span class="sd">                self.Error is raised if default is default is NO_DEFAULT</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            numpy array if varname represents an array, scalar otherwise.</span>
@@ -298,12 +312,8 @@
         <span class="n">charr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span><span class="s2">&quot;chemical_symbols&quot;</span><span class="p">)</span>
         <span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">charr</span><span class="p">:</span>
-            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">v</span><span class="p">))</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">v</span><span class="p">))</span>
 
-        <span class="c1">#symbols = [&quot;&quot;.join(str(c)) for symb in symbols for c in symb]</span>
-        <span class="c1">#symbols = [s.decode(&quot;ascii&quot;) for s in symbols]</span>
-        <span class="c1">#chemical_symbols = [str(&quot;&quot;.join(s)) for s in symbols]</span>
-        <span class="c1">#print(symbols)</span>
         <span class="k">return</span> <span class="n">symbols</span></div>
 
 <div class="viewcode-block" id="ETSF_Reader.typeidx_from_symbol"><a class="viewcode-back" href="../../../../pymatgen.io.abinit.netcdf.html#pymatgen.io.abinit.netcdf.ETSF_Reader.typeidx_from_symbol">[docs]</a>    <span class="k">def</span> <span class="nf">typeidx_from_symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
@@ -321,7 +331,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Read ixc from an Abinit file. Return :class:`XcFunc` object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ixc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_variable</span><span class="p">(</span><span class="s2">&quot;ixc&quot;</span><span class="p">)</span>
+        <span class="n">ixc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">read_value</span><span class="p">(</span><span class="s2">&quot;ixc&quot;</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">XcFunc</span><span class="o">.</span><span class="n">from_abinit_ixc</span><span class="p">(</span><span class="n">ixc</span><span class="p">)</span></div></div>
 
 
@@ -403,7 +413,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

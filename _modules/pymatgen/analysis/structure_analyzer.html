@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.structure_analyzer &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.analysis.structure_analyzer &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -847,7 +847,7 @@
             <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OrderParameters</span><span class="o">.</span><span class="n">__supported_types</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown order parameter type (&quot;</span> <span class="o">+</span> \
                                  <span class="n">t</span> <span class="o">+</span> <span class="s2">&quot;)!&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">parameters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;1st dimension of parameters array is not&quot;</span>
                                  <span class="s2">&quot; consistent with types list!&quot;</span><span class="p">)</span>
@@ -1056,7 +1056,7 @@
 
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_nneigh</span><span class="p">)</span>
 
-<div class="viewcode-block" id="OrderParameters.compute_trigonometric_terms"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.compute_trigonometric_terms">[docs]</a>    <span class="k">def</span> <span class="nf">compute_trigonometric_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="p">[],</span> <span class="n">phis</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="OrderParameters.compute_trigonometric_terms"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.compute_trigonometric_terms">[docs]</a>    <span class="k">def</span> <span class="nf">compute_trigonometric_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="p">,</span> <span class="n">phis</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;&quot;</span>
 <span class="sd">        Computes trigonometric terms that are required to</span>
@@ -1077,9 +1077,6 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">thetas</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">phis</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No entries in list/s of polar and/or azimuthal&quot;</span> \
-                             <span class="s2">&quot; angles!&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phis</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;List of polar and azimuthal angles have to be&quot;</span>
                              <span class="s2">&quot; equal!&quot;</span><span class="p">)</span>
@@ -1104,7 +1101,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_cos_n_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> \
                                 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">phis</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="OrderParameters.get_q2"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_q2">[docs]</a>    <span class="k">def</span> <span class="nf">get_q2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="p">[],</span> <span class="n">phis</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="OrderParameters.get_q2"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_q2">[docs]</a>    <span class="k">def</span> <span class="nf">get_q2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">phis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the value of the bond orientational order parameter of</span>
@@ -1124,7 +1121,7 @@
 <span class="sd">                corresponding to the input angles thetas and phis.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">and</span> <span class="n">phis</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">phis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">compute_trigonometric_terms</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">phis</span><span class="p">)</span>
         <span class="n">nnn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pow_sin_t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">nnn_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nnn</span><span class="p">)</span>
@@ -1175,7 +1172,7 @@
         <span class="n">q2</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">acc</span> <span class="o">/</span> <span class="p">(</span><span class="mf">5.0</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">nnn</span> <span class="o">*</span> <span class="n">nnn</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">q2</span></div>
 
-<div class="viewcode-block" id="OrderParameters.get_q4"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_q4">[docs]</a>    <span class="k">def</span> <span class="nf">get_q4</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="p">[],</span> <span class="n">phis</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="OrderParameters.get_q4"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_q4">[docs]</a>    <span class="k">def</span> <span class="nf">get_q4</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">phis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the value of the bond orientational order parameter of</span>
@@ -1195,7 +1192,7 @@
 <span class="sd">                corresponding to the input angles thetas and phis.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">and</span> <span class="n">phis</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">phis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">compute_trigonometric_terms</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">phis</span><span class="p">)</span>
         <span class="n">nnn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pow_sin_t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">nnn_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nnn</span><span class="p">)</span>
@@ -1286,7 +1283,7 @@
         <span class="n">q4</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">acc</span> <span class="o">/</span> <span class="p">(</span><span class="mf">9.0</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">nnn</span> <span class="o">*</span> <span class="n">nnn</span><span class="p">)))</span>
         <span class="k">return</span> <span class="n">q4</span></div>
 
-<div class="viewcode-block" id="OrderParameters.get_q6"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_q6">[docs]</a>    <span class="k">def</span> <span class="nf">get_q6</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="p">[],</span> <span class="n">phis</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="OrderParameters.get_q6"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_q6">[docs]</a>    <span class="k">def</span> <span class="nf">get_q6</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">phis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the value of the bond orientational order parameter of</span>
@@ -1306,7 +1303,7 @@
 <span class="sd">                corresponding to the input angles thetas and phis.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">and</span> <span class="n">phis</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">phis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">compute_trigonometric_terms</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">phis</span><span class="p">)</span>
         <span class="n">nnn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pow_sin_t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">nnn_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nnn</span><span class="p">)</span>
@@ -1500,7 +1497,7 @@
                              <span class="s2">&quot; order-parameter calculation out-of-bounds!&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="OrderParameters.get_order_parameters"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_order_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">get_order_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">indeces_neighs</span><span class="o">=</span><span class="p">[],</span> \
+<div class="viewcode-block" id="OrderParameters.get_order_parameters"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.OrderParameters.get_order_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">get_order_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">indeces_neighs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
                              <span class="n">tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">target_spec</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1555,7 +1552,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Site index smaller zero!&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Site index beyond maximum!&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">indeces_neighs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">indeces_neighs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indeces_neighs</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Neighbor site index beyond maximum!&quot;</span><span class="p">)</span>
@@ -1570,7 +1567,7 @@
         <span class="c1"># Note that we adopt the same way of accessing sites here as in</span>
         <span class="c1"># VoronoiCoordFinder; that is, not via the sites iterator.</span>
         <span class="n">centsite</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">indeces_neighs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">indeces_neighs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">neighsites</span> <span class="o">=</span> <span class="p">[</span><span class="n">structure</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indeces_neighs</span><span class="p">]</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voroneigh</span><span class="p">:</span>
             <span class="n">vorocf</span> <span class="o">=</span> <span class="n">VoronoiCoordFinder</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
@@ -1876,7 +1873,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

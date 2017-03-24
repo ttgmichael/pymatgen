@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.tasks module &#8212; pymatgen 4.7.1 documentation</title>
+    <title>pymatgen.io.abinit.tasks module &#8212; pymatgen 4.7.2 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.1',
+        VERSION:     '4.7.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -83,7 +83,7 @@ Ideally, the TaskManager should be the <strong>main entry point</strong> used by
 </table>
 <dl class="attribute">
 <dt id="pymatgen.io.abinit.tasks.TaskManager.ENTRIES">
-<code class="descname">ENTRIES</code><em class="property"> = {'qadapters', 'batch_adapter', 'db_connector', 'policy'}</em><a class="headerlink" href="#pymatgen.io.abinit.tasks.TaskManager.ENTRIES" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ENTRIES</code><em class="property"> = {'policy', 'db_connector', 'batch_adapter', 'qadapters'}</em><a class="headerlink" href="#pymatgen.io.abinit.tasks.TaskManager.ENTRIES" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -300,7 +300,7 @@ according to some criterion as well as the <code class="xref py py-class docutil
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pconfs</strong> &#8211; <code class="xref py py-class docutils literal"><span class="pre">ParalHints</span></code> object with the list of parallel configurations</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pconfs</strong> &#8211; <a class="reference internal" href="#pymatgen.io.abinit.tasks.ParalHints" title="pymatgen.io.abinit.tasks.ParalHints"><code class="xref py py-class docutils literal"><span class="pre">ParalHints</span></code></a> object with the list of parallel configurations</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">ParallelConf</span></code> object with the <cite>optimal</cite> configuration.</td>
 </tr>
@@ -386,13 +386,6 @@ Default: no arguments.</td>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="pymatgen.io.abinit.tasks.AbinitBuild.has_etsfio">
-<code class="descname">has_etsfio</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitBuild.has_etsfio" title="Permalink to this definition">¶</a></dt>
-<dt>
-<code class="descname">True if etsf-io is enabled.</code></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
 <dt id="pymatgen.io.abinit.tasks.AbinitBuild.has_omp">
 <code class="descname">has_omp</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitBuild.has_omp" title="Permalink to this definition">¶</a></dt>
 <dt>
@@ -436,6 +429,322 @@ Default: no arguments.</td>
 <code class="descname">parse</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHintsParser.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHintsParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the <cite>AutoParal</cite> section (YAML format) from filename.
 Assumes the file contains only one section.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymatgen.io.abinit.tasks.ParalHints">
+<em class="property">class </em><code class="descname">ParalHints</code><span class="sig-paren">(</span><em>info</em>, <em>confs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">collections.abc.Iterable</span></code></p>
+<p>Iterable with the hints for the parallel execution reported by ABINIT.</p>
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.Error">
+<code class="descname">Error</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">ParalHintsError</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shallow copy of self.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.from_mpi_omp_lists">
+<em class="property">classmethod </em><code class="descname">from_mpi_omp_lists</code><span class="sig-paren">(</span><em>mpi_procs</em>, <em>omp_threads</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.from_mpi_omp_lists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.from_mpi_omp_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a list of Parallel configurations from two lists
+containing the number of MPI processes and the number of OpenMP threads
+i.e. product(mpi_procs, omp_threads).
+The configuration have parallel efficiency set to 1.0 and no input variables.
+Mainly used for preparing benchmarks.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.get_ordered_with_policy">
+<code class="descname">get_ordered_with_policy</code><span class="sig-paren">(</span><em>policy</em>, <em>max_ncpus</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.get_ordered_with_policy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.get_ordered_with_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort and return a new list of configurations ordered according to the <code class="xref py py-class docutils literal"><span class="pre">TaskPolicy</span></code> policy.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.max_cores">
+<code class="descname">max_cores</code><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.max_cores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.max_cores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of cores.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.max_efficiency">
+<code class="descname">max_efficiency</code><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.max_efficiency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.max_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum parallel efficiency.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.max_mem_per_proc">
+<code class="descname">max_mem_per_proc</code><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.max_mem_per_proc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.max_mem_per_proc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum memory per MPI process.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.max_speedup">
+<code class="descname">max_speedup</code><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.max_speedup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.max_speedup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum speedup.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.multidimensional_optimization">
+<code class="descname">multidimensional_optimization</code><span class="sig-paren">(</span><em>priorities=('speedup'</em>, <em>'efficiency')</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.multidimensional_optimization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.multidimensional_optimization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.select_with_condition">
+<code class="descname">select_with_condition</code><span class="sig-paren">(</span><em>condition</em>, <em>key=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.select_with_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.select_with_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all the configurations that do not satisfy the given condition.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">condition: dict or <code class="xref py py-class docutils literal"><span class="pre">Condition</span></code> object with operators expressed with a Mongodb-like syntax
+key: Selects the sub-dictionary on which condition is applied, e.g. key=&#8221;vars&#8221;</p>
+<blockquote class="last">
+<div>if we have to filter the configurations depending on the values in vars</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.sort_by_efficiency">
+<code class="descname">sort_by_efficiency</code><span class="sig-paren">(</span><em>reverse=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.sort_by_efficiency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.sort_by_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort the configurations in place. items with highest efficiency come first</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.sort_by_mem_per_proc">
+<code class="descname">sort_by_mem_per_proc</code><span class="sig-paren">(</span><em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.sort_by_mem_per_proc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.sort_by_mem_per_proc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort the configurations in place. items with lowest memory per proc come first.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.ParalHints.sort_by_speedup">
+<code class="descname">sort_by_speedup</code><span class="sig-paren">(</span><em>reverse=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#ParalHints.sort_by_speedup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.ParalHints.sort_by_speedup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort the configurations in place. items with highest speedup come first</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask">
+<em class="property">class </em><code class="descname">AbinitTask</code><span class="sig-paren">(</span><em>input</em>, <em>workdir=None</em>, <em>manager=None</em>, <em>deps=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">pymatgen.io.abinit.tasks.Task</span></code></p>
+<p>Base class defining an ABINIT calculation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>input</strong> &#8211; <code class="xref py py-class docutils literal"><span class="pre">AbinitInput</span></code> object.</li>
+<li><strong>workdir</strong> &#8211; Path to the working directory.</li>
+<li><strong>manager</strong> &#8211; <a class="reference internal" href="#pymatgen.io.abinit.tasks.TaskManager" title="pymatgen.io.abinit.tasks.TaskManager"><code class="xref py py-class docutils literal"><span class="pre">TaskManager</span></code></a> object.</li>
+<li><strong>deps</strong> &#8211; Dictionary specifying the dependency of this node.
+None means that this Task has no dependency.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.Results">
+<code class="descname">Results</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.Results" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">TaskResults</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.autoparal_run">
+<code class="descname">autoparal_run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.autoparal_run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.autoparal_run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find an optimal set of parameters for the execution of the task
+This method can change the ABINIT input variables and/or the
+submission parameters e.g. the number of CPUs for MPI and OpenMp.</p>
+<dl class="docutils">
+<dt>Set:</dt>
+<dd>self.pconfs where pconfs is a <a class="reference internal" href="#pymatgen.io.abinit.tasks.ParalHints" title="pymatgen.io.abinit.tasks.ParalHints"><code class="xref py py-class docutils literal"><span class="pre">ParalHints</span></code></a> object with the configuration reported by
+autoparal and optimal is the optimal configuration selected.
+Returns 0 if success</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.executable">
+<code class="descname">executable</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.executable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to the executable required for running the Task.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.filesfile_string">
+<code class="descname">filesfile_string</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.filesfile_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>String with the list of files and prefixes needed to execute ABINIT.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.find_optconf">
+<code class="descname">find_optconf</code><span class="sig-paren">(</span><em>pconfs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.find_optconf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.find_optconf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the optimal Parallel configuration.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.fix_abicritical">
+<code class="descname">fix_abicritical</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.fix_abicritical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.fix_abicritical" title="Permalink to this definition">¶</a></dt>
+<dd><p>method to fix crashes/error caused by abinit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">1 if task has been fixed else 0.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.fix_queue_critical">
+<code class="descname">fix_queue_critical</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.fix_queue_critical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.fix_queue_critical" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function tries to fix critical events originating from the queue submission system.</p>
+<p>General strategy, first try to increase resources in order to fix the problem,
+if this is not possible, call a task specific method to attempt to decrease the demands.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">1 if task has been fixed else 0.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.from_input">
+<em class="property">classmethod </em><code class="descname">from_input</code><span class="sig-paren">(</span><em>input</em>, <em>workdir=None</em>, <em>manager=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.from_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.from_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an instance of <cite>AbinitTask</cite> from an ABINIT input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ainput</strong> &#8211; <cite>AbinitInput</cite> object.</li>
+<li><strong>workdir</strong> &#8211; Path to the working directory.</li>
+<li><strong>manager</strong> &#8211; <a class="reference internal" href="#pymatgen.io.abinit.tasks.TaskManager" title="pymatgen.io.abinit.tasks.TaskManager"><code class="xref py py-class docutils literal"><span class="pre">TaskManager</span></code></a> object.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.isnc">
+<code class="descname">isnc</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.isnc" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if norm-conserving calculation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.ispaw">
+<code class="descname">ispaw</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.ispaw" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if PAW calculation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.parse_timing">
+<code class="descname">parse_timing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.parse_timing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.parse_timing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the timer data in the main output file of Abinit.
+Requires timopt /= 0 in the input file (usually timopt = -1)</p>
+<p>Return: <code class="xref py py-class docutils literal"><span class="pre">AbinitTimerParser</span></code> instance, None if error.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.pconfs">
+<code class="descname">pconfs</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.pconfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of autoparal configurations.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.pseudos">
+<code class="descname">pseudos</code><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.pseudos" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of pseudos used in the calculation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.reset_from_scratch">
+<code class="descname">reset_from_scratch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.reset_from_scratch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.reset_from_scratch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restart from scratch, this is to be used if a job is restarted with more resources after a crash</p>
+<p>Move output files produced in workdir to _reset otherwise check_status continues
+to see the task as crashed even if the job did not run</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.restart">
+<code class="descname">restart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.restart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.restart" title="Permalink to this definition">¶</a></dt>
+<dd><p>general restart used when scheduler problems have been taken care of</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.select_files">
+<code class="descname">select_files</code><span class="sig-paren">(</span><em>what='o'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.select_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.select_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function used to select the files of a task.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>what</strong> &#8211; <p>string with the list of characters selecting the file type
+Possible choices:</p>
+<blockquote>
+<div>i ==&gt; input_file,
+o ==&gt; output_file,
+f ==&gt; files_file,
+j ==&gt; job_file,
+l ==&gt; log_file,
+e ==&gt; stderr_file,
+q ==&gt; qout_file,
+all ==&gt; all files.</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.set_pconfs">
+<code class="descname">set_pconfs</code><span class="sig-paren">(</span><em>pconfs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.set_pconfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.set_pconfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the list of autoparal configurations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.setup">
+<code class="descname">setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abinit has the very <em>bad</em> habit of changing the file extension by appending the characters in [A,B ..., Z]
+to the output file, and this breaks a lot of code that relies of the use of a unique file extension.
+Here we fix this issue by renaming run.abo to run.abo_[number] if the output file &#8220;run.abo&#8221; already
+exists. A few lines of code in python, a lot of problems if you try to implement this trick in Fortran90.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.temp_shell_task">
+<em class="property">classmethod </em><code class="descname">temp_shell_task</code><span class="sig-paren">(</span><em>inp</em>, <em>workdir=None</em>, <em>manager=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.temp_shell_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.temp_shell_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a Task with a temporary workdir. The task is executed via the shell with 1 MPI proc.
+Mainly used for invoking Abinit to get important parameters needed to prepare the real task.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.io.abinit.tasks.AbinitTask.uses_paral_kgb">
+<code class="descname">uses_paral_kgb</code><span class="sig-paren">(</span><em>value=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/tasks.html#AbinitTask.uses_paral_kgb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.tasks.AbinitTask.uses_paral_kgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the task is a GS Task and uses paral_kgb with the given value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1071,7 +1380,7 @@ the shell with 1 MPI proc. Mainly used for post-processing the DDB files.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
       </ul>
     </div>
 
