@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.pourbaix.entry &#8212; pymatgen 4.7.2 documentation</title>
+    <title>pymatgen.analysis.pourbaix.entry &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -63,6 +63,19 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
+<span class="kn">from</span> <span class="nn">monty.string</span> <span class="k">import</span> <span class="n">unicode2str</span>
+
+<span class="kn">from</span> <span class="nn">pymatgen.core.periodic_table</span> <span class="k">import</span> <span class="n">Element</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="k">import</span> <span class="n">Composition</span>
+<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core.ion</span> <span class="k">import</span> <span class="n">Ion</span>
+<span class="kn">from</span> <span class="nn">pymatgen.phasediagram.entries</span> <span class="k">import</span> <span class="n">PDEntry</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Module which defines basic entries for each ion and oxide to compute a</span>
 <span class="sd">Pourbaix diagram</span>
@@ -77,18 +90,6 @@
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Development&quot;</span>
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;December 10, 2012&quot;</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">zip</span>
-<span class="kn">from</span> <span class="nn">monty.string</span> <span class="k">import</span> <span class="n">unicode2str</span>
-
-<span class="kn">from</span> <span class="nn">pymatgen.core.periodic_table</span> <span class="k">import</span> <span class="n">Element</span>
-<span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="k">import</span> <span class="n">Composition</span>
-<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
-<span class="kn">from</span> <span class="nn">pymatgen.core.ion</span> <span class="k">import</span> <span class="n">Ion</span>
-<span class="kn">from</span> <span class="nn">pymatgen.phasediagram.entries</span> <span class="k">import</span> <span class="n">PDEntry</span>
 
 <span class="n">PREFAC</span> <span class="o">=</span> <span class="mf">0.0591</span>
 
@@ -535,7 +536,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

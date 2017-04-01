@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.symmetry.analyzer &#8212; pymatgen 4.7.2 documentation</title>
+    <title>pymatgen.symmetry.analyzer &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -326,13 +326,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">spglib</span><span class="o">.</span><span class="n">get_symmetry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cell</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_symprec</span><span class="p">,</span>
                                 <span class="n">angle_tolerance</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_angle_tol</span><span class="p">)</span>
-        <span class="c1"># Sometimes spglib returns small translation vectors, e.g. [1e-4, 2e-4, 1e-4]</span>
-        <span class="c1"># (these are in fractional coordinates, so should be small denominator fractions)</span>
+        <span class="c1"># Sometimes spglib returns small translation vectors, e.g.</span>
+        <span class="c1"># [1e-4, 2e-4, 1e-4]</span>
+        <span class="c1"># (these are in fractional coordinates, so should be small denominator</span>
+        <span class="c1"># fractions)</span>
         <span class="n">trans</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;translations&quot;</span><span class="p">]:</span>
-            <span class="n">trans</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">Fraction</span><span class="o">.</span><span class="n">from_float</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="p">])</span>
+            <span class="n">trans</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">Fraction</span><span class="o">.</span><span class="n">from_float</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">limit_denominator</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+                          <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="p">])</span>
         <span class="n">trans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
-        <span class="n">trans</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># fractional translations of 1 are more simply 0</span>
+
+        <span class="c1"># fractional translations of 1 are more simply 0</span>
+        <span class="n">trans</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;rotations&quot;</span><span class="p">],</span> <span class="n">trans</span>
 
 <div class="viewcode-block" id="SpacegroupAnalyzer.get_symmetry_operations"><a class="viewcode-back" href="../../../pymatgen.symmetry.analyzer.html#pymatgen.symmetry.analyzer.SpacegroupAnalyzer.get_symmetry_operations">[docs]</a>    <span class="k">def</span> <span class="nf">get_symmetry_operations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -393,7 +398,8 @@
                                   <span class="bp">self</span><span class="o">.</span><span class="n">get_space_group_number</span><span class="p">(),</span>
                                   <span class="bp">self</span><span class="o">.</span><span class="n">get_symmetry_operations</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">SymmetrizedStructure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_structure</span><span class="p">,</span> <span class="n">sg</span><span class="p">,</span>
-                                    <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;equivalent_atoms&quot;</span><span class="p">])</span></div>
+                                    <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;equivalent_atoms&quot;</span><span class="p">],</span>
+                                    <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;wyckoffs&quot;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="SpacegroupAnalyzer.get_refined_structure"><a class="viewcode-back" href="../../../pymatgen.symmetry.analyzer.html#pymatgen.symmetry.analyzer.SpacegroupAnalyzer.get_refined_structure">[docs]</a>    <span class="k">def</span> <span class="nf">get_refined_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -610,8 +616,7 @@
             <span class="n">transf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">latt_type</span> <span class="o">==</span> <span class="s2">&quot;monoclinic&quot;</span><span class="p">:</span>
-            <span class="c1">#you want to keep the c axis where it is</span>
-            <span class="c1">#to keep the C- settings</span>
+            <span class="c1"># You want to keep the c axis where it is to keep the C- settings</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_space_group_operations</span><span class="p">()</span><span class="o">.</span><span class="n">int_symbol</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">):</span>
                 <span class="n">transf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -1356,16 +1361,15 @@
                 <span class="k">if</span> <span class="n">test_site</span><span class="o">.</span><span class="n">is_periodic_image</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">symm_prec</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
                     <span class="k">return</span> <span class="kc">True</span>
             <span class="k">return</span> <span class="kc">False</span>
+
         <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
             <span class="n">newsites2</span> <span class="o">=</span> <span class="p">[</span><span class="n">PeriodicSite</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">species_and_occu</span><span class="p">,</span>
                                       <span class="n">op</span><span class="o">.</span><span class="n">operate</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">),</span>
                                       <span class="n">site</span><span class="o">.</span><span class="n">lattice</span><span class="p">)</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">sites2</span><span class="p">]</span>
-            <span class="n">ismapping</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">newsites2</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">in_sites</span><span class="p">(</span><span class="n">site</span><span class="p">):</span>
-                    <span class="n">ismapping</span> <span class="o">=</span> <span class="kc">False</span>
                     <span class="k">break</span>
-            <span class="k">if</span> <span class="n">ismapping</span><span class="p">:</span>
+            <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
@@ -1401,22 +1405,6 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
 
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">pymatgen.io.vasp</span> <span class="k">import</span> <span class="n">Vasprun</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">Vasprun</span><span class="p">(</span><span class="s2">&quot;../../test_files/vasprun.xml&quot;</span><span class="p">)</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">final_structure</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">actual_kpoints</span><span class="p">)</span>
-    <span class="kn">import</span> <span class="nn">spglib</span>
-
-    <span class="n">shift</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">mapping</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">spglib</span><span class="o">.</span><span class="n">get_ir_reciprocal_mesh</span><span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span> <span class="n">a</span><span class="o">.</span><span class="n">_cell</span><span class="p">,</span> <span class="n">is_shift</span><span class="o">=</span><span class="n">shift</span><span class="p">)</span>
-    <span class="n">mapping</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span> <span class="o">/</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
-    <span class="n">wts</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_kpoint_weights</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">actual_kpoints</span><span class="p">)</span>
-
 </pre></div>
 
           </div>
@@ -1447,7 +1435,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

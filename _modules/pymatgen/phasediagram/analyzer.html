@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.phasediagram.analyzer &#8212; pymatgen 4.7.2 documentation</title>
+    <title>pymatgen.phasediagram.analyzer &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -68,15 +68,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
-
-<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Shyue Ping Ong&quot;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2011, The Materials Project&quot;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;1.1&quot;</span>
-<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Shyue Ping Ong&quot;</span>
-<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;shyuep@gmail.com&quot;</span>
-<span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Production&quot;</span>
-<span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;May 16, 2012&quot;</span>
-
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">collections</span>
@@ -85,10 +76,17 @@
 <span class="kn">from</span> <span class="nn">monty.dev</span> <span class="k">import</span> <span class="n">deprecated</span>
 
 <span class="kn">from</span> <span class="nn">pymatgen.core.composition</span> <span class="k">import</span> <span class="n">Composition</span>
-<span class="kn">from</span> <span class="nn">pymatgen.phasediagram.maker</span> <span class="k">import</span> <span class="n">PhaseDiagram</span><span class="p">,</span> \
-    <span class="n">GrandPotentialPhaseDiagram</span><span class="p">,</span> <span class="n">get_facets</span>
+<span class="kn">from</span> <span class="nn">pymatgen.phasediagram.maker</span> <span class="k">import</span> <span class="n">PhaseDiagram</span><span class="p">,</span> <span class="n">get_facets</span>
 <span class="kn">from</span> <span class="nn">pymatgen.analysis.reaction_calculator</span> <span class="k">import</span> <span class="n">Reaction</span>
 <span class="kn">from</span> <span class="nn">pymatgen.util.coord_utils</span> <span class="k">import</span> <span class="n">Simplex</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Shyue Ping Ong&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2011, The Materials Project&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;1.1&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Shyue Ping Ong&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;shyuep@gmail.com&quot;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Production&quot;</span>
+<span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;May 16, 2012&quot;</span>
 
 
 <div class="viewcode-block" id="PDAnalyzer"><a class="viewcode-back" href="../../../pymatgen.phasediagram.analyzer.html#pymatgen.phasediagram.analyzer.PDAnalyzer">[docs]</a><span class="k">class</span> <span class="nc">PDAnalyzer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -303,6 +301,11 @@
         <span class="c1"># first element in the PD</span>
         <span class="n">c1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span><span class="o">.</span><span class="n">pd_coords</span><span class="p">(</span><span class="n">comp1</span><span class="p">)</span>
         <span class="n">c2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span><span class="o">.</span><span class="n">pd_coords</span><span class="p">(</span><span class="n">comp2</span><span class="p">)</span>
+
+        <span class="c1"># none of the projections work if c1 == c2, so just return *copies*</span>
+        <span class="c1"># of the inputs</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span><span class="p">):</span>
+            <span class="k">return</span><span class="p">[</span><span class="n">comp1</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">comp2</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
 
         <span class="n">intersections</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span><span class="o">.</span><span class="n">simplexes</span><span class="p">:</span>
@@ -568,7 +571,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

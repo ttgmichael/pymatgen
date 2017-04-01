@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.strain module &#8212; pymatgen 4.7.2 documentation</title>
+    <title>pymatgen.analysis.elasticity.strain module &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -89,15 +89,6 @@ be modified by the deformation</td>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="pymatgen.analysis.elasticity.strain.Deformation.check_independent">
-<code class="descname">check_independent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/strain.html#Deformation.check_independent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.Deformation.check_independent" title="Permalink to this definition">¶</a></dt>
-<dd><p>checks to determine whether the deformation matrix represents an
-independent deformation, raises a ValueError if not.  If so, returns
-the indices of the deformation gradient entry representing the
-independent component</p>
-</dd></dl>
-
 <dl class="classmethod">
 <dt id="pymatgen.analysis.elasticity.strain.Deformation.from_index_amount">
 <em class="property">classmethod </em><code class="descname">from_index_amount</code><span class="sig-paren">(</span><em>matrixpos</em>, <em>amt</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/strain.html#Deformation.from_index_amount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.Deformation.from_index_amount" title="Permalink to this definition">¶</a></dt>
@@ -119,11 +110,24 @@ matrixpos</li>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.strain.Deformation.get_perturbed_indices">
+<code class="descname">get_perturbed_indices</code><span class="sig-paren">(</span><em>tol=1e-08</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/strain.html#Deformation.get_perturbed_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.Deformation.get_perturbed_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets indices of perturbed elements of the deformation gradient,
+i. e. those that differ from the identity</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="pymatgen.analysis.elasticity.strain.Deformation.green_lagrange_strain">
 <code class="descname">green_lagrange_strain</code><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.Deformation.green_lagrange_strain" title="Permalink to this definition">¶</a></dt>
 <dd><p>calculates the euler-lagrange strain from
 the deformation gradient</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.strain.Deformation.is_independent">
+<code class="descname">is_independent</code><span class="sig-paren">(</span><em>tol=1e-08</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/strain.html#Deformation.is_independent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.Deformation.is_independent" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks to determine whether the deformation is independent</p>
 </dd></dl>
 
 </dd></dl>
@@ -189,14 +193,10 @@ representing the deformation gradient</td>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="pymatgen.analysis.elasticity.strain.IndependentStrain.i">
-<code class="descname">i</code><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.IndependentStrain.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="pymatgen.analysis.elasticity.strain.IndependentStrain.j">
-<code class="descname">j</code><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.IndependentStrain.j" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="pymatgen.analysis.elasticity.strain.IndependentStrain.ij">
+<code class="descname">ij</code><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.IndependentStrain.ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience method to return independent indices</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -237,15 +237,6 @@ gradient</p>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="pymatgen.analysis.elasticity.strain.Strain.independent_deformation">
-<code class="descname">independent_deformation</code><a class="headerlink" href="#pymatgen.analysis.elasticity.strain.Strain.independent_deformation" title="Permalink to this definition">¶</a></dt>
-<dd><p>determines whether the deformation matrix represents an
-independent deformation, raises a value error if not.
-Returns the index of the deformation gradient corresponding
-to the independent deformation</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -299,7 +290,7 @@ to the independent deformation</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>
 

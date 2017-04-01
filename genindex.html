@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &#8212; pymatgen 4.7.2 documentation</title>
+    <title>Index &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -1303,6 +1303,12 @@
 </li>
       <li><a href="pymatgen.analysis.reaction_calculator.html#pymatgen.analysis.reaction_calculator.BalancedReaction.calculate_energy">calculate_energy() (BalancedReaction method)</a>
 </li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensorExpansion.calculate_stress">calculate_stress() (ElasticTensorExpansion method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.NthOrderElasticTensor.calculate_stress">(NthOrderElasticTensor method)</a>
+</li>
+      </ul></li>
       <li><a href="pymatgen.analysis.reaction_calculator.html#pymatgen.analysis.reaction_calculator.ComputedReaction.calculated_reaction_energy">calculated_reaction_energy (ComputedReaction attribute)</a>
 </li>
       <li><a href="pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyFlowScheduler.callback">callback() (PyFlowScheduler method)</a>
@@ -1376,8 +1382,6 @@
       <li><a href="pymatgen.analysis.chemenv.utils.defs_utils.html#pymatgen.analysis.chemenv.utils.defs_utils.AdditionalConditions.check_condition">check_condition() (AdditionalConditions method)</a>
 </li>
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.check_dependencies">check_dependencies() (Flow method)</a>
-</li>
-      <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.Deformation.check_independent">check_independent() (Deformation method)</a>
 </li>
       <li><a href="pymatgen.analysis.defects.dilute_solution_model.html#pymatgen.analysis.defects.dilute_solution_model.check_input">check_input() (in module pymatgen.analysis.defects.dilute_solution_model)</a>
 </li>
@@ -1659,8 +1663,12 @@
 </li>
       <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.convert_strain_to_deformation">convert_strain_to_deformation() (in module pymatgen.analysis.elasticity.strain)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.convert_to_ieee">convert_to_ieee() (TensorBase method)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.convert_to_ieee">convert_to_ieee() (Tensor method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.convert_to_ieee">(TensorCollection method)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.coord_list_mapping">coord_list_mapping() (in module pymatgen.util.coord_utils)</a>
 </li>
       <li><a href="pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.coord_list_mapping_pbc">coord_list_mapping_pbc() (in module pymatgen.util.coord_utils)</a>
@@ -1947,10 +1955,10 @@
 </li>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node.depends_on">depends_on() (Node method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node.deps">deps (Node attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node.deps_status">deps_status (Node attribute)</a>
 </li>
       <li><a href="pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.html#pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.AdditionalConditionInt.description">description (AdditionalConditionInt attribute)</a>
@@ -1989,6 +1997,8 @@
         <li><a href="pymatgen.io.feff.inputs.html#pymatgen.io.feff.inputs.Tags.diff">(Tags method)</a>
 </li>
       </ul></li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.diff_fit">diff_fit() (in module pymatgen.analysis.elasticity.elastic)</a>
+</li>
       <li><a href="pymatgen.cli.pmg.html#pymatgen.cli.pmg.diff_incar">diff_incar() (in module pymatgen.cli.pmg)</a>
 </li>
       <li><a href="pymatgen.analysis.chemenv.coordination_environments.structure_environments.html#pymatgen.analysis.chemenv.coordination_environments.structure_environments.StructureEnvironments.differences_wrt">differences_wrt() (StructureEnvironments method)</a>
@@ -2145,6 +2155,8 @@
 </li>
       <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor">ElasticTensor (class in pymatgen.analysis.elasticity.elastic)</a>
 </li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensorExpansion">ElasticTensorExpansion (class in pymatgen.analysis.elasticity.elastic)</a>
+</li>
       <li><a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.electrical_resistivity">electrical_resistivity (Element attribute)</a>
 </li>
       <li><a href="pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Oszicar.electronic_steps">electronic_steps (Oszicar attribute)</a>
@@ -2195,8 +2207,12 @@
 </li>
       <li><a href="pymatgen.analysis.pourbaix.entry.html#pymatgen.analysis.pourbaix.entry.PourbaixEntry.energy">energy (PourbaixEntry attribute)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.energy_density">energy_density() (ElasticTensor method)</a>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensorExpansion.energy_density">energy_density() (ElasticTensorExpansion method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.NthOrderElasticTensor.energy_density">(NthOrderElasticTensor method)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.analysis.pourbaix.entry.html#pymatgen.analysis.pourbaix.entry.IonEntry.energy_per_atom">energy_per_atom (IonEntry attribute)</a>
 
       <ul>
@@ -2243,13 +2259,11 @@
 </li>
       <li><a href="pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Vasprun.epsilon_static_wolfe">epsilon_static_wolfe (Vasprun attribute)</a>, <a href="pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Vasprun.epsilon_static_wolfe">[1]</a>
 </li>
-      <li><a href="pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.html#pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.AbstractChemenvStrategy.equivalent_site_index">equivalent_site_index() (AbstractChemenvStrategy method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.html#pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.AbstractChemenvStrategy.equivalent_site_index_and_transform">equivalent_site_index_and_transform() (AbstractChemenvStrategy method)</a>
+      <li><a href="pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.html#pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.AbstractChemenvStrategy.equivalent_site_index">equivalent_site_index() (AbstractChemenvStrategy method)</a>
 </li>
-      <li><a href="pymatgen.symmetry.structure.html#pymatgen.symmetry.structure.SymmetrizedStructure.equivalent_sites">equivalent_sites (SymmetrizedStructure attribute)</a>
+      <li><a href="pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.html#pymatgen.analysis.chemenv.coordination_environments.chemenv_strategies.AbstractChemenvStrategy.equivalent_site_index_and_transform">equivalent_site_index_and_transform() (AbstractChemenvStrategy method)</a>
 </li>
       <li><a href="pymatgen.analysis.chemenv.utils.chemenv_errors.html#pymatgen.analysis.chemenv.utils.chemenv_errors.EquivalentSiteSearchError">EquivalentSiteSearchError</a>
 </li>
@@ -2509,6 +2523,8 @@
 </li>
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.find_deadlocks">find_deadlocks() (Flow method)</a>
 </li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.find_eq_stress">find_eq_stress() (in module pymatgen.analysis.elasticity.elastic)</a>
+</li>
       <li><a href="pymatgen.symmetry.structure.html#pymatgen.symmetry.structure.SymmetrizedStructure.find_equivalent_sites">find_equivalent_sites() (SymmetrizedStructure method)</a>
 </li>
       <li><a href="pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.find_in_coord_list">find_in_coord_list() (in module pymatgen.util.coord_utils)</a>
@@ -2559,8 +2575,12 @@
 </li>
       <li><a href="pymatgen.analysis.chemenv.utils.coordination_geometry_utils.html#pymatgen.analysis.chemenv.utils.coordination_geometry_utils.Plane.fit_maximum_distance_error">fit_maximum_distance_error() (Plane method)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.fit_to_structure">fit_to_structure() (TensorBase method)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.fit_to_structure">fit_to_structure() (Tensor method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.fit_to_structure">(TensorCollection method)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.io.abinit.tasks.html#pymatgen.io.abinit.tasks.AbinitTask.fix_abicritical">fix_abicritical() (AbinitTask method)</a>
 
       <ul>
@@ -2949,6 +2969,12 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensorExpansion.from_diff_fit">from_diff_fit() (pymatgen.analysis.elasticity.elastic.ElasticTensorExpansion class method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.NthOrderElasticTensor.from_diff_fit">(pymatgen.analysis.elasticity.elastic.NthOrderElasticTensor class method)</a>
+</li>
+      </ul></li>
       <li><a href="pymatgen.analysis.transition_state.html#pymatgen.analysis.transition_state.NEBAnalysis.from_dir">from_dir() (pymatgen.analysis.transition_state.NEBAnalysis class method)</a>
 
       <ul>
@@ -3101,6 +3127,8 @@
         <li><a href="pymatgen.io.vasp.sets.html#pymatgen.io.vasp.sets.MPStaticSet.from_prev_calc">(pymatgen.io.vasp.sets.MPStaticSet class method)</a>
 </li>
       </ul></li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.from_pseudoinverse">from_pseudoinverse() (pymatgen.analysis.elasticity.elastic.ElasticTensor class method)</a>
+</li>
       <li><a href="pymatgen.io.abinit.qjobs.html#pymatgen.io.abinit.qjobs.QueueJob.from_qtype_and_id">from_qtype_and_id() (QueueJob static method)</a>
 </li>
       <li><a href="pymatgen.core.operations.html#pymatgen.core.operations.SymmOp.from_rotation_and_translation">from_rotation_and_translation() (SymmOp static method)</a>
@@ -3133,8 +3161,6 @@
         <li><a href="pymatgen.core.structure.html#pymatgen.core.structure.SiteCollection.from_str">(pymatgen.core.structure.SiteCollection class method)</a>
 </li>
       </ul></li>
-      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.from_strain_stress_list">from_strain_stress_list() (pymatgen.analysis.elasticity.elastic.ElasticTensor class method)</a>
-</li>
       <li><a href="pymatgen.io.abinit.abiinspect.html#pymatgen.io.abinit.abiinspect.Relaxation.from_stream">from_stream() (pymatgen.io.abinit.abiinspect.Relaxation class method)</a>
 
       <ul>
@@ -3227,8 +3253,12 @@
       </ul></li>
       <li><a href="pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_vaspruns">from_vaspruns() (pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer class method)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.from_voigt">from_voigt() (pymatgen.analysis.elasticity.tensors.TensorBase class method)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.from_voigt">from_voigt() (pymatgen.analysis.elasticity.tensors.Tensor class method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.from_voigt">(pymatgen.analysis.elasticity.tensors.TensorCollection class method)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.core.operations.html#pymatgen.core.operations.SymmOp.from_xyz_string">from_xyz_string() (SymmOp static method)</a>
 </li>
       <li><a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.from_Z">from_Z() (Element static method)</a>
@@ -3593,6 +3623,8 @@
 </li>
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.get_dict_for_mongodb_queries">get_dict_for_mongodb_queries() (Flow method)</a>
 </li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.get_diff_coeff">get_diff_coeff() (in module pymatgen.analysis.elasticity.elastic)</a>
+</li>
       <li><a href="pymatgen.io.lammps.output.html#pymatgen.io.lammps.output.LammpsRun.get_diffusion_analyzer">get_diffusion_analyzer() (LammpsRun method)</a>
 </li>
       <li><a href="pymatgen.core.structure.html#pymatgen.core.structure.SiteCollection.get_dihedral">get_dihedral() (SiteCollection method)</a>
@@ -3953,6 +3985,8 @@
         <li><a href="pymatgen.analysis.defects.point_defects.html#pymatgen.analysis.defects.point_defects.RelaxedInterstitial.get_percentage_volume_change">(RelaxedInterstitial method)</a>
 </li>
       </ul></li>
+      <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.Deformation.get_perturbed_indices">get_perturbed_indices() (Deformation method)</a>
+</li>
       <li><a href="pymatgen.io.phonopy.html#pymatgen.io.phonopy.get_ph_bs_symm_line">get_ph_bs_symm_line() (in module pymatgen.io.phonopy)</a>
 </li>
       <li><a href="pymatgen.io.phonopy.html#pymatgen.io.phonopy.get_ph_bs_symm_line_from_dict">get_ph_bs_symm_line_from_dict() (in module pymatgen.io.phonopy)</a>
@@ -4223,6 +4257,8 @@
         <li><a href="pymatgen.io.abinit.qjobs.html#pymatgen.io.abinit.qjobs.SlurmJob.get_stats">(SlurmJob method)</a>
 </li>
       </ul></li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.get_strain_state_dict">get_strain_state_dict() (in module pymatgen.analysis.elasticity.elastic)</a>
+</li>
       <li><a href="pymatgen.io.vasp.inputs.html#pymatgen.io.vasp.inputs.Incar.get_string">get_string() (Incar method)</a>
 
       <ul>
@@ -4246,6 +4282,8 @@
       <li><a href="pymatgen.io.phonopy.html#pymatgen.io.phonopy.get_structure_from_dict">get_structure_from_dict() (in module pymatgen.io.phonopy)</a>
 </li>
       <li><a href="pymatgen.io.vasp.sets.html#pymatgen.io.vasp.sets.get_structure_from_prev_run">get_structure_from_prev_run() (in module pymatgen.io.vasp.sets)</a>
+</li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.get_structure_property_dict">get_structure_property_dict() (ElasticTensor method)</a>
 </li>
       <li><a href="pymatgen.io.cif.html#pymatgen.io.cif.CifParser.get_structures">get_structures() (CifParser method)</a>
 
@@ -4345,7 +4383,7 @@
 </li>
       <li><a href="pymatgen.io.zeopp.html#pymatgen.io.zeopp.get_void_volume_surfarea">get_void_volume_surfarea() (in module pymatgen.io.zeopp)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.get_voigt_dict">get_voigt_dict() (TensorBase static method)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.get_voigt_dict">get_voigt_dict() (Tensor static method)</a>
 </li>
       <li><a href="pymatgen.analysis.defects.point_defects.html#pymatgen.analysis.defects.point_defects.Vacancy.get_volume">get_volume() (Vacancy method)</a>
 </li>
@@ -5071,8 +5109,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.I">I (Element attribute)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.IndependentStrain.i">i (IndependentStrain attribute)</a>
-</li>
       <li><a href="pymatgen.util.convergence.html#pymatgen.util.convergence.id_generator">id_generator() (in module pymatgen.util.convergence)</a>
 </li>
       <li><a href="pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Vasprun.idos">idos (Vasprun attribute)</a>
@@ -5082,6 +5118,8 @@
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.iflat_tasks">iflat_tasks() (Flow method)</a>
 </li>
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.iflat_tasks_wti">iflat_tasks_wti() (Flow method)</a>
+</li>
+      <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.IndependentStrain.ij">ij (IndependentStrain attribute)</a>
 </li>
       <li><a href="pymatgen.analysis.path_finder.html#pymatgen.analysis.path_finder.NEBPathfinder.images">images (NEBPathfinder attribute)</a>
 </li>
@@ -5138,8 +5176,6 @@
 </li>
       </ul></li>
       <li><a href="pymatgen.io.exciting.inputs.html#pymatgen.io.exciting.inputs.ExcitingInput.indent">indent() (ExcitingInput static method)</a>
-</li>
-      <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.Strain.independent_deformation">independent_deformation (Strain attribute)</a>
 </li>
       <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.IndependentStrain">IndependentStrain (class in pymatgen.analysis.elasticity.strain)</a>
 </li>
@@ -5321,12 +5357,12 @@
 </li>
       <li><a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.is_alkali">is_alkali (Element attribute)</a>, <a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.is_alkali">[1]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.is_alkaline">is_alkaline (Element attribute)</a>, <a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.is_alkaline">[1]</a>
 </li>
       <li><a href="pymatgen.analysis.chemenv.utils.coordination_geometry_utils.html#pymatgen.analysis.chemenv.utils.coordination_geometry_utils.is_anion_cation_bond">is_anion_cation_bond() (in module pymatgen.analysis.chemenv.utils.coordination_geometry_utils)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.io.adf.html#pymatgen.io.adf.AdfKey.is_block_key">is_block_key() (AdfKey method)</a>
 </li>
       <li><a href="pymatgen.core.bonds.html#pymatgen.core.bonds.CovalentBond.is_bonded">is_bonded() (CovalentBond static method)</a>
@@ -5373,7 +5409,7 @@
       </ul></li>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node.is_file">is_file (Node attribute)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.is_fit_to_structure">is_fit_to_structure() (TensorBase method)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.is_fit_to_structure">is_fit_to_structure() (Tensor method)</a>
 </li>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node.is_flow">is_flow (Node attribute)</a>
 </li>
@@ -5396,6 +5432,8 @@
       <li><a href="pymatgen.analysis.chemenv.utils.coordination_geometry_utils.html#pymatgen.analysis.chemenv.utils.coordination_geometry_utils.Plane.is_in_list">is_in_list() (Plane method)</a>
 </li>
       <li><a href="pymatgen.analysis.chemenv.utils.coordination_geometry_utils.html#pymatgen.analysis.chemenv.utils.coordination_geometry_utils.Plane.is_in_plane">is_in_plane() (Plane method)</a>
+</li>
+      <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.Deformation.is_independent">is_independent() (Deformation method)</a>
 </li>
       <li><a href="pymatgen.io.adf.html#pymatgen.io.adf.AdfOutput.is_internal_crash">is_internal_crash (AdfOutput attribute)</a>
 </li>
@@ -5522,7 +5560,9 @@
       <li><a href="pymatgen.core.surface.html#pymatgen.core.surface.Slab.is_symmetric">is_symmetric() (Slab method)</a>
 
       <ul>
-        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.is_symmetric">(TensorBase method)</a>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.is_symmetric">(Tensor method)</a>
+</li>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.is_symmetric">(TensorCollection method)</a>
 </li>
       </ul></li>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node.is_task">is_task (Node attribute)</a>
@@ -5537,8 +5577,12 @@
 </li>
       <li><a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.is_valid_symbol">is_valid_symbol() (Element static method)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.is_voigt_symmetric">is_voigt_symmetric (TensorBase attribute)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.is_voigt_symmetric">is_voigt_symmetric() (Tensor method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.is_voigt_symmetric">(TensorCollection method)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node.is_work">is_work (Node attribute)</a>
 </li>
       <li><a href="pymatgen.core.libxcfunc.html#pymatgen.core.libxcfunc.LibxcFunc.is_x_kind">is_x_kind (LibxcFunc attribute)</a>
@@ -5585,8 +5629,6 @@
 <h2 id="J">J</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pymatgen.analysis.elasticity.strain.html#pymatgen.analysis.elasticity.strain.IndependentStrain.j">j (IndependentStrain attribute)</a>
-</li>
       <li><a href="pymatgen.io.abinit.qjobs.html#pymatgen.io.abinit.qjobs.JobStatus">JobStatus (class in pymatgen.io.abinit.qjobs)</a>
 </li>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.NodeResults.json_dump">json_dump() (NodeResults method)</a>
@@ -5629,14 +5671,12 @@
 </li>
       <li><a href="pymatgen.io.vasp.inputs.html#pymatgen.io.vasp.inputs.PotcarSingle.keywords">keywords (PotcarSingle attribute)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.kg_average">kg_average (ElasticTensor attribute)</a>
-</li>
       <li><a href="pymatgen.symmetry.bandstructure.html#pymatgen.symmetry.bandstructure.HighSymmKpath.kpath">kpath (HighSymmKpath attribute)</a>
+</li>
+      <li><a href="pymatgen.electronic_structure.bandstructure.html#pymatgen.electronic_structure.bandstructure.Kpoint">Kpoint (class in pymatgen.electronic_structure.bandstructure)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pymatgen.electronic_structure.bandstructure.html#pymatgen.electronic_structure.bandstructure.Kpoint">Kpoint (class in pymatgen.electronic_structure.bandstructure)</a>
-</li>
       <li><a href="pymatgen.io.vasp.inputs.html#pymatgen.io.vasp.inputs.Kpoints">Kpoints (class in pymatgen.io.vasp.inputs)</a>
 </li>
       <li><a href="pymatgen.io.vasp.sets.html#pymatgen.io.vasp.sets.DictSet.kpoints">kpoints (DictSet attribute)</a>
@@ -6599,10 +6639,10 @@
 </li>
       <li><a href="pymatgen.analysis.chemenv.utils.defs_utils.html#pymatgen.analysis.chemenv.utils.defs_utils.AdditionalConditions.NO_ELEMENT_TO_SAME_ELEMENT_BONDS">NO_ELEMENT_TO_SAME_ELEMENT_BONDS (AdditionalConditions attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Node">Node (class in pymatgen.io.abinit.nodes)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.io.abinit.nodes.html#pymatgen.io.abinit.nodes.Dependency.node">node (Dependency attribute)</a>
 </li>
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.node_from_nid">node_from_nid() (Flow method)</a>
@@ -6686,6 +6726,8 @@
       <li><a href="pymatgen.io.abinit.abiobjects.html#pymatgen.io.abinit.abiobjects.Electrons.nspinor">nspinor (Electrons attribute)</a>
 </li>
       <li><a href="pymatgen.io.abinit.abiobjects.html#pymatgen.io.abinit.abiobjects.Electrons.nsppol">nsppol (Electrons attribute)</a>
+</li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.NthOrderElasticTensor">NthOrderElasticTensor (class in pymatgen.analysis.elasticity.elastic)</a>
 </li>
       <li><a href="pymatgen.core.structure.html#pymatgen.core.structure.SiteCollection.ntypesp">ntypesp (SiteCollection attribute)</a>
 </li>
@@ -6813,10 +6855,10 @@
 </li>
       <li><a href="pymatgen.io.qchem.html#pymatgen.io.qchem.QcTask.optional_keywords_list">optional_keywords_list (QcTask attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.electronic_structure.core.html#pymatgen.electronic_structure.core.Orbital">Orbital (class in pymatgen.electronic_structure.core)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.electronic_structure.core.html#pymatgen.electronic_structure.core.Orbital.orbital_type">orbital_type (Orbital attribute)</a>
 </li>
       <li><a href="pymatgen.electronic_structure.core.html#pymatgen.electronic_structure.core.OrbitalType">OrbitalType (class in pymatgen.electronic_structure.core)</a>
@@ -6833,8 +6875,14 @@
 </li>
       <li><a href="pymatgen.symmetry.bandstructure.html#pymatgen.symmetry.bandstructure.HighSymmKpath.orci">orci() (HighSymmKpath method)</a>
 </li>
-      <li><a href="pymatgen.symmetry.groups.html#pymatgen.symmetry.groups.SpaceGroup.order">order (SpaceGroup attribute)</a>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensorExpansion.order">order (ElasticTensorExpansion attribute)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.NthOrderElasticTensor.order">(NthOrderElasticTensor attribute)</a>
 </li>
+        <li><a href="pymatgen.symmetry.groups.html#pymatgen.symmetry.groups.SpaceGroup.order">(SpaceGroup attribute)</a>
+</li>
+      </ul></li>
       <li><a href="pymatgen.apps.borg.queen.html#pymatgen.apps.borg.queen.order_assimilation">order_assimilation() (in module pymatgen.apps.borg.queen)</a>
 </li>
       <li><a href="pymatgen.phasediagram.plotter.html#pymatgen.phasediagram.plotter.order_phase_diagram">order_phase_diagram() (in module pymatgen.phasediagram.plotter)</a>
@@ -7444,6 +7492,8 @@
       <li><a href="pymatgen.io.gaussian.html#pymatgen.io.gaussian.GaussianOutput.properly_terminated">properly_terminated (GaussianOutput attribute)</a>
 </li>
       <li><a href="pymatgen.core.sites.html#pymatgen.core.sites.Site.properties">properties (Site attribute)</a>
+</li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.property_dict">property_dict (ElasticTensor attribute)</a>
 </li>
       <li><a href="pymatgen.analysis.defects.point_defects.html#pymatgen.analysis.defects.point_defects.Interstitial.prune_close_defectsites">prune_close_defectsites() (Interstitial method)</a>
 </li>
@@ -8325,8 +8375,12 @@
       </ul></li>
       <li><a href="pymatgen.core.periodic_table.html#pymatgen.core.periodic_table.Element.Rn">Rn (Element attribute)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.rotate">rotate() (TensorBase method)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.rotate">rotate() (Tensor method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.rotate">(TensorCollection method)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.core.structure.html#pymatgen.core.structure.Molecule.rotate_sites">rotate_sites() (Molecule method)</a>
 </li>
       <li><a href="pymatgen.vis.structure_vtk.html#pymatgen.vis.structure_vtk.StructureVis.rotate_view">rotate_view() (StructureVis method)</a>
@@ -8821,14 +8875,14 @@
 </li>
       <li><a href="pymatgen.util.convergence.html#pymatgen.util.convergence.single_reciprocal">single_reciprocal() (in module pymatgen.util.convergence)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.single_shot">single_shot() (Flow method)</a>
 
       <ul>
         <li><a href="pymatgen.io.abinit.launcher.html#pymatgen.io.abinit.launcher.PyLauncher.single_shot">(PyLauncher method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.core.sites.html#pymatgen.core.sites.Site">Site (class in pymatgen.core.sites)</a>
 </li>
       <li><a href="pymatgen.analysis.chemenv.coordination_environments.structure_environments.html#pymatgen.analysis.chemenv.coordination_environments.structure_environments.LightStructureEnvironments.site_contains_environment">site_contains_environment() (LightStructureEnvironments method)</a>
@@ -8930,8 +8984,6 @@
 </li>
       </ul></li>
       <li><a href="pymatgen.symmetry.groups.html#pymatgen.symmetry.groups.SpaceGroup">SpaceGroup (class in pymatgen.symmetry.groups)</a>
-</li>
-      <li><a href="pymatgen.symmetry.structure.html#pymatgen.symmetry.structure.SymmetrizedStructure.spacegroup">spacegroup (SymmetrizedStructure attribute)</a>
 </li>
       <li><a href="pymatgen.symmetry.analyzer.html#pymatgen.symmetry.analyzer.SpacegroupAnalyzer">SpacegroupAnalyzer (class in pymatgen.symmetry.analyzer)</a>
 </li>
@@ -9171,6 +9223,8 @@
 </li>
       <li><a href="pymatgen.io.abinit.scheduler_error_parsers.html#pymatgen.io.abinit.scheduler_error_parsers.SubmitError">SubmitError (class in pymatgen.io.abinit.scheduler_error_parsers)</a>
 </li>
+      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.subs">subs() (in module pymatgen.analysis.elasticity.elastic)</a>
+</li>
       <li><a href="pymatgen.core.structure.html#pymatgen.core.structure.Molecule.substitute">substitute() (Molecule method)</a>
 </li>
       <li><a href="pymatgen.cli.pydii.html#pymatgen.cli.pydii.substitute_def_struct_gen">substitute_def_struct_gen() (in module pymatgen.cli.pydii)</a>
@@ -9255,8 +9309,12 @@
 </li>
       <li><a href="pymatgen.core.surface.html#pymatgen.core.surface.SlabGenerator.symmetrize_slab">symmetrize_slab() (SlabGenerator method)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.symmetrized">symmetrized (TensorBase attribute)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.symmetrized">symmetrized (Tensor attribute)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.symmetrized">(TensorCollection attribute)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.symmetry.structure.html#pymatgen.symmetry.structure.SymmetrizedStructure">SymmetrizedStructure (class in pymatgen.symmetry.structure)</a>
 </li>
       <li><a href="pymatgen.analysis.chemenv.coordination_environments.coordination_geometry_finder.html#pymatgen.analysis.chemenv.coordination_environments.coordination_geometry_finder.symmetry_measure">symmetry_measure() (in module pymatgen.analysis.chemenv.coordination_environments.coordination_geometry_finder)</a>
@@ -9323,7 +9381,9 @@
 </li>
       <li><a href="pymatgen.io.abinit.flows.html#pymatgen.io.abinit.flows.Flow.temporary_flow">temporary_flow() (pymatgen.io.abinit.flows.Flow class method)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase">TensorBase (class in pymatgen.analysis.elasticity.tensors)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor">Tensor (class in pymatgen.analysis.elasticity.tensors)</a>
+</li>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection">TensorCollection (class in pymatgen.analysis.elasticity.tensors)</a>
 </li>
       <li><a href="pymatgen.command_line.gulp_caller.html#pymatgen.command_line.gulp_caller.GulpIO.tersoff_input">tersoff_input() (GulpIO method)</a>
 </li>
@@ -9503,8 +9563,6 @@
 </li>
       <li><a href="pymatgen.core.sites.html#pymatgen.core.sites.PeriodicSite.to_unit_cell">to_unit_cell (PeriodicSite attribute)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.toec_fit">toec_fit() (in module pymatgen.analysis.elasticity.elastic)</a>
-</li>
       <li><a href="pymatgen.analysis.reaction_calculator.html#pymatgen.analysis.reaction_calculator.BalancedReaction.TOLERANCE">TOLERANCE (BalancedReaction attribute)</a>
 </li>
       <li><a href="pymatgen.io.lammps.topology.html#pymatgen.io.lammps.topology.Topology">Topology (class in pymatgen.io.lammps.topology)</a>
@@ -9529,8 +9587,12 @@
 </li>
       <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.trans_v">trans_v() (ElasticTensor method)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.transform">transform() (TensorBase method)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.transform">transform() (Tensor method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.transform">(TensorCollection method)</a>
 </li>
+      </ul></li>
       <li><a href="pymatgen.phasediagram.maker.html#pymatgen.phasediagram.maker.CompoundPhaseDiagram.transform_entries">transform_entries() (CompoundPhaseDiagram method)</a>
 </li>
       <li><a href="pymatgen.core.operations.html#pymatgen.core.operations.SymmOp.transform_tensor">transform_tensor() (SymmOp method)</a>
@@ -9757,9 +9819,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pymatgen.analysis.chemenv.utils.scripts_utils.html#pymatgen.analysis.chemenv.utils.scripts_utils.visualize">visualize() (in module pymatgen.analysis.chemenv.utils.scripts_utils)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.voigt">voigt (TensorBase attribute)</a>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.voigt">voigt (Tensor attribute)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.voigt">(TensorCollection attribute)</a>
 </li>
-      <li><a href="pymatgen.analysis.elasticity.elastic.html#pymatgen.analysis.elasticity.elastic.ElasticTensor.voigt_symmetrized">voigt_symmetrized (ElasticTensor attribute)</a>
+      </ul></li>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.voigt_symmetrized">voigt_symmetrized (Tensor attribute)</a>
 </li>
       <li><a href="pymatgen.apps.battery.battery_abc.html#pymatgen.apps.battery.battery_abc.AbstractVoltagePair.vol_charge">vol_charge (AbstractVoltagePair attribute)</a>
 
@@ -10111,10 +10177,14 @@
 </li>
       <li><a href="pymatgen.io.zeopp.html#pymatgen.io.zeopp.ZeoVoronoiXYZ">ZeoVoronoiXYZ (class in pymatgen.io.zeopp)</a>
 </li>
+      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.zeroed">zeroed() (Tensor method)</a>
+
+      <ul>
+        <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorCollection.zeroed">(TensorCollection method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.TensorBase.zeroed">zeroed() (TensorBase method)</a>
-</li>
       <li><a href="pymatgen.io.abinit.pseudos.html#pymatgen.io.abinit.pseudos.PseudoTable.zlist">zlist (PseudoTable attribute)</a>
 </li>
       <li><a href="pymatgen.io.gaussian.html#pymatgen.io.gaussian.GaussianInput.zmat_patt">zmat_patt (GaussianInput attribute)</a>
@@ -10167,7 +10237,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>
 

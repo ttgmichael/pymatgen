@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.defects.dilute_solution_model &#8212; pymatgen 4.7.2 documentation</title>
+    <title>pymatgen.analysis.defects.dilute_solution_model &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -63,6 +63,13 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
+
+<span class="kn">from</span> <span class="nn">monty.fractions</span> <span class="k">import</span> <span class="n">gcd</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">nsolve</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">solve</span><span class="p">,</span> <span class="n">Eq</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Evaluate the defect concentration based on composition, temperature,</span>
@@ -81,23 +88,9 @@
 <span class="n">__status__</span> <span class="o">=</span> <span class="s2">&quot;Alpha&quot;</span>
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;6/4/14&quot;</span>
 
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">zip</span>
-
-<span class="kn">from</span> <span class="nn">monty.dev</span> <span class="k">import</span> <span class="n">requires</span>
-<span class="kn">from</span> <span class="nn">monty.fractions</span> <span class="k">import</span> <span class="n">gcd</span>
-
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">nsolve</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">solve</span><span class="p">,</span> <span class="n">Eq</span>
-    <span class="n">sympy_found</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="n">sympy_found</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># physical consts</span>
-<span class="n">k_B</span><span class="o">=</span><span class="mf">8.6173324e-5</span>                <span class="c1"># eV/K</span>
+<span class="n">k_B</span> <span class="o">=</span> <span class="mf">8.6173324e-5</span>                <span class="c1"># eV/K</span>
 
 <span class="c1"># Check the inputs</span>
 <div class="viewcode-block" id="check_input"><a class="viewcode-back" href="../../../../pymatgen.analysis.defects.dilute_solution_model.html#pymatgen.analysis.defects.dilute_solution_model.check_input">[docs]</a><span class="k">def</span> <span class="nf">check_input</span><span class="p">(</span><span class="n">def_list</span><span class="p">):</span>
@@ -108,8 +101,7 @@
             <span class="k">break</span>
     <span class="k">return</span> <span class="n">flag</span></div>
 
-<span class="nd">@requires</span><span class="p">(</span><span class="n">sympy_found</span><span class="p">,</span>
-            <span class="s2">&quot;dilute_solution_model requires Sympy module. Please install it.&quot;</span><span class="p">)</span>
+
 <div class="viewcode-block" id="dilute_solution_model"><a class="viewcode-back" href="../../../../pymatgen.analysis.defects.dilute_solution_model.html#pymatgen.analysis.defects.dilute_solution_model.dilute_solution_model">[docs]</a><span class="k">def</span> <span class="nf">dilute_solution_model</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">e0</span><span class="p">,</span> <span class="n">vac_defs</span><span class="p">,</span> <span class="n">antisite_defs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span>
         <span class="n">trial_chem_pot</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">generate</span><span class="o">=</span><span class="s1">&#39;plot&#39;</span><span class="p">):</span>
 
@@ -746,8 +738,7 @@
 
     <span class="k">return</span> <span class="n">conc_data</span><span class="p">,</span> <span class="n">en_data</span><span class="p">,</span> <span class="n">mu_data</span></div>
 
-<span class="nd">@requires</span><span class="p">(</span><span class="n">sympy_found</span><span class="p">,</span>
-          <span class="s2">&quot;comute_defect_density requires Sympy module. Please install it.&quot;</span><span class="p">)</span>
+
 <div class="viewcode-block" id="compute_defect_density"><a class="viewcode-back" href="../../../../pymatgen.analysis.defects.dilute_solution_model.html#pymatgen.analysis.defects.dilute_solution_model.compute_defect_density">[docs]</a><span class="k">def</span> <span class="nf">compute_defect_density</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">e0</span><span class="p">,</span> <span class="n">vac_defs</span><span class="p">,</span> <span class="n">antisite_defs</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
         <span class="n">trial_chem_pot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_style</span><span class="o">=</span><span class="s2">&quot;highcharts&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -831,8 +822,6 @@
 <span class="c1">#solute_site_preference_finder is based on dilute_solution_model and so most</span>
 <span class="c1">#of the code is same. However differences exist in setting up and processing</span>
 <span class="c1">#hence new function</span>
-<span class="nd">@requires</span><span class="p">(</span><span class="n">sympy_found</span><span class="p">,</span> <span class="s2">&quot;solute_site_preference_finder requires Sympy module. &quot;</span>\
-        <span class="s2">&quot;Please install it.&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="solute_site_preference_finder"><a class="viewcode-back" href="../../../../pymatgen.analysis.defects.dilute_solution_model.html#pymatgen.analysis.defects.dilute_solution_model.solute_site_preference_finder">[docs]</a><span class="k">def</span> <span class="nf">solute_site_preference_finder</span><span class="p">(</span>
         <span class="n">structure</span><span class="p">,</span> <span class="n">e0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">vac_defs</span><span class="p">,</span> <span class="n">antisite_defs</span><span class="p">,</span>  <span class="n">solute_defs</span><span class="p">,</span>
         <span class="n">solute_concen</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">trial_chem_pot</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -1365,8 +1354,7 @@
     <span class="c1">#return site_pref_data, conc_data</span>
     <span class="k">return</span>  <span class="n">conc_data</span></div>
 
-<span class="nd">@requires</span><span class="p">(</span><span class="n">sympy_found</span><span class="p">,</span>
-          <span class="s2">&quot;solute_defect_density requires Sympy module. Please install it.&quot;</span><span class="p">)</span>
+
 <div class="viewcode-block" id="solute_defect_density"><a class="viewcode-back" href="../../../../pymatgen.analysis.defects.dilute_solution_model.html#pymatgen.analysis.defects.dilute_solution_model.solute_defect_density">[docs]</a><span class="k">def</span> <span class="nf">solute_defect_density</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">e0</span><span class="p">,</span> <span class="n">vac_defs</span><span class="p">,</span> <span class="n">antisite_defs</span><span class="p">,</span> <span class="n">solute_defs</span><span class="p">,</span>
         <span class="n">solute_concen</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">trial_chem_pot</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">plot_style</span><span class="o">=</span><span class="s2">&quot;highchargs&quot;</span><span class="p">):</span>
@@ -1484,7 +1472,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

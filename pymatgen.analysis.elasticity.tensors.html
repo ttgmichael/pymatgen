@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.tensors module &#8212; pymatgen 4.7.2 documentation</title>
+    <title>pymatgen.analysis.elasticity.tensors module &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -60,7 +60,7 @@
 <dl class="class">
 <dt id="pymatgen.analysis.elasticity.tensors.SquareTensor">
 <em class="property">class </em><code class="descname">SquareTensor</code><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#SquareTensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.SquareTensor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pymatgen.analysis.elasticity.tensors.TensorBase" title="pymatgen.analysis.elasticity.tensors.TensorBase"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.analysis.elasticity.tensors.TensorBase</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pymatgen.analysis.elasticity.tensors.Tensor" title="pymatgen.analysis.elasticity.tensors.Tensor"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.analysis.elasticity.tensors.Tensor</span></code></a></p>
 <p>Base class for doing useful general operations on second rank tensors
 (stress, strain etc.).</p>
 <p>Create a SquareTensor object.  Note that the constructor uses __new__
@@ -150,12 +150,12 @@ polynomial for the matrix</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase">
-<em class="property">class </em><code class="descname">TensorBase</code><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor">
+<em class="property">class </em><code class="descname">Tensor</code><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></p>
 <p>Base class for doing useful general operations on Nth order tensors,
 without restrictions on the type (stress, elastic, strain, piezo, etc.)</p>
-<p>Create a TensorBase object.  Note that the constructor uses __new__
+<p>Create a Tensor object.  Note that the constructor uses __new__
 rather than __init__ according to the standard method of
 subclassing numpy ndarrays.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -163,8 +163,8 @@ subclassing numpy ndarrays.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>input_array</strong> &#8211; (3xN array-like): the 3xN array-like representing
-a tensor quantity</li>
+<li><strong>input_array</strong> &#8211; (array-like with shape 3^N): array-like representing
+a tensor quantity in standard (i. e. non-voigt) notation</li>
 <li><strong>vscale</strong> &#8211; (N x M array-like): a matrix corresponding
 to the coefficients of the voigt-notation tensor</li>
 </ul>
@@ -173,8 +173,8 @@ to the coefficients of the voigt-notation tensor</li>
 </tbody>
 </table>
 <dl class="method">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.convert_to_ieee">
-<code class="descname">convert_to_ieee</code><span class="sig-paren">(</span><em>structure</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.convert_to_ieee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.convert_to_ieee" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.convert_to_ieee">
+<code class="descname">convert_to_ieee</code><span class="sig-paren">(</span><em>structure</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.convert_to_ieee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.convert_to_ieee" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a structure associated with a tensor, attempts a
 calculation of the tensor in IEEE format according to
 the 1987 IEEE standards.</p>
@@ -190,8 +190,8 @@ tensor to be converted to the IEEE standard</td>
 </dd></dl>
 
 <dl class="method">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.fit_to_structure">
-<code class="descname">fit_to_structure</code><span class="sig-paren">(</span><em>structure</em>, <em>symprec=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.fit_to_structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.fit_to_structure" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.fit_to_structure">
+<code class="descname">fit_to_structure</code><span class="sig-paren">(</span><em>structure</em>, <em>symprec=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.fit_to_structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.fit_to_structure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a tensor that is invariant with respect to symmetry
 operations corresponding to a structure</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -211,15 +211,22 @@ used to generate the symmetry operations</li>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.from_voigt">
-<em class="property">classmethod </em><code class="descname">from_voigt</code><span class="sig-paren">(</span><em>voigt_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.from_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.from_voigt" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.from_voigt">
+<em class="property">classmethod </em><code class="descname">from_voigt</code><span class="sig-paren">(</span><em>voigt_input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.from_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.from_voigt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor based on the voigt notation vector or matrix.</p>
-<p>Args:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>voigt_input</strong> (<em>array-like</em>) &#8211; voigt input for a given tensor</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.get_voigt_dict">
-<em class="property">static </em><code class="descname">get_voigt_dict</code><span class="sig-paren">(</span><em>rank</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.get_voigt_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.get_voigt_dict" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.get_voigt_dict">
+<em class="property">static </em><code class="descname">get_voigt_dict</code><span class="sig-paren">(</span><em>rank</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.get_voigt_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.get_voigt_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary that maps indices in the tensor to those
 in a voigt representation based on input rank</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -233,8 +240,8 @@ in a voigt representation based on input rank</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.is_fit_to_structure">
-<code class="descname">is_fit_to_structure</code><span class="sig-paren">(</span><em>structure</em>, <em>tol=0.01</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.is_fit_to_structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.is_fit_to_structure" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.is_fit_to_structure">
+<code class="descname">is_fit_to_structure</code><span class="sig-paren">(</span><em>structure</em>, <em>tol=0.01</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.is_fit_to_structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.is_fit_to_structure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests whether a tensor is invariant with respect to the
 symmetry operations of a particular structure by testing
 whether the residual of the symmetric portion is below a
@@ -250,8 +257,8 @@ tolerance</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.is_symmetric">
-<code class="descname">is_symmetric</code><span class="sig-paren">(</span><em>tol=1e-05</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.is_symmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.is_symmetric" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.is_symmetric">
+<code class="descname">is_symmetric</code><span class="sig-paren">(</span><em>tol=1e-05</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.is_symmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.is_symmetric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests whether a tensor is symmetric or not based on the residual
 with its symmetric part, from self.symmetrized</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -264,17 +271,17 @@ with its symmetric part, from self.symmetrized</p>
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.is_voigt_symmetric">
-<code class="descname">is_voigt_symmetric</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.is_voigt_symmetric" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.is_voigt_symmetric">
+<code class="descname">is_voigt_symmetric</code><span class="sig-paren">(</span><em>tol=1e-06</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.is_voigt_symmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.is_voigt_symmetric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests symmetry of tensor to that necessary for voigt-conversion
 by grouping indices into pairs and constructing a sequence of
 possible permutations to be used in a tensor transpose</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.rotate">
-<code class="descname">rotate</code><span class="sig-paren">(</span><em>matrix</em>, <em>tol=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.rotate" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.rotate">
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>matrix</em>, <em>tol=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.rotate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a rotation directly, and tests input matrix to ensure a valid
 rotation.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -292,16 +299,16 @@ rotation.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.symmetrized">
-<code class="descname">symmetrized</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.symmetrized" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.symmetrized">
+<code class="descname">symmetrized</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.symmetrized" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a generally symmetrized tensor, calculated by taking
 the sum of the tensor and its transpose with respect to all
 possible permutations of indices</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>symm_op</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.transform" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>symm_op</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a transformation (via a symmetry operation) to a tensor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -314,17 +321,82 @@ possible permutations of indices</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.voigt">
-<code class="descname">voigt</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.voigt" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.voigt">
+<code class="descname">voigt</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.voigt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the tensor in Voigt notation</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.voigt_symmetrized">
+<code class="descname">voigt_symmetrized</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.voigt_symmetrized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a &#8220;voigt&#8221;-symmetrized tensor, i. e. a voigt-notation
+tensor such that it is invariant wrt permutation of indices</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="pymatgen.analysis.elasticity.tensors.TensorBase.zeroed">
-<code class="descname">zeroed</code><span class="sig-paren">(</span><em>tol=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorBase.zeroed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorBase.zeroed" title="Permalink to this definition">¶</a></dt>
+<dt id="pymatgen.analysis.elasticity.tensors.Tensor.zeroed">
+<code class="descname">zeroed</code><span class="sig-paren">(</span><em>tol=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.zeroed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.zeroed" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns the matrix with all entries below a certain threshold
 (i.e. tol) set to zero</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection">
+<em class="property">class </em><code class="descname">TensorCollection</code><span class="sig-paren">(</span><em>tensor_list</em>, <em>base_class=&lt;class 'pymatgen.analysis.elasticity.tensors.Tensor'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">collections.abc.Sequence</span></code></p>
+<p>A sequence of tensors that can be used for fitting data
+or for having a tensor expansion</p>
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.convert_to_ieee">
+<code class="descname">convert_to_ieee</code><span class="sig-paren">(</span><em>structure</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.convert_to_ieee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.convert_to_ieee" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.fit_to_structure">
+<code class="descname">fit_to_structure</code><span class="sig-paren">(</span><em>structure</em>, <em>symprec=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.fit_to_structure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.fit_to_structure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.from_voigt">
+<em class="property">classmethod </em><code class="descname">from_voigt</code><span class="sig-paren">(</span><em>voigt_input_list</em>, <em>base_class=&lt;class 'pymatgen.analysis.elasticity.tensors.Tensor'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.from_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.from_voigt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.is_symmetric">
+<code class="descname">is_symmetric</code><span class="sig-paren">(</span><em>tol=1e-05</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.is_symmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.is_symmetric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.is_voigt_symmetric">
+<code class="descname">is_voigt_symmetric</code><span class="sig-paren">(</span><em>tol=1e-06</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.is_voigt_symmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.is_voigt_symmetric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.rotate">
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>matrix</em>, <em>tol=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.rotate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.symmetrized">
+<code class="descname">symmetrized</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.symmetrized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>symm_op</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.voigt">
+<code class="descname">voigt</code><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.voigt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pymatgen.analysis.elasticity.tensors.TensorCollection.zeroed">
+<code class="descname">zeroed</code><span class="sig-paren">(</span><em>tol=0.001</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#TensorCollection.zeroed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.TensorCollection.zeroed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -340,7 +412,7 @@ tensors from the original list</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tensors</strong> (<em>list of tensors</em>) &#8211; list of TensorBase objects to test for
+<li><strong>tensors</strong> (<em>list of tensors</em>) &#8211; list of Tensor objects to test for
 symmetrically-equivalent duplicates</li>
 <li><strong>structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; structure from which to get symmetry</li>
 <li><strong>tol</strong> (<em>float</em>) &#8211; tolerance for tensor equivalence</li>
@@ -395,7 +467,7 @@ tensors as values</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>
 

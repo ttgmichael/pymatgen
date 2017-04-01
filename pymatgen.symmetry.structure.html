@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.symmetry.structure module &#8212; pymatgen 4.7.2 documentation</title>
+    <title>pymatgen.symmetry.structure module &#8212; pymatgen 4.7.3 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.2',
+        VERSION:     '4.7.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -59,7 +59,7 @@
 <span id="pymatgen-symmetry-structure-module"></span><h1>pymatgen.symmetry.structure module<a class="headerlink" href="#module-pymatgen.symmetry.structure" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pymatgen.symmetry.structure.SymmetrizedStructure">
-<em class="property">class </em><code class="descname">SymmetrizedStructure</code><span class="sig-paren">(</span><em>structure</em>, <em>spacegroup</em>, <em>equivalent_positions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/symmetry/structure.html#SymmetrizedStructure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.symmetry.structure.SymmetrizedStructure" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">SymmetrizedStructure</code><span class="sig-paren">(</span><em>structure</em>, <em>spacegroup</em>, <em>equivalent_positions</em>, <em>wyckoff_letters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/symmetry/structure.html#SymmetrizedStructure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.symmetry.structure.SymmetrizedStructure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.core.structure.Structure</span></code></a></p>
 <p>This class represents a symmetrized structure, i.e. a structure
 where the spacegroup and symmetry operations are defined. This class is
@@ -71,20 +71,14 @@ pymatgen.symmetry.analyzer.SpacegroupAnalyzer.get_symmetrized_structure.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; Original structure</li>
-<li><strong>spacegroup</strong> (<em>Spacegroup</em>) &#8211; An input spacegroup from SpacegroupAnalyzer.</li>
+<li><strong>spacegroup</strong> (<a class="reference internal" href="pymatgen.symmetry.analyzer.html#pymatgen.symmetry.analyzer.SpacegroupOperations" title="pymatgen.symmetry.analyzer.SpacegroupOperations"><em>SpacegroupOperations</em></a>) &#8211; An input SpacegroupOperations from
+SpacegroupAnalyzer.</li>
 <li><strong>equivalent_positions</strong> &#8211; Equivalent positions from SpacegroupAnalyzer.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<dl class="attribute">
-<dt id="pymatgen.symmetry.structure.SymmetrizedStructure.equivalent_sites">
-<code class="descname">equivalent_sites</code><a class="headerlink" href="#pymatgen.symmetry.structure.SymmetrizedStructure.equivalent_sites" title="Permalink to this definition">¶</a></dt>
-<dd><p>All the sites grouped by symmetry equivalence in the form of [[sites
-in group1], [sites in group2], ...]</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="pymatgen.symmetry.structure.SymmetrizedStructure.find_equivalent_sites">
 <code class="descname">find_equivalent_sites</code><span class="sig-paren">(</span><em>site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/symmetry/structure.html#SymmetrizedStructure.find_equivalent_sites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.symmetry.structure.SymmetrizedStructure.find_equivalent_sites" title="Permalink to this definition">¶</a></dt>
@@ -102,11 +96,6 @@ in group1], [sites in group2], ...]</p>
 </tbody>
 </table>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="pymatgen.symmetry.structure.SymmetrizedStructure.spacegroup">
-<code class="descname">spacegroup</code><a class="headerlink" href="#pymatgen.symmetry.structure.SymmetrizedStructure.spacegroup" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -148,7 +137,7 @@ in group1], [sites in group2], ...]</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
       </ul>
     </div>
 
