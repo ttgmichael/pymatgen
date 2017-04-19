@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -1501,6 +1501,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">final_energy</span> <span class="o">=</span> <span class="n">total_energy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
 
+        <span class="c1"># Check if calculation is spin polarized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spin</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_pattern</span><span class="p">({</span><span class="s1">&#39;spin&#39;</span><span class="p">:</span> <span class="s1">&#39;ISPIN  =      2&#39;</span><span class="p">})</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;spin&#39;</span><span class="p">,[]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spin</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Check if calculation is noncollinear</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">noncollinear</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_pattern</span><span class="p">({</span><span class="s1">&#39;noncollinear&#39;</span><span class="p">:</span> <span class="s1">&#39;LNONCOLLINEAR =      T&#39;</span><span class="p">})</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;noncollinear&#39;</span><span class="p">,[]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">noncollinear</span> <span class="o">=</span> <span class="kc">False</span>
+
         <span class="c1"># Check to see if LEPSILON is true and read piezo data if so</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lepsilon</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">read_pattern</span><span class="p">({</span><span class="s1">&#39;epsilon&#39;</span><span class="p">:</span> <span class="s1">&#39;LEPSILON=     T&#39;</span><span class="p">})</span>
@@ -1508,6 +1520,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">lepsilon</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">read_lepsilon</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">read_lepsilon_ionic</span><span class="p">()</span>
+
+        <span class="c1"># Check to see if LCALCPOL is true and read polarization data if so</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcalcpol</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_pattern</span><span class="p">({</span><span class="s1">&#39;calcpol&#39;</span><span class="p">:</span> <span class="s1">&#39;LCALCPOL   =     T&#39;</span><span class="p">})</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;calcpol&#39;</span><span class="p">,[]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lcalcpol</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_lcalcpol</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_pseudo_zval</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Outcar.read_pattern"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_pattern">[docs]</a>    <span class="k">def</span> <span class="nf">read_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">terminate_on_match</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                      <span class="n">postprocess</span><span class="o">=</span><span class="nb">str</span><span class="p">):</span>
@@ -2109,20 +2129,43 @@
 <div class="viewcode-block" id="Outcar.read_lcalcpol"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_lcalcpol">[docs]</a>    <span class="k">def</span> <span class="nf">read_lcalcpol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># variables to be filled</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p_elec</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_sp1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_sp2</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p_ion</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">search</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="c1"># Always present spin/non-spin</span>
-            <span class="k">def</span> <span class="nf">p_elc</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">p_elc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+            <span class="k">def</span> <span class="nf">p_elec</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">p_elec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
                                           <span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span>
                                           <span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))])</span>
 
             <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;^.*Total electronic dipole moment: &quot;</span>
                            <span class="sa">r</span><span class="s2">&quot;*p\[elc\]=\( *([-0-9.Ee+]*) *([-0-9.Ee+]*) &quot;</span>
                            <span class="sa">r</span><span class="s2">&quot;*([-0-9.Ee+]*) *\)&quot;</span><span class="p">,</span>
-                           <span class="kc">None</span><span class="p">,</span> <span class="n">p_elc</span><span class="p">])</span>
+                           <span class="kc">None</span><span class="p">,</span> <span class="n">p_elec</span><span class="p">])</span>
+
+            <span class="c1"># If spin-polarized (and not noncollinear)</span>
+            <span class="c1"># save spin-polarized electronic values</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spin</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">noncollinear</span><span class="p">:</span>
+                <span class="k">def</span> <span class="nf">p_sp1</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">p_sp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+                                              <span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span>
+                                              <span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))])</span>
+
+                <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;^.*p\[sp1\]=\( *([-0-9.Ee+]*) *([-0-9.Ee+]*) &quot;</span>
+                               <span class="sa">r</span><span class="s2">&quot;*([-0-9.Ee+]*) *\)&quot;</span><span class="p">,</span>
+                               <span class="kc">None</span><span class="p">,</span> <span class="n">p_sp1</span><span class="p">])</span>
+
+                <span class="k">def</span> <span class="nf">p_sp2</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">p_sp2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+                                              <span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span>
+                                              <span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))])</span>
+
+                <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;^.*p\[sp2\]=\( *([-0-9.Ee+]*) *([-0-9.Ee+]*) &quot;</span>
+                               <span class="sa">r</span><span class="s2">&quot;*([-0-9.Ee+]*) *\)&quot;</span><span class="p">,</span>
+                               <span class="kc">None</span><span class="p">,</span> <span class="n">p_sp2</span><span class="p">])</span>
 
             <span class="k">def</span> <span class="nf">p_ion</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
                 <span class="n">results</span><span class="o">.</span><span class="n">p_ion</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
@@ -2136,7 +2179,38 @@
             <span class="n">micro_pyawk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;CLACLCPOL OUTCAR could not be parsed.&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;LCALCPOL OUTCAR could not be parsed.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Outcar.read_pseudo_zval"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_pseudo_zval">[docs]</a>    <span class="k">def</span> <span class="nf">read_pseudo_zval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create pseudopotential ZVAL dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">poscar_line</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+                <span class="n">poscar_line</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">poscar_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[A-Z][a-z]?&#39;</span><span class="p">,</span> <span class="n">poscar_line</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">zvals</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+                <span class="n">zvals</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">zvals</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;-?\d+\.\d*&#39;</span><span class="p">,</span> <span class="n">zvals</span><span class="p">))</span>
+
+            <span class="n">search</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;^.*POSCAR.*=(.*)&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">poscar_line</span><span class="p">])</span>
+            <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;^\s+ZVAL.*=(.*)&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zvals</span><span class="p">])</span>
+
+            <span class="n">micro_pyawk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+            <span class="n">zval_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poscar_line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zvals</span><span class="p">):</span>
+                <span class="n">zval_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">y</span><span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">zval_dict</span> <span class="o">=</span> <span class="n">zval_dict</span>
+
+            <span class="c1"># Clean-up</span>
+            <span class="k">del</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poscar_line</span><span class="p">)</span>
+            <span class="k">del</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zvals</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;ZVAL dict could not be parsed.&quot;</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="Outcar.read_core_state_eigen"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_core_state_eigen">[docs]</a>    <span class="k">def</span> <span class="nf">read_core_state_eigen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2233,6 +2307,15 @@
                       <span class="s1">&#39;dielectric_ionic_tensor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dielectric_ionic_tensor</span><span class="p">,</span>
                       <span class="s1">&#39;born_ion&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">born_ion</span><span class="p">,</span>
                       <span class="s1">&#39;born&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">born</span><span class="p">})</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcalcpol</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;p_elec&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_elec</span><span class="p">,</span>
+                      <span class="s1">&#39;p_ion&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_ion</span><span class="p">})</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spin</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">noncollinear</span><span class="p">:</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;p_sp1&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_sp1</span><span class="p">,</span>
+                          <span class="s1">&#39;p_sp2&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_sp2</span><span class="p">})</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;zval_dict&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">zval_dict</span><span class="p">})</span>
+
         <span class="k">return</span> <span class="n">d</span></div></div>
 
 
@@ -3377,7 +3460,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.util.coord_utils &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.util.coord_utils &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -246,7 +246,9 @@
     <span class="n">fdist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">fcoords1</span><span class="p">,</span> <span class="n">fcoords2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">fdist</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fdist</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="pbc_shortest_vectors"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.pbc_shortest_vectors">[docs]</a><span class="k">def</span> <span class="nf">pbc_shortest_vectors</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">fcoords1</span><span class="p">,</span> <span class="n">fcoords2</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_d2</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="pbc_shortest_vectors"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.pbc_shortest_vectors">[docs]</a><span class="k">def</span> <span class="nf">pbc_shortest_vectors</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">fcoords1</span><span class="p">,</span> <span class="n">fcoords2</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">return_d2</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the shortest vectors between two lists of coordinates taking into</span>
 <span class="sd">    account periodic boundary conditions and the lattice.</span>
@@ -266,7 +268,8 @@
 <span class="sd">        array of displacement vectors from fcoords1 to fcoords2</span>
 <span class="sd">        first index is fcoords1 index, second is fcoords2 index</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">cuc</span><span class="o">.</span><span class="n">pbc_shortest_vectors</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">fcoords1</span><span class="p">,</span> <span class="n">fcoords2</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">return_d2</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">cuc</span><span class="o">.</span><span class="n">pbc_shortest_vectors</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">fcoords1</span><span class="p">,</span> <span class="n">fcoords2</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span>
+                                    <span class="n">return_d2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="find_in_coord_list_pbc"><a class="viewcode-back" href="../../../pymatgen.util.coord_utils.html#pymatgen.util.coord_utils.find_in_coord_list_pbc">[docs]</a><span class="k">def</span> <span class="nf">find_in_coord_list_pbc</span><span class="p">(</span><span class="n">fcoord_list</span><span class="p">,</span> <span class="n">fcoord</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
@@ -568,7 +571,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

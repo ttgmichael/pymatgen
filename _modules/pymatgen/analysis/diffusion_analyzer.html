@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.diffusion_analyzer &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.analysis.diffusion_analyzer &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -69,7 +69,7 @@
 <span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
 
 <span class="kn">from</span> <span class="nn">pymatgen.analysis.structure_matcher</span> <span class="k">import</span> <span class="n">StructureMatcher</span><span class="p">,</span> \
-     <span class="n">OrderDisorderElementComparator</span>
+    <span class="n">OrderDisorderElementComparator</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.periodic_table</span> <span class="k">import</span> <span class="n">get_el_sp</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="k">import</span> <span class="n">Structure</span>
 <span class="kn">from</span> <span class="nn">pymatgen.io.vasp.outputs</span> <span class="k">import</span> <span class="n">Vasprun</span>
@@ -219,8 +219,9 @@
 <span class="sd">            avg_nsteps (int): Used with smoothed=&quot;constant&quot;. Determines the</span>
 <span class="sd">                number of time steps to average over to get the msd for each</span>
 <span class="sd">                timestep. Default of 1000 is usually pretty good.</span>
-<span class="sd">            lattices (array): Numpy array of lattice matrix of every step</span>
-<span class="sd">                in NPT-AIMD. For NVT-AIMD, lattices has only one item.</span>
+<span class="sd">            lattices (array): Numpy array of lattice matrix of every step. Used</span>
+<span class="sd">                for NPT-AIMD. For NVT-AIMD, the lattice at each time step is</span>
+<span class="sd">                set to the lattice in the &quot;structure&quot; argument.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="n">structure</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">disp</span> <span class="o">=</span> <span class="n">displacements</span>
@@ -253,7 +254,7 @@
             <span class="n">framework_disp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disp</span><span class="p">[</span><span class="n">framework_indices</span><span class="p">]</span>
             <span class="n">drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">framework_disp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
 
-            <span class="c1">#drift corrected position</span>
+            <span class="c1"># drift corrected position</span>
             <span class="n">dc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disp</span> <span class="o">-</span> <span class="n">drift</span>
 
             <span class="n">nions</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">shape</span>
@@ -265,7 +266,7 @@
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not enough data to calculate diffusivity&#39;</span><span class="p">)</span>
                 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nsteps</span> <span class="o">-</span> <span class="n">avg_nsteps</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="c1">#limit the number of sampled timesteps to 200</span>
+                <span class="c1"># limit the number of sampled timesteps to 200</span>
                 <span class="n">min_dt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_skip</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_step</span><span class="p">))</span>
                 <span class="n">max_dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">*</span> <span class="n">nsteps</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_obs</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">min_dt</span> <span class="o">&gt;=</span> <span class="n">max_dt</span><span class="p">:</span>
@@ -316,11 +317,11 @@
                 <span class="n">m_components_res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
             <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">res</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">weighted_lstsq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">msd</span><span class="p">)</span>
-            <span class="c1">#m shouldn&#39;t be negative</span>
+            <span class="c1"># m shouldn&#39;t be negative</span>
             <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">)</span>
 
-            <span class="c1">#factor of 10 is to convert from A^2/fs to cm^2/s</span>
-            <span class="c1">#factor of 6 is for dimensionality</span>
+            <span class="c1"># factor of 10 is to convert from A^2/fs to cm^2/s</span>
+            <span class="c1"># factor of 6 is for dimensionality</span>
             <span class="n">conv_factor</span> <span class="o">=</span> <span class="n">get_conversion_factor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">specie</span><span class="p">,</span>
                                                 <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">diffusivity</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="mi">60</span>
@@ -334,8 +335,8 @@
             <span class="c1"># Pre-compute the denominator since we will use it later.</span>
             <span class="c1"># We divide dt by 1000 to avoid overflow errors in some systems (</span>
             <span class="c1"># e.g., win). This is subsequently corrected where denom is used.</span>
-            <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">dt</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span>
-                                                                           <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">dt</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dt</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+                <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">diffusivity_std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">denom</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">1000</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">conductivity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diffusivity</span> <span class="o">*</span> <span class="n">conv_factor</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">conductivity_std_dev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diffusivity_std_dev</span> <span class="o">*</span> <span class="n">conv_factor</span>
@@ -382,9 +383,9 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span> <span class="n">stop</span> <span class="ow">or</span> <span class="n">nsteps</span><span class="p">,</span> <span class="n">step</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">latt</span> <span class="o">=</span> <span class="n">lattices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lattices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">lattices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">yield</span> <span class="n">Structure</span><span class="p">(</span>
-                    <span class="n">latt</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span>
-                    <span class="n">coords</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">corrected_displacements</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:],</span>
-                    <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+                <span class="n">latt</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span>
+                <span class="n">coords</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">corrected_displacements</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:],</span>
+                <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DiffusionAnalyzer.get_summary_dict"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.get_summary_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_summary_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_msd_t</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -418,7 +419,8 @@
             <span class="n">d</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">d</span></div>
 
-<div class="viewcode-block" id="DiffusionAnalyzer.get_framework_rms_plot"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.get_framework_rms_plot">[docs]</a>    <span class="k">def</span> <span class="nf">get_framework_rms_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">granularity</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">matching_s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DiffusionAnalyzer.get_framework_rms_plot"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.get_framework_rms_plot">[docs]</a>    <span class="k">def</span> <span class="nf">get_framework_rms_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">granularity</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                               <span class="n">matching_s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the plot of rms framework displacement vs time. Useful for checking</span>
 <span class="sd">        for melting, especially if framework atoms can move via paddle-wheel</span>
@@ -426,8 +428,8 @@
 <span class="sd">        but doesn&#39;t constitute melting).</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            plt (matplotlib.pyplot): If plt is supplied, changes will be made to an</span>
-<span class="sd">                existing plot. Otherwise, a new plot will be created.</span>
+<span class="sd">            plt (matplotlib.pyplot): If plt is supplied, changes will be made </span>
+<span class="sd">                to an existing plot. Otherwise, a new plot will be created.</span>
 <span class="sd">            granularity (int): Number of structures to match</span>
 <span class="sd">            matching_s (Structure): Optionally match to a disordered structure</span>
 <span class="sd">                instead of the first structure in the analyzer. Required when</span>
@@ -457,7 +459,7 @@
                 <span class="n">rms</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">max_dt</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rms</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">step</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_skip</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_step</span>
         <span class="k">if</span> <span class="n">max_dt</span> <span class="o">&gt;</span> <span class="mi">100000</span><span class="p">:</span>
-            <span class="n">plot_dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_dt</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rms</span><span class="p">))</span>
+            <span class="n">plot_dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_dt</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rms</span><span class="p">))</span>
             <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;ps&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">plot_dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_dt</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rms</span><span class="p">))</span>
@@ -553,9 +555,8 @@
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="DiffusionAnalyzer.from_structures"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_structures">[docs]</a>    <span class="k">def</span> <span class="nf">from_structures</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">structures</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span>
-                        <span class="n">time_step</span><span class="p">,</span> <span class="n">step_skip</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">min_obs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-                        <span class="n">avg_nsteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                        <span class="n">initial_structure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                        <span class="n">time_step</span><span class="p">,</span> <span class="n">step_skip</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">initial_structure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convenient constructor that takes in a list of Structure objects to</span>
 <span class="sd">        perform diffusion analysis.</span>
@@ -571,29 +572,6 @@
 <span class="sd">            step_skip (int): Sampling frequency of the displacements (</span>
 <span class="sd">                time_step is multiplied by this number to get the real time</span>
 <span class="sd">                between measurements)</span>
-<span class="sd">            smoothed (str): Whether to smooth the MSD, and what mode to smooth.</span>
-<span class="sd">                Supported modes are:</span>
-
-<span class="sd">                i. &quot;max&quot;, which tries to use the maximum #</span>
-<span class="sd">                   of data points for each time origin, subject to a</span>
-<span class="sd">                   minimum # of observations given by min_obs, and then</span>
-<span class="sd">                   weights the observations based on the variance</span>
-<span class="sd">                   accordingly. This is the default.</span>
-<span class="sd">                ii. &quot;constant&quot;, in which each timestep is averaged over</span>
-<span class="sd">                    the same number of observations given by min_obs.</span>
-<span class="sd">                iii. None / False / any other false-like quantity. No</span>
-<span class="sd">                   smoothing.</span>
-
-<span class="sd">            min_obs (int): Used with smoothed=&quot;max&quot;. Minimum number of</span>
-<span class="sd">                observations to have before including in the MSD vs dt</span>
-<span class="sd">                calculation. E.g. If a structure has 10 diffusing atoms,</span>
-<span class="sd">                and min_obs = 30, the MSD vs dt will be</span>
-<span class="sd">                calculated up to dt = total_run_time / 3, so that each</span>
-<span class="sd">                diffusing atom is measured at least 3 uncorrelated times.</span>
-<span class="sd">                Only applies in smoothed=&quot;max&quot;.</span>
-<span class="sd">            avg_nsteps (int): Used with smoothed=&quot;constant&quot;. Determines the</span>
-<span class="sd">                number of time steps to average over to get the msd for each</span>
-<span class="sd">                timestep. Default of 1000 is usually pretty good.</span>
 <span class="sd">            initial_disp (np.ndarray): Sometimes, you need to iteratively</span>
 <span class="sd">                compute estimates of the diffusivity. This supplies an</span>
 <span class="sd">                initial displacement that will be added on to the initial</span>
@@ -604,6 +582,8 @@
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
 <span class="sd">                initial structure from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
+<span class="sd">            \*\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
+<span class="sd">                Examples include smoothed, min_obs, avg_nsteps.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">structures</span><span class="p">):</span>
@@ -634,13 +614,11 @@
             <span class="n">disp</span> <span class="o">+=</span> <span class="n">initial_disp</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span>
-                   <span class="n">step_skip</span><span class="o">=</span><span class="n">step_skip</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="n">smoothed</span><span class="p">,</span>
-                   <span class="n">min_obs</span><span class="o">=</span><span class="n">min_obs</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">avg_nsteps</span><span class="p">,</span> <span class="n">lattices</span><span class="o">=</span><span class="n">l</span><span class="p">)</span></div>
+                   <span class="n">step_skip</span><span class="o">=</span><span class="n">step_skip</span><span class="p">,</span> <span class="n">lattices</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DiffusionAnalyzer.from_vaspruns"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_vaspruns">[docs]</a>    <span class="k">def</span> <span class="nf">from_vaspruns</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">vaspruns</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">min_obs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-                      <span class="n">avg_nsteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                      <span class="n">initial_structure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DiffusionAnalyzer.from_vaspruns"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_vaspruns">[docs]</a>    <span class="k">def</span> <span class="nf">from_vaspruns</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">vaspruns</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">initial_structure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convenient constructor that takes in a list of Vasprun objects to</span>
 <span class="sd">        perform diffusion analysis.</span>
@@ -651,34 +629,6 @@
 <span class="sd">                sequential VASP runs to obtain sufficient statistics.</span>
 <span class="sd">            specie (Element/Specie): Specie to calculate diffusivity for as a</span>
 <span class="sd">                String. E.g., &quot;Li&quot;.</span>
-<span class="sd">            min_obs (int): Minimum number of observations to have before</span>
-<span class="sd">                including in the MSD vs dt calculation. E.g. If a structure</span>
-<span class="sd">                has 10 diffusing atoms, and min_obs = 30, the MSD vs dt will be</span>
-<span class="sd">                calculated up to dt = total_run_time / 3, so that each</span>
-<span class="sd">                diffusing atom is measured at least 3 uncorrelated times.</span>
-<span class="sd">            smoothed (str): Whether to smooth the MSD, and what mode to smooth.</span>
-<span class="sd">                Supported modes are:</span>
-
-<span class="sd">                i. &quot;max&quot;, which tries to use the maximum #</span>
-<span class="sd">                   of data points for each time origin, subject to a</span>
-<span class="sd">                   minimum # of observations given by min_obs, and then</span>
-<span class="sd">                   weights the observations based on the variance</span>
-<span class="sd">                   accordingly. This is the default.</span>
-<span class="sd">                ii. &quot;constant&quot;, in which each timestep is averaged over</span>
-<span class="sd">                    the same number of observations given by min_obs.</span>
-<span class="sd">                iii. None / False / any other false-like quantity. No</span>
-<span class="sd">                   smoothing.</span>
-
-<span class="sd">            min_obs (int): Used with smoothed=&quot;max&quot;. Minimum number of</span>
-<span class="sd">                observations to have before including in the MSD vs dt</span>
-<span class="sd">                calculation. E.g. If a structure has 10 diffusing atoms,</span>
-<span class="sd">                and min_obs = 30, the MSD vs dt will be</span>
-<span class="sd">                calculated up to dt = total_run_time / 3, so that each</span>
-<span class="sd">                diffusing atom is measured at least 3 uncorrelated times.</span>
-<span class="sd">                Only applies in smoothed=&quot;max&quot;.</span>
-<span class="sd">            avg_nsteps (int): Used with smoothed=&quot;constant&quot;. Determines the</span>
-<span class="sd">                number of time steps to average over to get the msd for each</span>
-<span class="sd">                timestep. Default of 1000 is usually pretty good.</span>
 <span class="sd">            initial_disp (np.ndarray): Sometimes, you need to iteratively</span>
 <span class="sd">                compute estimates of the diffusivity. This supplies an</span>
 <span class="sd">                initial displacement that will be added on to the initial</span>
@@ -689,6 +639,8 @@
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
 <span class="sd">                initial stricture from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
+<span class="sd">            \*\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
+<span class="sd">                Examples include smoothed, min_obs, avg_nsteps.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">get_structures</span><span class="p">(</span><span class="n">vaspruns</span><span class="p">):</span>
@@ -714,15 +666,15 @@
         <span class="n">s</span> <span class="o">=</span> <span class="n">get_structures</span><span class="p">(</span><span class="n">vaspruns</span><span class="p">)</span>
         <span class="n">step_skip</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">time_step</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_structures</span><span class="p">(</span><span class="n">structures</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">specie</span><span class="o">=</span><span class="n">specie</span><span class="p">,</span>
-            <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span> <span class="n">step_skip</span><span class="o">=</span><span class="n">step_skip</span><span class="p">,</span>
-            <span class="n">smoothed</span><span class="o">=</span><span class="n">smoothed</span><span class="p">,</span> <span class="n">min_obs</span><span class="o">=</span><span class="n">min_obs</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">avg_nsteps</span><span class="p">,</span>
-            <span class="n">initial_disp</span><span class="o">=</span><span class="n">initial_disp</span><span class="p">,</span> <span class="n">initial_structure</span><span class="o">=</span><span class="n">initial_structure</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_structures</span><span class="p">(</span>
+            <span class="n">structures</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">specie</span><span class="o">=</span><span class="n">specie</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+            <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span> <span class="n">step_skip</span><span class="o">=</span><span class="n">step_skip</span><span class="p">,</span>
+            <span class="n">initial_disp</span><span class="o">=</span><span class="n">initial_disp</span><span class="p">,</span> <span class="n">initial_structure</span><span class="o">=</span><span class="n">initial_structure</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DiffusionAnalyzer.from_files"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_files">[docs]</a>    <span class="k">def</span> <span class="nf">from_files</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepaths</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">step_skip</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">smoothed</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span>
-                   <span class="n">min_obs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ncores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                   <span class="n">initial_structure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DiffusionAnalyzer.from_files"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_files">[docs]</a>    <span class="k">def</span> <span class="nf">from_files</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepaths</span><span class="p">,</span> <span class="n">specie</span><span class="p">,</span> <span class="n">step_skip</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ncores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">initial_disp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_structure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convenient constructor that takes in a list of vasprun.xml paths to</span>
 <span class="sd">        perform diffusion analysis.</span>
@@ -738,29 +690,6 @@
 <span class="sd">            step_skip (int): Sampling frequency of the displacements (</span>
 <span class="sd">                time_step is multiplied by this number to get the real time</span>
 <span class="sd">                between measurements)</span>
-<span class="sd">            smoothed (str): Whether to smooth the MSD, and what mode to smooth.</span>
-<span class="sd">                Supported modes are:</span>
-
-<span class="sd">                i. &quot;max&quot;, which tries to use the maximum #</span>
-<span class="sd">                   of data points for each time origin, subject to a</span>
-<span class="sd">                   minimum # of observations given by min_obs, and then</span>
-<span class="sd">                   weights the observations based on the variance</span>
-<span class="sd">                   accordingly. This is the default.</span>
-<span class="sd">                ii. &quot;constant&quot;, in which each timestep is averaged over</span>
-<span class="sd">                    the same number of observations given by min_obs.</span>
-<span class="sd">                iii. None / False / any other false-like quantity. No</span>
-<span class="sd">                   smoothing.</span>
-
-<span class="sd">            min_obs (int): Used with smoothed=&quot;max&quot;. Minimum number of</span>
-<span class="sd">                observations to have before including in the MSD vs dt</span>
-<span class="sd">                calculation. E.g. If a structure has 10 diffusing atoms,</span>
-<span class="sd">                and min_obs = 30, the MSD vs dt will be</span>
-<span class="sd">                calculated up to dt = total_run_time / 3, so that each</span>
-<span class="sd">                diffusing atom is measured at least 3 uncorrelated times.</span>
-<span class="sd">                Only applies in smoothed=&quot;max&quot;.</span>
-<span class="sd">            avg_nsteps (int): Used with smoothed=&quot;constant&quot;. Determines the</span>
-<span class="sd">                number of time steps to average over to get the msd for each</span>
-<span class="sd">                timestep. Default of 1000 is usually pretty good.</span>
 <span class="sd">            ncores (int): Numbers of cores to use for multiprocessing. Can</span>
 <span class="sd">                speed up vasprun parsing considerably. Defaults to None,</span>
 <span class="sd">                which means serial. It should be noted that if you want to</span>
@@ -778,15 +707,17 @@
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
 <span class="sd">                initial structure from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
+<span class="sd">            \*\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
+<span class="sd">                Examples include smoothed, min_obs, avg_nsteps.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ncores</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">filepaths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">ncores</span><span class="p">)</span>
             <span class="n">vaspruns</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="n">_get_vasprun</span><span class="p">,</span>
-                             <span class="p">[(</span><span class="n">fp</span><span class="p">,</span> <span class="n">step_skip</span><span class="p">)</span> <span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="n">filepaths</span><span class="p">])</span>
-            <span class="n">analyzer</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_vaspruns</span><span class="p">(</span><span class="n">vaspruns</span><span class="p">,</span> <span class="n">min_obs</span><span class="o">=</span><span class="n">min_obs</span><span class="p">,</span>
-                <span class="n">smoothed</span><span class="o">=</span><span class="n">smoothed</span><span class="p">,</span> <span class="n">specie</span><span class="o">=</span><span class="n">specie</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="n">initial_disp</span><span class="p">,</span>
-                <span class="n">initial_structure</span><span class="o">=</span><span class="n">initial_structure</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">avg_nsteps</span><span class="p">)</span>
+                              <span class="p">[(</span><span class="n">fp</span><span class="p">,</span> <span class="n">step_skip</span><span class="p">)</span> <span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="n">filepaths</span><span class="p">])</span>
+            <span class="n">analyzer</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_vaspruns</span><span class="p">(</span>
+                <span class="n">vaspruns</span><span class="p">,</span> <span class="n">specie</span><span class="o">=</span><span class="n">specie</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="n">initial_disp</span><span class="p">,</span>
+                <span class="n">initial_structure</span><span class="o">=</span><span class="n">initial_structure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">analyzer</span>
@@ -800,9 +731,9 @@
                     <span class="c1"># Recompute offset.</span>
                     <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">nionic_steps</span> <span class="o">-</span> <span class="n">offset</span><span class="p">))</span> <span class="o">%</span> <span class="n">step_skip</span>
 
-            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_vaspruns</span><span class="p">(</span><span class="n">vr</span><span class="p">(</span><span class="n">filepaths</span><span class="p">),</span> <span class="n">min_obs</span><span class="o">=</span><span class="n">min_obs</span><span class="p">,</span>
-                <span class="n">smoothed</span><span class="o">=</span><span class="n">smoothed</span><span class="p">,</span> <span class="n">specie</span><span class="o">=</span><span class="n">specie</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="n">initial_disp</span><span class="p">,</span>
-                <span class="n">initial_structure</span><span class="o">=</span><span class="n">initial_structure</span><span class="p">,</span> <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">avg_nsteps</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_vaspruns</span><span class="p">(</span>
+                <span class="n">vr</span><span class="p">(</span><span class="n">filepaths</span><span class="p">),</span> <span class="n">specie</span><span class="o">=</span><span class="n">specie</span><span class="p">,</span> <span class="n">initial_disp</span><span class="o">=</span><span class="n">initial_disp</span><span class="p">,</span>
+                <span class="n">initial_structure</span><span class="o">=</span><span class="n">initial_structure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DiffusionAnalyzer.as_dict"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span>
@@ -829,7 +760,8 @@
                    <span class="n">smoothed</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;smoothed&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">),</span>
                    <span class="n">avg_nsteps</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;avg_nsteps&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
                    <span class="n">lattices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lattices&quot;</span><span class="p">,</span>
-                                           <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">][</span><span class="s2">&quot;lattice&quot;</span><span class="p">][</span><span class="s2">&quot;matrix&quot;</span><span class="p">]])))</span></div></div>
+                                           <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">][</span><span class="s2">&quot;lattice&quot;</span><span class="p">][</span>
+                                                <span class="s2">&quot;matrix&quot;</span><span class="p">]])))</span></div></div>
 
 
 <div class="viewcode-block" id="get_conversion_factor"><a class="viewcode-back" href="../../../pymatgen.analysis.diffusion_analyzer.html#pymatgen.analysis.diffusion_analyzer.get_conversion_factor">[docs]</a><span class="k">def</span> <span class="nf">get_conversion_factor</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
@@ -858,7 +790,7 @@
     <span class="n">n</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="p">[</span><span class="n">species</span><span class="p">]</span>
 
     <span class="n">vol</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">volume</span> <span class="o">*</span> <span class="mf">1e-24</span>  <span class="c1"># units cm^3</span>
-    <span class="k">return</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">vol</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">N_A</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">N_A</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>\
+    <span class="k">return</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">vol</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">N_A</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">N_A</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> \
         <span class="o">/</span> <span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">)</span></div>
 
 
@@ -888,7 +820,8 @@
     <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">temps</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">std_Ea</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">t_1</span><span class="p">)))</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">k</span> <span class="o">/</span> <span class="n">const</span><span class="o">.</span><span class="n">e</span>
+        <span class="n">std_Ea</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">t_1</span><span class="p">)))</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">k</span> <span class="o">/</span> <span class="n">const</span><span class="o">.</span><span class="n">e</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">std_Ea</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">k</span> <span class="o">/</span> <span class="n">const</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">std_Ea</span></div>
@@ -1002,7 +935,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

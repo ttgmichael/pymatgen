@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.diffusion_analyzer module &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.analysis.diffusion_analyzer module &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -114,8 +114,9 @@ Only applies in smoothed=&#8221;max&#8221;.</li>
 <li><strong>avg_nsteps</strong> (<em>int</em>) &#8211; Used with smoothed=&#8221;constant&#8221;. Determines the
 number of time steps to average over to get the msd for each
 timestep. Default of 1000 is usually pretty good.</li>
-<li><strong>lattices</strong> (<em>array</em>) &#8211; Numpy array of lattice matrix of every step
-in NPT-AIMD. For NVT-AIMD, lattices has only one item.</li>
+<li><strong>lattices</strong> (<em>array</em>) &#8211; Numpy array of lattice matrix of every step. Used
+for NPT-AIMD. For NVT-AIMD, the lattice at each time step is
+set to the lattice in the &#8220;structure&#8221; argument.</li>
 </ul>
 </td>
 </tr>
@@ -150,7 +151,7 @@ a dat format is assumed.</td>
 
 <dl class="classmethod">
 <dt id="pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_files">
-<em class="property">classmethod </em><code class="descname">from_files</code><span class="sig-paren">(</span><em>filepaths</em>, <em>specie</em>, <em>step_skip=10</em>, <em>smoothed='max'</em>, <em>min_obs=30</em>, <em>avg_nsteps=1000</em>, <em>ncores=None</em>, <em>initial_disp=None</em>, <em>initial_structure=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer.from_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_files" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_files</code><span class="sig-paren">(</span><em>filepaths</em>, <em>specie</em>, <em>step_skip=10</em>, <em>ncores=None</em>, <em>initial_disp=None</em>, <em>initial_structure=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer.from_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenient constructor that takes in a list of vasprun.xml paths to
 perform diffusion analysis.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -168,31 +169,6 @@ String. E.g., &#8220;Li&#8221;.</li>
 <li><strong>step_skip</strong> (<em>int</em>) &#8211; Sampling frequency of the displacements (
 time_step is multiplied by this number to get the real time
 between measurements)</li>
-<li><strong>smoothed</strong> (<em>str</em>) &#8211; <p>Whether to smooth the MSD, and what mode to smooth.
-Supported modes are:</p>
-<ol class="lowerroman">
-<li>&#8220;max&#8221;, which tries to use the maximum #
-of data points for each time origin, subject to a
-minimum # of observations given by min_obs, and then
-weights the observations based on the variance
-accordingly. This is the default.</li>
-<li>&#8220;constant&#8221;, in which each timestep is averaged over
-the same number of observations given by min_obs.</li>
-<li>None / False / any other false-like quantity. No</li>
-</ol>
-<blockquote>
-<div>smoothing.</div></blockquote>
-</li>
-<li><strong>min_obs</strong> (<em>int</em>) &#8211; Used with smoothed=&#8221;max&#8221;. Minimum number of
-observations to have before including in the MSD vs dt
-calculation. E.g. If a structure has 10 diffusing atoms,
-and min_obs = 30, the MSD vs dt will be
-calculated up to dt = total_run_time / 3, so that each
-diffusing atom is measured at least 3 uncorrelated times.
-Only applies in smoothed=&#8221;max&#8221;.</li>
-<li><strong>avg_nsteps</strong> (<em>int</em>) &#8211; Used with smoothed=&#8221;constant&#8221;. Determines the
-number of time steps to average over to get the msd for each
-timestep. Default of 1000 is usually pretty good.</li>
 <li><strong>ncores</strong> (<em>int</em>) &#8211; Numbers of cores to use for multiprocessing. Can
 speed up vasprun parsing considerably. Defaults to None,
 which means serial. It should be noted that if you want to
@@ -210,6 +186,8 @@ for iterative computations of estimates of the diffusivity. You
 typically need to supply both variables. This stipulates the
 initial structure from which the current set of displacements
 are computed.</li>
+<li><strong>**kwargs</strong> &#8211; kwargs supported by the <a href="#id1"><span class="problematic" id="id2">:class:`DiffusionAnalyzer`_</span></a>.
+Examples include smoothed, min_obs, avg_nsteps.</li>
 </ul>
 </td>
 </tr>
@@ -219,7 +197,7 @@ are computed.</li>
 
 <dl class="classmethod">
 <dt id="pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_structures">
-<em class="property">classmethod </em><code class="descname">from_structures</code><span class="sig-paren">(</span><em>structures</em>, <em>specie</em>, <em>temperature</em>, <em>time_step</em>, <em>step_skip</em>, <em>smoothed='max'</em>, <em>min_obs=30</em>, <em>avg_nsteps=1000</em>, <em>initial_disp=None</em>, <em>initial_structure=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer.from_structures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_structures" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_structures</code><span class="sig-paren">(</span><em>structures</em>, <em>specie</em>, <em>temperature</em>, <em>time_step</em>, <em>step_skip</em>, <em>initial_disp=None</em>, <em>initial_structure=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer.from_structures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_structures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenient constructor that takes in a list of Structure objects to
 perform diffusion analysis.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -237,31 +215,6 @@ String. E.g., &#8220;Li&#8221;.</li>
 <li><strong>step_skip</strong> (<em>int</em>) &#8211; Sampling frequency of the displacements (
 time_step is multiplied by this number to get the real time
 between measurements)</li>
-<li><strong>smoothed</strong> (<em>str</em>) &#8211; <p>Whether to smooth the MSD, and what mode to smooth.
-Supported modes are:</p>
-<ol class="lowerroman">
-<li>&#8220;max&#8221;, which tries to use the maximum #
-of data points for each time origin, subject to a
-minimum # of observations given by min_obs, and then
-weights the observations based on the variance
-accordingly. This is the default.</li>
-<li>&#8220;constant&#8221;, in which each timestep is averaged over
-the same number of observations given by min_obs.</li>
-<li>None / False / any other false-like quantity. No</li>
-</ol>
-<blockquote>
-<div>smoothing.</div></blockquote>
-</li>
-<li><strong>min_obs</strong> (<em>int</em>) &#8211; Used with smoothed=&#8221;max&#8221;. Minimum number of
-observations to have before including in the MSD vs dt
-calculation. E.g. If a structure has 10 diffusing atoms,
-and min_obs = 30, the MSD vs dt will be
-calculated up to dt = total_run_time / 3, so that each
-diffusing atom is measured at least 3 uncorrelated times.
-Only applies in smoothed=&#8221;max&#8221;.</li>
-<li><strong>avg_nsteps</strong> (<em>int</em>) &#8211; Used with smoothed=&#8221;constant&#8221;. Determines the
-number of time steps to average over to get the msd for each
-timestep. Default of 1000 is usually pretty good.</li>
 <li><strong>initial_disp</strong> (<em>np.ndarray</em>) &#8211; Sometimes, you need to iteratively
 compute estimates of the diffusivity. This supplies an
 initial displacement that will be added on to the initial
@@ -272,6 +225,8 @@ for iterative computations of estimates of the diffusivity. You
 typically need to supply both variables. This stipulates the
 initial structure from which the current set of displacements
 are computed.</li>
+<li><strong>**kwargs</strong> &#8211; kwargs supported by the <a href="#id3"><span class="problematic" id="id4">:class:`DiffusionAnalyzer`_</span></a>.
+Examples include smoothed, min_obs, avg_nsteps.</li>
 </ul>
 </td>
 </tr>
@@ -281,7 +236,7 @@ are computed.</li>
 
 <dl class="classmethod">
 <dt id="pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_vaspruns">
-<em class="property">classmethod </em><code class="descname">from_vaspruns</code><span class="sig-paren">(</span><em>vaspruns</em>, <em>specie</em>, <em>smoothed='max'</em>, <em>min_obs=30</em>, <em>avg_nsteps=1000</em>, <em>initial_disp=None</em>, <em>initial_structure=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer.from_vaspruns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_vaspruns" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_vaspruns</code><span class="sig-paren">(</span><em>vaspruns</em>, <em>specie</em>, <em>initial_disp=None</em>, <em>initial_structure=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/diffusion_analyzer.html#DiffusionAnalyzer.from_vaspruns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.diffusion_analyzer.DiffusionAnalyzer.from_vaspruns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenient constructor that takes in a list of Vasprun objects to
 perform diffusion analysis.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -294,36 +249,6 @@ sequence of MD simulation). E.g., you may have performed
 sequential VASP runs to obtain sufficient statistics.</li>
 <li><strong>specie</strong> (<em>Element/Specie</em>) &#8211; Specie to calculate diffusivity for as a
 String. E.g., &#8220;Li&#8221;.</li>
-<li><strong>min_obs</strong> (<em>int</em>) &#8211; Minimum number of observations to have before
-including in the MSD vs dt calculation. E.g. If a structure
-has 10 diffusing atoms, and min_obs = 30, the MSD vs dt will be
-calculated up to dt = total_run_time / 3, so that each
-diffusing atom is measured at least 3 uncorrelated times.</li>
-<li><strong>smoothed</strong> (<em>str</em>) &#8211; <p>Whether to smooth the MSD, and what mode to smooth.
-Supported modes are:</p>
-<ol class="lowerroman">
-<li>&#8220;max&#8221;, which tries to use the maximum #
-of data points for each time origin, subject to a
-minimum # of observations given by min_obs, and then
-weights the observations based on the variance
-accordingly. This is the default.</li>
-<li>&#8220;constant&#8221;, in which each timestep is averaged over
-the same number of observations given by min_obs.</li>
-<li>None / False / any other false-like quantity. No</li>
-</ol>
-<blockquote>
-<div>smoothing.</div></blockquote>
-</li>
-<li><strong>min_obs</strong> &#8211; Used with smoothed=&#8221;max&#8221;. Minimum number of
-observations to have before including in the MSD vs dt
-calculation. E.g. If a structure has 10 diffusing atoms,
-and min_obs = 30, the MSD vs dt will be
-calculated up to dt = total_run_time / 3, so that each
-diffusing atom is measured at least 3 uncorrelated times.
-Only applies in smoothed=&#8221;max&#8221;.</li>
-<li><strong>avg_nsteps</strong> (<em>int</em>) &#8211; Used with smoothed=&#8221;constant&#8221;. Determines the
-number of time steps to average over to get the msd for each
-timestep. Default of 1000 is usually pretty good.</li>
 <li><strong>initial_disp</strong> (<em>np.ndarray</em>) &#8211; Sometimes, you need to iteratively
 compute estimates of the diffusivity. This supplies an
 initial displacement that will be added on to the initial
@@ -334,6 +259,8 @@ for iterative computations of estimates of the diffusivity. You
 typically need to supply both variables. This stipulates the
 initial stricture from which the current set of displacements
 are computed.</li>
+<li><strong>**kwargs</strong> &#8211; kwargs supported by the <a href="#id5"><span class="problematic" id="id6">:class:`DiffusionAnalyzer`_</span></a>.
+Examples include smoothed, min_obs, avg_nsteps.</li>
 </ul>
 </td>
 </tr>
@@ -371,8 +298,8 @@ but doesn&#8217;t constitute melting).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>plt</strong> (<em>matplotlib.pyplot</em>) &#8211; If plt is supplied, changes will be made to an
-existing plot. Otherwise, a new plot will be created.</li>
+<li><strong>plt</strong> (<em>matplotlib.pyplot</em>) &#8211; If plt is supplied, changes will be made
+to an existing plot. Otherwise, a new plot will be created.</li>
 <li><strong>granularity</strong> (<em>int</em>) &#8211; Number of structures to match</li>
 <li><strong>matching_s</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; Optionally match to a disordered structure
 instead of the first structure in the analyzer. Required when
@@ -603,7 +530,7 @@ from DiffusionAnalyzer.diffusivity). units: cm^2/s</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.flows module &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.io.abinit.flows module &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -769,13 +769,54 @@ in read-only mode and we want to avoid callbacks that can change the flow.</li>
 
 <dl class="method">
 <dt id="pymatgen.io.abinit.flows.Flow.plot_networkx">
-<code class="descname">plot_networkx</code><span class="sig-paren">(</span><em>mode='network'</em>, <em>with_edge_labels=False</em>, <em>node_size='num_cores'</em>, <em>node_label='name_class'</em>, <em>layout_type='spring'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/flows.html#Flow.plot_networkx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.flows.Flow.plot_networkx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use networkx to draw the flow with the connections among the nodes and
+<code class="descname">plot_networkx</code><span class="sig-paren">(</span><em>mode='network'</em>, <em>with_edge_labels=False</em>, <em>ax=None</em>, <em>node_size='num_cores'</em>, <em>node_label='name_class'</em>, <em>layout_type='spring'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/abinit/flows.html#Flow.plot_networkx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.abinit.flows.Flow.plot_networkx" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Use networkx to draw the flow with the connections among the nodes and
 the status of the tasks.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>mode: <cite>networkx</cite> to show connections, <cite>status</cite> to group tasks by status.
+with_edge_labels: True to draw edge labels.
+ax: matplotlib <code class="xref py py-class docutils literal"><span class="pre">Axes</span></code> or None if a new figure should be created.
+node_size: By default, the size of the node is proportional to the number of cores used.
+node_label: By default, the task class is used to label node.
+layout_type: Get positions for all nodes using <cite>layout_type</cite>. e.g. pos = nx.spring_layout(g)</dd>
+</dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Requires networkx package.</p>
 </div>
+</div></blockquote>
+<p>keyword arguments controlling the display of the figure:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">kwargs</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>title</td>
+<td>Title of the plot (Default: None).</td>
+</tr>
+<tr class="row-odd"><td>show</td>
+<td>True to show the figure (default: True).</td>
+</tr>
+<tr class="row-even"><td>savefig</td>
+<td>&#8216;abc.png&#8217; or &#8216;abc.eps&#8217; to save the figure to a file.</td>
+</tr>
+<tr class="row-odd"><td>size_kwargs</td>
+<td>Dictionary with options passed to fig.set_size_inches
+example: size_kwargs=dict(w=3, h=4)</td>
+</tr>
+<tr class="row-even"><td>tight_layout</td>
+<td>True if to call fig.tight_layout (default: False)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
@@ -1391,7 +1432,7 @@ Initialized from manager.yml if manager is None.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.sets module &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.io.vasp.sets module &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -94,7 +94,13 @@ ediff_per_atom and hubbard_u are no longer args. Instead, the
 config_dict supports EDIFF_PER_ATOM and EDIFF keys. The former
 scales with # of atoms, the latter does not. If both are
 present, EDIFF is preferred. To force such settings, just supply
-user_incar_settings={&#8220;EDIFF&#8221;: 1e-5, &#8220;LDAU&#8221;: False} for example.</li>
+user_incar_settings={&#8220;EDIFF&#8221;: 1e-5, &#8220;LDAU&#8221;: False} for example.
+The keys &#8216;LDAUU&#8217;, &#8216;LDAUJ&#8217;, &#8216;LDAUL&#8217; are special cases since
+pymatgen defines different values depending on what anions are
+present in the structure, so these keys can be defined in one
+of two ways, e.g. either {&#8220;LDAUU&#8221;:{&#8220;O&#8221;:{&#8220;Fe&#8221;:5}}} to set LDAUU
+for Fe to 5 in an oxide, or {&#8220;LDAUU&#8221;:{&#8220;Fe&#8221;:5}} to set LDAUU to
+5 regardless of the input structure.</li>
 <li><strong>user_kpoints_settings</strong> (<em>dict</em>) &#8211; Allow user to override kpoints setting by
 supplying a dict. E.g., {&#8220;reciprocal_density&#8221;: 1000}. Default is
 None.</li>
@@ -509,7 +515,7 @@ are determined from the prev_calc_dir.</li>
 
 <dl class="class">
 <dt id="pymatgen.io.vasp.sets.MPStaticSet">
-<em class="property">class </em><code class="descname">MPStaticSet</code><span class="sig-paren">(</span><em>structure</em>, <em>prev_incar=None</em>, <em>prev_kpoints=None</em>, <em>lepsilon=False</em>, <em>reciprocal_density=100</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/sets.html#MPStaticSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.sets.MPStaticSet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">MPStaticSet</code><span class="sig-paren">(</span><em>structure</em>, <em>prev_incar=None</em>, <em>prev_kpoints=None</em>, <em>lepsilon=False</em>, <em>lcalcpol=False</em>, <em>reciprocal_density=100</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/vasp/sets.html#MPStaticSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.vasp.sets.MPStaticSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pymatgen.io.vasp.sets.MPRelaxSet" title="pymatgen.io.vasp.sets.MPRelaxSet"><code class="xref py py-class docutils literal"><span class="pre">pymatgen.io.vasp.sets.MPRelaxSet</span></code></a></p>
 <p>Run a static calculation.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -831,7 +837,7 @@ Vasp input files, e.g. get_kpoints.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
       </ul>
     </div>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.abinit.abitimer &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.io.abinit.abitimer &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -199,7 +199,12 @@
         <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;Parse single line.&quot;&quot;&quot;</span>
             <span class="n">name</span><span class="p">,</span> <span class="n">vals</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="mi">25</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">25</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-            <span class="n">ctime</span><span class="p">,</span> <span class="n">cfract</span><span class="p">,</span> <span class="n">wtime</span><span class="p">,</span> <span class="n">wfract</span><span class="p">,</span> <span class="n">ncalls</span><span class="p">,</span> <span class="n">gflops</span> <span class="o">=</span> <span class="n">vals</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ctime</span><span class="p">,</span> <span class="n">cfract</span><span class="p">,</span> <span class="n">wtime</span><span class="p">,</span> <span class="n">wfract</span><span class="p">,</span> <span class="n">ncalls</span><span class="p">,</span> <span class="n">gflops</span> <span class="o">=</span> <span class="n">vals</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="c1"># v8.3 Added two columns at the end [Speedup, Efficacity]</span>
+                <span class="n">ctime</span><span class="p">,</span> <span class="n">cfract</span><span class="p">,</span> <span class="n">wtime</span><span class="p">,</span> <span class="n">wfract</span><span class="p">,</span> <span class="n">ncalls</span><span class="p">,</span> <span class="n">gflops</span><span class="p">,</span> <span class="n">speedup</span><span class="p">,</span> <span class="n">eff</span> <span class="o">=</span> <span class="n">vals</span>
+
             <span class="k">return</span> <span class="n">AbinitTimerSection</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ctime</span><span class="p">,</span> <span class="n">cfract</span><span class="p">,</span> <span class="n">wtime</span><span class="p">,</span> <span class="n">wfract</span><span class="p">,</span> <span class="n">ncalls</span><span class="p">,</span> <span class="n">gflops</span><span class="p">)</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
@@ -965,7 +970,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

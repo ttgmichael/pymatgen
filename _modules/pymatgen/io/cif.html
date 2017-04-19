@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.cif &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.io.cif &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -659,22 +659,14 @@
 
         <span class="c1">############################################################</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;_atom_site_label&quot;</span><span class="p">])):</span>
-            <span class="n">symbol</span> <span class="o">=</span> <span class="n">parse_symbol</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;_atom_site_label&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># If site type symbol exists, use it. Otherwise, we use the</span>
+                <span class="c1"># label.</span>
+                <span class="n">symbol</span> <span class="o">=</span> <span class="n">parse_symbol</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;_atom_site_type_symbol&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">symbol</span> <span class="o">=</span> <span class="n">parse_symbol</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;_atom_site_label&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">symbol</span><span class="p">:</span>
                 <span class="k">continue</span>
-            <span class="c1"># make sure symbol was properly parsed from _atom_site_label</span>
-            <span class="c1"># otherwise get it from _atom_site_type_symbol</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">Element</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
-            <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-                <span class="c1"># sometimes the site doesn&#39;t have the type_symbol.</span>
-                <span class="c1"># we then hope the type_symbol can be parsed from the label</span>
-                <span class="k">if</span> <span class="s2">&quot;_atom_site_type_symbol&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">new</span> <span class="o">=</span> <span class="n">parse_symbol</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;_atom_site_type_symbol&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="n">new</span> <span class="o">!=</span> <span class="n">symbol</span><span class="p">:</span>
-                        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> from _atom_site_type_symbol&#39;</span>
-                                      <span class="s1">&#39; used instead of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">symbol</span><span class="p">))</span>
-                        <span class="n">symbol</span> <span class="o">=</span> <span class="n">new</span>
 
             <span class="k">if</span> <span class="n">oxi_states</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">o_s</span> <span class="o">=</span> <span class="n">oxi_states</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -972,7 +964,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

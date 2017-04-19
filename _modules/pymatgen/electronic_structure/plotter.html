@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.plotter &#8212; pymatgen 4.7.3 documentation</title>
+    <title>pymatgen.electronic_structure.plotter &#8212; pymatgen 4.7.4 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.3',
+        VERSION:     '4.7.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -1076,7 +1076,7 @@
                         <span class="k">for</span> <span class="n">anum</span> <span class="ow">in</span> <span class="n">dictpa</span><span class="p">[</span><span class="n">elt</span><span class="p">]:</span>
                             <span class="n">edict</span><span class="p">[</span><span class="n">elt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">anum</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{}</span>
                             <span class="k">for</span> <span class="n">morb</span> <span class="ow">in</span> <span class="n">dictio</span><span class="p">[</span><span class="n">elt</span><span class="p">]:</span>
-                                <span class="n">edict</span><span class="p">[</span><span class="n">elt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">anum</span><span class="p">)][</span><span class="n">morb</span><span class="p">]</span> <span class="o">=</span> <span class="n">proj</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">Orbital</span><span class="p">(</span><span class="n">setos</span><span class="p">[</span><span class="n">morb</span><span class="p">])][</span><span class="n">anum</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                                <span class="n">edict</span><span class="p">[</span><span class="n">elt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">anum</span><span class="p">)][</span><span class="n">morb</span><span class="p">]</span> <span class="o">=</span> <span class="n">proj</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">setos</span><span class="p">[</span><span class="n">morb</span><span class="p">]][</span><span class="n">anum</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                     <span class="n">proj_br</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">)][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edict</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">is_spin_polarized</span><span class="p">:</span>
@@ -1087,7 +1087,7 @@
                             <span class="k">for</span> <span class="n">anum</span> <span class="ow">in</span> <span class="n">dictpa</span><span class="p">[</span><span class="n">elt</span><span class="p">]:</span>
                                 <span class="n">edict</span><span class="p">[</span><span class="n">elt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">anum</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{}</span>
                                 <span class="k">for</span> <span class="n">morb</span> <span class="ow">in</span> <span class="n">dictio</span><span class="p">[</span><span class="n">elt</span><span class="p">]:</span>
-                                    <span class="n">edict</span><span class="p">[</span><span class="n">elt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">anum</span><span class="p">)][</span><span class="n">morb</span><span class="p">]</span> <span class="o">=</span> <span class="n">proj</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">Orbital</span><span class="p">(</span><span class="n">setos</span><span class="p">[</span><span class="n">morb</span><span class="p">])][</span><span class="n">anum</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                                    <span class="n">edict</span><span class="p">[</span><span class="n">elt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">anum</span><span class="p">)][</span><span class="n">morb</span><span class="p">]</span> <span class="o">=</span> <span class="n">proj</span><span class="p">[</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">setos</span><span class="p">[</span><span class="n">morb</span><span class="p">]][</span><span class="n">anum</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                         <span class="n">proj_br</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">)][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edict</span><span class="p">)</span>
 
         <span class="c1"># Adjusting  projections for plot</span>
@@ -2016,7 +2016,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a matplotlib plot object.</span>
 <span class="sd">        Args:</span>
-<span class="sd">            bs (BandStructure): the bandstructure to plot. Projection data must exist for projected plots.</span>
+<span class="sd">            bs (BandStructureSymmLine): the bandstructure to plot. Projection data must exist for projected plots.</span>
 <span class="sd">            dos (Dos): the Dos to plot. Projection data must exist (i.e., CompleteDos) for projected plots.</span>
 
 <span class="sd">        Returns:</span>
@@ -3147,7 +3147,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
