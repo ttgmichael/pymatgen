@@ -1964,10 +1964,11 @@
 
         <span class="k">return</span> <span class="n">plt</span><span class="p">,</span> <span class="n">shift</span></div>
 
-<div class="viewcode-block" id="BSDOSPlotter"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BSDOSPlotter">[docs]</a><span class="k">class</span> <span class="nc">BSDOSPlotter</span><span class="p">():</span>
+
+<div class="viewcode-block" id="BSDOSPlotter"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BSDOSPlotter">[docs]</a><span class="k">class</span> <span class="nc">BSDOSPlotter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A joint, aligned band structure and density of states plot. Contributions from Jan Pohls</span>
-<span class="sd">    as well as the online example from Germain Salvato-Vallverdu:</span>
+<span class="sd">    A joint, aligned band structure and density of states plot. Contributions </span>
+<span class="sd">    from Jan Pohls as well as the online example from Germain Salvato-Vallverdu:</span>
 <span class="sd">    http://gvallver.perso.univ-pau.fr/?p=587</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -2016,12 +2017,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a matplotlib plot object.</span>
 <span class="sd">        Args:</span>
-<span class="sd">            bs (BandStructureSymmLine): the bandstructure to plot. Projection data must exist for projected plots.</span>
-<span class="sd">            dos (Dos): the Dos to plot. Projection data must exist (i.e., CompleteDos) for projected plots.</span>
+<span class="sd">            bs (BandStructureSymmLine): the bandstructure to plot. Projection </span>
+<span class="sd">                data must exist for projected plots.</span>
+<span class="sd">            dos (Dos): the Dos to plot. Projection data must exist (i.e., </span>
+<span class="sd">                CompleteDos) for projected plots.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            a matplotlib plt object on which you can call commands like show() and savefig()</span>
-
+<span class="sd">            matplotlib.pyplot object on which you can call commands like show() </span>
+<span class="sd">            and savefig()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.lines</span> <span class="k">as</span> <span class="nn">mlines</span>
         <span class="kn">from</span> <span class="nn">matplotlib.gridspec</span> <span class="k">import</span> <span class="n">GridSpec</span>
@@ -2036,9 +2039,10 @@
 
         <span class="k">if</span> <span class="n">bs_projection</span> <span class="ow">and</span> <span class="n">bs_projection</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;elements&quot;</span> <span class="ow">and</span> \
                 <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_projection_on_elements</span><span class="p">()):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Cannot get element projected data; either the projection data &quot;</span>
-                          <span class="s2">&quot;doesn&#39;t exist, or you don&#39;t have a compound with exactly 2 or 3&quot;</span>
-                          <span class="s2">&quot; unique elements.&quot;</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot get element projected data; either the projection data &quot;</span>
+                <span class="s2">&quot;doesn&#39;t exist, or you don&#39;t have a compound with exactly 2 or 3&quot;</span>
+                <span class="s2">&quot; unique elements.&quot;</span><span class="p">)</span>
             <span class="n">bs_projection</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># specify energy range of plot</span>
