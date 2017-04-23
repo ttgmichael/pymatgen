@@ -152,9 +152,9 @@
                         <span class="s2">&quot;scf_max_cycles&quot;</span><span class="p">:</span> <span class="s2">&quot;max_scf_cycles&quot;</span><span class="p">}</span>
     <span class="n">alternative_values</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;optimization&quot;</span><span class="p">:</span> <span class="s2">&quot;opt&quot;</span><span class="p">,</span>
                           <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="s2">&quot;freq&quot;</span><span class="p">}</span>
-    <span class="n">zmat_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^(\w+)*([\s,]+(\w+)[\s,]+(\w+))*[\-\.\s,\w]*$&quot;</span><span class="p">)</span>
-    <span class="n">xyz_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^(\w+)[\s,]+([\d\.eE\-]+)[\s,]+([\d\.eE\-]+)[\s,]+&quot;</span>
-                          <span class="s2">&quot;([\d\.eE\-]+)[\-\.\s,\w.]*$&quot;</span><span class="p">)</span>
+    <span class="n">zmat_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(\w+)*([\s,]+(\w+)[\s,]+(\w+))*[\-\.\s,\w]*$&#39;</span><span class="p">)</span>
+    <span class="n">xyz_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(\w+)[\s,]+([\d\.eE\-]+)[\s,]+([\d\.eE\-]+)[\s,]+&#39;</span>
+                          <span class="sa">r</span><span class="s1">&#39;([\d\.eE\-]+)[\-\.\s,\w.]*$&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">spin_multiplicity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">jobtype</span><span class="o">=</span><span class="s1">&#39;SP&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="s2">&quot;HF&quot;</span><span class="p">,</span> <span class="n">correlation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1055,7 +1055,7 @@
 <span class="sd">        Helper method to parse coordinates. Copied from GaussianInput class.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">paras</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">var_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^([A-Za-z]+\S*)[\s=,]+([\d\-\.]+)$&quot;</span><span class="p">)</span>
+        <span class="n">var_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^([A-Za-z]+\S*)[\s=,]+([\d\-\.]+)$&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">coord_lines</span><span class="p">:</span>
             <span class="n">m</span> <span class="o">=</span> <span class="n">var_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
             <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
@@ -1073,14 +1073,14 @@
             <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">zmode</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="n">xyz_patt</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
                 <span class="n">m</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">xyz_patt</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
                 <span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-                <span class="n">toks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;[,\s]+&quot;</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="n">toks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[,\s]+&#39;</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">toks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
                     <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">toks</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">toks</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])))</span>
             <span class="k">elif</span> <span class="bp">cls</span><span class="o">.</span><span class="n">zmat_patt</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
                 <span class="n">zmode</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">toks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;[,\s]+&quot;</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="n">toks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[,\s]+&#39;</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
                 <span class="n">species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">toks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="n">toks</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">toks</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1154,7 +1154,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">sp_str</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="n">sp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;\d&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sp_str</span><span class="p">)</span>
+                <span class="n">sp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sp_str</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
 
         <span class="n">species</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">parse_species</span><span class="p">,</span> <span class="n">species</span><span class="p">))</span>
@@ -1175,8 +1175,8 @@
             <span class="k">return</span> <span class="n">ghosts</span><span class="p">,</span> <span class="n">no_ghost_text</span>
 
         <span class="n">text</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">contents</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
-        <span class="n">charge_multi_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;\s*(?P&lt;charge&gt;&#39;</span>
-                                          <span class="s1">&#39;[-+]?\d+)\s+(?P&lt;multi&gt;\d+)&#39;</span><span class="p">)</span>
+        <span class="n">charge_multi_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s*(?P&lt;charge&gt;&#39;</span>
+                                          <span class="sa">r</span><span class="s1">&#39;[-+]?\d+)\s+(?P&lt;multi&gt;\d+)&#39;</span><span class="p">)</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">charge_multi_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
@@ -1221,8 +1221,8 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_parse_rem</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
         <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
-        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
+        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
+        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
             <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -1333,8 +1333,8 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_parse_pcm</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
         <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
-        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
+        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
+        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
             <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -1362,8 +1362,8 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_parse_pcm_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
         <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
-        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
+        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
+        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
             <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -1410,14 +1410,14 @@
         <span class="n">constraints</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">fixed_sec</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">valid_fix_spec</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;XY&quot;</span><span class="p">,</span> <span class="s2">&quot;XZ&quot;</span><span class="p">,</span> <span class="s2">&quot;YZ&quot;</span><span class="p">,</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">}</span>
-        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
-        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
+        <span class="n">int_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+$&#39;</span><span class="p">)</span>
+        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[-+]?\d+\.\d+([eE][-+]?\d+)?$&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
             <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;ENDCONSTRAINT&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ENDCONSTRAINT&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
                 <span class="n">constraints</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="n">opt_dict</span><span class="p">[</span><span class="s2">&quot;CONSTRAINT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">const_list</span>
-            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;ENDFIXED&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ENDFIXED&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
                 <span class="n">fixed_sec</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="n">opt_dict</span><span class="p">[</span><span class="s2">&quot;FIXED&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fixed_dict</span>
             <span class="k">elif</span> <span class="n">constraints</span><span class="p">:</span>
@@ -1437,10 +1437,10 @@
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is not a correct keyword to fix&quot;</span>
                                      <span class="s2">&quot;atoms&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fix_spec</span><span class="p">))</span>
                 <span class="n">fixed_dict</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="n">fix_spec</span>
-            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;CONSTRAINT&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;CONSTRAINT&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
                 <span class="n">constraints</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">const_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;FIXED&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;FIXED&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
                 <span class="n">fixed_sec</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">fixed_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1501,9 +1501,9 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
-        <span class="n">split_pattern</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Running Job \d+ of \d+ \S+|&quot;</span> \
-                        <span class="s2">&quot;[*]</span><span class="si">{61}</span><span class="se">\n</span><span class="s2">Job \d+ of \d+ </span><span class="se">\n</span><span class="s2">[*]</span><span class="si">{61}</span><span class="s2">|&quot;</span> \
-                        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">.*time.*</span><span class="se">\n</span><span class="s2">Running Job \d+ of \d+ \S+&quot;</span>
+        <span class="n">split_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\n\nRunning Job \d+ of \d+ \S+|&quot;</span> \
+                        <span class="sa">r</span><span class="s2">&quot;[*]</span><span class="si">{61}</span><span class="s2">\nJob \d+ of \d+ \n[*]</span><span class="si">{61}</span><span class="s2">|&quot;</span> \
+                        <span class="sa">r</span><span class="s2">&quot;\n.*time.*\nRunning Job \d+ of \d+ \S+&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">zopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -1546,61 +1546,63 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_parse_job</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="n">scf_energy_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Total energy in the final basis set =&quot;</span>
-                                        <span class="s2">&quot;\s+(?P&lt;energy&gt;-\d+\.\d+)&quot;</span><span class="p">)</span>
-        <span class="n">corr_energy_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?P&lt;name&gt;[A-Z\-\(\)0-9]+)\s+&quot;</span>
-                                         <span class="s2">&quot;([tT]otal\s+)?[eE]nergy\s+=\s+&quot;</span>
-                                         <span class="s2">&quot;(?P&lt;energy&gt;-\d+\.\d+)&quot;</span><span class="p">)</span>
-        <span class="n">coord_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s*\d+\s+(?P&lt;element&gt;[A-Z][a-zH]*)\s+&quot;</span>
-                                   <span class="s2">&quot;(?P&lt;x&gt;\-?\d+\.\d+)\s+&quot;</span>
-                                   <span class="s2">&quot;(?P&lt;y&gt;\-?\d+\.\d+)\s+&quot;</span>
-                                   <span class="s2">&quot;(?P&lt;z&gt;\-?\d+\.\d+)&quot;</span><span class="p">)</span>
-        <span class="n">num_ele_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;There are\s+(?P&lt;alpha&gt;\d+)\s+alpha &quot;</span>
-                                     <span class="s2">&quot;and\s+(?P&lt;beta&gt;\d+)\s+beta electrons&quot;</span><span class="p">)</span>
-        <span class="n">total_charge_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Sum of atomic charges =&quot;</span>
-                                          <span class="s2">&quot;\s+(?P&lt;charge&gt;\-?\d+\.\d+)&quot;</span><span class="p">)</span>
-        <span class="n">scf_iter_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\d+\s*(?P&lt;energy&gt;\-\d+\.\d+)\s+&quot;</span>
-                                      <span class="s2">&quot;(?P&lt;diis_error&gt;\d+\.\d+E[-+]\d+)&quot;</span><span class="p">)</span>
-        <span class="n">zpe_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Zero point vibrational energy:&quot;</span>
-                                 <span class="s2">&quot;\s+(?P&lt;zpe&gt;\d+\.\d+)\s+kcal/mol&quot;</span><span class="p">)</span>
-        <span class="n">thermal_corr_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?P&lt;name&gt;\S.*\S):\s+&quot;</span>
-                                          <span class="s2">&quot;(?P&lt;correction&gt;\d+\.\d+)\s+&quot;</span>
-                                          <span class="s2">&quot;k?cal/mol&quot;</span><span class="p">)</span>
-        <span class="n">detailed_charge_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(Ground-State )?(?P&lt;method&gt;\w+)( Net)?&quot;</span>
-                                             <span class="s2">&quot; Atomic Charges&quot;</span><span class="p">)</span>
-        <span class="n">nbo_charge_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?P&lt;element&gt;[A-Z][a-z]{0,2})\s*(?P&lt;no&gt;\d+)\s+(?P&lt;charge&gt;\-?\d\.\d+)&quot;</span>
-                                        <span class="s2">&quot;\s+(?P&lt;core&gt;\-?\d+\.\d+)\s+(?P&lt;valence&gt;\-?\d+\.\d+)&quot;</span>
-                                        <span class="s2">&quot;\s+(?P&lt;rydberg&gt;\-?\d+\.\d+)\s+(?P&lt;total&gt;\-?\d+\.\d+)&quot;</span>
-                                        <span class="s2">&quot;(\s+(?P&lt;spin&gt;\-?\d\.\d+))?&quot;</span><span class="p">)</span>
-        <span class="n">nbo_wavefunction_type_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;This is an? (?P&lt;type&gt;\w+\-\w+) NBO calculation&quot;</span><span class="p">)</span>
-        <span class="n">bsse_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;DE, kJ/mol\s+(?P&lt;raw_be&gt;\-?\d+\.?\d+([eE]\d+)?)\s+&quot;</span>
-                                  <span class="s2">&quot;(?P&lt;corrected_be&gt;\-?\d+\.?\d+([eE]\d+)?)&quot;</span><span class="p">)</span>
-        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\-?\d+\.?\d+([eE]\d+)?$&quot;</span><span class="p">)</span>
+        <span class="n">scf_energy_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Total energy in the final basis set =&#39;</span>
+                                        <span class="sa">r</span><span class="s1">&#39;\s+(?P&lt;energy&gt;-\d+\.\d+)&#39;</span><span class="p">)</span>
+        <span class="n">corr_energy_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?P&lt;name&gt;[A-Z\-\(\)0-9]+)\s+&#39;</span>
+                                         <span class="sa">r</span><span class="s1">&#39;([tT]otal\s+)?[eE]nergy\s+=\s+&#39;</span>
+                                         <span class="sa">r</span><span class="s1">&#39;(?P&lt;energy&gt;-\d+\.\d+)&#39;</span><span class="p">)</span>
+        <span class="n">coord_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;\s*\d+\s+(?P&lt;element&gt;[A-Z][a-zH]*)\s+(?P&lt;x&gt;\-?\d+\.\d+)\s+&#39;</span>
+            <span class="sa">r</span><span class="s1">&#39;(?P&lt;y&gt;\-?\d+\.\d+)\s+(?P&lt;z&gt;\-?\d+\.\d+)&#39;</span><span class="p">)</span>
+        <span class="n">num_ele_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;There are\s+(?P&lt;alpha&gt;\d+)\s+alpha &#39;</span>
+                                     <span class="sa">r</span><span class="s1">&#39;and\s+(?P&lt;beta&gt;\d+)\s+beta electrons&#39;</span><span class="p">)</span>
+        <span class="n">total_charge_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Sum of atomic charges =&#39;</span>
+                                          <span class="sa">r</span><span class="s1">&#39;\s+(?P&lt;charge&gt;\-?\d+\.\d+)&#39;</span><span class="p">)</span>
+        <span class="n">scf_iter_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;\d+\s*(?P&lt;energy&gt;\-\d+\.\d+)\s+(?P&lt;diis_error&gt;\d+\.\d+E[-+]\d+)&#39;</span><span class="p">)</span>
+        <span class="n">zpe_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;Zero point vibrational energy:\s+(?P&lt;zpe&gt;\d+\.\d+)\s+kcal/mol&#39;</span><span class="p">)</span>
+        <span class="n">thermal_corr_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;(?P&lt;name&gt;\S.*\S):\s+(?P&lt;correction&gt;\d+\.\d+)\s+k?cal/mol&#39;</span><span class="p">)</span>
+        <span class="n">detailed_charge_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;(Ground-State )?(?P&lt;method&gt;\w+)( Net)? Atomic Charges&#39;</span><span class="p">)</span>
+        <span class="n">nbo_charge_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;(?P&lt;element&gt;[A-Z][a-z]{0,2})\s*(?P&lt;no&gt;\d+)\s+(?P&lt;charge&gt;\-?\d\.\d+)&#39;</span>
+            <span class="sa">r</span><span class="s1">&#39;\s+(?P&lt;core&gt;\-?\d+\.\d+)\s+(?P&lt;valence&gt;\-?\d+\.\d+)&#39;</span>
+            <span class="sa">r</span><span class="s1">&#39;\s+(?P&lt;rydberg&gt;\-?\d+\.\d+)\s+(?P&lt;total&gt;\-?\d+\.\d+)&#39;</span>
+            <span class="sa">r</span><span class="s1">&#39;(\s+(?P&lt;spin&gt;\-?\d\.\d+))?&#39;</span><span class="p">)</span>
+        <span class="n">nbo_wavefunction_type_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;This is an? (?P&lt;type&gt;\w+\-\w+) NBO calculation&#39;</span><span class="p">)</span>
+        <span class="n">bsse_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;DE, kJ/mol\s+(?P&lt;raw_be&gt;\-?\d+\.?\d+([eE]\d+)?)\s+&#39;</span>
+            <span class="sa">r</span><span class="s1">&#39;(?P&lt;corrected_be&gt;\-?\d+\.?\d+([eE]\d+)?)&#39;</span><span class="p">)</span>
+        <span class="n">float_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\-?\d+\.?\d+([eE]\d+)?$&#39;</span><span class="p">)</span>
 
         <span class="n">error_defs</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Convergence failure&quot;</span><span class="p">),</span> <span class="s2">&quot;Bad SCF convergence&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Coordinates do not transform within specified &quot;</span>
-                        <span class="s2">&quot;threshold&quot;</span><span class="p">),</span> <span class="s2">&quot;autoz error&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;MAXIMUM OPTIMIZATION CYCLES REACHED&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Convergence failure&#39;</span><span class="p">),</span> <span class="s2">&quot;Bad SCF convergence&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+                <span class="sa">r</span><span class="s1">&#39;Coordinates do not transform within specified threshold&#39;</span><span class="p">),</span>
+             <span class="s2">&quot;autoz error&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;MAXIMUM OPTIMIZATION CYCLES REACHED&#39;</span><span class="p">),</span>
                 <span class="s2">&quot;Geometry optimization failed&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s+[Nn][Aa][Nn]\s+&quot;</span><span class="p">),</span> <span class="s2">&quot;NAN values&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;energy\s+=\s*(\*)+&quot;</span><span class="p">),</span> <span class="s2">&quot;Numerical disaster&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;NewFileMan::OpenFile\(\):\s+nopenfiles=\d+\s+&quot;</span>
-                        <span class="s2">&quot;maxopenfiles=\d+s+errno=\d+&quot;</span><span class="p">),</span> <span class="s2">&quot;Open file error&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Application \d+ exit codes: 1[34]\d+&quot;</span><span class="p">),</span> <span class="s2">&quot;Exit Code 134&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Negative overlap matrix eigenvalue. Tighten integral &quot;</span>
-                        <span class="s2">&quot;threshold \(REM_THRESH\)!&quot;</span><span class="p">),</span> <span class="s2">&quot;Negative Eigen&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Unable to allocate requested memory in mega_alloc&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+[Nn][Aa][Nn]\s+&#39;</span><span class="p">),</span> <span class="s2">&quot;NAN values&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;energy\s+=\s*(\*)+&#39;</span><span class="p">),</span> <span class="s2">&quot;Numerical disaster&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;NewFileMan::OpenFile\(\):\s+nopenfiles=\d+\s+&#39;</span>
+                        <span class="sa">r</span><span class="s1">&#39;maxopenfiles=\d+s+errno=\d+&#39;</span><span class="p">),</span> <span class="s2">&quot;Open file error&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Application \d+ exit codes: 1[34]\d+&#39;</span><span class="p">),</span> <span class="s2">&quot;Exit Code 134&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Negative overlap matrix eigenvalue. Tighten integral &#39;</span>
+                        <span class="sa">r</span><span class="s1">&#39;threshold \(REM_THRESH\)!&#39;</span><span class="p">),</span> <span class="s2">&quot;Negative Eigen&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Unable to allocate requested memory in mega_alloc&#39;</span><span class="p">),</span>
                 <span class="s2">&quot;Insufficient static memory&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Application \d+ exit signals: Killed&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Application \d+ exit signals: Killed&#39;</span><span class="p">),</span>
                 <span class="s2">&quot;Killed&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;UNABLE TO DETERMINE Lamda IN FormD&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;UNABLE TO DETERMINE Lamda IN FormD&#39;</span><span class="p">),</span>
                 <span class="s2">&quot;Lamda Determination Failed&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Job too small. Please specify .*CPSCF_NSEG&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Job too small. Please specify .*CPSCF_NSEG&#39;</span><span class="p">),</span>
                 <span class="s2">&quot;Freq Job Too Small&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Not enough total memory&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Not enough total memory&#39;</span><span class="p">),</span>
                 <span class="s2">&quot;Not Enough Total Memory&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Use of \$pcm_solvent section has been deprecated starting in Q-Chem&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Use of \$pcm_solvent section has been deprecated starting in Q-Chem&#39;</span><span class="p">),</span>
                 <span class="s2">&quot;pcm_solvent deprecated&quot;</span><span class="p">)</span>
         <span class="p">)</span>
 

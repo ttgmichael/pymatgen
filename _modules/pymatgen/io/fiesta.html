@@ -92,10 +92,10 @@
 <div class="viewcode-block" id="Nwchem2Fiesta"><a class="viewcode-back" href="../../../pymatgen.io.fiesta.html#pymatgen.io.fiesta.Nwchem2Fiesta">[docs]</a><span class="k">class</span> <span class="nc">Nwchem2Fiesta</span><span class="p">(</span><span class="n">MSONable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    To run NWCHEM2FIESTA inside python:</span>
-
-<span class="sd">	If nwchem.nw is the input, nwchem.out the output, and structure.movecs the</span>
-<span class="sd">	&quot;movecs&quot; file, the syntax to run NWCHEM2FIESTA is: NWCHEM2FIESTA</span>
-<span class="sd">	nwchem.nw  nwchem.nwout  structure.movecs &gt; log_n2f</span>
+<span class="sd">    </span>
+<span class="sd">    If nwchem.nw is the input, nwchem.out the output, and structure.movecs the</span>
+<span class="sd">    &quot;movecs&quot; file, the syntax to run NWCHEM2FIESTA is: NWCHEM2FIESTA</span>
+<span class="sd">    nwchem.nw  nwchem.nwout  structure.movecs &gt; log_n2f</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;nwchem&quot;</span><span class="p">,</span> <span class="n">log_file</span><span class="o">=</span><span class="s2">&quot;log_n2f&quot;</span><span class="p">):</span>
@@ -241,13 +241,13 @@
 
     <span class="k">def</span> <span class="nf">_parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
 
-        <span class="n">lmax_nnlo_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s* (\d+) \s+ (\d+) \s+ \# .* &quot;</span><span class="p">,</span>
+        <span class="n">lmax_nnlo_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s* (\d+) \s+ (\d+) \s+ \# .* &quot;</span><span class="p">,</span>
                                     <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
-        <span class="n">nl_orbital_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s* (\d+) \s+ (\d+) \s+ (\d+) \s+ \# .* &quot;</span><span class="p">,</span>
+        <span class="n">nl_orbital_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s* (\d+) \s+ (\d+) \s+ (\d+) \s+ \# .* &quot;</span><span class="p">,</span>
                                      <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
-        <span class="n">coef_alpha_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s* ([-\d.\D]+) \s+ ([-\d.\D]+) \s* &quot;</span><span class="p">,</span>
+        <span class="n">coef_alpha_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s* ([-\d.\D]+) \s+ ([-\d.\D]+) \s* &quot;</span><span class="p">,</span>
                                      <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
         <span class="n">preamble</span> <span class="o">=</span> <span class="p">[]</span>
@@ -418,7 +418,7 @@
 <span class="sd">        :return: set the &quot;do_bse&quot; variable to one in cell.in</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">BSE_dump</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">BSE_dump</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">BSE_TDDFT_options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">do_bse</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">do_tddft</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">BSE_TDDFT_options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">do_bse</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">do_tddft</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
@@ -760,7 +760,7 @@
         <span class="k">with</span> <span class="n">zopen</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-        <span class="n">chunks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;GW Driver iteration&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;GW Driver iteration&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 
         <span class="c1"># preamble: everything before the first GW Driver iteration</span>
         <span class="n">preamble</span> <span class="o">=</span> <span class="n">chunks</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -771,17 +771,17 @@
     <span class="k">def</span> <span class="nf">_parse_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
 
         <span class="n">GW_BANDS_results_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;^&lt;it.*  \| \s+ (\D+\d*) \s+ \| \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ \| &quot;</span>
-            <span class="s2">&quot; \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ \|&quot;</span>
-            <span class="s2">&quot; \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ &quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s2">&quot;^&lt;it.*  \| \s+ (\D+\d*) \s+ \| \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ \| &quot;</span>
+            <span class="sa">r</span><span class="s2">&quot; \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ \|&quot;</span>
+            <span class="sa">r</span><span class="s2">&quot; \s+ ([-\d.]+) \s+ ([-\d.]+) \s+ &quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
         <span class="n">GW_GAPS_results_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;^&lt;it.*  \| \s+ Egap_KS \s+ = \s+ ([-\d.]+) \s+ \| \s+ Egap_QP \s+ = \s+ ([-\d.]+) \s+ \| &quot;</span>
-            <span class="s2">&quot; \s+ Egap_QP \s+ = \s+ ([-\d.]+) \s+ \|&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s2">&quot;^&lt;it.*  \| \s+ Egap_KS \s+ = \s+ ([-\d.]+) \s+ \| \s+ Egap_QP \s+ = \s+ ([-\d.]+) \s+ \| &quot;</span>
+            <span class="sa">r</span><span class="s2">&quot; \s+ Egap_QP \s+ = \s+ ([-\d.]+) \s+ \|&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
-        <span class="n">end_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s*program returned normally\s*&quot;</span><span class="p">)</span>
+        <span class="n">end_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*program returned normally\s*&quot;</span><span class="p">)</span>
 
-        <span class="n">total_time_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s*total \s+ time: \s+  ([\d.]+) .*&quot;</span><span class="p">,</span>
+        <span class="n">total_time_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*total \s+ time: \s+  ([\d.]+) .*&quot;</span><span class="p">,</span>
                                      <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
         <span class="n">error_defs</span> <span class="o">=</span> <span class="p">{</span>
@@ -856,9 +856,9 @@
             <span class="s2">&quot;^exiton \s+ (\d+)  : \s+  ([\d.]+) \( \s+ ([-\d.]+) \) \s+ \| .*  &quot;</span><span class="p">,</span>
             <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
-        <span class="n">end_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s*program returned normally\s*&quot;</span><span class="p">)</span>
+        <span class="n">end_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*program returned normally\s*&quot;</span><span class="p">)</span>
 
-        <span class="n">total_time_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s*total \s+ time: \s+  ([\d.]+) .*&quot;</span><span class="p">,</span>
+        <span class="n">total_time_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*total \s+ time: \s+  ([\d.]+) .*&quot;</span><span class="p">,</span>
                                      <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
 
         <span class="n">error_defs</span> <span class="o">=</span> <span class="p">{</span>

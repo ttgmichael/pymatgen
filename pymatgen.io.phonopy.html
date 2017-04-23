@@ -61,14 +61,26 @@
 <dt id="pymatgen.io.phonopy.eigvec_to_eigdispl">
 <code class="descname">eigvec_to_eigdispl</code><span class="sig-paren">(</span><em>v</em>, <em>q</em>, <em>frac_coords</em>, <em>mass</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/phonopy.html#eigvec_to_eigdispl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.phonopy.eigvec_to_eigdispl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a single eigenvector to an eigendisplacement in the primitive cell
-according to the formula:
-exp(2*pi*i*(frac_coords dot q) / sqrt(mass) * v
-Compared to the modulation option in phonopy, here all the additional
-multiplicative and phase factors are set to 1.
-:param v: the vector that should be converted. A 3D complex numpy array.
-:param q: the q point in fractional coordinates
-:param frac_coords: the fractional coordinates of the atom
-:param mass: the mass of the atom</p>
+according to the formula:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">frac_coords</span> \<span class="n">dot</span> <span class="n">q</span><span class="p">)</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span>
+</pre></div>
+</div>
+<p>Compared to the modulation option in phonopy, here all the additional
+multiplicative and phase factors are set to 1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> &#8211; the vector that should be converted. A 3D complex numpy array.</li>
+<li><strong>q</strong> &#8211; the q point in fractional coordinates</li>
+<li><strong>frac_coords</strong> &#8211; the fractional coordinates of the atom</li>
+<li><strong>mass</strong> &#8211; the mass of the atom</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -123,9 +135,12 @@ exp(2*pi*i*(frac_coords dot q) / sqrt(mass) * v</p>
 <dd><p>Creates a pymatgen PhononBandStructure object from the dictionary
 extracted by the band.yaml file produced by phonopy. The labels
 will be extracted from the dictionary, if present. If the &#8216;eigenvector&#8217;
-key is found the eigendisplacements will be calculated according to the formula:
-exp(2*pi*i*(frac_coords dot q) / sqrt(mass) * v
-and added to the object.</p>
+key is found the eigendisplacements will be calculated according to the
+formula:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">frac_coords</span> \<span class="n">dot</span> <span class="n">q</span><span class="p">)</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span>
+</pre></div>
+</div>
+<p>and added to the object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

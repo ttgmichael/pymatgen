@@ -64,14 +64,18 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">fractions</span> <span class="k">import</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">Fraction</span>
+<span class="kn">from</span> <span class="nn">fractions</span> <span class="k">import</span> <span class="n">Fraction</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">gcd</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">fractions</span> <span class="k">import</span> <span class="n">gcd</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">groupby</span>
 <span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">math</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MontyDecoder</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">monty.fractions</span> <span class="k">import</span> <span class="n">lcm</span>
 
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="k">import</span> <span class="n">Composition</span>
@@ -543,7 +547,7 @@
                 <span class="s1">&#39;The specified species do not exist in the structure&#39;</span>
                 <span class="s1">&#39; to be enumerated&#39;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">lcm</span><span class="p">(</span><span class="n">n_gcd</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_gcd</span></div>
+        <span class="k">return</span> <span class="n">lcm</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n_gcd</span><span class="p">),</span> <span class="n">denom</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_gcd</span></div>
 
 <div class="viewcode-block" id="MagOrderingTransformation.apply_transformation"><a class="viewcode-back" href="../../../pymatgen.transformations.advanced_transformations.html#pymatgen.transformations.advanced_transformations.MagOrderingTransformation.apply_transformation">[docs]</a>    <span class="k">def</span> <span class="nf">apply_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">return_ranked_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># Make a mutable structure first</span>
@@ -643,10 +647,12 @@
     <span class="n">symbols</span> <span class="o">=</span> <span class="n">allowed_elements</span> <span class="ow">or</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">Element</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">sp</span> <span class="o">=</span> <span class="n">Specie</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">oxidation_state</span><span class="p">)</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">ionic_radius</span>
-            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">sp</span><span class="p">))</span>
+            <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+                <span class="n">sp</span> <span class="o">=</span> <span class="n">Specie</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">oxidation_state</span><span class="p">)</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">ionic_radius</span>
+                <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">sp</span><span class="p">))</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
     <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">ref_radius</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>

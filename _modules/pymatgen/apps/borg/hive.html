@@ -201,7 +201,7 @@
                                                    <span class="s2">&quot;vasprun.xml.bz2&quot;</span><span class="p">]:</span>
                         <span class="n">filepath</span> <span class="o">=</span> <span class="n">fname</span>
                         <span class="k">break</span>
-                    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;relax2&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;relax2&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
                         <span class="n">filepath</span> <span class="o">=</span> <span class="n">fname</span>
                         <span class="k">break</span>
                     <span class="n">filepath</span> <span class="o">=</span> <span class="n">fname</span>
@@ -298,16 +298,16 @@
 <span class="sd">                        &quot;&quot;&quot;</span>
                         <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
                             <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span>
-                                               <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(\.gz|\.bz2)*&quot;</span>
+                                               <span class="sa">r</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(\.gz|\.bz2)*&quot;</span>
                                                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">)):</span>
                                 <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>
                                 <span class="k">break</span>
                             <span class="k">if</span> <span class="n">fname</span> <span class="o">==</span> <span class="s2">&quot;POSCAR&quot;</span> <span class="ow">and</span> \
-                                    <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;relax1&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
+                                    <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;relax1&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">):</span>
                                 <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>
                                 <span class="k">break</span>
                             <span class="k">if</span> <span class="p">(</span><span class="n">fname</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;CONTCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;OSZICAR&quot;</span><span class="p">)</span> <span class="ow">and</span>
-                                    <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;relax2&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">)):</span>
+                                    <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;relax2&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">)):</span>
                                 <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>
                                 <span class="k">break</span>
                             <span class="n">files_to_parse</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">fname</span>

@@ -708,7 +708,7 @@
 <span class="sd">        queue manager (obtained by parsing QTEMPLATE).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">re</span>
-        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;\$\$\{(\w+)\}&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">QTEMPLATE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\$\$\{(\w+)\}&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">QTEMPLATE</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">has_mpi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

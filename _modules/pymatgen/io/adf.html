@@ -827,15 +827,15 @@
 <span class="sd">        Parse the formatted logfile.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">cycle_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Coordinates\sin\sGeometry\sCycle\s(\d+)&quot;</span><span class="p">)</span>
-        <span class="n">coord_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s+([0-9]+)\.([A-Za-z]+)&quot;</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="s2">&quot;\s+([-\.0-9]+)&quot;</span><span class="p">)</span>
-        <span class="n">energy_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+current\senergy\s+([-\.0-9]+)\s&quot;</span>
+        <span class="n">cycle_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Coordinates\sin\sGeometry\sCycle\s(\d+)&quot;</span><span class="p">)</span>
+        <span class="n">coord_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+([0-9]+)\.([A-Za-z]+)&quot;</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="s2">&quot;\s+([-\.0-9]+)&quot;</span><span class="p">)</span>
+        <span class="n">energy_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+current\senergy\s+([-\.0-9]+)\s&quot;</span>
                                  <span class="s2">&quot;Hartree&quot;</span><span class="p">)</span>
-        <span class="n">final_energy_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+Bond\sEnergy\s+([-\.0-9]+)&quot;</span>
-                                       <span class="s2">&quot;\sa\.u\.&quot;</span><span class="p">)</span>
-        <span class="n">error_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+ERROR\sDETECTED:\s(.*)&quot;</span><span class="p">)</span>
-        <span class="n">runtype_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+RunType\s+:\s(.*)&quot;</span><span class="p">)</span>
-        <span class="n">end_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+END&quot;</span><span class="p">)</span>
+        <span class="n">final_energy_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+Bond\sEnergy\s+([-\.0-9]+)\sa\.u\.&quot;</span><span class="p">)</span>
+        <span class="n">error_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+ERROR\sDETECTED:\s(.*)&quot;</span><span class="p">)</span>
+        <span class="n">runtype_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+RunType\s+:\s(.*)&quot;</span><span class="p">)</span>
+        <span class="n">end_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;.*&gt;\s&lt;.*&gt;\s+END&quot;</span><span class="p">)</span>
         <span class="n">parse_cycle</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">sites</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">last_cycle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
@@ -939,16 +939,15 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parse the standard ADF output file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">numerical_freq_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s+\*\s+F\sR\sE\sQ\sU\sE\sN\sC\sI\sE&quot;</span>
-                                         <span class="s2">&quot;\sS\s+\*&quot;</span><span class="p">)</span>
-        <span class="n">analytic_freq_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s+\*\s+F\sR\sE\sQ\sU\sE\sN\sC\sY\s+A&quot;</span>
-                                        <span class="s2">&quot;\sN\sA\sL\sY\sS\sI\sS\s+\*&quot;</span><span class="p">)</span>
-        <span class="n">freq_on_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;Vibrations\sand\sNormal\sModes\s+\*+.*\*+&quot;</span><span class="p">)</span>
-        <span class="n">freq_off_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;List\sof\sAll\sFrequencies:&quot;</span><span class="p">)</span>
-        <span class="n">mode_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s+(\d+)\.([A-Za-z]+)\s+(.*)&quot;</span><span class="p">)</span>
-        <span class="n">coord_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s+(\d+)\s+([A-Za-z]+)&quot;</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="s2">&quot;\s+([0-9\.-]+)&quot;</span><span class="p">)</span>
-        <span class="n">coord_on_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;\s+\*\s+R\sU\sN\s+T\sY\sP\sE\s:\s&quot;</span>
-                                   <span class="s2">&quot;FREQUENCIES\s+\*&quot;</span><span class="p">)</span>
+        <span class="n">numerical_freq_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;\s+\*\s+F\sR\sE\sQ\sU\sE\sN\sC\sI\sE\sS\s+\*&quot;</span><span class="p">)</span>
+        <span class="n">analytic_freq_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;\s+\*\s+F\sR\sE\sQ\sU\sE\sN\sC\sY\s+A\sN\sA\sL\sY\sS\sI\sS\s+\*&quot;</span><span class="p">)</span>
+        <span class="n">freq_on_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Vibrations\sand\sNormal\sModes\s+\*+.*\*+&quot;</span><span class="p">)</span>
+        <span class="n">freq_off_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;List\sof\sAll\sFrequencies:&quot;</span><span class="p">)</span>
+        <span class="n">mode_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+(\d+)\.([A-Za-z]+)\s+(.*)&quot;</span><span class="p">)</span>
+        <span class="n">coord_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+(\d+)\s+([A-Za-z]+)&quot;</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="sa">r</span><span class="s2">&quot;\s+([0-9\.-]+)&quot;</span><span class="p">)</span>
+        <span class="n">coord_on_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+\*\s+R\sU\sN\s+T\sY\sP\sE\s:\sFREQUENCIES\s+\*&quot;</span><span class="p">)</span>
         <span class="n">parse_freq</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">parse_mode</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">nnext</span> <span class="o">=</span> <span class="mi">0</span>

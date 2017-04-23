@@ -287,17 +287,17 @@
         <span class="c1"># atom_id, mol_id, atom_type, charge, x, y, z</span>
         <span class="k">if</span> <span class="n">read_charge</span><span class="p">:</span>
             <span class="n">atoms_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-                <span class="s2">&quot;^\s*(\d+)\s+(\d+)\s+(\d+)\s+([0-9eE\.+-]+)\s+(&quot;</span>
-                <span class="s2">&quot;[0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\w*&quot;</span><span class="p">)</span>
+                <span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+(\d+)\s+(\d+)\s+([0-9eE\.+-]+)\s+(&#39;</span>
+                <span class="sa">r</span><span class="s1">&#39;[0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\w*&#39;</span><span class="p">)</span>
         <span class="c1"># atom_id, mol_id, atom_type, x, y, z</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">atoms_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-                <span class="s2">&quot;^\s*(\d+)\s+(\d+)\s+(\d+)\s+([0-9eE\.+-]+)\s+(&quot;</span>
-                <span class="s2">&quot;[0-9eE\.+-]+)\s+([0-9eE\.+-]+)\w*&quot;</span><span class="p">)</span>
+                <span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+(\d+)\s+(\d+)\s+([0-9eE\.+-]+)\s+(&#39;</span>
+                <span class="sa">r</span><span class="s1">&#39;[0-9eE\.+-]+)\s+([0-9eE\.+-]+)\w*&#39;</span><span class="p">)</span>
         <span class="c1"># atom_type, mass</span>
-        <span class="n">masses_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^\s*(\d+)\s+([0-9\.]+)$&quot;</span><span class="p">)</span>
+        <span class="n">masses_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+([0-9\.]+)$&#39;</span><span class="p">)</span>
         <span class="n">box_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;^([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+[xyz]lo\s+[xyz]hi&quot;</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s1">&#39;^([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+[xyz]lo\s+[xyz]hi&#39;</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">df</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">masses_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
@@ -686,24 +686,24 @@
         <span class="n">angles_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">dihedral_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">imdihedral_data</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">types_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^\s*(\d+)\s+([a-zA-Z]+)\s+types$&quot;</span><span class="p">)</span>
+        <span class="n">types_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+([a-zA-Z]+)\s+types$&#39;</span><span class="p">)</span>
         <span class="c1"># atom_id, mol_id, atom_type, charge, x, y, z</span>
         <span class="n">atoms_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;^\s*(\d+)\s+(\d+)\s+(\d+)\s+([0-9eE\.+-]+)\s+(&quot;</span>
-            <span class="s2">&quot;[0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\w*&quot;</span><span class="p">)</span>
-        <span class="n">masses_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^\s*(\d+)\s+([0-9\.]+)$&quot;</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+(\d+)\s+(\d+)\s+([0-9eE\.+-]+)\s+(&#39;</span>
+            <span class="sa">r</span><span class="s1">&#39;[0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\w*&#39;</span><span class="p">)</span>
+        <span class="n">masses_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+([0-9\.]+)$&#39;</span><span class="p">)</span>
         <span class="n">box_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;^\s*([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+[xyz]lo\s+[xyz]hi&quot;</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s1">&#39;^\s*([0-9eE\.+-]+)\s+([0-9eE\.+-]+)\s+[xyz]lo\s+[xyz]hi&#39;</span><span class="p">)</span>
         <span class="c1"># id, value1, value2</span>
-        <span class="n">general_coeff_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^\s*(\d+)\s+([0-9\.]+)\s+([0-9\.]+)$&quot;</span><span class="p">)</span>
+        <span class="n">general_coeff_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+([0-9\.]+)\s+([0-9\.]+)$&#39;</span><span class="p">)</span>
         <span class="c1"># id, type, atom_id1, atom_id2</span>
-        <span class="n">bond_data_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$&quot;</span><span class="p">)</span>
+        <span class="n">bond_data_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$&#39;</span><span class="p">)</span>
         <span class="c1"># id, type, atom_id1, atom_id2, atom_id3</span>
         <span class="n">angle_data_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$&quot;</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$&#39;</span><span class="p">)</span>
         <span class="c1"># id, type, atom_id1, atom_id2, atom_id3, atom_id4</span>
         <span class="n">dihedral_data_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$&quot;</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s1">&#39;^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s*$&#39;</span><span class="p">)</span>
         <span class="n">read_pair_coeffs</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">read_bond_coeffs</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">read_angle_coeffs</span> <span class="o">=</span> <span class="kc">False</span>

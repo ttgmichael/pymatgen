@@ -100,10 +100,13 @@
 <div class="viewcode-block" id="eigvec_to_eigdispl"><a class="viewcode-back" href="../../../pymatgen.io.phonopy.html#pymatgen.io.phonopy.eigvec_to_eigdispl">[docs]</a><span class="k">def</span> <span class="nf">eigvec_to_eigdispl</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">frac_coords</span><span class="p">,</span> <span class="n">mass</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a single eigenvector to an eigendisplacement in the primitive cell</span>
-<span class="sd">    according to the formula:</span>
-<span class="sd">    \exp(2*pi*i*(frac_coords \dot q) / sqrt(mass) * v</span>
+<span class="sd">    according to the formula::</span>
+<span class="sd">        </span>
+<span class="sd">        exp(2*pi*i*(frac_coords \dot q) / sqrt(mass) * v</span>
+<span class="sd">    </span>
 <span class="sd">    Compared to the modulation option in phonopy, here all the additional</span>
 <span class="sd">    multiplicative and phase factors are set to 1.</span>
+<span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        v: the vector that should be converted. A 3D complex numpy array.</span>
 <span class="sd">        q: the q point in fractional coordinates</span>
@@ -121,8 +124,11 @@
 <span class="sd">    Creates a pymatgen PhononBandStructure object from the dictionary</span>
 <span class="sd">    extracted by the band.yaml file produced by phonopy. The labels</span>
 <span class="sd">    will be extracted from the dictionary, if present. If the &#39;eigenvector&#39;</span>
-<span class="sd">    key is found the eigendisplacements will be calculated according to the formula:</span>
-<span class="sd">    \exp(2*pi*i*(frac_coords \dot q) / sqrt(mass) * v</span>
+<span class="sd">    key is found the eigendisplacements will be calculated according to the </span>
+<span class="sd">    formula::</span>
+<span class="sd">        </span>
+<span class="sd">        exp(2*pi*i*(frac_coords \dot q) / sqrt(mass) * v</span>
+<span class="sd">    </span>
 <span class="sd">    and added to the object.</span>
 
 <span class="sd">    Args:</span>

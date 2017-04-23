@@ -185,7 +185,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;INCAR&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;INCAR&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;INCAR found. Using &quot;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot; from INCAR.&quot;</span><span class="p">)</span>
             <span class="n">incar</span> <span class="o">=</span> <span class="n">Incar</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">incar</span><span class="p">:</span>
@@ -907,7 +907,7 @@
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;reduced_cell_formula&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">reduced_formula</span><span class="p">)</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;pretty_formula&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">reduced_formula</span>
         <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">potcar_symbols</span><span class="p">]</span>
-        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">]</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;is_hubbard&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hubbard</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;hubbards&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;is_hubbard&quot;</span><span class="p">]:</span>
@@ -1272,7 +1272,7 @@
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;reduced_cell_formula&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">reduced_formula</span><span class="p">)</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;pretty_formula&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">comp</span><span class="o">.</span><span class="n">reduced_formula</span>
         <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">potcar_symbols</span><span class="p">]</span>
-        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">]</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;is_hubbard&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hubbard</span>
         <span class="n">d</span><span class="p">[</span><span class="s2">&quot;hubbards&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;is_hubbard&quot;</span><span class="p">]:</span>
@@ -1537,7 +1537,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            patterns (dict): A dict of patterns, e.g.,</span>
-<span class="sd">                {&quot;energy&quot;: &quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;}.</span>
+<span class="sd">                {&quot;energy&quot;: r&quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;}.</span>
 <span class="sd">            reverse (bool): Read files in reverse. Defaults to false. Useful for</span>
 <span class="sd">                large files, esp OUTCARs, especially when used with</span>
 <span class="sd">                terminate_on_match.</span>
@@ -1548,7 +1548,7 @@
 
 <span class="sd">        Renders accessible:</span>
 <span class="sd">            Any attribute in patterns. For example,</span>
-<span class="sd">            {&quot;energy&quot;: &quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;} will set the</span>
+<span class="sd">            {&quot;energy&quot;: r&quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;} will set the</span>
 <span class="sd">            value of self.data[&quot;energy&quot;] = [[-1234], [-3453], ...], to the</span>
 <span class="sd">            results from regex and postprocess. Note that the returned values</span>
 <span class="sd">            are lists of lists, because you can grep multiple items on one line.</span>
@@ -1677,12 +1677,12 @@
                          <span class="sa">r</span><span class="s2">&quot;\s+EXCLUDING G=0 CONTRIBUTION\s+INCLUDING G=0 CONTRIBUTION\s+&quot;</span> \
                          <span class="sa">r</span><span class="s2">&quot;\s+-{20,}\s+-{20,}\s+&quot;</span> \
                          <span class="sa">r</span><span class="s2">&quot;\s+ATOM\s+ISO_SHIFT\s+SPAN\s+SKEW\s+ISO_SHIFT\s+SPAN\s+SKEW\s+&quot;</span> \
-                         <span class="s2">&quot;-{50,}\s*$&quot;</span>
+                         <span class="sa">r</span><span class="s2">&quot;-{50,}\s*$&quot;</span>
         <span class="n">first_part_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+\(absolute, valence only\)\s+$&quot;</span>
         <span class="n">swallon_valence_body_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;.+?\(absolute, valence and core\)\s+$&quot;</span>
         <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+(?:\s+[-]?\d+\.\d+)</span><span class="si">{3}</span><span class="s2">\s+&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;([-]?\d+\.\d+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
-        <span class="n">footer_pattern</span> <span class="o">=</span> <span class="s2">&quot;-{50,}\s*$&quot;</span>
+        <span class="n">footer_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;-{50,}\s*$&quot;</span>
         <span class="n">h1</span> <span class="o">=</span> <span class="n">header_pattern</span> <span class="o">+</span> <span class="n">first_part_pattern</span>
         <span class="n">cs_valence_only</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span>
             <span class="n">h1</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span> <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
@@ -1709,16 +1709,16 @@
 <span class="sd">            Electric Field Gradient tensors as a list of dict in the order of atoms from OUTCAR.</span>
 <span class="sd">            Each dict key/value pair corresponds to a component of the tensors.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;^\s+NMR quadrupolar parameters\s+$\n&quot;</span> \
-                         <span class="sa">r</span><span class="s2">&quot;^\s+Cq : quadrupolar parameter\s+Cq=e[*]Q[*]V_zz/h$\n&quot;</span> \
-                         <span class="sa">r</span><span class="s2">&quot;^\s+eta: asymmetry parameters\s+\(V_yy - V_xx\)/ V_zz$\n&quot;</span> \
-                         <span class="sa">r</span><span class="s2">&quot;^\s+Q  : nuclear electric quadrupole moment in mb \(millibarn\)$\n&quot;</span> \
-                         <span class="sa">r</span><span class="s2">&quot;^-{50,}$\n&quot;</span> \
-                         <span class="sa">r</span><span class="s2">&quot;^\s+ion\s+Cq\(MHz\)\s+eta\s+Q \(mb\)\s+$\n&quot;</span> \
-                         <span class="sa">r</span><span class="s2">&quot;^-{50,}\s*$\n&quot;</span>
-        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\d+\s+(?P&lt;cq&gt;[-]?\d+\.\d+)\s+(?P&lt;eta&gt;[-]?\d+\.\d+)\s+&quot;</span> \
-                      <span class="sa">r</span><span class="s2">&quot;(?P&lt;nuclear_quadrupole_moment&gt;[-]?\d+\.\d+)&quot;</span>
-        <span class="n">footer_pattern</span> <span class="o">=</span> <span class="s2">&quot;-{50,}\s*$&quot;</span>
+        <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^\s+NMR quadrupolar parameters\s+$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+Cq : quadrupolar parameter\s+Cq=e[*]Q[*]V_zz/h$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+eta: asymmetry parameters\s+\(V_yy - V_xx\)/ V_zz$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+Q  : nuclear electric quadrupole moment in mb \(millibarn\)$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^-{50,}$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^\s+ion\s+Cq\(MHz\)\s+eta\s+Q \(mb\)\s+$\n&#39;</span> \
+                         <span class="sa">r</span><span class="s1">&#39;^-{50,}\s*$\n&#39;</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\d+\s+(?P&lt;cq&gt;[-]?\d+\.\d+)\s+(?P&lt;eta&gt;[-]?\d+\.\d+)\s+&#39;</span> \
+                      <span class="sa">r</span><span class="s1">&#39;(?P&lt;nuclear_quadrupole_moment&gt;[-]?\d+\.\d+)&#39;</span>
+        <span class="n">footer_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;-{50,}\s*$&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span> <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
                                 <span class="n">last_one_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attribute_name</span><span class="o">=</span><span class="s2">&quot;efg&quot;</span><span class="p">)</span></div>
 
@@ -1782,9 +1782,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">patterns</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;energy&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tangent_force&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;(NEB: projections on to tangent \(&quot;</span>
-            <span class="sa">r</span><span class="s2">&quot;spring, REAL\)\s+\S+|tangential force \(eV/A\))\s+([&quot;</span>
-            <span class="sa">r</span><span class="s2">&quot;\d\-\.]+)&quot;</span>
+            <span class="s2">&quot;tangent_force&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;(NEB: projections on to tangent \(spring, REAL\)\s+\S+|tangential force \(eV/A\))\s+([\d\-\.]+)&quot;</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">read_pattern</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">,</span>
                           <span class="n">terminate_on_match</span><span class="o">=</span><span class="n">terminate_on_match</span><span class="p">,</span>
@@ -2188,11 +2186,11 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">def</span> <span class="nf">poscar_line</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
                 <span class="n">poscar_line</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">poscar_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[A-Z][a-z]?&#39;</span><span class="p">,</span> <span class="n">poscar_line</span><span class="p">)</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">poscar_line</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[A-Z][a-z]?&#39;</span><span class="p">,</span> <span class="n">poscar_line</span><span class="p">)</span>
 
             <span class="k">def</span> <span class="nf">zvals</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
                 <span class="n">zvals</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">zvals</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;-?\d+\.\d*&#39;</span><span class="p">,</span> <span class="n">zvals</span><span class="p">))</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">zvals</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;-?\d+\.\d*&#39;</span><span class="p">,</span> <span class="n">zvals</span><span class="p">))</span>
 
             <span class="n">search</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;^.*POSCAR.*=(.*)&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">poscar_line</span><span class="p">])</span>

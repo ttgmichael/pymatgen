@@ -159,8 +159,8 @@ compatible. Our approach is to have a single codebase support Python 2.7 and
 </div>
 <div class="section" id="getting-pymatgen">
 <h1>Getting pymatgen<a class="headerlink" href="#getting-pymatgen" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="conda-install-recommended">
-<h2>Conda install (recommended)<a class="headerlink" href="#conda-install-recommended" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conda-recommended">
+<h2>Conda (recommended)<a class="headerlink" href="#conda-recommended" title="Permalink to this headline">¶</a></h2>
 <p>If you are absolutely new to Python and/or are using Windows, the easiest
 installation process is using <a class="reference external" href="http://conda.pydata.org">conda</a>. The
 <a class="reference external" href="http://www.materialsvirtuallab.org">Materials Virtual Lab</a> has started <a class="reference external" href="http://materials.sh">materials.sh</a>,
@@ -173,8 +173,8 @@ pymatgen can be installed from the <a class="reference external" href="https://a
 <p>Step-by-step instructions for all platforms are available at the
 <a class="reference internal" href="installation.html"><span class="doc">installation page</span></a>.</p>
 </div>
-<div class="section" id="standard-install">
-<h2>Standard install<a class="headerlink" href="#standard-install" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pip">
+<h2>Pip<a class="headerlink" href="#pip" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Preparation</p>
@@ -264,8 +264,8 @@ conda install --yes pymatgen
 </div>
 </div>
 </div>
-<div class="section" id="using-pymatgen">
-<h1>Using pymatgen<a class="headerlink" href="#using-pymatgen" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-center" id="id3">
 <a class="reference internal image-reference" href="_images/overview.jpg"><img alt="pymatgen overview" src="_images/overview.jpg" style="width: 100%;" /></a>
 <p class="caption"><span class="caption-text">Overview of a typical workflow for pymatgen.</span></p>
@@ -471,36 +471,36 @@ line to your <code class="docutils literal"><span class="pre">.bash_profile</spa
 </pre></div>
 </div>
 <p>Here are a few examples of typical usages:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Parses all vasp runs in a directory and display the basic energy</span>
-<span class="c1">#information. Saves the data in a file called vasp_data.gz for subsequent</span>
-<span class="c1">#reuse.</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Parses all vasp runs in a directory and display the basic energy</span>
+<span class="c1"># information. Saves the data in a file called vasp_data.gz for subsequent</span>
+<span class="c1"># reuse.</span>
 
 <span class="n">pmg</span> <span class="n">analyze</span> <span class="o">.</span>
 
-<span class="c1">#Plot the dos from the vasprun.xml file.</span>
+<span class="c1"># Plot the dos from the vasprun.xml file.</span>
 
 <span class="n">pmg</span> <span class="n">plotdos</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">xml</span>
 
-<span class="c1">#Convert between file formats. The script attempts to intelligently</span>
-<span class="c1">#determine the file type. Input file types supported include CIF,</span>
-<span class="c1">#vasprun.xml, POSCAR, CSSR. You can force the script to assume certain file</span>
-<span class="c1">#types by specifying additional arguments. See pmg convert -h.</span>
+<span class="c1"># Convert between file formats. The script attempts to intelligently</span>
+<span class="c1"># determine the file type. Input file types supported include CIF,</span>
+<span class="c1"># vasprun.xml, POSCAR, CSSR. You can force the script to assume certain file</span>
+<span class="c1"># types by specifying additional arguments. See pmg convert -h.</span>
 
 <span class="n">pmg</span> <span class="n">convert</span> <span class="n">input_filename</span> <span class="n">output_filename</span><span class="o">.</span>
 
-<span class="c1">#Obtain spacegroup information.</span>
+<span class="c1"># Obtain spacegroup information.</span>
 
 <span class="n">pmg</span> <span class="n">symm</span> <span class="o">-</span><span class="n">s</span> <span class="n">filename1</span> <span class="n">filename2</span>
 
-<span class="c1">#Visualize a structure. Requires VTK to be installed.</span>
+<span class="c1"># Visualize a structure. Requires VTK to be installed.</span>
 
 <span class="n">pmg</span> <span class="n">view</span> <span class="n">filename</span>
 
-<span class="c1">#Compare two structures for similarity</span>
+<span class="c1"># Compare two structures for similarity</span>
 
 <span class="n">pmg</span> <span class="n">compare</span> <span class="n">filename1</span> <span class="n">filename2</span>
 
-<span class="c1">#Generate a POTCAR with symbols Li_sv O and the PBE functional</span>
+<span class="c1"># Generate a POTCAR with symbols Li_sv O and the PBE functional</span>
 
 <span class="n">pmg</span> <span class="n">generate</span> <span class="o">--</span><span class="n">potcar</span> <span class="n">Li_sv</span> <span class="n">O</span> <span class="o">--</span><span class="n">functional</span> <span class="n">PBE</span>
 </pre></div>
@@ -587,8 +587,8 @@ follows:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="about-the-pymatgen-development-team">
-<h1>About the Pymatgen Development Team<a class="headerlink" href="#about-the-pymatgen-development-team" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about-the-team">
+<h1>About the Team<a class="headerlink" href="#about-the-team" title="Permalink to this headline">¶</a></h1>
 <p>Shyue Ping Ong of the <a class="reference external" href="http://www.materialsvirtuallab.org">Materials Virtual Lab</a> started Pymatgen in 2011, and is
 still the project lead.</p>
 <p>The Pymatgen Development Team is the set of all contributors to the
@@ -638,12 +638,12 @@ to indicate the copyright and license terms:</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#getting-pymatgen">Getting pymatgen</a><ul>
-<li><a class="reference internal" href="#conda-install-recommended">Conda install (recommended)</a></li>
-<li><a class="reference internal" href="#standard-install">Standard install</a></li>
+<li><a class="reference internal" href="#conda-recommended">Conda (recommended)</a></li>
+<li><a class="reference internal" href="#pip">Pip</a></li>
 <li><a class="reference internal" href="#shared-cluster-installation">Shared cluster installation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#using-pymatgen">Using pymatgen</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
 <li><a class="reference internal" href="#quick-start">Quick start</a></li>
 <li><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li><a class="reference internal" href="#more-resources">More resources</a></li>
@@ -658,7 +658,7 @@ to indicate the copyright and license terms:</p>
 </li>
 <li><a class="reference internal" href="#how-to-cite-pymatgen">How to cite pymatgen</a></li>
 <li><a class="reference internal" href="#license">License</a></li>
-<li><a class="reference internal" href="#about-the-pymatgen-development-team">About the Pymatgen Development Team</a></li>
+<li><a class="reference internal" href="#about-the-team">About the Team</a></li>
 <li><a class="reference internal" href="#copyright-policy">Copyright Policy</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>

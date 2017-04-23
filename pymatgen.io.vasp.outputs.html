@@ -491,7 +491,7 @@ arguments.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>patterns</strong> (<em>dict</em>) &#8211; A dict of patterns, e.g.,
-{&#8220;energy&#8221;: &#8220;energy(sigma-&gt;0)s+=s+([d-.]+)&#8221;}.</li>
+{&#8220;energy&#8221;: r&#8221;energy(sigma-&gt;0)s+=s+([d-.]+)&#8221;}.</li>
 <li><strong>reverse</strong> (<em>bool</em>) &#8211; Read files in reverse. Defaults to false. Useful for
 large files, esp OUTCARs, especially when used with
 terminate_on_match.</li>
@@ -507,7 +507,7 @@ matches. Defaults to str, i.e., no change.</li>
 <dl class="docutils">
 <dt>Renders accessible:</dt>
 <dd>Any attribute in patterns. For example,
-{&#8220;energy&#8221;: &#8220;energy(sigma-&gt;0)s+=s+([d-.]+)&#8221;} will set the
+{&#8220;energy&#8221;: r&#8221;energy(sigma-&gt;0)s+=s+([d-.]+)&#8221;} will set the
 value of self.data[&#8220;energy&#8221;] = [[-1234], [-3453], ...], to the
 results from regex and postprocess. Note that the returned values
 are lists of lists, because you can grep multiple items on one line.</dd>
