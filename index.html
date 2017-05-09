@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &#8212; pymatgen 4.7.4 documentation</title>
+    <title>Introduction &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -50,7 +50,7 @@
         <li class="right" >
           <a href="installation.html" title="Requirements"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pymatgen 4.7.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pymatgen 4.7.5 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -123,21 +123,18 @@ of unittests. The coverage of the unittests can be seen at <a class="reference e
 <li><strong>It is well documented.</strong> A fairly comprehensive documentation has been
 written to help you get to grips with it quickly.</li>
 <li><strong>It is open.</strong> You are free to use and contribute to pymatgen. It also means
-that pymatgen is continuously being improved. We have a policy of
-attributing any code you contribute to any publication you choose.
-Contributing to pymatgen means your research becomes more visible, which
-translates to greater impact.</li>
+that pymatgen is continuously being improved. We will attribute any code you
+contribute to any publication you specify. Contributing to pymatgen means
+your research becomes more visible, which translates to greater impact.</li>
 <li><strong>It is fast.</strong> Many of the core numerical methods in pymatgen have been
-optimized by vectorizing in numpy. This means that coordinate
+optimized by vectorizing in numpy/scipy. This means that coordinate
 manipulations are extremely fast and are in fact comparable to codes
 written in other languages. Pymatgen also comes with a complete system for
 handling periodic boundary conditions.</li>
 <li><strong>It will be around.</strong> Pymatgen is not a pet research project. It is used in
 the well-established Materials Project. It is also actively being developed
-and maintained by the Materials Virtual Lab, the ABINIT group and many other
-research groups. The plan is to make sure pymatgen will stand the test of
-time and be the de facto analysis code for most materials and structural
-analysis.</li>
+and maintained by the <a class="reference external" href="http://www.materialsvirtuallab.org">Materials Virtual Lab</a>, the ABINIT group and many
+other research groups.</li>
 </ol>
 <p>With effect from version 3.0, pymatgen now supports both Python 2.7 as well
 as Python 3.x. For developers working to add new features to pymatgen, this
@@ -147,12 +144,11 @@ compatible. Our approach is to have a single codebase support Python 2.7 and
 </div>
 <div class="section" id="change-log">
 <h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="v4-7-4">
-<h2>v4.7.4<a class="headerlink" href="#v4-7-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="v4-7-5">
+<h2>v4.7.5<a class="headerlink" href="#v4-7-5" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>New ferroelectric analysis module (Tess).</li>
-<li>Magmom support and MagSymmOp (Matthew Horton).</li>
-<li>Improved CIF Parsing.</li>
+<li>MultiXYZ support (Xiaohui Xu)</li>
+<li>Misc bug fixes and cleanup.</li>
 </ul>
 <p><a class="reference internal" href="change_log.html"><span class="doc">Older versions</span></a></p>
 </div>
@@ -181,9 +177,9 @@ pymatgen can be installed from the <a class="reference external" href="https://a
 <p>Before installing pymatgen, you may need to first install a few critical
 dependencies manually.</p>
 <ol class="last arabic simple">
-<li>It is highly recommended that you use Python&gt;=2.7.9 or &gt;=3.5+. In
+<li>It is highly recommended that you use Python&gt;=2.7.9 or latest 3.x. In
 fact, unless you are very sure you have dependencies that require Python
-2, it is highly recommended that you use Python &gt;=3.5+.</li>
+2, it is highly recommended that you use latest Python 3.x.</li>
 <li>Installation has been tested to be most successful with gcc. Use gcc
 where possible and do &#8220;export CC=gcc&#8221; prior to installation.</li>
 <li>Numpy&#8217;s distutils is needed to compile the spglib and pyhull
@@ -634,7 +630,7 @@ to indicate the copyright and license terms:</p>
 <li><a class="reference internal" href="#matgenie-examples">Matgenie &amp; Examples</a></li>
 <li><a class="reference internal" href="#why-use-pymatgen">Why use pymatgen?</a></li>
 <li><a class="reference internal" href="#change-log">Change log</a><ul>
-<li><a class="reference internal" href="#v4-7-4">v4.7.4</a></li>
+<li><a class="reference internal" href="#v4-7-5">v4.7.5</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#getting-pymatgen">Getting pymatgen</a><ul>
@@ -699,7 +695,7 @@ to indicate the copyright and license terms:</p>
         <li class="right" >
           <a href="installation.html" title="Requirements"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pymatgen 4.7.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pymatgen 4.7.5 documentation</a> &#187;</li> 
       </ul>
     </div>
 

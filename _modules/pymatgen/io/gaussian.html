@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.gaussian &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.io.gaussian &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -305,7 +305,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">sp_str</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="n">sp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;\d&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sp_str</span><span class="p">)</span>
+                <span class="n">sp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\d&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sp_str</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
 
         <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_species</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span> <span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="n">species</span><span class="p">]</span>
@@ -440,8 +440,9 @@
         <span class="n">outs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">to_s</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%0.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mol</span><span class="p">):</span>
-            <span class="n">outs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">site</span><span class="o">.</span><span class="n">species_string</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">to_s</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">site</span><span class="o">.</span><span class="n">coords</span><span class="p">])]))</span>
-        <span class="k">return</span>  <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outs</span><span class="p">)</span></div>
+            <span class="n">outs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">site</span><span class="o">.</span><span class="n">species_string</span><span class="p">,</span>
+                                  <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">to_s</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">site</span><span class="o">.</span><span class="n">coords</span><span class="p">])]))</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outs</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span>
@@ -520,7 +521,6 @@
                              <span class="n">spin_multiplicity</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;spin_multiplicity&quot;</span><span class="p">],</span>
                              <span class="n">input_parameters</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;input_parameters&quot;</span><span class="p">],</span>
                              <span class="n">link0_parameters</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;link0_parameters&quot;</span><span class="p">])</span></div></div>
-
 
 
 <div class="viewcode-block" id="GaussianOutput"><a class="viewcode-back" href="../../../pymatgen.io.gaussian.html#pymatgen.io.gaussian.GaussianOutput">[docs]</a><span class="k">class</span> <span class="nc">GaussianOutput</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -728,14 +728,14 @@
         <span class="n">mulliken_charge_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
             <span class="sa">r</span><span class="s1">&#39;^\s+(\d+)\s+([A-Z][a-z]?)\s*(\S*)&#39;</span><span class="p">)</span>
         <span class="n">end_mulliken_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s1">&#39;(Sum of Mulliken )(.*)(charges)\s*=\s*(\D)&#39;</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s1">&#39;(Sum of Mulliken )(.*)(charges)\s*=\s*(\D)&#39;</span><span class="p">)</span>
         <span class="n">std_orientation_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Standard orientation&quot;</span><span class="p">)</span>
         <span class="n">end_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;--+&quot;</span><span class="p">)</span>
         <span class="n">orbital_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(Alpha|Beta)\s*\S+\s*eigenvalues --(.*)&quot;</span><span class="p">)</span>
         <span class="n">thermo_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(Zero-point|Thermal) correction(.*)=&quot;</span>
                                  <span class="sa">r</span><span class="s2">&quot;\s+([\d\.-]+)&quot;</span><span class="p">)</span>
         <span class="n">forces_on_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="s2">&quot;Center\s+Atomic\s+Forces\s+\(Hartrees/Bohr\)&quot;</span><span class="p">)</span>
+            <span class="sa">r</span><span class="s2">&quot;Center\s+Atomic\s+Forces\s+\(Hartrees/Bohr\)&quot;</span><span class="p">)</span>
         <span class="n">forces_off_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Cartesian\s+Forces:\s+Max.*RMS.*&quot;</span><span class="p">)</span>
         <span class="n">forces_patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
             <span class="sa">r</span><span class="s2">&quot;\s+(\d+)\s+(\d+)\s+([0-9\.-]+)\s+([0-9\.-]+)\s+([0-9\.-]+)&quot;</span><span class="p">)</span>
@@ -1228,7 +1228,7 @@
             <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;energies&quot;</span><span class="p">]))</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;points&quot;</span><span class="p">)</span>
 
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy   /   eV&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy (eV)&quot;</span><span class="p">)</span>
 
         <span class="n">e_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;energies&quot;</span><span class="p">])</span>
         <span class="n">y</span> <span class="o">=</span> <span class="p">[(</span><span class="n">e</span> <span class="o">-</span> <span class="n">e_min</span><span class="p">)</span> <span class="o">*</span> <span class="n">HARTREE_TO_ELECTRON_VOLT</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;energies&quot;</span><span class="p">]]</span>
@@ -1322,7 +1322,7 @@
                    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;transitions&quot;</span><span class="p">,</span>
                    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$ (nm)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">lambda$ (nm)&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Arbitrary unit&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -1425,7 +1425,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

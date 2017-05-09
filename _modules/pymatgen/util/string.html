@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.util.string &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.util.string &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -137,7 +137,7 @@
 <div class="viewcode-block" id="latexify_spacegroup"><a class="viewcode-back" href="../../../pymatgen.util.string.html#pymatgen.util.string.latexify_spacegroup">[docs]</a><span class="k">def</span> <span class="nf">latexify_spacegroup</span><span class="p">(</span><span class="n">spacegroup_symbol</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a latex formatted spacegroup. E.g., P2_1/c is converted to</span>
-<span class="sd">    P2$_{1}$/c and P-1 is converted to P$\overline{1}$.</span>
+<span class="sd">    P2$_{1}$/c and P-1 is converted to P$\\overline{1}$.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        spacegroup_symbol (str): A spacegroup symbol</span>
@@ -146,7 +146,7 @@
 <span class="sd">        A latex formatted spacegroup with proper subscripts and overlines.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sym</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;_(\d+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$_{\1}$&quot;</span><span class="p">,</span> <span class="n">spacegroup_symbol</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;-(\d)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\overline{\1}$&quot;</span><span class="p">,</span> <span class="n">sym</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;-(\d)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">overline{\1}$&quot;</span><span class="p">,</span> <span class="n">sym</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="stream_has_colours"><a class="viewcode-back" href="../../../pymatgen.util.string.html#pymatgen.util.string.stream_has_colours">[docs]</a><span class="k">def</span> <span class="nf">stream_has_colours</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
@@ -223,7 +223,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

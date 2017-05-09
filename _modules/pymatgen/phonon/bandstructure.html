@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.phonon.bandstructure &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.phonon.bandstructure &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -68,7 +68,7 @@
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="k">import</span> <span class="n">Structure</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.lattice</span> <span class="k">import</span> <span class="n">Lattice</span>
 <span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.bandstructure</span> <span class="k">import</span> <span class="n">Kpoint</span>
-<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span><span class="p">,</span> <span class="n">MontyDecoder</span><span class="p">,</span> <span class="n">MontyEncoder</span>
+<span class="kn">from</span> <span class="nn">monty.json</span> <span class="k">import</span> <span class="n">MSONable</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module provides classes to define a phonon band structure.</span>
@@ -83,8 +83,9 @@
 <span class="sd">    non-analytical contribution may be taken into account.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qpoints</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">lattice</span><span class="p">,</span> <span class="n">nac_frequencies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eigendisplacements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">nac_eigendisplacements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qpoints</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">lattice</span><span class="p">,</span> <span class="n">nac_frequencies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">eigendisplacements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nac_eigendisplacements</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">labels_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">structure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
@@ -290,7 +291,7 @@
 <div class="viewcode-block" id="PhononBandStructureSymmLine"><a class="viewcode-back" href="../../../pymatgen.phonon.bandstructure.html#pymatgen.phonon.bandstructure.PhononBandStructureSymmLine">[docs]</a><span class="k">class</span> <span class="nc">PhononBandStructureSymmLine</span><span class="p">(</span><span class="n">PhononBandStructure</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This object stores phonon band structures along selected (symmetry) lines in the</span>
-<span class="sd">    Brillouin zone. We call the different symmetry lines (ex: \Gamma to Z)</span>
+<span class="sd">    Brillouin zone. We call the different symmetry lines (ex: \\Gamma to Z)</span>
 <span class="sd">    &quot;branches&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -422,7 +423,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A list of dictionaries [{&quot;name&quot;,&quot;start_index&quot;,&quot;end_index&quot;,&quot;index&quot;}]</span>
 <span class="sd">            indicating all branches in which the qpoint is. It takes into</span>
-<span class="sd">            account the fact that one qpoint (e.g., \Gamma) can be in several</span>
+<span class="sd">            account the fact that one qpoint (e.g., \\Gamma) can be in several</span>
 <span class="sd">            branches</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">to_return</span> <span class="o">=</span> <span class="p">[]</span>
@@ -481,7 +482,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.io.vasp.outputs &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -142,7 +142,7 @@
 <span class="sd">        val_type: Value type parsed from vasprun.xml.</span>
 <span class="sd">        val: Actual string value parsed for vasprun.xml.</span>
 <span class="sd">        filename: Fullpath of vasprun.xml. Used for robust error handling.</span>
-<span class="sd">            E.g., if vasprun.xml contains \*\*\* for some Incar parameters,</span>
+<span class="sd">            E.g., if vasprun.xml contains \\*\\*\\* for some Incar parameters,</span>
 <span class="sd">            the code will try to read from an INCAR file present in the same</span>
 <span class="sd">            directory.</span>
 <span class="sd">        param_name: Name of parameter.</span>
@@ -1537,7 +1537,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            patterns (dict): A dict of patterns, e.g.,</span>
-<span class="sd">                {&quot;energy&quot;: r&quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;}.</span>
+<span class="sd">                {&quot;energy&quot;: r&quot;energy\\(sigma-&gt;0\\)\\s+=\\s+([\\d\\-.]+)&quot;}.</span>
 <span class="sd">            reverse (bool): Read files in reverse. Defaults to false. Useful for</span>
 <span class="sd">                large files, esp OUTCARs, especially when used with</span>
 <span class="sd">                terminate_on_match.</span>
@@ -1548,7 +1548,7 @@
 
 <span class="sd">        Renders accessible:</span>
 <span class="sd">            Any attribute in patterns. For example,</span>
-<span class="sd">            {&quot;energy&quot;: r&quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;} will set the</span>
+<span class="sd">            {&quot;energy&quot;: r&quot;energy\\(sigma-&gt;0\\)\\s+=\\s+([\\d\\-.]+)&quot;} will set the</span>
 <span class="sd">            value of self.data[&quot;energy&quot;] = [[-1234], [-3453], ...], to the</span>
 <span class="sd">            results from regex and postprocess. Note that the returned values</span>
 <span class="sd">            are lists of lists, because you can grep multiple items on one line.</span>
@@ -1650,11 +1650,10 @@
                 <span class="k">if</span> <span class="n">component</span> <span class="o">==</span> <span class="s2">&quot;IMAGINARY&quot;</span><span class="p">:</span>
                     <span class="n">freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">toks</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
                 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">yz</span><span class="p">,</span> <span class="n">xz</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">toks</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
-                <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">xx</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">yz</span><span class="p">],</span> <span class="p">[</span><span class="n">xy</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">yz</span><span class="p">],</span> <span class="p">[</span><span class="n">xz</span><span class="p">,</span> <span class="n">yz</span><span class="p">,</span> <span class="n">zz</span><span class="p">]]</span>
+                <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">xx</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">xz</span><span class="p">],</span> <span class="p">[</span><span class="n">xy</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">yz</span><span class="p">],</span> <span class="p">[</span><span class="n">xz</span><span class="p">,</span> <span class="n">yz</span><span class="p">,</span> <span class="n">zz</span><span class="p">]]</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">component</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*\-+\s*&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*-+\s*&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-
             <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">component</span> <span class="o">=</span> <span class="s2">&quot;REAL&quot;</span>
             <span class="k">elif</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -1732,7 +1731,7 @@
         <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;TOTAL ELASTIC MODULI \(kBar\)\s+&quot;</span>\
                          <span class="sa">r</span><span class="s2">&quot;Direction\s+([X-Z][X-Z]\s+)+&quot;</span>\
                          <span class="sa">r</span><span class="s2">&quot;\-+&quot;</span>
-        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[X-Z][X-Z]\s+&quot;</span><span class="o">+</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;(\-*[\.\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[X-Z][X-Z]\s+&quot;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;(\-*[\.\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span>
         <span class="n">footer_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\-+&quot;</span>
         <span class="n">et_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span>
                                            <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -1744,7 +1743,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">header_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;PIEZOELECTRIC TENSOR  for field in x, y, &quot;</span> \
                          <span class="sa">r</span><span class="s2">&quot;z\s+\(C/m\^2\)\s+([X-Z][X-Z]\s+)+\-+&quot;</span>
-        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[x-z]\s+&quot;</span><span class="o">+</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;(\-*[\.\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="n">row_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[x-z]\s+&quot;</span><span class="o">+</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;(\-*[\.\d]+)&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span>
         <span class="n">footer_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;BORN EFFECTIVE&quot;</span>
         <span class="n">pt_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_table_pattern</span><span class="p">(</span><span class="n">header_pattern</span><span class="p">,</span> <span class="n">row_pattern</span><span class="p">,</span>
                                            <span class="n">footer_pattern</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -2193,8 +2192,8 @@
                 <span class="n">results</span><span class="o">.</span><span class="n">zvals</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;-?\d+\.\d*&#39;</span><span class="p">,</span> <span class="n">zvals</span><span class="p">))</span>
 
             <span class="n">search</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;^.*POSCAR.*=(.*)&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">poscar_line</span><span class="p">])</span>
-            <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;^\s+ZVAL.*=(.*)&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zvals</span><span class="p">])</span>
+            <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;^.*POSCAR.*=(.*)&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">poscar_line</span><span class="p">])</span>
+            <span class="n">search</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;^\s+ZVAL.*=(.*)&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zvals</span><span class="p">])</span>
 
             <span class="n">micro_pyawk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">search</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
@@ -2208,7 +2207,6 @@
             <span class="k">del</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zvals</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;ZVAL dict could not be parsed.&quot;</span><span class="p">)</span></div>
-
 
 <div class="viewcode-block" id="Outcar.read_core_state_eigen"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.outputs.html#pymatgen.io.vasp.outputs.Outcar.read_core_state_eigen">[docs]</a>    <span class="k">def</span> <span class="nf">read_core_state_eigen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3458,7 +3456,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

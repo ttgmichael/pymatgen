@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.elastic module &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.analysis.elasticity.elastic module &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.5 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -176,7 +176,7 @@ strain in voigt notation</p>
 
 <dl class="classmethod">
 <dt id="pymatgen.analysis.elasticity.elastic.ElasticTensor.from_stress_dict">
-<em class="property">classmethod </em><code class="descname">from_stress_dict</code><span class="sig-paren">(</span><em>stress_dict</em>, <em>tol=0.1</em>, <em>vasp=True</em>, <em>symmetry=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/elastic.html#ElasticTensor.from_stress_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.elastic.ElasticTensor.from_stress_dict" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_stress_dict</code><span class="sig-paren">(</span><em>stress_dict</em>, <em>vasp=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/elastic.html#ElasticTensor.from_stress_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.elastic.ElasticTensor.from_stress_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs the elastic tensor from IndependentStrain-Stress dictionary
 corresponding to legacy behavior of elasticity package.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -186,11 +186,8 @@ corresponding to legacy behavior of elasticity package.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>stress_dict</strong> (<em>dict</em>) &#8211; dictionary of stresses indexed by corresponding
 IndependentStrain objects.</li>
-<li><strong>tol</strong> (<em>float</em>) &#8211; tolerance for zeroing small values of the tensor</li>
 <li><strong>vasp</strong> (<em>boolean</em>) &#8211; flag for whether the stress tensor should be
 converted based on vasp units/convention for stress</li>
-<li><strong>symmetry</strong> (<em>boolean</em>) &#8211; flag for whether or not the elastic tensor
-should fit from data based on symmetry</li>
 </ul>
 </td>
 </tr>
@@ -472,7 +469,7 @@ equilibrium strain (i. e. &#8220;0&#8221; strain state).
 If not specified, function will try to find
 the state in the list of provided stresses
 and strains.  If not found, defaults to 0.</li>
-<li><strong>zero_crit</strong> (<em>float</em>) &#8211; value for which strains below
+<li><strong>tol</strong> (<em>float</em>) &#8211; value for which strains below
 are ignored in identifying strain states.</li>
 </ul>
 </td>
@@ -682,7 +679,7 @@ of numpy vectorization</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.5 documentation</a> &#187;</li> 
       </ul>
     </div>
 

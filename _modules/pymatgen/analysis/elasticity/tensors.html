@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.tensors &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.analysis.elasticity.tensors &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -93,6 +93,7 @@
 <span class="n">reverse_voigt_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
                               <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
                               <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
 
 <div class="viewcode-block" id="Tensor"><a class="viewcode-back" href="../../../../pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor">[docs]</a><span class="k">class</span> <span class="nc">Tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -158,9 +159,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tostring</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                               <span class="bp">cls</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
 
 <div class="viewcode-block" id="Tensor.zeroed"><a class="viewcode-back" href="../../../../pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.zeroed">[docs]</a>    <span class="k">def</span> <span class="nf">zeroed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -254,6 +255,7 @@
 <span class="sd">        tolerance</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
+<span class="sd">            structure (Structure): structure to be fit to</span>
 <span class="sd">            tol (float): tolerance for symmetry testing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_to_structure</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span></div>
@@ -264,9 +266,9 @@
 <span class="sd">        Returns the tensor in Voigt notation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">v_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vscale</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="n">voigt_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_voigt_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">voigt_map</span><span class="p">:</span>
-            <span class="n">v_matrix</span><span class="p">[</span><span class="n">voigt_map</span><span class="p">[</span><span class="n">ind</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+        <span class="n">this_voigt_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_voigt_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">this_voigt_map</span><span class="p">:</span>
+            <span class="n">v_matrix</span><span class="p">[</span><span class="n">this_voigt_map</span><span class="p">[</span><span class="n">ind</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_voigt_symmetric</span><span class="p">():</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Tensor is not symmetric, information may &quot;</span>
                           <span class="s2">&quot;be lost in voigt conversion.&quot;</span><span class="p">)</span>
@@ -297,7 +299,7 @@
 <span class="sd">        in a voigt representation based on input rank</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            Rank (int): Tensor rank to generate the voigt map</span>
+<span class="sd">            rank (int): Tensor rank to generate the voigt map</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">vdict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="o">*</span> <span class="n">rank</span><span class="p">):</span>
@@ -322,9 +324,9 @@
         <span class="k">if</span> <span class="n">voigt_input</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">t</span><span class="o">.</span><span class="n">_vscale</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid shape for voigt matrix&quot;</span><span class="p">)</span>
         <span class="n">voigt_input</span> <span class="o">=</span> <span class="n">voigt_input</span> <span class="o">/</span> <span class="n">t</span><span class="o">.</span><span class="n">_vscale</span>
-        <span class="n">voigt_map</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get_voigt_dict</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">voigt_map</span><span class="p">:</span>
-            <span class="n">t</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">voigt_input</span><span class="p">[</span><span class="n">voigt_map</span><span class="p">[</span><span class="n">ind</span><span class="p">]]</span>
+        <span class="n">this_voigt_map</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get_voigt_dict</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">this_voigt_map</span><span class="p">:</span>
+            <span class="n">t</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">voigt_input</span><span class="p">[</span><span class="n">this_voigt_map</span><span class="p">[</span><span class="n">ind</span><span class="p">]]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">t</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Tensor.convert_to_ieee"><a class="viewcode-back" href="../../../../pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.Tensor.convert_to_ieee">[docs]</a>    <span class="k">def</span> <span class="nf">convert_to_ieee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">):</span>
@@ -338,12 +340,12 @@
 <span class="sd">                tensor to be converted to the IEEE standard</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">get_uvec</span><span class="p">(</span><span class="n">vec</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">get_uvec</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot; Gets a unit vector parallel to input vector&quot;&quot;&quot;</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">vec</span>
-            <span class="k">return</span> <span class="n">vec</span> <span class="o">/</span> <span class="n">l</span>
+                <span class="k">return</span> <span class="n">v</span>
+            <span class="k">return</span> <span class="n">v</span> <span class="o">/</span> <span class="n">l</span>
 
         <span class="c1"># Check conventional setting:</span>
         <span class="n">sga</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
@@ -413,7 +415,7 @@
 <span class="sd">    A sequence of tensors that can be used for fitting data</span>
 <span class="sd">    or for having a tensor expansion</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensor_list</span><span class="p">,</span> <span class="n">base_class</span> <span class="o">=</span> <span class="n">Tensor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensor_list</span><span class="p">,</span> <span class="n">base_class</span><span class="o">=</span><span class="n">Tensor</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">base_class</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">base_class</span><span class="p">)</span>
                         <span class="k">else</span> <span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tensor_list</span><span class="p">]</span>
 
@@ -519,12 +521,14 @@
 <span class="sd">            tol (float): tolerance to both tests of whether the</span>
 <span class="sd">                the determinant is one and the inverse is equal</span>
 <span class="sd">                to the transpose</span>
+<span class="sd">            include_improper (bool): whether to include improper</span>
+<span class="sd">                rotations in the determination of validity</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">det</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">include_improper</span><span class="p">:</span>
             <span class="n">det</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">det</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inv</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> \
-               <span class="ow">and</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">det</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span></div>
+            <span class="ow">and</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">det</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SquareTensor.get_scaled"><a class="viewcode-back" href="../../../../pymatgen.analysis.elasticity.tensors.html#pymatgen.analysis.elasticity.tensors.SquareTensor.get_scaled">[docs]</a>    <span class="k">def</span> <span class="nf">get_scaled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -614,7 +618,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.diffusion_analyzer &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.analysis.diffusion_analyzer &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -514,7 +514,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">msd_components</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Overall&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Timestep (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;MSD ($\AA^2$)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;MSD ($</span><span class="se">\\</span><span class="s2">AA^2$)&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">plt</span></div>
 
@@ -582,7 +582,7 @@
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
 <span class="sd">                initial structure from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
-<span class="sd">            \*\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
+<span class="sd">            \\*\\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
 <span class="sd">                Examples include smoothed, min_obs, avg_nsteps.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -639,7 +639,7 @@
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
 <span class="sd">                initial stricture from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
-<span class="sd">            \*\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
+<span class="sd">            \\*\\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
 <span class="sd">                Examples include smoothed, min_obs, avg_nsteps.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -707,7 +707,7 @@
 <span class="sd">                typically need to supply both variables. This stipulates the</span>
 <span class="sd">                initial structure from which the current set of displacements</span>
 <span class="sd">                are computed.</span>
-<span class="sd">            \*\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
+<span class="sd">            \\*\\*kwargs: kwargs supported by the :class:`DiffusionAnalyzer`_. </span>
 <span class="sd">                Examples include smoothed, min_obs, avg_nsteps.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ncores</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">filepaths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -875,7 +875,7 @@
 <span class="sd">            from DiffusionAnalyzer.diffusivity).</span>
 <span class="sd">        diffusivity_errors ([float]): A sequence of errors for the</span>
 <span class="sd">            diffusivities. If None, no error bar is plotted.</span>
-<span class="sd">        \*\*kwargs:</span>
+<span class="sd">        \\*\\*kwargs:</span>
 <span class="sd">            Any keyword args supported by matplotlib.pyplot.plot.</span>
 
 <span class="sd">    Returns:</span>
@@ -935,7 +935,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

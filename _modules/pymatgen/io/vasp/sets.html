@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.sets &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.io.vasp.sets &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -516,9 +516,14 @@
 <span class="sd">                we usually set the reciprocal density by voluyme. This is a</span>
 <span class="sd">                convenience arg to change that, rather than using</span>
 <span class="sd">                user_kpoints_settings. Defaults to 100.</span>
-<span class="sd">            \*\*kwargs: kwargs supported by MPRelaxSet.</span>
+<span class="sd">            \\*\\*kwargs: kwargs supported by MPRelaxSet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MPStaticSet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prev_incar</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">prev_incar</span> <span class="o">=</span> <span class="n">Incar</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">prev_incar</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prev_kpoints</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">prev_kpoints</span> <span class="o">=</span> <span class="n">Kpoints</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">prev_kpoints</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">prev_incar</span> <span class="o">=</span> <span class="n">prev_incar</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prev_kpoints</span> <span class="o">=</span> <span class="n">prev_kpoints</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reciprocal_density</span> <span class="o">=</span> <span class="n">reciprocal_density</span>
@@ -614,7 +619,7 @@
 <span class="sd">            small_gap_multiply ([float, float]): If the gap is less than</span>
 <span class="sd">                1st index, multiply the default reciprocal_density by the 2nd</span>
 <span class="sd">                index.</span>
-<span class="sd">            \*\*kwargs: All kwargs supported by MPStaticSet,</span>
+<span class="sd">            \\*\\*kwargs: All kwargs supported by MPStaticSet,</span>
 <span class="sd">                other than prev_incar and prev_structure and prev_kpoints which</span>
 <span class="sd">                are determined from the prev_calc_dir.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -738,7 +743,7 @@
 <span class="sd">            mode (str): Either &quot;uniform&quot;, &quot;gap&quot; or &quot;line&quot;</span>
 <span class="sd">            reciprocal_density (int): density of k-mesh</span>
 <span class="sd">            copy_chgcar (bool): whether to copy CHGCAR of previous run</span>
-<span class="sd">            \*\*kwargs: All kwargs supported by MPHSEBSStaticSet,</span>
+<span class="sd">            \\*\\*kwargs: All kwargs supported by MPHSEBSStaticSet,</span>
 <span class="sd">                other than prev_structure which is determined from the previous</span>
 <span class="sd">                calc dir.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -750,8 +755,9 @@
                                                      <span class="n">sym_prec</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="n">added_kpoints</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">bs</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">()</span>
+
         <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;gap&quot;</span><span class="p">:</span>
+            <span class="n">bs</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">()</span>
             <span class="n">vbm</span><span class="p">,</span> <span class="n">cbm</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_vbm</span><span class="p">()[</span><span class="s2">&quot;kpoint&quot;</span><span class="p">],</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_cbm</span><span class="p">()[</span><span class="s2">&quot;kpoint&quot;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">vbm</span><span class="p">:</span>
                 <span class="n">added_kpoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vbm</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">)</span>
@@ -781,7 +787,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            structure (Structure): Structure to compute</span>
-<span class="sd">            prev_incar (Incar): Incar file from previous run.</span>
+<span class="sd">            prev_incar (Incar/string): Incar file from previous run.</span>
 <span class="sd">            mode (str): Line or Uniform mode supported.</span>
 <span class="sd">            nedos (int): nedos parameter. Default to 601.</span>
 <span class="sd">            reciprocal_density (int): density of k-mesh by reciprocal</span>
@@ -789,9 +795,11 @@
 <span class="sd">            sym_prec (float): Symmetry precision (for Uniform mode).</span>
 <span class="sd">            kpoints_line_density (int): Line density for Line mode.</span>
 <span class="sd">            optics (bool): whether to add dielectric function</span>
-<span class="sd">            \*\*kwargs: kwargs supported by MPVaspInputSet.</span>
+<span class="sd">            \\*\\*kwargs: kwargs supported by MPVaspInputSet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MPNonSCFSet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prev_incar</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">prev_incar</span> <span class="o">=</span> <span class="n">Incar</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">prev_incar</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prev_incar</span> <span class="o">=</span> <span class="n">prev_incar</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nedos</span> <span class="o">=</span> <span class="n">nedos</span>
@@ -894,7 +902,7 @@
 <span class="sd">            small_gap_multiply ([float, float]): If the gap is less than</span>
 <span class="sd">                1st index, multiply the default reciprocal_density by the 2nd</span>
 <span class="sd">                index.</span>
-<span class="sd">            \*\*kwargs: All kwargs supported by MPNonSCFSet,</span>
+<span class="sd">            \\*\\*kwargs: All kwargs supported by MPNonSCFSet,</span>
 <span class="sd">                other than structure, prev_incar and prev_chgcar which</span>
 <span class="sd">                are determined from the prev_calc_dir.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -951,7 +959,7 @@
 <span class="sd">            prev_incar (Incar): Incar file from previous run.</span>
 <span class="sd">            reciprocal_density (int): density of k-mesh by reciprocal</span>
 <span class="sd">                                    volume (defaults to 100)</span>
-<span class="sd">            \*\*kwargs: kwargs supported by MPVaspInputSet.</span>
+<span class="sd">            \\*\\*kwargs: kwargs supported by MPVaspInputSet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;magmom&quot;</span><span class="p">)</span> <span class="ow">and</span> \
                 <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">magmom</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1005,7 +1013,7 @@
 <span class="sd">            small_gap_multiply ([float, float]): If the gap is less than</span>
 <span class="sd">                1st index, multiply the default reciprocal_density by the 2nd</span>
 <span class="sd">                index.</span>
-<span class="sd">            \*\*kwargs: All kwargs supported by MPSOCSet,</span>
+<span class="sd">            \\*\\*kwargs: All kwargs supported by MPSOCSet,</span>
 <span class="sd">                other than structure, prev_incar and prev_chgcar which</span>
 <span class="sd">                are determined from the prev_calc_dir.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1149,7 +1157,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        unset_encut (bool): Whether to unset ENCUT.</span>
-<span class="sd">        \*\*kwargs: Other kwargs supported by :class:`DictSet`.</span>
+<span class="sd">        \\*\\*kwargs: Other kwargs supported by :class:`DictSet`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structures</span><span class="p">,</span> <span class="n">unset_encut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1258,7 +1266,7 @@
 <span class="sd">            The ISPIN parameter. Defaults to False.</span>
 <span class="sd">        sort_structure (bool): Whether to sort structure. Defaults to False</span>
 <span class="sd">            (different behavior from standard input sets).</span>
-<span class="sd">        \*\*kwargs: Other kwargs supported by :class:`DictSet`.</span>
+<span class="sd">        \\*\\*kwargs: Other kwargs supported by :class:`DictSet`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">start_temp</span><span class="p">,</span> <span class="n">end_temp</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
@@ -1407,7 +1415,7 @@
 <span class="sd">            Defaults to False.</span>
 <span class="sd">        include_cif (bool): Whether to output a CIF as well. CIF files are</span>
 <span class="sd">            generally better supported in visualization programs.</span>
-<span class="sd">        \*\*kwargs: Additional kwargs are passed to the vasp_input_set class in</span>
+<span class="sd">        \\*\\*kwargs: Additional kwargs are passed to the vasp_input_set class in</span>
 <span class="sd">            addition to structure.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">structures</span><span class="p">):</span>
@@ -1452,7 +1460,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

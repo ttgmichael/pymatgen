@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.structure_analyzer &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.analysis.structure_analyzer &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -62,6 +62,10 @@
 <span class="c1"># Distributed under the terms of the MIT License.</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module provides classes to perform topological analyses of structures.</span>
@@ -87,7 +91,7 @@
 <span class="kn">from</span> <span class="nn">pymatgen</span> <span class="k">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">Specie</span><span class="p">,</span> <span class="n">Composition</span>
 <span class="kn">from</span> <span class="nn">pymatgen.util.num</span> <span class="k">import</span> <span class="n">abs_cap</span>
 <span class="kn">from</span> <span class="nn">pymatgen.symmetry.analyzer</span> <span class="k">import</span> <span class="n">SpacegroupAnalyzer</span>
-<span class="kn">from</span> <span class="nn">pymatgen.core.surface</span> <span class="k">import</span> <span class="n">Slab</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core.surface</span> <span class="k">import</span> <span class="n">Slab</span><span class="p">,</span> <span class="n">SlabGenerator</span>
 
 
 <div class="viewcode-block" id="VoronoiCoordFinder"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.VoronoiCoordFinder">[docs]</a><span class="k">class</span> <span class="nc">VoronoiCoordFinder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -196,6 +200,89 @@
             <span class="k">if</span> <span class="n">weight</span> <span class="o">&gt;</span> <span class="n">tol</span> <span class="ow">and</span> <span class="p">(</span><span class="n">target</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">site</span><span class="o">.</span><span class="n">specie</span> <span class="o">==</span> <span class="n">target</span><span class="p">):</span>
                 <span class="n">coordinated_sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">coordinated_sites</span></div></div>
+
+
+<div class="viewcode-block" id="JMolCoordFinder"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.JMolCoordFinder">[docs]</a><span class="k">class</span> <span class="nc">JMolCoordFinder</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine coordinated sites and coordination number using an emulation of </span>
+<span class="sd">    JMol&#39;s default autoBond() algorithm. This version of the algorithm does not </span>
+<span class="sd">    take into account any information regarding known charge states.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">el_radius_updates</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize coordination finder parameters (atomic radii)</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            el_radius_updates: (dict) symbol-&gt;float to override default atomic </span>
+<span class="sd">                radii table values </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># load elemental radii table</span>
+        <span class="n">bonds_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span>
+                                  <span class="s2">&quot;bonds_jmol_ob.yaml&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bonds_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">el_radius</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># update any user preference elemental radii</span>
+        <span class="k">if</span> <span class="n">el_radius_updates</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">el_radius</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">el_radius_updates</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JMolCoordFinder.get_max_bond_distance"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.JMolCoordFinder.get_max_bond_distance">[docs]</a>    <span class="k">def</span> <span class="nf">get_max_bond_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">el1_sym</span><span class="p">,</span> <span class="n">el2_sym</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="mf">0.56</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use JMol algorithm to determine bond length from atomic parameters</span>
+<span class="sd">        Args:</span>
+<span class="sd">            el1_sym: (str) symbol of atom 1</span>
+<span class="sd">            el2_sym: (str) symbol of atom 2</span>
+<span class="sd">            constant: (float) factor to tune model</span>
+
+<span class="sd">        Returns: (float) max bond length</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">el_radius</span><span class="p">[</span><span class="n">el1_sym</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">el_radius</span><span class="p">[</span><span class="n">el2_sym</span><span class="p">]</span> <span class="o">+</span> <span class="n">constant</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JMolCoordFinder.get_coordination_number"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.JMolCoordFinder.get_coordination_number">[docs]</a>    <span class="k">def</span> <span class="nf">get_coordination_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1E-3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the coordination number of a site</span>
+<span class="sd">        Args:</span>
+<span class="sd">            structure: (Structure)</span>
+<span class="sd">            n: (int) index of site in the structure to get CN for</span>
+<span class="sd">            tol: (float) a numerical tolerance to extend search</span>
+
+<span class="sd">        Returns: (int) the coordination number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_coordinated_sites</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tol</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="JMolCoordFinder.get_coordinated_sites"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.JMolCoordFinder.get_coordinated_sites">[docs]</a>    <span class="k">def</span> <span class="nf">get_coordinated_sites</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1E-3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the coordinated sites for a site</span>
+<span class="sd">        Args:</span>
+<span class="sd">            structure: (Structure)</span>
+<span class="sd">            n: (int) index of site in the structure to analyze</span>
+<span class="sd">            tol: (float) a numerical tolerance to extend search</span>
+
+<span class="sd">        Returns: ([sites]) a list of coordinated sites</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">site</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+        <span class="c1"># determine relevant bond lengths based on atomic radii table</span>
+        <span class="n">bonds</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span>
+            <span class="n">bonds</span><span class="p">[</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="p">,</span> <span class="n">el</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_max_bond_distance</span><span class="p">(</span>
+                <span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">el</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span>
+
+        <span class="c1"># search for neighbors up to max bond length + tolerance</span>
+        <span class="n">max_rad</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bonds</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="n">tol</span>
+
+        <span class="n">all_neighbors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">neighb</span><span class="p">,</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">structure</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">max_rad</span><span class="p">):</span>
+            <span class="c1"># confirm neighbor based on bond length specific to atom pair</span>
+            <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;=</span> <span class="n">bonds</span><span class="p">[(</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="p">,</span> <span class="n">neighb</span><span class="o">.</span><span class="n">specie</span><span class="p">)]</span> <span class="o">+</span> <span class="n">tol</span><span class="p">:</span>
+                <span class="n">all_neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighb</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">all_neighbors</span></div></div>
 
 
 <div class="viewcode-block" id="average_coordination_number"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.average_coordination_number">[docs]</a><span class="k">def</span> <span class="nf">average_coordination_number</span><span class="p">(</span><span class="n">structures</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -550,6 +637,80 @@
     <span class="k">return</span> <span class="n">phi</span> <span class="o">+</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span></div>
 
 
+<div class="viewcode-block" id="get_max_bond_lengths"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.get_max_bond_lengths">[docs]</a><span class="k">def</span> <span class="nf">get_max_bond_lengths</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">el_radius_updates</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides max bond length estimates for a structure based on the JMol</span>
+<span class="sd">    table and algorithms.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        structure: (structure)</span>
+<span class="sd">        el_radius_updates: (dict) symbol-&gt;float to update atomic radii</span>
+<span class="sd">    </span>
+<span class="sd">    Returns: (dict) - (Element1, Element2) -&gt; float. The two elements are </span>
+<span class="sd">        ordered by Z.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jmc</span> <span class="o">=</span> <span class="n">JMolCoordFinder</span><span class="p">(</span><span class="n">el_radius_updates</span><span class="p">)</span>
+
+    <span class="n">bonds_lens</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">els</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">Z</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">els</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">i2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">els</span><span class="p">)</span> <span class="o">-</span> <span class="n">i1</span><span class="p">):</span>
+            <span class="n">bonds_lens</span><span class="p">[</span><span class="n">els</span><span class="p">[</span><span class="n">i1</span><span class="p">],</span> <span class="n">els</span><span class="p">[</span><span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">]]</span> <span class="o">=</span> <span class="n">jmc</span><span class="o">.</span><span class="n">get_max_bond_distance</span><span class="p">(</span>
+                <span class="n">els</span><span class="p">[</span><span class="n">i1</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">els</span><span class="p">[</span><span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">bonds_lens</span></div>
+
+
+<div class="viewcode-block" id="get_dimensionality"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.get_dimensionality">[docs]</a><span class="k">def</span> <span class="nf">get_dimensionality</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">max_hkl</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">el_radius_updates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">min_slab_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_vacuum_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                       <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method returns whether a structure is 3D, 2D (layered), or 1D (linear </span>
+<span class="sd">    chains or molecules) according to the algorithm published in Gorai, P., </span>
+<span class="sd">    Toberer, E. &amp; Stevanovic, V. Computational Identification of Promising </span>
+<span class="sd">    Thermoelectric Materials Among Known Quasi-2D Binary Compounds. J. Mater. </span>
+<span class="sd">    Chem. A 2, 4136 (2016).</span>
+<span class="sd">    </span>
+<span class="sd">    Note that a 1D structure detection might indicate problems in the bonding</span>
+<span class="sd">    algorithm, particularly for ionic crystals (e.g., NaCl)</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        structure: (Structure) structure to analyze dimensionality for </span>
+<span class="sd">        max_hkl: (int) max index of planes to look for layers</span>
+<span class="sd">        el_radius_updates: (dict) symbol-&gt;float to update atomic radii</span>
+<span class="sd">        min_slab_size: (float) internal surface construction parameter</span>
+<span class="sd">        min_vacuum_size: (float) internal surface construction parameter</span>
+<span class="sd">        standardize (bool): whether to standardize the structure before </span>
+<span class="sd">            analysis. Set to False only if you already have the structure in a </span>
+<span class="sd">            convention where layers / chains will be along low &lt;hkl&gt; indexes.</span>
+
+<span class="sd">    Returns: (int) the dimensionality of the structure - 1 (molecules/chains), </span>
+<span class="sd">        2 (layered), or 3 (3D)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">standardize</span><span class="p">:</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="n">SpacegroupAnalyzer</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span><span class="o">.</span>\
+            <span class="n">get_conventional_standard_structure</span><span class="p">()</span>
+
+    <span class="n">bonds</span> <span class="o">=</span> <span class="n">get_max_bond_lengths</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+
+    <span class="n">num_surfaces</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_hkl</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_hkl</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_hkl</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">max</span><span class="p">([</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">num_surfaces</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">sg</span> <span class="o">=</span> <span class="n">SlabGenerator</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span>
+                                       <span class="n">min_slab_size</span><span class="o">=</span><span class="n">min_slab_size</span><span class="p">,</span>
+                                       <span class="n">min_vacuum_size</span><span class="o">=</span><span class="n">min_vacuum_size</span><span class="p">)</span>
+                    <span class="n">slabs</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">get_slabs</span><span class="p">(</span><span class="n">bonds</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">slabs</span><span class="p">:</span>
+                        <span class="n">num_surfaces</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="mi">3</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_surfaces</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="contains_peroxide"><a class="viewcode-back" href="../../../pymatgen.analysis.structure_analyzer.html#pymatgen.analysis.structure_analyzer.contains_peroxide">[docs]</a><span class="k">def</span> <span class="nf">contains_peroxide</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">relative_cutoff</span><span class="o">=</span><span class="mf">1.1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Determines if a structure contains peroxide anions.</span>
@@ -750,7 +911,7 @@
 
     <span class="n">__supported_types</span> <span class="o">=</span> <span class="p">(</span>
             <span class="s2">&quot;cn&quot;</span><span class="p">,</span> <span class="s2">&quot;lin&quot;</span><span class="p">,</span> <span class="s2">&quot;bent&quot;</span><span class="p">,</span> <span class="s2">&quot;tet&quot;</span><span class="p">,</span> <span class="s2">&quot;oct&quot;</span><span class="p">,</span> <span class="s2">&quot;bcc&quot;</span><span class="p">,</span> <span class="s2">&quot;q2&quot;</span><span class="p">,</span> <span class="s2">&quot;q4&quot;</span><span class="p">,</span> <span class="s2">&quot;q6&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;reg_tri&quot;</span><span class="p">,</span> <span class="s2">&quot;sq&quot;</span><span class="p">,</span> <span class="s2">&quot;sq_pyr&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;reg_tri&quot;</span><span class="p">,</span> <span class="s2">&quot;sq&quot;</span><span class="p">,</span> <span class="s2">&quot;sq_pyr&quot;</span><span class="p">,</span> <span class="s2">&quot;tri_bipyr&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=-</span><span class="mf">10.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -779,6 +940,7 @@
 <span class="sd">                &quot;reg_tri&quot; (OP recognizing coordination with a regular triangle),</span>
 <span class="sd">                &quot;sq&quot; (OP recognizing square coordination),</span>
 <span class="sd">                &quot;sq_pyr&quot; (OP recognizing square pyramidal coordination),</span>
+<span class="sd">                &quot;tri_bipyr&quot; (OP recognizing trigonal bipyramidal coord.),</span>
 <span class="sd">                &quot;q2&quot;  [Bond orientational order parameter (BOOP)</span>
 <span class="sd">                      of weight l=2 (Steinhardt et al., Phys. Rev. B,</span>
 <span class="sd">                      28, 784-805, 1983)],</span>
@@ -832,7 +994,13 @@
 <span class="sd">                            for penalizing angles away from 90 degrees</span>
 <span class="sd">                            (0.0333);</span>
 <span class="sd">                            Gaussian width in Angstrom for penalizing</span>
-<span class="sd">                            variations in neighbor distances (0.1).</span>
+<span class="sd">                            variations in neighbor distances (0.1);</span>
+<span class="sd">                  &quot;tri_bipyr&quot;: threshold angle to identify close to</span>
+<span class="sd">                            South pole positions (160.0, cf., oct).</span>
+<span class="sd">                            Gaussian width for penalizing deviations away</span>
+<span class="sd">                            from south pole (0.0667);</span>
+<span class="sd">                            Gaussian width for penalizing deviations away</span>
+<span class="sd">                            from equator (0.0556).</span>
 <span class="sd">            cutoff (float):</span>
 <span class="sd">                Cutoff radius to determine which nearest neighbors are</span>
 <span class="sd">                supposed to contribute to the order parameters.</span>
@@ -994,6 +1162,32 @@
                                 <span class="s2">&quot; square pyramid order parameter is zero!&quot;</span><span class="p">)</span>
                     <span class="n">tmpparas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> \
                             <span class="mf">1.0</span> <span class="o">/</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tri_bipyr&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">tmpparas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="mf">9.0</span><span class="p">)</span>
+                    <span class="n">tmpparas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">0.0667</span><span class="p">)</span>
+                    <span class="n">tmpparas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">0.0741</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span>
+                            <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">180.0</span><span class="p">:</span>
+                        <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Threshold value for south pole&quot;</span>
+                             <span class="s2">&quot; configurations in octahedral order&quot;</span>
+                             <span class="s2">&quot; parameter outside ]0,180[&quot;</span><span class="p">)</span>
+                    <span class="n">tmpparas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Gaussian width for south pole&quot;</span>
+                                         <span class="s2">&quot; configurations in trigonal&quot;</span>
+                                         <span class="s2">&quot; bipyramidal order parameter is&quot;</span>
+                                         <span class="s2">&quot; zero!&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tmpparas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Gaussian width for equatorial&quot;</span>
+                                         <span class="s2">&quot; configurations in trigonal&quot;</span>
+                                         <span class="s2">&quot; bipyramidal order parameter&quot;</span>
+                                         <span class="s2">&quot; is zero!&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tmpparas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">loc_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
             <span class="c1"># All following types should be well-defined/-implemented,</span>
             <span class="c1"># and they should not require parameters.</span>
             <span class="k">elif</span> <span class="n">t</span> <span class="o">!=</span> <span class="s2">&quot;q2&quot;</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">!=</span> <span class="s2">&quot;q4&quot;</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">!=</span> <span class="s2">&quot;q6&quot;</span><span class="p">:</span>
@@ -1004,7 +1198,8 @@
             <span class="c1">#                    to any neighbor j.</span>
             <span class="c1"># self._computerjks: compute vectors from non-centeral atom j</span>
             <span class="c1">#                    to any non-central atom k.</span>
-            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tet&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;oct&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;bcc&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;sq_pyr&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tet&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;oct&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;bcc&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;sq_pyr&quot;</span> <span class="ow">or</span> \
+                    <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tri_bipyr&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_computerijs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geomops</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;reg_tri&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span><span class="s2">&quot;sq&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_computerijs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computerjks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geomops2</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1721,6 +1916,11 @@
                             <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;sq_pyr&quot;</span><span class="p">:</span>
                                 <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">thetak</span> <span class="o">*</span> <span class="n">ipi</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
                                 <span class="n">qsptheta</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">qsptheta</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tmp</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span>
+                            <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tri_bipyr&quot;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">thetak</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                                    <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+                                        <span class="n">thetak</span> <span class="o">*</span> <span class="n">ipi</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+                                    <span class="n">qsptheta</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tmp</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span>
 
                         <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nneigh</span><span class="p">):</span>
                             <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m</span> <span class="o">!=</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">flag_xaxis</span><span class="p">):</span>
@@ -1773,6 +1973,16 @@
                                                           <span class="mf">1.6</span> <span class="o">*</span> <span class="n">tmp</span> <span class="o">*</span> \
                                                           <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
                                                               <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tmp</span> <span class="o">*</span> <span class="n">tmp</span><span class="p">)</span>
+                                        <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tri_bipyr&quot;</span><span class="p">:</span>
+                                            <span class="k">if</span> <span class="n">thetak</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> \
+                                                    <span class="n">thetam</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                                                <span class="n">tmp</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+                                                <span class="n">tmp2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paras</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+                                                    <span class="n">thetam</span> <span class="o">*</span> <span class="n">ipi</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+                                                <span class="n">qsptheta</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> \
+                                                    <span class="n">tmp</span> <span class="o">*</span> <span class="n">tmp</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> \
+                                                    <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">tmp2</span> <span class="o">*</span> <span class="n">tmp2</span><span class="p">)</span>
+
 
             <span class="c1"># Normalize Peters-style OPs.</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_types</span><span class="p">):</span>
@@ -1803,6 +2013,11 @@
                                 <span class="n">nneigh</span> <span class="o">*</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;tri_bipyr&quot;</span><span class="p">:</span>
+                    <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">qsptheta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span>
+                            <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">nneigh</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span> <span class="k">if</span> <span class="n">nneigh</span> <span class="o">&gt;</span> <span class="mi">3</span> \
+                            <span class="k">else</span> <span class="kc">None</span>
+
 
         <span class="c1"># Then, deal with the new-style OPs that require vectors between</span>
         <span class="c1"># neighbors.</span>
@@ -1873,7 +2088,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

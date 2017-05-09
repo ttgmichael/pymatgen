@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.qchem module &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.io.qchem module &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.5 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -95,6 +95,49 @@
 <code class="descname">write_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/qchem.html#QcInput.write_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.qchem.QcInput.write_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="pymatgen.io.qchem.QcNucVeloc">
+<em class="property">class </em><code class="descname">QcNucVeloc</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/qchem.html#QcNucVeloc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.qchem.QcNucVeloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>class to QChem AMID NucVeloc file.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>filename (str): Filename to parse</dd>
+</dl>
+<dl class="attribute">
+<dt id="pymatgen.io.qchem.QcNucVeloc.time_steps">
+<code class="descname">time_steps</code><span class="sig-paren">(</span><em>fs</em><span class="sig-paren">)</span><a class="headerlink" href="#pymatgen.io.qchem.QcNucVeloc.time_steps" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">The AIMD time stamp for each frame</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pymatgen.io.qchem.QcNucVeloc.velocities">
+<code class="descname">velocities</code><span class="sig-paren">(</span><em>a.u.</em><span class="sig-paren">)</span><a class="headerlink" href="#pymatgen.io.qchem.QcNucVeloc.velocities" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">The atom velocities for each frame. Format:</code></dt>
+<dt>
+<code class="descname">[[[x, y, z]</code></dt>
+<dt>
+<code class="descname">[x, y, z]</code></dt>
+<dt>
+<code class="descname">... ]   ## frame 1</code></dt>
+<dt>
+<code class="descname">...</code></dt>
+<dt>
+<code class="descname">[[x, y, z]</code></dt>
+<dt>
+<code class="descname">[x, y, z]</code></dt>
+<dt>
+<code class="descname">... ]   ## frame N</code></dt>
+<dt>
+<code class="descname">]</code></dt>
+<dd></dd></dl>
+
+</div></blockquote>
 </dd></dl>
 
 <dl class="class">
@@ -229,7 +272,7 @@ The ghost atom will be represented in of the form of &#64;element_symmbol</li>
 
 <dl class="attribute">
 <dt id="pymatgen.io.qchem.QcTask.optional_keywords_list">
-<code class="descname">optional_keywords_list</code><em class="property"> = {'van_der_waals', 'occupied', 'localized_diabatization', 'plots', 'swap_occupied_virtual', 'efp_fragments', 'aux_basis', 'multipole_field', 'basis', 'svpirf', 'xc_functional', 'basis2', 'svp', 'alist', 'intracule', 'opt', 'external_charges', 'efp_params', 'cdft', 'pcm', 'pcm_solvent', 'nbo', 'force_field_params', 'qm_atoms', 'isotopes', 'empirical_dispersion', 'solvent', 'ecp'}</em><a class="headerlink" href="#pymatgen.io.qchem.QcTask.optional_keywords_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">optional_keywords_list</code><em class="property"> = {'occupied', 'swap_occupied_virtual', 'empirical_dispersion', 'velocity', 'nbo', 'efp_params', 'localized_diabatization', 'efp_fragments', 'basis', 'ecp', 'qm_atoms', 'cdft', 'solvent', 'isotopes', 'svpirf', 'alist', 'external_charges', 'plots', 'multipole_field', 'pcm_solvent', 'xc_functional', 'basis2', 'aux_basis', 'opt', 'van_der_waals', 'svp', 'intracule', 'force_field_params', 'pcm'}</em><a class="headerlink" href="#pymatgen.io.qchem.QcTask.optional_keywords_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -465,6 +508,21 @@ In QChem, the default values are:
 </dd></dl>
 
 <dl class="method">
+<dt id="pymatgen.io.qchem.QcTask.set_velocities">
+<code class="descname">set_velocities</code><span class="sig-paren">(</span><em>velocities</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/qchem.html#QcTask.set_velocities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.qchem.QcTask.set_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong></strong><strong>(</strong><strong>au</strong><strong>)</strong><strong></strong> (<a class="reference internal" href="#pymatgen.io.qchem.QcNucVeloc.velocities" title="pymatgen.io.qchem.QcNucVeloc.velocities"><em>velocities</em></a>) &#8211; list of list of atom velocities</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="pymatgen.io.qchem.QcTask.use_cosmo">
 <code class="descname">use_cosmo</code><span class="sig-paren">(</span><em>dielectric_constant=78.4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/io/qchem.html#QcTask.use_cosmo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.io.qchem.QcTask.use_cosmo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the solvent model to COSMO.</p>
@@ -555,7 +613,7 @@ radii. Default to UFF.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.5 documentation</a> &#187;</li> 
       </ul>
     </div>
 

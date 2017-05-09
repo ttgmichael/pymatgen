@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.matproj.rest &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.matproj.rest &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -159,6 +159,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PMG_MAPI_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preamble</span> <span class="o">=</span> <span class="n">endpoint</span>
         <span class="kn">import</span> <span class="nn">requests</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pybtex</span> <span class="k">import</span> <span class="n">__version__</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;If you query for structure data encoded using MP&#39;s &quot;</span>
+                          <span class="s2">&quot;Structure Notation Language (SNL) format and you use &quot;</span>
+                          <span class="s2">&quot;`mp_decode=True` (the default) for MPRester queries, &quot;</span>
+                          <span class="s2">&quot;you should install dependencies via &quot;</span>
+                          <span class="s2">&quot;`pip install pymatgen[matproj.snl]`.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x-api-key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="p">}</span>
 
@@ -587,14 +595,14 @@
 
 <span class="sd">                If string, it supports a powerful but simple string criteria.</span>
 <span class="sd">                E.g., &quot;Fe2O3&quot; means search for materials with reduced_formula</span>
-<span class="sd">                Fe2O3. Wild cards are also supported. E.g., &quot;\*2O&quot; means get</span>
-<span class="sd">                all materials whose formula can be formed as \*2O, e.g.,</span>
+<span class="sd">                Fe2O3. Wild cards are also supported. E.g., &quot;\\*2O&quot; means get</span>
+<span class="sd">                all materials whose formula can be formed as \\*2O, e.g.,</span>
 <span class="sd">                Li2O, K2O, etc.</span>
 
 <span class="sd">                Other syntax examples:</span>
 <span class="sd">                mp-1234: Interpreted as a Materials ID.</span>
-<span class="sd">                Fe2O3 or \*2O3: Interpreted as reduced formulas.</span>
-<span class="sd">                Li-Fe-O or \*-Fe-O: Interpreted as chemical systems.</span>
+<span class="sd">                Fe2O3 or \\*2O3: Interpreted as reduced formulas.</span>
+<span class="sd">                Li-Fe-O or \\*-Fe-O: Interpreted as chemical systems.</span>
 
 <span class="sd">                You can mix and match with spaces, which are interpreted as</span>
 <span class="sd">                &quot;OR&quot;. E.g. &quot;mp-1234 FeO&quot; means query for all compounds with</span>
@@ -931,13 +939,13 @@
 <span class="sd">        Args:</span>
 <span class="sd">            criteria_string (str): A string representing a search criteria.</span>
 <span class="sd">                Also supports wild cards. E.g.,</span>
-<span class="sd">                something like &quot;\*2O&quot; gets converted to</span>
+<span class="sd">                something like &quot;*2O&quot; gets converted to</span>
 <span class="sd">                {&#39;pretty_formula&#39;: {&#39;$in&#39;: [u&#39;B2O&#39;, u&#39;Xe2O&#39;, u&quot;Li2O&quot;, ...]}}</span>
 
 <span class="sd">                Other syntax examples:</span>
 <span class="sd">                    mp-1234: Interpreted as a Materials ID.</span>
-<span class="sd">                    Fe2O3 or \*2O3: Interpreted as reduced formulas.</span>
-<span class="sd">                    Li-Fe-O or \*-Fe-O: Interpreted as chemical systems.</span>
+<span class="sd">                    Fe2O3 or *2O3: Interpreted as reduced formulas.</span>
+<span class="sd">                    Li-Fe-O or *-Fe-O: Interpreted as chemical systems.</span>
 
 <span class="sd">                You can mix and match with spaces, which are interpreted as</span>
 <span class="sd">                &quot;OR&quot;. E.g., &quot;mp-1234 FeO&quot; means query for all compounds with</span>
@@ -1005,7 +1013,6 @@
 <span class="sd">    Raised when the query has problems, e.g., bad query format.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
-
 </pre></div>
 
           </div>
@@ -1036,7 +1043,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

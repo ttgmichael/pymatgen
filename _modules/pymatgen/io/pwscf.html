@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.pwscf &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.io.pwscf &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -63,6 +63,11 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
 
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">from</span> <span class="nn">monty.re</span> <span class="k">import</span> <span class="n">regrep</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module implements input and output processing from PWSCF.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -73,12 +78,6 @@
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Shyue Ping Ong&quot;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;ongsp@ucsd.edu&quot;</span>
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;3/27/15&quot;</span>
-
-
-<span class="kn">import</span> <span class="nn">six</span>
-
-<span class="kn">from</span> <span class="nn">monty.re</span> <span class="k">import</span> <span class="n">regrep</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
 
 
 <div class="viewcode-block" id="PWInput"><a class="viewcode-back" href="../../../pymatgen.io.pwscf.html#pymatgen.io.pwscf.PWInput">[docs]</a><span class="k">class</span> <span class="nc">PWInput</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -213,7 +212,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            patterns (dict): A dict of patterns, e.g.,</span>
-<span class="sd">                {&quot;energy&quot;: &quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;}.</span>
+<span class="sd">                {&quot;energy&quot;: r&quot;energy\\(sigma-&gt;0\\)\\s+=\\s+([\\d\\-.]+)&quot;}.</span>
 <span class="sd">            reverse (bool): Read files in reverse. Defaults to false. Useful for</span>
 <span class="sd">                large files, esp OUTCARs, especially when used with</span>
 <span class="sd">                terminate_on_match.</span>
@@ -224,7 +223,7 @@
 
 <span class="sd">        Renders accessible:</span>
 <span class="sd">            Any attribute in patterns. For example,</span>
-<span class="sd">            {&quot;energy&quot;: &quot;energy\(sigma-&gt;0\)\s+=\s+([\d\-\.]+)&quot;} will set the</span>
+<span class="sd">            {&quot;energy&quot;: r&quot;energy\\(sigma-&gt;0\\)\\s+=\s+([\\d\\-.]+)&quot;} will set the</span>
 <span class="sd">            value of self.data[&quot;energy&quot;] = [[-1234], [-3453], ...], to the</span>
 <span class="sd">            results from regex and postprocess. Note that the returned</span>
 <span class="sd">            values are lists of lists, because you can grep multiple</span>
@@ -275,7 +274,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.ferroelectricity.polarization &#8212; pymatgen 4.7.4 documentation</title>
+    <title>pymatgen.analysis.ferroelectricity.polarization &#8212; pymatgen 4.7.5 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.4',
+        VERSION:     '4.7.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -100,7 +100,7 @@
 <span class="sd">polarization rather than the values from OUTCAR.</span>
 
 <span class="sd">We find that the ionic dipole moment reported in OUTCAR differ from</span>
-<span class="sd">the naive calculation of \sum_i Z_i r_i where i is the index of the</span>
+<span class="sd">the naive calculation of \\sum_i Z_i r_i where i is the index of the</span>
 <span class="sd">atom, Z_i is the ZVAL from the pseudopotential file, and r is the distance</span>
 <span class="sd">in Angstroms along the lattice vectors.</span>
 
@@ -278,15 +278,15 @@
 <span class="sd">        Polarization is a lattice vector, meaning it is only defined modulo the</span>
 <span class="sd">        quantum of polarization:</span>
 
-<span class="sd">            P = P_0 + \sum_i \frac{n_i e R_i}{\Omega}</span>
+<span class="sd">            P = P_0 + \\sum_i \\frac{n_i e R_i}{\\Omega}</span>
 
 <span class="sd">        where n_i is an integer, e is the charge of the electron in microCoulombs,</span>
-<span class="sd">        R_i is a lattice vector, and \Omega is the unit cell volume in cm**3</span>
+<span class="sd">        R_i is a lattice vector, and \\Omega is the unit cell volume in cm**3</span>
 <span class="sd">        (giving polarization units of microCoulomb per centimeter**2).</span>
 
 <span class="sd">        The quantum of the dipole moment in electron Angstroms (as given by VASP) is:</span>
 
-<span class="sd">            \sum_i n_i e R_i</span>
+<span class="sd">            \\sum_i n_i e R_i</span>
 
 <span class="sd">        where e, the electron charge, is 1 and R_i is a lattice vector, and n_i is an integer.</span>
 
@@ -534,7 +534,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
