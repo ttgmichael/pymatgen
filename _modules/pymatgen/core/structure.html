@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.structure &#8212; pymatgen 4.7.5 documentation</title>
+    <title>pymatgen.core.structure &#8212; pymatgen 4.7.6 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.5',
+        VERSION:     '4.7.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,8 +46,9 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -2371,17 +2372,26 @@
         <span class="n">latt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lattice</span>
         <span class="n">species_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">get_el_sp</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">v</span>
                            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">species_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">sp_to_replace</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">species_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">sp_in_structure</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sp_in_structure</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">sp_to_replace</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Some species to be substituted are not present in &quot;</span>
+                          <span class="s2">&quot;structure. Pls check your input. Species to be &quot;</span>
+                          <span class="s2">&quot;substituted = </span><span class="si">%s</span><span class="s2">; Species in structure = </span><span class="si">%s</span><span class="s2">&quot;</span>
+                          <span class="o">%</span> <span class="p">(</span><span class="n">sp_to_replace</span><span class="p">,</span> <span class="n">sp_in_structure</span><span class="p">))</span>
 
         <span class="k">def</span> <span class="nf">mod_site</span><span class="p">(</span><span class="n">site</span><span class="p">):</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">sp</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="n">site</span><span class="o">.</span><span class="n">species_and_occu</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">new_sp</span> <span class="o">=</span> <span class="n">species_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">c</span> <span class="o">+=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">new_sp</span><span class="p">)</span> <span class="o">*</span> <span class="n">amt</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">c</span> <span class="o">+=</span> <span class="p">{</span><span class="n">new_sp</span><span class="p">:</span> <span class="n">amt</span><span class="p">}</span>
-            <span class="k">return</span> <span class="n">PeriodicSite</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">,</span> <span class="n">latt</span><span class="p">,</span>
-                                <span class="n">properties</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">properties</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sp_to_replace</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">species_and_occu</span><span class="p">):</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">sp</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="n">site</span><span class="o">.</span><span class="n">species_and_occu</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">new_sp</span> <span class="o">=</span> <span class="n">species_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">c</span> <span class="o">+=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">new_sp</span><span class="p">)</span> <span class="o">*</span> <span class="n">amt</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">c</span> <span class="o">+=</span> <span class="p">{</span><span class="n">new_sp</span><span class="p">:</span> <span class="n">amt</span><span class="p">}</span>
+                <span class="k">return</span> <span class="n">PeriodicSite</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">frac_coords</span><span class="p">,</span> <span class="n">latt</span><span class="p">,</span>
+                                    <span class="n">properties</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">properties</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">site</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_sites</span> <span class="o">=</span> <span class="p">[</span><span class="n">mod_site</span><span class="p">(</span><span class="n">site</span><span class="p">)</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sites</span><span class="p">]</span></div>
 
@@ -3184,8 +3194,9 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>
     </div>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.strain &#8212; pymatgen 4.7.5 documentation</title>
+    <title>pymatgen.analysis.elasticity.strain &#8212; pymatgen 4.7.6 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.5',
+        VERSION:     '4.7.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,8 +46,9 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -210,7 +211,7 @@
         <span class="c1"># Perform symmetry reduction if specified</span>
         <span class="k">if</span> <span class="n">symmetry</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sym_dict</span> <span class="o">=</span> <span class="n">symmetry_reduce</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deformations</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">undeformed_structure</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">deformations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sym_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deformations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sym_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">def_structs</span> <span class="o">=</span> <span class="p">[</span><span class="n">defo</span><span class="o">.</span><span class="n">apply_to_structure</span><span class="p">(</span><span class="n">rlxd_str</span><span class="p">)</span>
                             <span class="k">for</span> <span class="n">defo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deformations</span><span class="p">]</span>
 
@@ -394,8 +395,9 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.5 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>
     </div>
 
