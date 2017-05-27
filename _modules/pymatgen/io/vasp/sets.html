@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.io.vasp.sets &#8212; pymatgen 4.7.6 documentation</title>
+    <title>pymatgen.io.vasp.sets &#8212; pymatgen 4.7.7 documentation</title>
     
     <link rel="stylesheet" href="../../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '4.7.6',
+        VERSION:     '4.7.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
@@ -504,7 +504,8 @@
 <div class="viewcode-block" id="MPStaticSet"><a class="viewcode-back" href="../../../../pymatgen.io.vasp.sets.html#pymatgen.io.vasp.sets.MPStaticSet">[docs]</a><span class="k">class</span> <span class="nc">MPStaticSet</span><span class="p">(</span><span class="n">MPRelaxSet</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">prev_incar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prev_kpoints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">lepsilon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lcalcpol</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reciprocal_density</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                 <span class="n">lepsilon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lcalcpol</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reciprocal_density</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run a static calculation.</span>
 
@@ -514,9 +515,10 @@
 <span class="sd">            prev_kpoints (Kpoints): Kpoints from previous run.</span>
 <span class="sd">            lepsilon (bool): Whether to add static dielectric calculation</span>
 <span class="sd">            reciprocal_density (int): For static calculations,</span>
-<span class="sd">                we usually set the reciprocal density by voluyme. This is a</span>
+<span class="sd">                we usually set the reciprocal density by volume. This is a</span>
 <span class="sd">                convenience arg to change that, rather than using</span>
-<span class="sd">                user_kpoints_settings. Defaults to 100.</span>
+<span class="sd">                user_kpoints_settings. Defaults to 100, which is ~50% more than</span>
+<span class="sd">                that of standard relaxation calculations.</span>
 <span class="sd">            \\*\\*kwargs: kwargs supported by MPRelaxSet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MPStaticSet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1461,7 +1463,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">pymatgen 4.7.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.analysis.elasticity.tensors module &#8212; pymatgen 4.7.6 documentation</title>
+    <title>pymatgen.analysis.elasticity.tensors module &#8212; pymatgen 4.7.7 documentation</title>
     
     <link rel="stylesheet" href="_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.7.6',
+        VERSION:     '4.7.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.7 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -179,7 +179,7 @@ to the coefficients of the voigt-notation tensor</li>
 </table>
 <dl class="method">
 <dt id="pymatgen.analysis.elasticity.tensors.Tensor.convert_to_ieee">
-<code class="descname">convert_to_ieee</code><span class="sig-paren">(</span><em>structure</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.convert_to_ieee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.convert_to_ieee" title="Permalink to this definition">¶</a></dt>
+<code class="descname">convert_to_ieee</code><span class="sig-paren">(</span><em>structure</em>, <em>initial_fit=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymatgen/analysis/elasticity/tensors.html#Tensor.convert_to_ieee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymatgen.analysis.elasticity.tensors.Tensor.convert_to_ieee" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a structure associated with a tensor, attempts a
 calculation of the tensor in IEEE format according to
 the 1987 IEEE standards.</p>
@@ -187,8 +187,17 @@ the 1987 IEEE standards.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; a structure associated with the
-tensor to be converted to the IEEE standard</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>structure</strong> (<a class="reference internal" href="pymatgen.core.structure.html#pymatgen.core.structure.Structure" title="pymatgen.core.structure.Structure"><em>Structure</em></a>) &#8211; a structure associated with the
+tensor to be converted to the IEEE standard</li>
+<li><strong>initial_fit</strong> (<em>bool</em>) &#8211; flag to indicate whether initial
+tensor is fit to the symmetry of the structure.
+Defaults to true. Note that if false, inconsistent
+results may be obtained due to symmetrically
+equivalent, but distinct transformations
+being used in different versions of spglib.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -476,7 +485,7 @@ tensors as values</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pymatgen 4.7.7 documentation</a> &#187;</li> 
       </ul>
     </div>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.electronic_structure.plotter &#8212; pymatgen 4.7.6 documentation</title>
+    <title>pymatgen.electronic_structure.plotter &#8212; pymatgen 4.7.7 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.6',
+        VERSION:     '4.7.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
@@ -585,9 +585,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_maketicks</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>
 
         <span class="c1"># Main X and Y Labels</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mathrm{Wave\ Vector}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-        <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{E\ -\ E_f\ (eV)}$&#39;</span> <span class="k">if</span> <span class="n">zero_to_efermi</span> \
-            <span class="k">else</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{Energy\ (eV)}$&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">mathrm{Wave\ Vector}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">mathrm{E\ -\ E_f\ (eV)}$&#39;</span> <span class="k">if</span> <span class="n">zero_to_efermi</span> \
+            <span class="k">else</span> <span class="sa">r</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">mathrm{Energy\ (eV)}$&#39;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
         <span class="c1"># Draw Fermi energy, only if not the zero</span>
@@ -697,7 +697,7 @@
                 <span class="n">previous_branch</span> <span class="o">=</span> <span class="n">this_branch</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;distance&#39;</span><span class="p">:</span> <span class="n">tick_distance</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">tick_labels</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="BSPlotter.plot_compare"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BSPlotter.plot_compare">[docs]</a>    <span class="k">def</span> <span class="nf">plot_compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_plotter</span><span class="p">):</span>
+<div class="viewcode-block" id="BSPlotter.plot_compare"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BSPlotter.plot_compare">[docs]</a>    <span class="k">def</span> <span class="nf">plot_compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_plotter</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        plot two band structure for comparison. One is in red the other in blue</span>
 <span class="sd">        (no difference in spins). The two band structures need to be defined</span>
@@ -712,6 +712,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO: add exception if the band structures are not compatible</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.lines</span> <span class="k">as</span> <span class="nn">mlines</span>
         <span class="n">plt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_plot</span><span class="p">()</span>
         <span class="n">data_orig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs_plot_data</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">other_plotter</span><span class="o">.</span><span class="n">bs_plot_data</span><span class="p">()</span>
@@ -720,11 +721,23 @@
             <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_orig</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">])):</span>
                 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_orig</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">],</span>
                          <span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">Spin</span><span class="o">.</span><span class="n">up</span><span class="p">)][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]][</span><span class="n">d</span><span class="p">],</span>
-                         <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">band_linewidth</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">other_plotter</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">is_spin_polarized</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_orig</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">],</span>
-                     <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">)]],</span>
-                     <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">band_linewidth</span><span class="p">)</span>
+                         <span class="s1">&#39;c-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">band_linewidth</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">other_plotter</span><span class="o">.</span><span class="n">_bs</span><span class="o">.</span><span class="n">is_spin_polarized</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_orig</span><span class="p">[</span><span class="s1">&#39;distances&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">],</span>
+                             <span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">Spin</span><span class="o">.</span><span class="n">down</span><span class="p">)][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]][</span><span class="n">d</span><span class="p">],</span>
+                             <span class="s1">&#39;m--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">band_linewidth</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+            <span class="n">handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bs 1 up&#39;</span><span class="p">),</span>
+                       <span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bs 1 down&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">),</span>
+                       <span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bs 2 up&#39;</span><span class="p">),</span>
+                       <span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+                                     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bs 2 down&#39;</span><span class="p">)]</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">handles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">plt</span></div>
 
 <div class="viewcode-block" id="BSPlotter.plot_brillouin"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BSPlotter.plot_brillouin">[docs]</a>    <span class="k">def</span> <span class="nf">plot_brillouin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2574,6 +2587,505 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">plt</span></div>
 
+<div class="viewcode-block" id="BoltztrapPlotter.plot_seebeck_temp"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_seebeck_temp">[docs]</a>    <span class="k">def</span> <span class="nf">plot_seebeck_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doping</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the Seebeck coefficient in function of temperature for different </span>
+<span class="sd">        doping levels.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dopings: the default &#39;all&#39; plots all the doping levels in the analyzer.</span>
+<span class="sd">                     Specify a list of doping levels if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">sbk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_seebeck</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">sbk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_seebeck</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sbk</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">doping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">doping</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">doping</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dop</span> <span class="ow">in</span> <span class="n">doping</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span>
+                <span class="n">sbk_temp</span> <span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                    <span class="n">sbk_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sbk</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="n">sbk_temp</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">sbk_temp</span><span class="p">)[</span><span class="n">xyz</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                                 <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Seebeck </span><span class="se">\n</span><span class="s2"> coefficient  ($</span><span class="se">\\</span><span class="s2">mu$V/K)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+<div class="viewcode-block" id="BoltztrapPlotter.plot_conductivity_temp"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_conductivity_temp">[docs]</a>    <span class="k">def</span> <span class="nf">plot_conductivity_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doping</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the conductivity in function of temperature for different doping levels.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dopings: the default &#39;all&#39; plots all the doping levels in the analyzer.</span>
+<span class="sd">                     Specify a list of doping levels if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">            relaxation_time: specify a constant relaxation time value</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">mtick</span>
+        
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">cond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_conductivity</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">cond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_conductivity</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">cond</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">doping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">doping</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">doping</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dop</span> <span class="ow">in</span> <span class="n">doping</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span>
+                <span class="n">cond_temp</span> <span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                    <span class="n">cond_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cond</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="n">cond_temp</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">cond_temp</span><span class="p">)[</span><span class="n">xyz</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                                 <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;conductivity $\sigma$ (1/($</span><span class="se">\\</span><span class="s2">Omega$ m))&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1"># &#39;lower right&#39; if i == 0 else &#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;sci&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+<div class="viewcode-block" id="BoltztrapPlotter.plot_power_factor_temp"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_power_factor_temp">[docs]</a>    <span class="k">def</span> <span class="nf">plot_power_factor_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doping</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the Power Factor in function of temperature for different doping levels.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dopings: the default &#39;all&#39; plots all the doping levels in the analyzer.</span>
+<span class="sd">                     Specify a list of doping levels if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">            relaxation_time: specify a constant relaxation time value</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_power_factor</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_power_factor</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">pf</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">doping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">doping</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">doping</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dop</span> <span class="ow">in</span> <span class="n">doping</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span>
+                <span class="n">pf_temp</span> <span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                    <span class="n">pf_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pf</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="n">pf_temp</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">pf_temp</span><span class="p">)[</span><span class="n">xyz</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                                 <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Power Factor ($</span><span class="se">\\</span><span class="s2">mu$W/(mK$^2$))&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1">#&#39;lower right&#39; if i == 0 else &#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;sci&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+<div class="viewcode-block" id="BoltztrapPlotter.plot_zt_temp"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_zt_temp">[docs]</a>    <span class="k">def</span> <span class="nf">plot_zt_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doping</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the figure of merit zT in function of temperature for different doping levels.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dopings: the default &#39;all&#39; plots all the doping levels in the analyzer.</span>
+<span class="sd">                     Specify a list of doping levels if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">            relaxation_time: specify a constant relaxation time value</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">zt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_zt</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">zt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_zt</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">zt</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">doping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">doping</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">doping</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dop</span> <span class="ow">in</span> <span class="n">doping</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span>
+                <span class="n">zt_temp</span> <span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                    <span class="n">zt_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zt</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="n">zt_temp</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">zt_temp</span><span class="p">)[</span><span class="n">xyz</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                                 <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;zT&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1">#&#39;lower right&#39; if i == 0 else &#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">plt</span></div>
+    
+<div class="viewcode-block" id="BoltztrapPlotter.plot_eff_mass_temp"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_eff_mass_temp">[docs]</a>    <span class="k">def</span> <span class="nf">plot_eff_mass_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doping</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the average effective mass in function of temperature </span>
+<span class="sd">        for different doping levels.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dopings: the default &#39;all&#39; plots all the doping levels in the analyzer.</span>
+<span class="sd">                     Specify a list of doping levels if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">em</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_average_eff_mass</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">em</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_average_eff_mass</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">em</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">doping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">doping</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">doping</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dop</span> <span class="ow">in</span> <span class="n">doping</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span>
+                <span class="n">em_temp</span> <span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                    <span class="n">em_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">em</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">][</span><span class="n">d</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="n">em_temp</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tlist</span><span class="p">,</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">em_temp</span><span class="p">)[</span><span class="n">xyz</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                                 <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">dop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; $cm^{-3}$&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Effective mass (m$_e$)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1">#&#39;lower right&#39; if i == 0 else &#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+    
+<div class="viewcode-block" id="BoltztrapPlotter.plot_seebeck_dop"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_seebeck_dop">[docs]</a>    <span class="k">def</span> <span class="nf">plot_seebeck_dop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temps</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the Seebeck in function of doping levels for different temperatures.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            temps: the default &#39;all&#39; plots all the temperatures in the analyzer.</span>
+<span class="sd">                   Specify a list of temperatures if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">sbk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_seebeck</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">sbk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_seebeck</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+        
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">sbk</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">temps</span><span class="o">==</span><span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">temps</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">sbk</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">])[</span><span class="n">xyz</span><span class="p">],</span>
+                                     <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="n">sbk</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">],</span>
+                                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Seebeck coefficient ($</span><span class="se">\\</span><span class="s2">mu$V/K)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Doping concentration (cm$^{-3}$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">plt</span></div>
+        
+
+<div class="viewcode-block" id="BoltztrapPlotter.plot_conductivity_dop"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_conductivity_dop">[docs]</a>    <span class="k">def</span> <span class="nf">plot_conductivity_dop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temps</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the conductivity in function of doping levels for different temperatures.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            temps: the default &#39;all&#39; plots all the temperatures in the analyzer.</span>
+<span class="sd">                   Specify a list of temperatures if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">            relaxation_time: specify a constant relaxation time value</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">cond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_conductivity</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">cond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_conductivity</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+        
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">cond</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">temps</span><span class="o">==</span><span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">temps</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">cond</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">])[</span><span class="n">xyz</span><span class="p">],</span>
+                                     <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="n">cond</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">],</span>
+                                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;conductivity $\sigma$ (1/($</span><span class="se">\\</span><span class="s2">Omega$ m))&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Doping concentration ($cm^{-3}$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;sci&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+<div class="viewcode-block" id="BoltztrapPlotter.plot_power_factor_dop"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_power_factor_dop">[docs]</a>    <span class="k">def</span> <span class="nf">plot_power_factor_dop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temps</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the Power Factor in function of doping levels for different temperatures.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            temps: the default &#39;all&#39; plots all the temperatures in the analyzer.</span>
+<span class="sd">                   Specify a list of temperatures if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">            relaxation_time: specify a constant relaxation time value</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_power_factor</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_power_factor</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+        
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">pf</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">temps</span><span class="o">==</span><span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">temps</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">pf</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">])[</span><span class="n">xyz</span><span class="p">],</span>
+                                     <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="n">pf</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">],</span>
+                                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Power Factor  ($</span><span class="se">\\</span><span class="s2">mu$W/(mK$^2$))&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Doping concentration ($cm^{-3}$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;sci&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1">#&#39;lower right&#39; if i == 0 else &#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+
+<div class="viewcode-block" id="BoltztrapPlotter.plot_zt_dop"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_zt_dop">[docs]</a>    <span class="k">def</span> <span class="nf">plot_zt_dop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temps</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">relaxation_time</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the figure of merit zT in function of doping levels for different temperatures.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            temps: the default &#39;all&#39; plots all the temperatures in the analyzer.</span>
+<span class="sd">                   Specify a list of temperatures if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">            relaxation_time: specify a constant relaxation time value</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">zt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_zt</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">zt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_zt</span><span class="p">(</span><span class="n">relaxation_time</span><span class="o">=</span><span class="n">relaxation_time</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+        
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">zt</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">temps</span><span class="o">==</span><span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">temps</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">zt</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">])[</span><span class="n">xyz</span><span class="p">],</span>
+                                     <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="n">zt</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">],</span>
+                                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;zT&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Doping concentration ($cm^{-3}$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+<div class="viewcode-block" id="BoltztrapPlotter.plot_eff_mass_dop"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_eff_mass_dop">[docs]</a>    <span class="k">def</span> <span class="nf">plot_eff_mass_dop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temps</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the average effective mass in function of doping levels </span>
+<span class="sd">        for different temperatures.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            temps: the default &#39;all&#39; plots all the temperatures in the analyzer.</span>
+<span class="sd">                   Specify a list of temperatures if you want to plot only some.</span>
+<span class="sd">            output: with &#39;average&#39; you get an average of the three directions</span>
+<span class="sd">                    with &#39;eigs&#39; you get all the three directions.</span>
+<span class="sd">            relaxation_time: specify a constant relaxation time value</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a matplotlib object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="n">em</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_average_eff_mass</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+            <span class="n">em</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">get_average_eff_mass</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;eigs&#39;</span><span class="p">)</span>
+        
+        <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">em</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">temps</span><span class="o">==</span><span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">temps</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">tlist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;eigs&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">em</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">])[</span><span class="n">xyz</span><span class="p">],</span>
+                                     <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bz</span><span class="o">.</span><span class="n">doping</span><span class="p">[</span><span class="n">dt</span><span class="p">],</span><span class="n">em</span><span class="p">[</span><span class="n">dt</span><span class="p">][</span><span class="n">temp</span><span class="p">],</span>
+                                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; K&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">dt</span><span class="o">+</span><span class="s1">&#39;-type&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Effective mass (m$_e$)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Doping concentration ($cm^{-3}$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+
+            <span class="n">p</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">plt</span></div>
+
+
 <div class="viewcode-block" id="BoltztrapPlotter.plot_dos"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.BoltztrapPlotter.plot_dos">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        plot dos</span>
@@ -3063,7 +3575,8 @@
     <span class="k">return</span> <span class="n">fig</span></div>
 
 
-<div class="viewcode-block" id="plot_ellipsoid"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.plot_ellipsoid">[docs]</a><span class="k">def</span> <span class="nf">plot_ellipsoid</span><span class="p">(</span><span class="n">hessian</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">lattice</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rescale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="plot_ellipsoid"><a class="viewcode-back" href="../../../pymatgen.electronic_structure.plotter.html#pymatgen.electronic_structure.plotter.plot_ellipsoid">[docs]</a><span class="k">def</span> <span class="nf">plot_ellipsoid</span><span class="p">(</span><span class="n">hessian</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">lattice</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rescale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                   <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arrows</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots a 3D ellipsoid rappresenting the Hessian matrix in input.</span>
 <span class="sd">    Useful to get a graphical visualization of the effective mass</span>
@@ -3120,6 +3633,15 @@
     <span class="c1"># add the ellipsoid to the current axes</span>
     <span class="n">ax</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">plt</span> <span class="o">=</span> <span class="n">get_ax3d_fig_plt</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot_wireframe</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">arrows</span><span class="p">:</span>
+        <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">em</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">em</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">rotation</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">rotation</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">quiver3D</span><span class="p">(</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">center</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">em</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">em</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">em</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">pivot</span><span class="o">=</span><span class="s1">&#39;tail&#39;</span><span class="p">,</span>
+                        <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">radii</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">rescale</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
 </pre></div>
@@ -3152,7 +3674,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>
