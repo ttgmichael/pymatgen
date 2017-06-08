@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pymatgen.core.bonds &#8212; pymatgen 4.7.7 documentation</title>
+    <title>pymatgen.core.bonds &#8212; pymatgen 2017.06.08 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/proBlue.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '4.7.7',
+        VERSION:     '2017.06.08',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.06.08 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" accesskey="U">pymatgen</a> &#187;</li> 
       </ul>
@@ -63,6 +63,12 @@
 <span class="c1"># Distributed under the terms of the MIT License.</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">pymatgen.core.periodic_table</span> <span class="k">import</span> <span class="n">get_el_sp</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This class implements definitions for various kinds of bonds. Typically used in</span>
@@ -76,13 +82,6 @@
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Shyue Ping Ong&quot;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;shyuep@gmail.com&quot;</span>
 <span class="n">__date__</span> <span class="o">=</span> <span class="s2">&quot;Jul 26, 2012&quot;</span>
-
-
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">collections</span>
-
-<span class="kn">from</span> <span class="nn">pymatgen.core.periodic_table</span> <span class="k">import</span> <span class="n">get_el_sp</span>
 
 
 <span class="k">def</span> <span class="nf">_load_bond_length_data</span><span class="p">():</span>
@@ -174,18 +173,21 @@
 <span class="sd">            C-C bond length, this should be set to 2. Defaults to 1.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Bond length in Angstrom. None if no data is available.</span>
+<span class="sd">        Bond length in Angstrom. If no data is available, the sum of the atomic</span>
+<span class="sd">        radii is used.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">syms</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">get_el_sp</span><span class="p">(</span><span class="n">sp1</span><span class="p">)</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span>
-                         <span class="n">get_el_sp</span><span class="p">(</span><span class="n">sp2</span><span class="p">)</span><span class="o">.</span><span class="n">symbol</span><span class="p">]))</span>
+    <span class="n">sp1</span> <span class="o">=</span> <span class="n">get_el_sp</span><span class="p">(</span><span class="n">sp1</span><span class="p">)</span>
+    <span class="n">sp2</span> <span class="o">=</span> <span class="n">get_el_sp</span><span class="p">(</span><span class="n">sp2</span><span class="p">)</span>
+    <span class="n">syms</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">sp1</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">sp2</span><span class="o">.</span><span class="n">symbol</span><span class="p">]))</span>
     <span class="k">if</span> <span class="n">syms</span> <span class="ow">in</span> <span class="n">bond_lengths</span><span class="p">:</span>
         <span class="n">all_lengths</span> <span class="o">=</span> <span class="n">bond_lengths</span><span class="p">[</span><span class="n">syms</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">bond_order</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">all_lengths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">bond_order</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">all_lengths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="kc">None</span></div>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No bond lengths for </span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2"> found in database. Returning sum&quot;</span>
+                  <span class="s2">&quot;of atomic radius.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sp1</span><span class="p">,</span> <span class="n">sp2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">sp1</span><span class="o">.</span><span class="n">atomic_radius</span> <span class="o">+</span> <span class="n">sp2</span><span class="o">.</span><span class="n">atomic_radius</span></div>
 </pre></div>
 
           </div>
@@ -216,7 +218,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 4.7.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pymatgen 2017.06.08 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymatgen.html" >pymatgen</a> &#187;</li> 
       </ul>
@@ -224,7 +226,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2011, Pymatgen Development Team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
