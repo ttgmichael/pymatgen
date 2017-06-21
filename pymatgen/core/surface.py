@@ -646,11 +646,14 @@ class SlabGenerator(object):
         new_lattice = [a, b, nlayers * c]
         frac_coords[:, 2] = frac_coords[:, 2] / nlayers
         all_coords = []
+        props['layers'] = []
         for i in range(nlayers_slab):
             fcoords = frac_coords.copy()
             fcoords[:, 2] += i / nlayers
             all_coords.extend(fcoords)
-
+            layer_id_list = [i+1]*len(gen.oriented_unit_cell)
+            props['layers'].extend(layer_id_list)
+            
         slab = Structure(new_lattice, species * nlayers_slab, all_coords,
                          site_properties=props)
 
