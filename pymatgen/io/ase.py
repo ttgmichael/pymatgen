@@ -47,7 +47,13 @@ class AseAtomsAdaptor(object):
         symbols = [str(site.specie.symbol) for site in structure]
         positions = [site.coords for site in structure]
         cell = structure.lattice.matrix
-        return Atoms(symbols=symbols, positions=positions, pbc=True, cell=cell)
+        tags = [0]*len(structure)
+        if 'layers' in structure.site_properties.keys():
+            tags = structure.site_properties['layers']
+        #if 'surface_properties' in structure.site_properties.keys():
+        #    prop_dict = {'subsurface':0,'surface':1,'adsorbate':2,'activesite':3,'free':4}
+        #    tags = [prop_dict[structure.site_properties['surface_properties'][n]] for n in range(len(structure))]
+        return Atoms(symbols=symbols, positions=positions, pbc=True, cell=cell, tags=tags)
 
     @staticmethod
     def get_structure(atoms, cls=None):
