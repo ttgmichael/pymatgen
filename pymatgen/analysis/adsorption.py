@@ -33,13 +33,13 @@ from matplotlib import patches
 from matplotlib.path import Path
 
 __author__ = "Joseph Montoya"
-__copyright__ = "Copyright 2016, The Materials Project"
-__version__ = "0.1"
-__maintainer__ = "Joseph Montoya"
+__copyright__ = "Copyright 2017, The Materials Project"
+__version__ = "0.2"
+__maintainer__ = "Joseph Montoya, Michael T Tang"
 __credits__ = "Richard Tran"
 __email__ = "montoyjh@lbl.gov"
 __status__ = "Development"
-__date__ = "December 2, 2015"
+__date__ = "June 21, 2017"
 
 class AdsorbateSiteFinder(object):
     """
