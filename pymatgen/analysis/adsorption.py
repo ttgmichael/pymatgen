@@ -344,6 +344,8 @@ class AdsorbateSiteFinder(object):
                     sites,profiles = set_radial_reduce(asf, sites, profiles, threshold=radial_reduce) 
                 ads_sites[key] = sites
                 site_profile[key] = profiles
+            self.sites = ads_sites
+            self.profiles = site_profile
         else:
             for key, sites in ads_sites.items():
                 # Pare off outer sites for bridge/hollow
@@ -416,11 +418,12 @@ class AdsorbateSiteFinder(object):
     
     def set_near_reduce(asf, coords_set, profile_set, threshold = 1e-4):
         """
-        Prunes coordinate set for coordinates that are within 
+        Prunes coordinate set and profile set for coordinates that are within 
         threshold
         
         Args:
             coords_set (Nx3 array-like): list or array of coordinates
+            profile_set (list): profile set for each coord in coords_set (ordered by zip)
             threshold (float): threshold value for distance
         """
         unique_coords = []
@@ -436,11 +439,12 @@ class AdsorbateSiteFinder(object):
 
     def set_radial_reduce(asf, coords_set, profile_set, threshold = 3.5):
         """
-        Prunes coordinate set for coordinates that are within 
+        Prunes coordinate set and profile set for coordinates that are within 
         threshold
         
         Args:
             coords_set (Nx3 array-like): list or array of coordinates
+            profile_set (list): profile set for each coord in coords_set (ordered by zip)
             threshold (float): threshold value for distance
         """
         passing_coords = []
@@ -463,11 +467,12 @@ class AdsorbateSiteFinder(object):
     
     def set_symm_reduce(asf, coords_set, profile_set, threshold = 1e-6):
         """
-        Reduces the set of adsorbate sites by finding removing
+        Reduces the set of adsorbate sites and profile set by finding removing
         symmetrically equivalent duplicates
 
         Args:
             coords_set: coordinate set in cartesian coordinates
+            profile_set: profile set for each coord in coords_set (ordered by zip)
             threshold: tolerance for distance equivalence, used
                 as input to in_coord_list_pbc for dupl. checking
         """
@@ -539,6 +544,9 @@ class AdsorbateSiteFinder(object):
         if 'selective_dynamics' in struct.site_properties.keys():
             molecule.add_site_property("selective_dynamics",
                                        [[True, True, True]] * molecule.num_sites)
+        if 'layers' in struct.site_properties.keys():
+                molecule.add_site_property("layers",
+                                           [-1] * molecule.num_sites)
         for site in molecule:
             struct.append(site.specie, ads_coord + site.coords, coords_are_cartesian = True,
                           properties = site.properties)
