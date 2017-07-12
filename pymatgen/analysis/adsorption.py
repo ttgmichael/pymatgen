@@ -309,7 +309,7 @@ class AdsorbateSiteFinder(object):
                                                         mesh[i].coord] for i in v])
 
 
-        ads_sites['all'] = sum(ads_sites.values(), [])
+        #ads_sites['all'] = sum(ads_sites.values(), [])
         
         if z_oriented: #recalculate mvec for input slabs that have been reoriented
             mvec = np.cross(asf.slab.lattice.matrix[0], asf.slab.lattice.matrix[1])
@@ -589,9 +589,11 @@ class AdsorbateSiteFinder(object):
             yrep = np.ceil(min_lw / np.linalg.norm(self.slab.lattice.matrix[1]))
             repeat = [xrep, yrep, 1]
         structs = []
-        for coords in self.find_adsorption_sites(**find_args)['all']:
-            structs.append(self.add_adsorbate(
-                molecule, coords, repeat=repeat, reorient=reorient))
+        #'key' meaning: ontop, bridge, hollow...
+        for key,key_coords in self.find_adsorption_sites(**find_args).items():
+            for coords in key_coords:
+                structs.append(self.add_adsorbate(
+                    molecule, coords, repeat=repeat, reorient=reorient))
         return structs
 
 def get_mi_vec(slab):
