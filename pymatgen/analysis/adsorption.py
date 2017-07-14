@@ -331,17 +331,17 @@ class AdsorbateSiteFinder(object):
                     z_distance = distance * np.cos(2*np.pi/12) #30degrees angle from the ontop distance from surface atom centers
 
                 if near_reduce:
-                    sites,profiles = self.set_near_reduce(asf, sites, profiles, threshold=near_reduce)
+                    sites,profiles = self.set_near_reduce(self, sites, profiles, threshold=near_reduce)
                 if put_inside:
-                    sites = [[put_coord_inside(asf.slab.lattice, coord),profile]
+                    sites = [[put_coord_inside(self.slab.lattice, coord),profile]
                              for coord,profile in zip(sites,profiles)]
                     profiles = [row[1] for row in sites]
                     sites = [row[0] for row in sites]
                 if symm_reduce:
-                    sites,profiles = self.set_symm_reduce(asf, sites, profiles, threshold=symm_reduce) 
+                    sites,profiles = self.set_symm_reduce(self, sites, profiles, threshold=symm_reduce) 
                 sites = [site - z_distance*mvec for site in sites]
                 if radial_reduce:
-                    sites,profiles = self.set_radial_reduce(asf, sites, profiles, threshold=radial_reduce) 
+                    sites,profiles = self.set_radial_reduce(self, sites, profiles, threshold=radial_reduce) 
                 ads_sites[key] = sites
                 site_profile[key] = profiles
             self.sites = ads_sites
@@ -428,13 +428,13 @@ class AdsorbateSiteFinder(object):
         """
         unique_coords = []
         unique_profile = []
-        coords_set = [cart_to_frac(asf.slab.lattice, coords) 
+        coords_set = [cart_to_frac(self.slab.lattice, coords) 
                       for coords in coords_set]
         for coord,profile in zip(coords_set,profile_set):
             if not in_coord_list_pbc(unique_coords, coord, threshold):
                 unique_coords += [coord]
                 unique_profile += [profile]
-        return [frac_to_cart(asf.slab.lattice, coords) 
+        return [frac_to_cart(self.slab.lattice, coords) 
                 for coords in unique_coords],unique_profile
 
     def set_radial_reduce(self, coords_set, profile_set, threshold = 3.5):
@@ -449,7 +449,7 @@ class AdsorbateSiteFinder(object):
         """
         passing_coords = []
         passing_profile = []
-        coords_set = [cart_to_frac(asf.slab.lattice, coords) 
+        coords_set = [cart_to_frac(self.slab.lattice, coords) 
               for coords in coords_set]
         for coord,profile in zip(coords_set,profile_set):
             sites = [val[1] for val in profile]
@@ -462,7 +462,7 @@ class AdsorbateSiteFinder(object):
             if distance < threshold:
                 passing_coords += [coord]
                 passing_profile += [profile]
-        return [frac_to_cart(asf.slab.lattice, coords) 
+        return [frac_to_cart(self.slab.lattice, coords) 
                 for coords in passing_coords],passing_profile
     
     def set_symm_reduce(self, coords_set, profile_set, threshold = 1e-6):
@@ -476,12 +476,12 @@ class AdsorbateSiteFinder(object):
             threshold: tolerance for distance equivalence, used
                 as input to in_coord_list_pbc for dupl. checking
         """
-        surf_sg = SpacegroupAnalyzer(asf.slab, 0.1)
+        surf_sg = SpacegroupAnalyzer(self.slab, 0.1)
         symm_ops = surf_sg.get_symmetry_operations()
         unique_coords = []
         unique_profile = []
         # Convert to fractional
-        coords_set = [cart_to_frac(asf.slab.lattice, coords) 
+        coords_set = [cart_to_frac(self.slab.lattice, coords) 
                       for coords in coords_set]
         for coords,profile in zip(coords_set,profile_set):
             incoord = False
@@ -494,7 +494,7 @@ class AdsorbateSiteFinder(object):
                 unique_coords += [coords]
                 unique_profile += [profile]
         # convert back to cartesian
-        return [frac_to_cart(asf.slab.lattice, coords) 
+        return [frac_to_cart(self.slab.lattice, coords) 
                 for coords in unique_coords],unique_profile
 
     def ensemble_center(self, site_list, indices, cartesian = True):
