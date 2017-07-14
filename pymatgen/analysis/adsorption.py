@@ -231,7 +231,7 @@ class AdsorbateSiteFinder(object):
     def find_adsorption_sites(self, distance = 2.0, put_inside = True,
                               symm_reduce = 1e-2, near_reduce = 1e-2,
                               positions = ['ontop', 'bridge', 'hollow'],
-                              no_obtuse_hollow = True, z_oriented = False
+                              no_obtuse_hollow = True, z_oriented = False,
                               make_profile_dict = True, radial_reduce = False):
         """
         Finds surface sites according to the above algorithm.  Returns
