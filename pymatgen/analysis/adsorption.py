@@ -331,17 +331,17 @@ class AdsorbateSiteFinder(object):
                     z_distance = distance * np.cos(2*np.pi/12) #30degrees angle from the ontop distance from surface atom centers
 
                 if near_reduce:
-                    sites,profiles = set_near_reduce(asf, sites, profiles, threshold=near_reduce)
+                    sites,profiles = self.set_near_reduce(asf, sites, profiles, threshold=near_reduce)
                 if put_inside:
                     sites = [[put_coord_inside(asf.slab.lattice, coord),profile]
                              for coord,profile in zip(sites,profiles)]
                     profiles = [row[1] for row in sites]
                     sites = [row[0] for row in sites]
                 if symm_reduce:
-                    sites,profiles = set_symm_reduce(asf, sites, profiles, threshold=symm_reduce) 
+                    sites,profiles = self.set_symm_reduce(asf, sites, profiles, threshold=symm_reduce) 
                 sites = [site - z_distance*mvec for site in sites]
                 if radial_reduce:
-                    sites,profiles = set_radial_reduce(asf, sites, profiles, threshold=radial_reduce) 
+                    sites,profiles = self.set_radial_reduce(asf, sites, profiles, threshold=radial_reduce) 
                 ads_sites[key] = sites
                 site_profile[key] = profiles
             self.sites = ads_sites
