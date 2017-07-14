@@ -416,7 +416,7 @@ class AdsorbateSiteFinder(object):
         return [frac_to_cart(self.slab.lattice, coords) 
                 for coords in unique_coords]
     
-    def set_near_reduce(asf, coords_set, profile_set, threshold = 1e-4):
+    def set_near_reduce(self, coords_set, profile_set, threshold = 1e-4):
         """
         Prunes coordinate set and profile set for coordinates that are within 
         threshold
@@ -437,7 +437,7 @@ class AdsorbateSiteFinder(object):
         return [frac_to_cart(asf.slab.lattice, coords) 
                 for coords in unique_coords],unique_profile
 
-    def set_radial_reduce(asf, coords_set, profile_set, threshold = 3.5):
+    def set_radial_reduce(self, coords_set, profile_set, threshold = 3.5):
         """
         Prunes coordinate set and profile set for coordinates that are within 
         threshold
@@ -465,7 +465,7 @@ class AdsorbateSiteFinder(object):
         return [frac_to_cart(asf.slab.lattice, coords) 
                 for coords in passing_coords],passing_profile
     
-    def set_symm_reduce(asf, coords_set, profile_set, threshold = 1e-6):
+    def set_symm_reduce(self, coords_set, profile_set, threshold = 1e-6):
         """
         Reduces the set of adsorbate sites and profile set by finding removing
         symmetrically equivalent duplicates
