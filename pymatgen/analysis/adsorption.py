@@ -263,7 +263,7 @@ class AdsorbateSiteFinder(object):
         if 'ontop' in positions:
             ads_sites['ontop'] = [s.coords for s in self.surface_sites]
             if make_profile_dict:
-                site_profile['ontop'] = [[ads,site,str(site.specie),site.coord] for site in self.surface_sites]
+                site_profile['ontop'] = [[site,str(site.specie),site.coord] for site in self.surface_sites]
         if 'subsurface' in positions:
             # Get highest site
             ref = self.slab.sites[np.argmax(self.slab.cart_coords[:, 2])]        
@@ -272,7 +272,7 @@ class AdsorbateSiteFinder(object):
                         + s.coords for s in self.subsurface_sites()]
             ads_sites['subsurface'] = ss_sites
             if make_profile_dict:
-                site_profile['subsurface'] = [[ads,site,str(site.specie),site.coord] for site in ss_sites]
+                site_profile['subsurface'] = [[site,str(site.specie),site.coord] for site in ss_sites]
         if 'bridge' in positions or 'hollow' in positions:
             mesh = self.get_extended_surface_mesh()
             if not z_oriented: #reorient the input slab if it hasn't been reoriented in the z.
@@ -294,7 +294,7 @@ class AdsorbateSiteFinder(object):
                             ads_sites["bridge"].append(
                                     self.ensemble_center(mesh, opp))
                             if make_profile_dict:
-                                site_profile['bridge'].append([[ads,mesh[d],
+                                site_profile['bridge'].append([[mesh[d],
                                                             str(mesh[d].specie),
                                                             mesh[d].coord] for d in opp])
                     # Prevent addition of hollow sites in obtuse triangles
@@ -304,7 +304,7 @@ class AdsorbateSiteFinder(object):
                         ads_sites['hollow'].append(
                                 self.ensemble_center(mesh, v))
                         if make_profile_dict:
-                            site_profile['hollow'].append([[ads,mesh[i],
+                            site_profile['hollow'].append([[mesh[i],
                                                         str(mesh[i].specie),
                                                         mesh[i].coord] for i in v])
 
@@ -312,7 +312,7 @@ class AdsorbateSiteFinder(object):
         #ads_sites['all'] = sum(ads_sites.values(), [])
         
         if z_oriented: #recalculate mvec for input slabs that have been reoriented
-            mvec = np.cross(asf.slab.lattice.matrix[0], asf.slab.lattice.matrix[1])
+            mvec = np.cross(self.slab.lattice.matrix[0], self.slab.lattice.matrix[1])
             self.mvec = mvec / np.linalg.norm(mvec)
             
         if make_profile_dict:
@@ -328,7 +328,7 @@ class AdsorbateSiteFinder(object):
                     frac_coords = [row[0] for row in frac_coords]
                     sites = [frac_to_cart(self.slab.lattice, frac_coord) 
                             for frac_coord in frac_coords]
-                    z_distance = z_distance * np.cos(2*np.pi/12) #30degrees angle from the ontop distance from surface atom centers
+                    z_distance = distance * np.cos(2*np.pi/12) #30degrees angle from the ontop distance from surface atom centers
 
                 if near_reduce:
                     sites,profiles = set_near_reduce(asf, sites, profiles, threshold=near_reduce)
