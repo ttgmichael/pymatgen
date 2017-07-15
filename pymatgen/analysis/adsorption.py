@@ -339,7 +339,7 @@ class AdsorbateSiteFinder(object):
                     sites = [row[0] for row in sites]
                 if symm_reduce:
                     sites,profiles = self.set_symm_reduce(sites, profiles, threshold=symm_reduce) 
-                sites = [site - z_distance*mvec for site in sites]
+                sites = [site + z_distance*self.mvec for site in sites]
                 if radial_reduce:
                     sites,profiles = self.set_radial_reduce(sites, profiles, threshold=radial_reduce) 
                 ads_sites[key] = sites
