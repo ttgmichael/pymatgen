@@ -314,6 +314,8 @@ class AdsorbateSiteFinder(object):
         if z_oriented: #recalculate mvec for input slabs that have been reoriented
             mvec = np.cross(self.slab.lattice.matrix[0], self.slab.lattice.matrix[1])
             self.mvec = mvec / np.linalg.norm(mvec)
+            if self.mvec[2]<0:
+                self.mvec=-self.mvec
             
         if make_profile_dict:
             for key, sites in ads_sites.items():
